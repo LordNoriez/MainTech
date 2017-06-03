@@ -1,4 +1,4 @@
-package org.techforumist.google.oauth.config;
+package org.maintech.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;

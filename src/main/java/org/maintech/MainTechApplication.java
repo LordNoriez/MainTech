@@ -1,4 +1,4 @@
-package org.techforumist.google.oauth;
+package org.maintech;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
