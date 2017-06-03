@@ -16,22 +16,22 @@ public class TopicController {
 	private TopicService topicService;
 	
 	@RequestMapping("/topics")
-	public List<Topic> getAllTopics() {
+	public List<Objeto> getAllTopics() {
 		return topicService.getAllTopics();
 	}
 	
 	@RequestMapping("/topics/{foo}")
-	public Topic getTopic(@PathVariable("foo") Integer id){
+	public Objeto getTopic(@PathVariable("foo") Integer id){
 		return topicService.getTopic(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/topics")
-	public void addTopic(@RequestBody Topic topic) {
+	public void addTopic(@RequestBody Objeto topic) {
 		topicService.addTopic(topic);
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/topics/{id}")
-	public void updateTopic(@RequestBody Topic topic, @PathVariable("id") Integer id) {
+	public void updateTopic(@RequestBody Objeto topic, @PathVariable("id") Integer id) {
 		topicService.updateTopic(id, topic);
 	}
 	
