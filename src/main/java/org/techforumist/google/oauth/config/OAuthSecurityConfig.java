@@ -16,12 +16,7 @@ import org.springframework.security.oauth2.client.token.grant.code.Authorization
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-/**
- * Modifying or overriding the default spring boot security.
- * 
- * @author Sarath Muraleedharan
- *
- */
+
 @Configurable
 @EnableWebSecurity
 public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
