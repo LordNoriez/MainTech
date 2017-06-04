@@ -16,22 +16,16 @@ public class ObjetoController {
 	@Autowired
 	private ObjetoService topicService;
 	
-	@RequestMapping("/Objeto")
+	@RequestMapping("/objeto")
 	public List<Objeto> getAllObjeto() {
 		return topicService.getAllObjeto();
 	}
 	
-	@RequestMapping("/welcome.html")
+	@RequestMapping("/welcome")
 	public ModelAndView welcome() {
 		return new ModelAndView("welcome");
 	}
-	
-	@RequestMapping("/topics")
-	public ModelAndView getAllTopics() {
-		return new ModelAndView("welcome");
-		//return topicService.getAllTopics();
-	}
-	
+		
 	@RequestMapping("/Objeto/{idObjeto}")
 	public Objeto getObjeto(@PathVariable("idObjeto") Integer id){
 		return topicService.getObjeto(id);
