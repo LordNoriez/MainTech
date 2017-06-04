@@ -2,6 +2,6 @@ package org.maintech.objeto;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface TopicRepository extends CrudRepository<Objeto, Integer> {
+public interface ObjetoRepository extends CrudRepository<Objeto, Integer> {
 
 }

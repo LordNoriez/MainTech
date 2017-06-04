@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class ObjetoController {
 	
 	@Autowired
-	private TopicService topicService;
+	private ObjetoService topicService;
 	
-	@RequestMapping("/topics")
-	public List<Objeto> getAllTopics() {
-		return topicService.getAllTopics();
+	@RequestMapping("/Objeto")
+	public List<Objeto> getAllObjeto() {
+		return topicService.getAllObjeto();
 	}
 	
-	@RequestMapping("/topics/{foo}")
-	public Objeto getTopic(@PathVariable("foo") Integer id){
-		return topicService.getTopic(id);
+	@RequestMapping("/Objeto/{idObjeto}")
+	public Objeto getObjeto(@PathVariable("idObjeto") Integer id){
+		return topicService.getObjeto(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/topics")
-	public void addTopic(@RequestBody Objeto topic) {
-		topicService.addTopic(topic);
+	@RequestMapping(method=RequestMethod.POST, value="/Objeto")
+	public void addObjeto(@RequestBody Objeto topic) {
+		topicService.addObjeto(topic);
 	}
 
-	@RequestMapping(method=RequestMethod.PUT, value="/topics/{id}")
-	public void updateTopic(@RequestBody Objeto topic, @PathVariable("id") Integer id) {
-		topicService.updateTopic(id, topic);
+	@RequestMapping(method=RequestMethod.PUT, value="/Objeto/{idObjeto}")
+	public void updateObjeto(@RequestBody Objeto topic, @PathVariable("idObjeto") Integer id) {
+		topicService.updateObjeto(id, topic);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/topics/{id}")
-	public void deleteTopic(@PathVariable Integer id){
-		topicService.deleteTopic(id);
+	@RequestMapping(method=RequestMethod.DELETE, value="/Objeto/{idObjeto}")
+	public void deleteObjeto(@PathVariable Integer id){
+		topicService.deleteObjeto(id);
 	}
 }
