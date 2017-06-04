@@ -21,10 +21,10 @@ public class ObjetoController {
 		return topicService.getAllObjeto();
 	}
 	
-	@RequestMapping("/heyo")
-	public ModelAndView welcome() {
+	@RequestMapping("/objeto/crear")
+	public ModelAndView objetoCrear() {
 		
-		return new ModelAndView("welcome.xhtml","WelcomeMessage","Message");
+		return new ModelAndView("pagObjetoCrear.xhtml","WelcomeMessage","Message");
 	}
 		
 	@RequestMapping("/objeto/{idObjeto}")
