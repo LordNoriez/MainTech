@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class ObjetoController {
@@ -18,6 +19,17 @@ public class ObjetoController {
 	@RequestMapping("/Objeto")
 	public List<Objeto> getAllObjeto() {
 		return topicService.getAllObjeto();
+	}
+	
+	@RequestMapping("/welcome.html")
+	public ModelAndView welcome() {
+		return new ModelAndView("welcome");
+	}
+	
+	@RequestMapping("/topics")
+	public ModelAndView getAllTopics() {
+		return new ModelAndView("welcome");
+		//return topicService.getAllTopics();
 	}
 	
 	@RequestMapping("/Objeto/{idObjeto}")
