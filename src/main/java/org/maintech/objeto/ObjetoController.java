@@ -21,7 +21,7 @@ public class ObjetoController {
 		return topicService.getAllObjeto();
 	}
 	
-	@RequestMapping("/objeto/crear")
+	@RequestMapping("/crearObjeto")
 	public ModelAndView objetoCrear() {
 		
 		return new ModelAndView("pagObjetoCrear.xhtml","WelcomeMessage","Message");
