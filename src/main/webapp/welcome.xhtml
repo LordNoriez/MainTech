@@ -1,0 +1,25 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="templates/template.xhtml">
+
+    <ui:define name="metadata">
+
+    </ui:define>
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl autoUpdate="true"/>
+            <h1>Bienvenido al Sistema de Control de Rutas</h1>
+            <br></br>
+            <div class="row">
+                <p:button outcome="productDetail" value="Bookmark" icon="ui-icon-star">
+				    <f:param name="productId" value="10" />
+				</p:button>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

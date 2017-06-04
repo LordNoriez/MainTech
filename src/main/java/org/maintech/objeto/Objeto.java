@@ -2,7 +2,11 @@ package org.maintech.objeto;
 
 import java.util.Date;
 
+<<<<<<< HEAD
 import javax.persistence.Column;
+=======
+import javax.faces.bean.ManagedBean;
+>>>>>>> 3004b10925b00b316823af19612ac0d0530c320d
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -35,6 +39,7 @@ public class Objeto {
 	private Categoria categoria;
 	
 	@ManyToOne
+<<<<<<< HEAD
 	private Objeto mantenimiento;
 	
 	@Column(name="is_active")
@@ -42,6 +47,10 @@ public class Objeto {
 	
 	
 	
+=======
+	private Mantenimiento mantenimiento;
+		
+>>>>>>> 3004b10925b00b316823af19612ac0d0530c320d
 	public Integer getIdObjeto() {
 		return idObjeto;
 	}

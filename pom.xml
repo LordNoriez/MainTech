@@ -63,10 +63,42 @@
 		    <scope>provided</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.primefaces</groupId>
-		    <artifactId>primefaces</artifactId>
-		    <version>6.0</version>
-		    <scope>provided</scope>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.1</version>
+		</dependency>
+	    <dependency>
+	      <groupId>org.primefaces.themes</groupId>
+	      <artifactId>all-themes</artifactId>
+	      <version>1.0.10</version>
+	    </dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			</dependency>
+		
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>blitzer</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+		<!-- Faces Implementation -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+		<!-- Faces Library -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.2.4</version>
 		</dependency>
 	</dependencies>
 
@@ -90,6 +122,15 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
 
 </project>

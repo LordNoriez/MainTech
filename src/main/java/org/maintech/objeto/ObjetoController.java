@@ -21,9 +21,10 @@ public class ObjetoController {
 		return topicService.getAllObjeto();
 	}
 	
-	@RequestMapping("/welcome.html")
+	@RequestMapping("/heyo")
 	public ModelAndView welcome() {
-		return new ModelAndView("jsp/welcome");
+		
+		return new ModelAndView("welcome.xhtml","WelcomeMessage","Message");
 	}
 		
 	@RequestMapping("/objeto/{idObjeto}")
