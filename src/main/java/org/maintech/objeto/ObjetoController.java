@@ -1,4 +1,4 @@
-package org.maintech.maquina;
+package org.maintech.objeto;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TopicController {
+public class ObjetoController {
 	
 	@Autowired
 	private TopicService topicService;

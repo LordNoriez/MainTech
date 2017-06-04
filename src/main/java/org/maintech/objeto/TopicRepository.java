@@ -1,4 +1,4 @@
-package org.maintech.maquina;
+package org.maintech.objeto;
 
 import org.springframework.data.repository.CrudRepository;
 
