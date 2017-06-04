@@ -5,6 +5,7 @@ import javax.persistence.Column;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -17,6 +18,7 @@ import org.maintech.mantenimiento.Mantenimiento;
 public class Objeto {
 	
 	@Id
+	@GeneratedValue
 	private Integer idObjeto;
 	private String MarcaObjeto;
 	private String ModeloObjeto;

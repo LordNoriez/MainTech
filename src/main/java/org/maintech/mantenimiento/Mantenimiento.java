@@ -2,6 +2,7 @@ package org.maintech.mantenimiento;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.Where;
@@ -11,6 +12,7 @@ import org.hibernate.annotations.Where;
 public class Mantenimiento {
 
 	@Id
+	@GeneratedValue
 	private Integer idMantenimiento;
 	private String NombreCategoria;
 	private String DescripcionCategoria;
