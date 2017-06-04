@@ -1,9 +1,13 @@
 package org.maintech.categoria;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Where;
+
 @Entity
+@Where(clause="is_active=1")
 public class Categoria {
 
 	@Id
@@ -11,6 +15,8 @@ public class Categoria {
 	private String NombreCategoria;
 	private String DescripcionCategoria;
 	
+	@Column(name="is_active")
+	private Boolean active;
 	
 	
 	public Integer getIdCategoria() {
@@ -37,17 +43,23 @@ public class Categoria {
 		DescripcionCategoria = descripcionCategoria;
 	}
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
 	public Categoria() {
 		super();
 	}
-	
-	public Categoria(Integer idCategoria, String nombreCategoria, String descripcionCategoria) {
+
+	public Categoria(Integer idCategoria, String nombreCategoria, String descripcionCategoria, Boolean active) {
 		super();
 		this.idCategoria = idCategoria;
 		NombreCategoria = nombreCategoria;
 		DescripcionCategoria = descripcionCategoria;
+		this.active = active;
 	}
-	
-	
-	
 }

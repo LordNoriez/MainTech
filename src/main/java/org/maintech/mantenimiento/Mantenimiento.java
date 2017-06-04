@@ -1,10 +1,13 @@
 package org.maintech.mantenimiento;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+import org.hibernate.annotations.Where;
 
+@Entity
+@Where(clause="is_active=1")
 public class Mantenimiento {
 
 	@Id
@@ -12,6 +15,8 @@ public class Mantenimiento {
 	private String NombreCategoria;
 	private String DescripcionCategoria;
 	
+	@Column(name="is_active")
+	private Boolean active;
 	
 	
 	public Integer getIdMantenimiento() {
@@ -38,17 +43,24 @@ public class Mantenimiento {
 		DescripcionCategoria = descripcionCategoria;
 	}
 
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
 	public Mantenimiento() {
 		super();
 	}
-	
-	public Mantenimiento(Integer idMantenimiento, String nombreCategoria, String descripcionCategoria) {
+
+	public Mantenimiento(Integer idMantenimiento, String nombreCategoria, String descripcionCategoria, Boolean active) {
 		super();
 		this.idMantenimiento = idMantenimiento;
 		NombreCategoria = nombreCategoria;
 		DescripcionCategoria = descripcionCategoria;
+		this.active = active;
 	}
-	
-	
 	
 }

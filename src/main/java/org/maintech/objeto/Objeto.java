@@ -2,14 +2,16 @@ package org.maintech.objeto;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Where;
 import org.maintech.categoria.Categoria;
-import org.maintech.mantenimiento.Mantenimiento;
 
 @Entity
+@Where(clause="is_active=1")
 public class Objeto {
 	
 	@Id
@@ -33,7 +35,10 @@ public class Objeto {
 	private Categoria categoria;
 	
 	@ManyToOne
-	private Mantenimiento mantenimiento;
+	private Objeto mantenimiento;
+	
+	@Column(name="is_active")
+	private Boolean active;
 	
 	
 	
@@ -149,12 +154,20 @@ public class Objeto {
 		this.categoria = categoria;
 	}
 
-	public Mantenimiento getMantenimiento() {
+	public Objeto getMantenimiento() {
 		return mantenimiento;
 	}
 
-	public void setMantenimiento(Mantenimiento mantenimiento) {
+	public void setMantenimiento(Objeto mantenimiento) {
 		this.mantenimiento = mantenimiento;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public Objeto() {
@@ -164,7 +177,7 @@ public class Objeto {
 	public Objeto(Integer idObjeto, String marcaObjeto, String modeloObjeto, String serialObjeto,
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
 			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objeto,
-			Categoria categoria, Mantenimiento mantenimiento) {
+			Categoria categoria, Objeto mantenimiento, Boolean active) {
 		super();
 		this.idObjeto = idObjeto;
 		MarcaObjeto = marcaObjeto;
@@ -181,6 +194,7 @@ public class Objeto {
 		this.objeto = objeto;
 		this.categoria = categoria;
 		this.mantenimiento = mantenimiento;
+		this.active = active;
 	}
 
 	
