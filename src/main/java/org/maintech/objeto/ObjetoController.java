@@ -24,7 +24,7 @@ public class ObjetoController {
 	@RequestMapping("/heyo")
 	public ModelAndView welcome() {
 		
-		return new ModelAndView("welcome.html","WelcomeMessage","Message");
+		return new ModelAndView("welcome.xhtml","WelcomeMessage","Message");
 	}
 		
 	@RequestMapping("/objeto/{idObjeto}")
