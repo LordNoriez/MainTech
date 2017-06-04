@@ -88,9 +88,9 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()//
 				.and()//
 				// Setting the filter for the URL "/google/login"
-				.addFilterAt(filter(), BasicAuthenticationFilter.class);//
-				//.csrf()//
-				//.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+				.addFilterAt(filter(), BasicAuthenticationFilter.class)//
+				.csrf()//
+				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	}
 
 }
