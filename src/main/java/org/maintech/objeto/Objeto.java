@@ -2,6 +2,7 @@ package org.maintech.objeto;
 
 import java.util.Date;
 
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -10,6 +11,7 @@ import org.maintech.categoria.Categoria;
 import org.maintech.mantenimiento.Mantenimiento;
 
 @Entity
+@ManagedBean(name = "objeto")
 public class Objeto {
 	
 	@Id
@@ -35,7 +37,7 @@ public class Objeto {
 	@ManyToOne
 	private Mantenimiento mantenimiento;
 	
-	
+	private String value = "This editor is provided by PrimeFaces heyo";
 	
 	public Integer getIdObjeto() {
 		return idObjeto;
