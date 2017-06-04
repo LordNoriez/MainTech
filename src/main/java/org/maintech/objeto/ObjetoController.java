@@ -21,27 +21,27 @@ public class ObjetoController {
 		return topicService.getAllObjeto();
 	}
 	
-	@RequestMapping("/welcome")
+	@RequestMapping("/welcome.html")
 	public ModelAndView welcome() {
-		return new ModelAndView("welcome");
+		return new ModelAndView("jsp/welcome");
 	}
 		
-	@RequestMapping("/Objeto/{idObjeto}")
+	@RequestMapping("/objeto/{idObjeto}")
 	public Objeto getObjeto(@PathVariable("idObjeto") Integer id){
 		return topicService.getObjeto(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/Objeto")
+	@RequestMapping(method=RequestMethod.POST, value="/objeto")
 	public void addObjeto(@RequestBody Objeto topic) {
 		topicService.addObjeto(topic);
 	}
 
-	@RequestMapping(method=RequestMethod.PUT, value="/Objeto/{idObjeto}")
+	@RequestMapping(method=RequestMethod.PUT, value="/objeto/{idObjeto}")
 	public void updateObjeto(@RequestBody Objeto topic, @PathVariable("idObjeto") Integer id) {
 		topicService.updateObjeto(id, topic);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/Objeto/{idObjeto}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/objeto/{idObjeto}")
 	public void deleteObjeto(@PathVariable Integer id){
 		topicService.deleteObjeto(id);
 	}
