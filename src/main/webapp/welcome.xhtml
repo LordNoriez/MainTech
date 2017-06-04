@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -18,27 +16,9 @@
             <h1>Bienvenido al Sistema de Control de Rutas</h1>
             <br></br>
             <div class="row">
-                <p:panelMenu style="width:300px">
-                    <p:submenu label="Cooperativas">
-                        <p:menuitem value="Ingresar" url="ingresarCooperativa.xhtml" icon="ui-icon-disk" />
-                        <p:menuitem value="Listar/Editar/Eliminar" url="faces/listarCooperativas.xhtml"  icon="ui-icon-arrowrefresh-1-w" />
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Unidades">
-                        <p:menuitem value="Ingresar" url="faces/ingresarUnidad.xhtml" icon="ui-icon-disk" />
-                        <p:menuitem value="Listar/Editar/Eliminar" url="faces/listarUnidades.xhtml"  icon="ui-icon-arrowrefresh-1-w" />
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Rutas" >
-                        <p:menuitem value="Ingresar" url="faces/ingresarRuta.xhtml" icon="ui-icon-disk" />
-                        <p:menuitem value="Listar/Editar/Eliminar" url="faces/listarRutas.xhtml"  icon="ui-icon-arrowrefresh-1-w" />
-                    </p:submenu>
-                    <p:separator />
-                    <p:submenu label="Reportes" >
-                        <p:menuitem value="Exitosos" url="faces/reporteExitoso.xhtml" icon="ui-icon-document" />
-                        <p:menuitem value="Anomalías" url="faces/reporteAnomalias.xhtml"  icon="ui-icon-document" />
-                    </p:submenu>
-                </p:panelMenu>
+                <p:button outcome="productDetail" value="Bookmark" icon="ui-icon-star">
+				    <f:param name="productId" value="10" />
+				</p:button>
             </div>
         </h:form>
     </ui:define>
