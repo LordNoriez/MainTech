@@ -26,7 +26,7 @@ public class ObjetoController {
 	@RequestMapping("/crearObjeto")
 	public ModelAndView objetoCrear() {
 		
-		return new ModelAndView("pagObjetoCrear.xhtml","WelcomeMessage","Message");
+		return new ModelAndView("ObjetoCrear.xhtml","WelcomeMessage","Message");
 	}
 		
 	@RequestMapping("/objeto/{idObjeto}")

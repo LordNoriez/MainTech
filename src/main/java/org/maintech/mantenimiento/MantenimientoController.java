@@ -25,7 +25,7 @@ public class MantenimientoController {
 		return mantenimientoService.getMantenimiento(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/mantenimiento")
+	@RequestMapping(method=RequestMethod.POST, value="/crearMantenimiento")
 	public void addMantenimiento(@RequestBody Mantenimiento mantenimiento) {
 		mantenimientoService.addMantenimiento(mantenimiento);
 	}
