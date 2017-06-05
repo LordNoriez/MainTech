@@ -26,12 +26,12 @@ public class Actividad {
 	private Double CostoActividad;
 	private String DescripcionActividad;
 	
-	@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
+	//@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
 //	  @JoinTable(
 //		        name="Mantenimiento_has_Actividad",
 //		        joinColumns=@JoinColumn(name="id_mantenimiento", referencedColumnName="id_mantenimiento"),
 //		        inverseJoinColumns=@JoinColumn(name="id_actividad", referencedColumnName="id_actividad"))
-	private Set<Mantenimiento> mantenimiento = new HashSet<Mantenimiento>();
+	//private Set<Mantenimiento> mantenimiento = new HashSet<Mantenimiento>();
 	
 	public Integer getIdActividad() {
 		return idActividad;
@@ -66,14 +66,14 @@ public class Actividad {
 	}
 
 	
-
+/*
 	public Set<Mantenimiento> getMantenimiento() {
 		return mantenimiento;
 	}
 
 	public void setMantenimiento(Set<Mantenimiento> mantenimiento) {
 		this.mantenimiento = mantenimiento;
-	}
+	}*/
 
 	public Actividad() {
 		super();
@@ -86,7 +86,7 @@ public class Actividad {
 		NombreActividad = nombreActividad;
 		CostoActividad = costoActividad;
 		DescripcionActividad = descripcionActividad;
-		this.mantenimiento = mantenimiento;
+		//this.mantenimiento = mantenimiento;
 	}
 	
 	

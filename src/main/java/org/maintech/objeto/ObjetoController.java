@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
+//@RequestMapping("/objeto")
 public class ObjetoController {
 	
 	@Autowired
-	private ObjetoService topicService;
+	private ObjetoService objetoService;
 	
+	//@RequestMapping(value="/", method=RequestMethod.GET)
 	@RequestMapping("/objeto")
 	public List<Objeto> getAllObjeto() {
-		return topicService.getAllObjeto();
+		return objetoService.getAllObjeto();
 	}
 	
 	@RequestMapping("/crearObjeto")
@@ -29,21 +31,21 @@ public class ObjetoController {
 		
 	@RequestMapping("/objeto/{idObjeto}")
 	public Objeto getObjeto(@PathVariable("idObjeto") Integer id){
-		return topicService.getObjeto(id);
+		return objetoService.getObjeto(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/objeto")
 	public void addObjeto(@RequestBody Objeto topic) {
-		topicService.addObjeto(topic);
+		objetoService.addObjeto(topic);
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/objeto/{idObjeto}")
 	public void updateObjeto(@RequestBody Objeto topic, @PathVariable("idObjeto") Integer id) {
-		topicService.updateObjeto(id, topic);
+		objetoService.updateObjeto(id, topic);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/objeto/{idObjeto}")
 	public void deleteObjeto(@PathVariable Integer id){
-		topicService.deleteObjeto(id);
+		objetoService.deleteObjeto(id);
 	}
 }

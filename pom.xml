@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.techforumist.google.oauth</groupId>
+	<groupId>org.maintech</groupId>
 	<artifactId>swing</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>google-oauth-spring-boot-security-angularjs</name>
-	<description>Simple demo application for using  google sign in</description>
+	<name>maintech</name>
+	<description>Sistema de Inventario y Control de Mantenimientos de Maquinaria Industrial</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -30,6 +30,11 @@
 			<artifactId>spring-cloud-starter-oauth2</artifactId>
 		</dependency>
 		<dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>  
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
@@ -43,20 +48,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
 		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<scope>runtime</scope>
+		    <groupId>org.apache.derby</groupId>
+		    <artifactId>derby</artifactId>
+		    <scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<exclusions>
-		        <exclusion>
-		            <artifactId>hibernate-entitymanager</artifactId>
-		            <groupId>org.hibernate</groupId>
-		        </exclusion>
-		    </exclusions>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>			
 		</dependency>
 		<dependency>
     		<groupId>mysql</groupId>
@@ -68,7 +69,7 @@
 		    <version>2.5</version>
 		    <scope>provided</scope>
 		</dependency>
-		<!-- Spring ORM -->
+		<!-- Spring ORM--> 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -83,16 +84,16 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.1</version>
 		</dependency>
-		<!-- Required By Hibernate -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+		<!-- Required By Hibernate-->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			</dependency>
-		<dependency>
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.12.1.GA</version>
-		</dependency>
 	    <dependency>
 	      <groupId>org.primefaces.themes</groupId>
 	      <artifactId>all-themes</artifactId>
@@ -133,7 +134,7 @@
 	    <dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-entitymanager</artifactId>
-		    </dependency>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

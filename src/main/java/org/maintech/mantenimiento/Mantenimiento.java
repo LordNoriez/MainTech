@@ -33,12 +33,12 @@ public class Mantenimiento {
 	private Objeto objeto;
 	
 	//@ManyToMany(cascade = CascadeType.ALL)
-	@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
+	//@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
 //	@JoinTable(
 //		        name="Mantenimiento_has_Actividad",
 //		        joinColumns=@JoinColumn(name="id_mantenimiento", referencedColumnName="id_mantenimiento"),
 //		        inverseJoinColumns=@JoinColumn(name="id_actividad", referencedColumnName="id_actividad"))
-	private Set<Actividad> actividad = new HashSet<Actividad>();
+	//private Set<Actividad> actividad = new HashSet<Actividad>();
 	
 	@Column(name="is_active")
 	private Boolean active;
@@ -95,14 +95,14 @@ public class Mantenimiento {
 	}
 	
 	
-
+/*
 	public Set<Actividad> getActividad() {
 		return actividad;
 	}
 
 	public void setActividad(Set<Actividad> actividad) {
 		this.actividad = actividad;
-	}
+	}*/
 
 	public Mantenimiento() {
 		super();
@@ -116,7 +116,7 @@ public class Mantenimiento {
 		FechaMantenimiento = fechaMantenimiento;
 		DescripcionMantenimiento = descripcionMantenimiento;
 		this.objeto = objeto;
-		this.actividad = actividad;
+		//this.actividad = actividad;
 		this.active = active;
 	}
 	
