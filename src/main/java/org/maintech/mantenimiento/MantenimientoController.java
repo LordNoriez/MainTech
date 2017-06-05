@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class MantenimientoController {
@@ -25,7 +26,12 @@ public class MantenimientoController {
 		return mantenimientoService.getMantenimiento(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/crearMantenimiento")
+	@RequestMapping("/crearMantenimiento")
+	public ModelAndView crearMantenimiento(){
+		return new ModelAndView("MantenimientoCrear.xhtml", "Crear Mantenimiento", "Crear Mantenimiento");
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public void addMantenimiento(@RequestBody Mantenimiento mantenimiento) {
 		mantenimientoService.addMantenimiento(mantenimiento);
 	}

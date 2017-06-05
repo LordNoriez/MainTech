@@ -26,7 +26,7 @@ public class Mantenimiento {
 	private String DescripcionMantenimiento;
 	
 	@ManyToOne
-	private Objeto objeto;
+	private Objeto objetoMantenimiento;
 	
 
 	//@ManyToMany(cascade = CascadeType.ALL)
@@ -80,11 +80,11 @@ public class Mantenimiento {
 	}
 
 	public Objeto getObjeto() {
-		return objeto;
+		return objetoMantenimiento;
 	}
 
 	public void setObjeto(Objeto objeto) {
-		this.objeto = objeto;
+		this.objetoMantenimiento = objeto;
 	}
 
 
@@ -116,13 +116,13 @@ public class Mantenimiento {
 	}
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
-			String descripcionMantenimiento, Objeto objeto, Collection<Actividad> actividad, Boolean active) {
+			String descripcionMantenimiento, Objeto objetoMantenimiento, Collection<Actividad> actividad, Boolean active) {
 		super();
 		this.idMantenimiento = idMantenimiento;
 		NombreMantenimiento = nombreMantenimiento;
 		FechaMantenimiento = fechaMantenimiento;
 		DescripcionMantenimiento = descripcionMantenimiento;
-		this.objeto = objeto;
+		this.objetoMantenimiento = objetoMantenimiento;
 		//this.actividad = actividad;
 		this.active = active;
 	}
