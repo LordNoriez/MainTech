@@ -1,18 +1,15 @@
 package org.maintech.actividad;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.Where;
 import org.maintech.mantenimiento.Mantenimiento;
+
 
 
 @Entity
@@ -26,13 +23,19 @@ public class Actividad {
 	private Double CostoActividad;
 	private String DescripcionActividad;
 	
+
 	//@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
 //	  @JoinTable(
 //		        name="Mantenimiento_has_Actividad",
 //		        joinColumns=@JoinColumn(name="id_mantenimiento", referencedColumnName="id_mantenimiento"),
 //		        inverseJoinColumns=@JoinColumn(name="id_actividad", referencedColumnName="id_actividad"))
 	//private Set<Mantenimiento> mantenimiento = new HashSet<Mantenimiento>();
+
+	@ManyToMany
+	private Collection<Mantenimiento> mantenimientos;
+
 	
+
 	public Integer getIdActividad() {
 		return idActividad;
 	}
@@ -65,6 +68,7 @@ public class Actividad {
 		DescripcionActividad = descripcionActividad;
 	}
 
+
 	
 /*
 	public Set<Mantenimiento> getMantenimiento() {
@@ -75,19 +79,34 @@ public class Actividad {
 		this.mantenimiento = mantenimiento;
 	}*/
 
+	public Collection<Mantenimiento> getMantenimiento() {
+		return mantenimientos;
+	}
+
+	public void setMantenimiento(Collection<Mantenimiento> mantenimiento) {
+		this.mantenimientos = mantenimiento;
+	}
+
+
 	public Actividad() {
 		super();
 	}
 
 	public Actividad(Integer idActividad, String nombreActividad, Double costoActividad, String descripcionActividad,
-			Set<Mantenimiento> mantenimiento) {
+			Collection<Mantenimiento> mantenimiento) {
 		super();
 		this.idActividad = idActividad;
 		NombreActividad = nombreActividad;
 		CostoActividad = costoActividad;
 		DescripcionActividad = descripcionActividad;
+
 		//this.mantenimiento = mantenimiento;
+
+		this.mantenimientos = mantenimiento;
+
 	}
+	
+	
 	
 	
 }

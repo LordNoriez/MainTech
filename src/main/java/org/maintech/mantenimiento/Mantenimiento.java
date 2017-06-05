@@ -1,16 +1,12 @@
 package org.maintech.mantenimiento;
 
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -32,6 +28,7 @@ public class Mantenimiento {
 	@ManyToOne
 	private Objeto objeto;
 	
+
 	//@ManyToMany(cascade = CascadeType.ALL)
 	//@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
 //	@JoinTable(
@@ -39,6 +36,11 @@ public class Mantenimiento {
 //		        joinColumns=@JoinColumn(name="id_mantenimiento", referencedColumnName="id_mantenimiento"),
 //		        inverseJoinColumns=@JoinColumn(name="id_actividad", referencedColumnName="id_actividad"))
 	//private Set<Actividad> actividad = new HashSet<Actividad>();
+
+	
+	@ManyToMany(mappedBy="mantenimientos")//mantenimientos is the objetc from Actividad that i created
+	private Collection<Actividad> actividad;
+
 	
 	@Column(name="is_active")
 	private Boolean active;
@@ -95,12 +97,17 @@ public class Mantenimiento {
 	}
 	
 	
+
 /*
 	public Set<Actividad> getActividad() {
+=======
+
+	public Collection<Actividad> getActividad() {
+>>>>>>> origin/master
 		return actividad;
 	}
 
-	public void setActividad(Set<Actividad> actividad) {
+	public void setActividad(Collection<Actividad> actividad) {
 		this.actividad = actividad;
 	}*/
 
@@ -109,7 +116,7 @@ public class Mantenimiento {
 	}
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
-			String descripcionMantenimiento, Objeto objeto, Set<Actividad> actividad, Boolean active) {
+			String descripcionMantenimiento, Objeto objeto, Collection<Actividad> actividad, Boolean active) {
 		super();
 		this.idMantenimiento = idMantenimiento;
 		NombreMantenimiento = nombreMantenimiento;
@@ -119,6 +126,8 @@ public class Mantenimiento {
 		//this.actividad = actividad;
 		this.active = active;
 	}
+
+	
 	
 	
 	
