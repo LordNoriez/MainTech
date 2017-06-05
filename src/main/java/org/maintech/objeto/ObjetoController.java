@@ -35,13 +35,13 @@ public class ObjetoController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/objeto")
-	public void addObjeto(@RequestBody Objeto topic) {
-		objetoService.addObjeto(topic);
+	public void addObjeto(@RequestBody Objeto objeto) {
+		objetoService.addObjeto(objeto);
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/objeto/{idObjeto}")
-	public void updateObjeto(@RequestBody Objeto topic, @PathVariable("idObjeto") Integer id) {
-		objetoService.updateObjeto(id, topic);
+	public void updateObjeto(@RequestBody Objeto objeto, @PathVariable("idObjeto") Integer id) {
+		objetoService.updateObjeto(id, objeto);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/objeto/{idObjeto}")
