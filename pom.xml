@@ -49,11 +49,13 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
-		<!-- <dependency>
+		 <!--  <dependency>
 		    <groupId>org.apache.derby</groupId>
 		    <artifactId>derby</artifactId>
 		    <scope>runtime</scope>
-		</dependency> -->
+		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.apache.derby/derbyLocale_cs -->
+				 
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -125,11 +127,11 @@
 			<version>1.0.10</version>
 		</dependency>
 		<!-- Faces Implementation -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.4</version>
-		</dependency>
+		</dependency>-->
 		<!-- Faces Library -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
