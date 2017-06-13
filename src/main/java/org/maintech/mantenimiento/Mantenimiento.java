@@ -127,6 +127,14 @@ public class Mantenimiento {
 		this.active = active;
 	}
 
+	public Mantenimiento(String nombreMantenimiento, Date fechaMantenimiento, String descripcionMantenimiento) {
+		super();
+		NombreMantenimiento = nombreMantenimiento;
+		FechaMantenimiento = fechaMantenimiento;
+		DescripcionMantenimiento = descripcionMantenimiento;
+		this.active = true;
+	}
+
 	
 	
 	

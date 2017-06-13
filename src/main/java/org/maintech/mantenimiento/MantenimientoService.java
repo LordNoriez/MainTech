@@ -22,12 +22,12 @@ public class MantenimientoService {
 		return mantenimientoRepository.findOne(id);
 	}
 
-	public void addMantenimiento(Mantenimiento topic) {
-		mantenimientoRepository.save(topic);
+	public void addMantenimiento(Mantenimiento mantenimiento) {
+		mantenimientoRepository.save(mantenimiento);
 	}
 
-	public void updateMantenimiento(Integer id, Mantenimiento topic) {
-		mantenimientoRepository.save(topic);
+	public void updateMantenimiento(Integer id, Mantenimiento mantenimiento) {
+		mantenimientoRepository.save(mantenimiento);
 	}
 
 	public void deleteMantenimiento(Integer id) {

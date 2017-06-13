@@ -1,5 +1,6 @@
 package org.maintech.mantenimiento;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,18 @@ public class MantenimientoController {
 	public void addMantenimiento(@RequestBody Mantenimiento mantenimiento) {
 		mantenimientoService.addMantenimiento(mantenimiento);
 	}
+	
+
+	@RequestMapping("/addMantenimiento/{nombre}/{descripcion}")
+	public String urlAddMantenimiento(@PathVariable("nombre") String nombre, @PathVariable("descripcion") String descripcion) {
+		Mantenimiento mat = new Mantenimiento();
+		mat.setNombreMantenimiento(nombre);
+		mat.setDescripcionMantenimiento(descripcion);
+		mat.setFechaMantenimiento(new Date());
+		mat.setActive(true);
+		mantenimientoService.addMantenimiento(mat);
+		return "Mantenimiento Creado!";
+	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/mantenimiento/{idMantenimiento}")
 	public void updateMantenimiento(@RequestBody Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
@@ -44,5 +57,11 @@ public class MantenimientoController {
 	@RequestMapping(method=RequestMethod.DELETE, value="/mantenimiento/{idMantenimiento}")
 	public void deleteMantenimiento(@PathVariable Integer id){
 		mantenimientoService.deleteMantenimiento(id);
+	}
+
+	@RequestMapping("/mantenimientoDelete/{id}")
+	public String urlDeleteMantenimiento(@PathVariable("id") Integer id){
+		mantenimientoService.deleteMantenimiento(id);
+		return "Mantenimiento Eliminado!";
 	}
 }

@@ -64,20 +64,20 @@
 			<!-- End Home Panel -->
 
 		</div>
-  <form action="/action_page.php">
+  <form action="">
     <div class="form-group col-md-6" ng-show="user">
       <label>Fecha de Mantenimiento:</label>
-      <input type="date" class="form-control" id="fechaMantenimiento" placeholder="Fecha Mantenimiento" name="fechaMantenimiento" ></input>
+      <input type="date" class="form-control" id="FechaMantenimiento" placeholder="Fecha Mantenimiento" name="FechaMantenimiento" ></input>
     </div>
     <div class="form-group col-md-6" ng-show="user">
       <label>Nombre de Mantenimiento:</label>
-      <input type="text" class="form-control" id="nombreMantenimiento" placeholder="Nombre Mantenimiento" name="nombreMantenimiento"></input>
+      <input type="text" class="form-control" id="NombreMantenimiento" placeholder="Nombre Mantenimiento" name="NombreMantenimiento"></input>
     </div>
     <div class="form-group col-md-6" ng-show="user">
       <label>Descripción de Mantenimiento:</label>
-      <input type="text" class="form-control" id="descripcionMantenimiento" placeholder="Descripción Mantenimiento" name="descripcionMantenimiento"></input>
+      <input type="text" class="form-control" id="DescripcionMantenimiento" placeholder="Descripción Mantenimiento" name="DescripcionMantenimiento"></input>
     </div>
-    <div class="form-group col-md-6" ng-show="user">
+    <!-- <div class="form-group col-md-6" ng-show="user">
       <label>Máquina:</label>
       <input type="text" class="form-control" id="objetoMantenimiento" placeholder="Máquina Mantenimiento" name="objetoMantenimiento"></input>
     </div>
@@ -93,9 +93,12 @@
     	<label><input type="checkbox" id="actividadMantenimiento"></input> Actividad 9</label><br></br>
     	<label><input type="checkbox" id="actividadMantenimiento"></input> Actividad 10</label><br></br>
 	    
-	 </div>
-
-    <button type="submit" class="btn btn-default col-md-6" ng-show="user">Crear</button>
+	 </div> -->
+		
+    <a class="btn btn-default"  href="#" 
+    title="Crear Mantenimiento" 
+  onclick="this.href='/addMantenimiento/'+document.getElementById('NombreMantenimiento').value + '/' + document.getElementById('DescripcionMantenimiento').value;">
+  Crear Mantenimiento</a>
   </form>
 </div>
 
