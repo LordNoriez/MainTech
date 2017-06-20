@@ -2,6 +2,7 @@ package org.maintech.objeto;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,11 +25,10 @@ public class ObjetoController {
 	}
 	
 	@RequestMapping("/crearObjeto")
-	public ModelAndView objetoCrear() {
-		
-		return new ModelAndView("ObjetoCrear.xhtml","Crear Objeto","Crear Objeto");
+	public ModelAndView crearMantenimiento(){
+		return new ModelAndView("ObjetoCrear.html", "Crear Mantenimiento", "Crear Mantenimiento");
 	}
-		
+	
 	@RequestMapping("/objeto/{idObjeto}")
 	public Objeto getObjeto(@PathVariable("idObjeto") Integer id){
 		return objetoService.getObjeto(id);
@@ -37,6 +37,7 @@ public class ObjetoController {
 	@RequestMapping(method=RequestMethod.POST, value="/objeto")
 	public void addObjeto(@RequestBody Objeto objeto) {
 		objetoService.addObjeto(objeto);
+		objetoService.getAllObjeto();
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/objeto/{idObjeto}")

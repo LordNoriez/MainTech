@@ -71,7 +71,8 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
 	// We can specify our authorization criteria inside this method.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
+		
+		
 		http
 				// starts authorizing configurations
 				.authorizeRequests()
@@ -91,6 +92,8 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterAt(filter(), BasicAuthenticationFilter.class)//
 				.csrf()//
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+		
+		http.csrf().disable();
 	}
 
 }

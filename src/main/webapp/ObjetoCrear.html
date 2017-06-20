@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+ 
+    <title>Crear Objeto</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+        <form action="#" th:action="@{/objeto}" th:object="${Objeto}" th:method="get" >
+
+            <table>
+                <tr>
+                    <td>MarcaObjeto:</td>
+                    <td><input type="text" th:field="*{MarcaObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="text" th:field="*{ModeloObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="text" th:field="*{DescripcionObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="text" th:field="*{LongitudObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="text" th:field="*{AnchoObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="text" th:field="*{AreaObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="text" th:field="*{AlturaObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="text" th:field="*{VidaObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="date" th:field="*{FechaCreacionObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td>ModeloObjeto:</td>
+                    <td><input type="date" th:field="*{FechaObtencionObjeto}" /></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

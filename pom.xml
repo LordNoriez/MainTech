@@ -25,6 +25,8 @@
 	</properties>
 
 	<dependencies>
+
+	
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-oauth2</artifactId>
@@ -147,6 +149,8 @@
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-entitymanager</artifactId>
 		</dependency> -->
+		
+	<!-- depndencias para thymeleaf -->
 
 	</dependencies>
 
@@ -179,6 +183,5 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
-
+	
 </project>
