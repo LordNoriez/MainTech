@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-        <form action="#" th:action="@{/objeto}" th:object="${Objeto}" th:method="get" >
+        <form action="/objeto" th:action="@{/objeto}" th:object="${objeto}" method="post" >
 
             <table>
                 <tr>
@@ -18,39 +18,39 @@
                     <td><input type="text" th:field="*{ModeloObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td>ModeloObjeto:</td>
+                    <td>DescripcionObjeto:</td>
                     <td><input type="text" th:field="*{DescripcionObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td>ModeloObjeto:</td>
+                    <td>LongitudObjeto:</td>
                     <td><input type="text" th:field="*{LongitudObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td>ModeloObjeto:</td>
+                    <td>AnchoObjeto:</td>
                     <td><input type="text" th:field="*{AnchoObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td>ModeloObjeto:</td>
+                    <td>AreaObjeto:</td>
                     <td><input type="text" th:field="*{AreaObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td>ModeloObjeto:</td>
+                    <td>AlturaObjeto:</td>
                     <td><input type="text" th:field="*{AlturaObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td>ModeloObjeto:</td>
+                    <td>VidaObjeto:</td>
                     <td><input type="text" th:field="*{VidaObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td>ModeloObjeto:</td>
+                    <td>FechaCreacionObjeto:</td>
                     <td><input type="date" th:field="*{FechaCreacionObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td>ModeloObjeto:</td>
+                    <td>FechaObtencionObjeto:</td>
                     <td><input type="date" th:field="*{FechaObtencionObjeto}" /></td>
                 </tr>
                 <tr>
-                    <td><button type="submit">Submit</button></td>
+                    <td><button type="submit">Crear Objeto</button></td>
                 </tr>
             </table>
         </form>

@@ -150,8 +150,11 @@
 		    <artifactId>hibernate-entitymanager</artifactId>
 		</dependency> -->
 		
-	<!-- depndencias para thymeleaf -->
-
+	<!-- dependencias para thymeleaf -->
+<!-- 	    <dependency> -->
+<!--             <groupId>org.springframework.boot</groupId> -->
+<!--             <artifactId>spring-boot-starter-thymeleaf</artifactId> -->
+<!--         </dependency> -->
 	</dependencies>
 
 	<dependencyManagement>

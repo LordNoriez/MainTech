@@ -4,7 +4,9 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,11 +36,11 @@ public class ObjetoController {
 		return objetoService.getObjeto(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/objeto")
-	public void addObjeto(@RequestBody Objeto objeto) {
-		objetoService.addObjeto(objeto);
-		objetoService.getAllObjeto();
-	}
+    @PostMapping("/objeto")
+    public String addObjeto(@ModelAttribute Objeto objeto) {
+    	objetoService.addObjeto(objeto);
+        return "Se Ingreso Correctamente el Objeto";
+    }
 
 	@RequestMapping(method=RequestMethod.PUT, value="/objeto/{idObjeto}")
 	public void updateObjeto(@RequestBody Objeto objeto, @PathVariable("idObjeto") Integer id) {

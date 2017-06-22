@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml", xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Crear Mantenimiento</title>
   <meta charset="utf-8"></meta>
@@ -64,7 +64,7 @@
 			<!-- End Home Panel -->
 
 		</div>
-  <form action="">
+  <form action="/objeto" th:action="@{/objeto}" th:object="${objeto}" method="post">
     <div class="form-group col-md-6" ng-show="user">
       <label>Fecha de Mantenimiento:</label>
       <input type="date" class="form-control" id="FechaMantenimiento" placeholder="Fecha Mantenimiento" name="FechaMantenimiento" ></input>
