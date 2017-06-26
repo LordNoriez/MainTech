@@ -122,7 +122,7 @@ public class ObjetoController {
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setTo(address);
         helper.setText("<html><body> Aceptar Manteniomiento "
-        		+ "<br><a href='http://localhost:8080/crearMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a><body></html>", true);
+        		+ "<br><a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a><body></html>", true);
         helper.setSubject("Mantenimiento Generado");
         mailSender.send(message);
     }
