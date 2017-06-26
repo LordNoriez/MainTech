@@ -28,10 +28,11 @@ public class ObjetoService {
 	}
 
 	public void updateObjeto(Integer id, Objeto topic) {		
-		objetoRepository.save(topic);
+		objetoRepository.save(topic);		
 	}
 
 	public void deleteObjeto(Integer id) {
 		objetoRepository.delete(id);
 	}
+	
 }

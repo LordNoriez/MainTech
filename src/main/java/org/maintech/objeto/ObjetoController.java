@@ -3,14 +3,14 @@ package org.maintech.objeto;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 import javax.mail.internet.MimeMessage;
 
->>>>>>> ed77c1128923e5cae9a8bf6b9103e090e74d4923
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -38,22 +38,27 @@ public class ObjetoController {
 	//@RequestMapping(value="/", method=RequestMethod.GET)
 	@RequestMapping("/objeto")
 	public List<Objeto> getAllObjeto() {
+
+		this.checkTimeObject();
 		return objetoService.getAllObjeto();
 	}
 	
 	@RequestMapping("/crearObjeto")
 	public ModelAndView crearMantenimiento(){
+		this.checkTimeObject();
 		return new ModelAndView("ObjetoCrear.html", "Crear Mantenimiento", "Crear Mantenimiento");
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
 	public Objeto getObjeto(@PathVariable("idObjeto") Integer id){
+		this.checkTimeObject();
 		return objetoService.getObjeto(id);
 	}
 	
     @PostMapping("/objeto")
     public String addObjeto(@ModelAttribute Objeto objeto) {
     	objetoService.addObjeto(objeto);
+    	this.checkTimeObject();
         return "Se Ingreso Correctamente el Objeto";
     }
 
@@ -66,17 +71,23 @@ public class ObjetoController {
 	public void deleteObjeto(@PathVariable Integer id){
 		objetoService.deleteObjeto(id);
 	}
-	
-<<<<<<< HEAD
-	public List<Objeto> checkTimeObject () {
-		List<Objeto> objetos = objetoService.getAllObjeto();
+		
+	public void checkTimeObject () {
+		Integer i = 0;
+		
+		List<Objeto> objetos = null;
+		objetos=objetoService.getAllObjeto();
 		List<Objeto> proximos = new ArrayList<Objeto>();
 		DateFormat formatter = new SimpleDateFormat("HH:mm");
-		for(Objeto obj : objetos){
+		
+		for (i=0;i<objetos.size();i++) {
 			try {
-				if (obj.getTiempoMante() != null) {
-					if (formatter.parse(obj.getTiempoMante()).getTime() < System.currentTimeMillis()) {
-						proximos.add(obj);
+				if (objetos.get(i).getTiempoMante() != null) {
+					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");    
+					Date resultdate = new Date(System.currentTimeMillis());
+					
+					if (formatter.parse(objetos.get(i).getTiempoMante()).getTime() < formatter.parse(sdf.format(resultdate)).getTime()) {
+						proximos.add(objetos.get(i));
 					}
 				}
 			} catch (ParseException e) {
@@ -84,36 +95,37 @@ public class ObjetoController {
 				e.printStackTrace();
 			}
 		}
-		return proximos;
-				
+		for (Objeto obj : proximos){
+			System.out.println(obj.getTiempoMante());			
+		}
 	}
-=======
+	
+	
+	
 	// ------------- send mail
 	
 	@RequestMapping("/simpleemail")
-	    @ResponseBody
-	    String home() {
-	        try {
-	            sendEmail();
-	            return "Email Sent!";
-	        }catch(Exception ex) {
-	            return "Error in sending email: "+ex;
-	        }
-	    } 
-	
-	    private void sendEmail() throws Exception{
-	    	
-	    	String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
-	    	
-	        MimeMessage message = mailSender.createMimeMessage();
-	        MimeMessageHelper helper = new MimeMessageHelper(message);
-	        helper.setTo(address);
-	        helper.setText("<html><body> Aceptar Manteniomiento "
-	        		+ "<br><a href='http://localhost:8080/crearMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a><body></html>", true);
-	        helper.setSubject("Mantenimiento Generado");
-	        mailSender.send(message);
-	    }
+    @ResponseBody
+    String home() {
+        try {
+            sendEmail();
+            return "Email Sent!";
+        }catch(Exception ex) {
+            return "Error in sending email: "+ex;
+        }
+    } 
 
-	
->>>>>>> ed77c1128923e5cae9a8bf6b9103e090e74d4923
+    private void sendEmail() throws Exception{
+    	
+    	String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
+    	
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setTo(address);
+        helper.setText("<html><body> Aceptar Manteniomiento "
+        		+ "<br><a href='http://localhost:8080/crearMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a><body></html>", true);
+        helper.setSubject("Mantenimiento Generado");
+        mailSender.send(message);
+    }
+
 }

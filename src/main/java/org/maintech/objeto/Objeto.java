@@ -1,6 +1,7 @@
 package org.maintech.objeto;
 
 
+import java.sql.Time;
 import java.util.Date;
 import javax.persistence.Column;
 
