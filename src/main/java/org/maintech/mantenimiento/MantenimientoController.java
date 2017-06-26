@@ -37,6 +37,15 @@ public class MantenimientoController {
 		mantenimientoService.addMantenimiento(mantenimiento);
 	}
 	
+	@RequestMapping(method=RequestMethod.POST, value="/cMantenimiento")
+	public void addMantnmailProvider(@RequestBody Mantenimiento mantenimiento) {
+		mantenimiento.setNombreMantenimiento(null);
+		mantenimiento.setFechaMantenimiento(null);
+		mantenimiento.setDescripcionMantenimiento(null);
+		mantenimiento.setActive(true);
+		mantenimientoService.addMantenimiento(mantenimiento);
+	}
+	
 
 	@RequestMapping("/addMantenimiento/{nombre}/{descripcion}")
 	public String urlAddMantenimiento(@PathVariable("nombre") String nombre, @PathVariable("descripcion") String descripcion) {

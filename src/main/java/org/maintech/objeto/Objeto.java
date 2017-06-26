@@ -1,7 +1,6 @@
 package org.maintech.objeto;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import javax.persistence.Column;
 
@@ -10,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.print.attribute.standard.DateTimeAtCompleted;
-
 import org.hibernate.annotations.Where;
 import org.maintech.categoria.Categoria;
 import org.maintech.mantenimiento.Mantenimiento;
@@ -179,13 +176,11 @@ public class Objeto {
 	}
 
 	public String getTiempoMante() {
-	    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-	    return dateFormat.format(tiempoMante);
+	    return tiempoMante;
 	}
 
 	public void setTiempoMante(String tiempoMante) {
-	    DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
-		this.tiempoMante = dateFormat2.format(tiempoMante);
+		this.tiempoMante = tiempoMante;
 	}
 
 	public Objeto() {
