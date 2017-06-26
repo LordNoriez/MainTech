@@ -3,12 +3,16 @@ package org.maintech.objeto;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.mail.internet.MimeMessage;
 
+import org.maintech.mantenimiento.MantenimientoController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -29,6 +33,9 @@ public class ObjetoController {
 	@Autowired
 	private ObjetoService objetoService;
 	
+	@Autowired
+	private MantenimientoController mantenimientoController;
+	
     @Autowired
     private JavaMailSender mailSender;
 
@@ -42,9 +49,9 @@ public class ObjetoController {
 	}
 	
 	@RequestMapping("/crearObjeto")
-	public ModelAndView crearMantenimiento(){
+	public ModelAndView crearObjeto(){
 		this.checkTimeObject();
-		return new ModelAndView("ObjetoCrear.html", "Crear Mantenimiento", "Crear Mantenimiento");
+		return new ModelAndView("ObjetoCrear.html", "Crear Objeto", "Crear Objeto");
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
@@ -71,31 +78,55 @@ public class ObjetoController {
 	}
 		
 	public List<Objeto> checkTimeObject () {
-		Integer i = 0;
 		
-		List<Objeto> objetos = null;
-		objetos=objetoService.getAllObjeto();
+		System.out.println(" 1 ");
+		List<Objeto> objetos = objetoService.getAllObjeto();
 		List<Objeto> proximos = new ArrayList<Objeto>();
-		DateFormat formatter = new SimpleDateFormat("HH:mm");
+		//DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 		
-		for (i=0;i<objetos.size();i++) {
+		for(Objeto objeto : objetos){
 			try {
-				if (objetos.get(i).getTiempoMante() != null) {
-					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");    
-					Date resultdate = new Date(System.currentTimeMillis());
+				System.out.println(" 2 ");
+				if (objeto.getTiempoMante() != null) {
+					System.out.println(" 3 ");
+					//DateFormat sdf = new SimpleDateFormat("HH:mm:ss");    
+					//Date resultDate = new Date(System.currentTimeMillis());
+										
+					/*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH);
+					LocalDate date = LocalDate.parse(objeto.getTiempoMante().toString(), formatter);
+					LocalDate nowDate = LocalDate.parse(now.toString(), formatter);*/
 					
-					if (formatter.parse(objetos.get(i).getTiempoMante()).getTime() < formatter.parse(sdf.format(resultdate)).getTime()) {
-						proximos.add(objetos.get(i));
-					}
+					Date now = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+				    Date date = sdf.parse(objeto.getTiempoMante().toString());
+				    //Date nowDate = sdf.parse(now.toString());
+				    long between = now.getTime() - date.getTime(); 
+				    System.out.println(between);
+				    
+					System.out.println(date);
+					System.out.println(" < ");
+					System.out.println(now);
+					
+					if (between >= 0){
+						System.out.println(" 4 ");
+						proximos.add(objeto);
+					}						
 				}
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		for (Objeto obj : proximos){
-			System.out.println(obj.getTiempoMante());
+		for (Objeto objeto : proximos){
+			System.out.println(objeto.getMarcaObjeto() + " " + objeto.getDescripcionObjeto() + " " + objeto.getTiempoMante());
+			System.out.println(" 5 ");
 		}
+		
+		if (proximos.size() != 0){ 
+			this.home();
+			System.out.println(" 6 ");
+		}
+		
 		return proximos;
 	}
 	
@@ -121,7 +152,7 @@ public class ObjetoController {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setTo(address);
-        helper.setText("<html><body> Aceptar Manteniomiento "
+        helper.setText("<html><body><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>  "
         		+ "<br><a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a><body></html>", true);
         helper.setSubject("Mantenimiento Generado");
         mailSender.send(message);

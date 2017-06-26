@@ -39,7 +39,7 @@ public class ObjetoService {
 		objetoRepository.delete(id);
 	}
 	
-	public List<Objeto> timeobj () {
+	public List<Objeto> timeObjeto () {
 		Integer i = 0;
 		
 		List<Objeto> objetos = null;

@@ -24,10 +24,10 @@ public class MantenimientoController {
 	private MantenimientoService mantenimientoService;
 	
 	@Autowired
-	private ObjetoService objetoService; 
+	private ObjetoController objetoController;
 	
 	@RequestMapping("/mantenimiento")
-	public List<Mantenimiento> getAllObjeto() {
+	public List<Mantenimiento> getAllMantenimiento() {
 		return mantenimientoService.getAllMantenimiento();
 	}
 		
@@ -48,29 +48,27 @@ public class MantenimientoController {
 	
 
 	@RequestMapping(value="/cMantenimiento")
-	public String addMantnmailProvider() {
+	public List<Mantenimiento>  addMantnmailProvider() {
 		
 		
 		Mantenimiento mat = new Mantenimiento();
-		
-
+				
 		Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.DATE, 1); //minus number would decrement the days
 		
 		
-		for (Objeto objeto : objetoService.timeobj()) {
+		for (Objeto objeto : objetoController.checkTimeObject()) {
 			System.out.println(objeto.getTiempoMante().toString());
 			mat.setNombreMantenimiento("Limpieza");
 			mat.setObjeto(objeto);
-			mat.setDescripcionMantenimiento("lo de siempre");
+			mat.setDescripcionMantenimiento("Limpieza exterior");
 			mat.setFechaMantenimiento(cal.getTime());
 			mat.setActive(true);
-			mantenimientoService.addMantenimiento(mat);
-			
+			mantenimientoService.addMantenimiento(mat);			
 		}
 
-		return "Se Ingreso Correctamente el Mantenimiento";
+		return mantenimientoService.getAllMantenimiento();
 	
 	}
 
