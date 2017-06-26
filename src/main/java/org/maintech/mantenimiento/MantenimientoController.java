@@ -1,8 +1,14 @@
 package org.maintech.mantenimiento;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.management.loading.PrivateClassLoader;
+
+import org.maintech.objeto.Objeto;
+import org.maintech.objeto.ObjetoController;
+import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +22,9 @@ public class MantenimientoController {
 	
 	@Autowired
 	private MantenimientoService mantenimientoService;
+	
+	@Autowired
+	private ObjetoService objetoService; 
 	
 	@RequestMapping("/mantenimiento")
 	public List<Mantenimiento> getAllObjeto() {
@@ -37,25 +46,32 @@ public class MantenimientoController {
 		mantenimientoService.addMantenimiento(mantenimiento);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/cMantenimiento")
-	public void addMantnmailProvider(@RequestBody Mantenimiento mantenimiento) {
-		mantenimiento.setNombreMantenimiento(null);
-		mantenimiento.setFechaMantenimiento(null);
-		mantenimiento.setDescripcionMantenimiento(null);
-		mantenimiento.setActive(true);
-		mantenimientoService.addMantenimiento(mantenimiento);
-	}
-	
 
-	@RequestMapping("/addMantenimiento/{nombre}/{descripcion}")
-	public String urlAddMantenimiento(@PathVariable("nombre") String nombre, @PathVariable("descripcion") String descripcion) {
+	@RequestMapping(value="/cMantenimiento")
+	public String addMantnmailProvider() {
+		
+		
 		Mantenimiento mat = new Mantenimiento();
-		mat.setNombreMantenimiento(nombre);
-		mat.setDescripcionMantenimiento(descripcion);
-		mat.setFechaMantenimiento(new Date());
-		mat.setActive(true);
-		mantenimientoService.addMantenimiento(mat);
-		return "Mantenimiento Creado!";
+		
+
+		Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, 1); //minus number would decrement the days
+		
+		
+		for (Objeto objeto : objetoService.timeobj()) {
+			System.out.println(objeto.getTiempoMante().toString());
+			mat.setNombreMantenimiento("Limpieza");
+			mat.setObjeto(objeto);
+			mat.setDescripcionMantenimiento("lo de siempre");
+			mat.setFechaMantenimiento(cal.getTime());
+			mat.setActive(true);
+			mantenimientoService.addMantenimiento(mat);
+			
+		}
+
+		return "Se Ingreso Correctamente el Mantenimiento";
+	
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/mantenimiento/{idMantenimiento}")
