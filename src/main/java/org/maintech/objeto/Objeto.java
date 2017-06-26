@@ -1,5 +1,7 @@
 package org.maintech.objeto;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 
@@ -8,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import org.hibernate.annotations.Where;
 import org.maintech.categoria.Categoria;
@@ -31,6 +34,7 @@ public class Objeto {
 	private String AreaObjeto;
 	private String AlturaObjeto;
 	private Integer VidaObjeto;
+	private String tiempoMante;
 	
 	@ManyToOne
 	private Objeto objeto;
@@ -174,6 +178,16 @@ public class Objeto {
 		this.active = active;
 	}
 
+	public String getTiempoMante() {
+	    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+	    return dateFormat.format(tiempoMante);
+	}
+
+	public void setTiempoMante(String tiempoMante) {
+	    DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+		this.tiempoMante = dateFormat2.format(tiempoMante);
+	}
+
 	public Objeto() {
 		super();
 	}
@@ -181,7 +195,7 @@ public class Objeto {
 	public Objeto(Integer idObjeto, String marcaObjeto, String modeloObjeto, String serialObjeto,
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
 			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objeto,
-			Categoria categoria, Mantenimiento mantenimiento, Boolean active) {
+			Categoria categoria, Mantenimiento mantenimiento, Boolean active, String tiempoMante) {
 		super();
 		this.idObjeto = idObjeto;
 		MarcaObjeto = marcaObjeto;
@@ -199,6 +213,7 @@ public class Objeto {
 		this.categoria = categoria;
 		this.mantenimiento = mantenimiento;
 		this.active = active;
+		this.tiempoMante = tiempoMante;
 	}
 
 	
