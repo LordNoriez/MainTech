@@ -1,7 +1,10 @@
 package org.maintech.objeto;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -50,5 +53,25 @@ public class ObjetoController {
 	@RequestMapping(method=RequestMethod.DELETE, value="/objeto/{idObjeto}")
 	public void deleteObjeto(@PathVariable Integer id){
 		objetoService.deleteObjeto(id);
+	}
+	
+	public List<Objeto> checkTimeObject () {
+		List<Objeto> objetos = objetoService.getAllObjeto();
+		List<Objeto> proximos = new ArrayList<Objeto>();
+		DateFormat formatter = new SimpleDateFormat("HH:mm");
+		for(Objeto obj : objetos){
+			try {
+				if (obj.getTiempoMante() != null) {
+					if (formatter.parse(obj.getTiempoMante()).getTime() < System.currentTimeMillis()) {
+						proximos.add(obj);
+					}
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return proximos;
+				
 	}
 }
