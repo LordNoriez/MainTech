@@ -72,7 +72,7 @@ public class ObjetoController {
 		objetoService.deleteObjeto(id);
 	}
 		
-	public void checkTimeObject () {
+	public List<Objeto> checkTimeObject () {
 		Integer i = 0;
 		
 		List<Objeto> objetos = null;
@@ -96,8 +96,9 @@ public class ObjetoController {
 			}
 		}
 		for (Objeto obj : proximos){
-			System.out.println(obj.getTiempoMante());			
+			System.out.println(obj.getTiempoMante());
 		}
+		return proximos;
 	}
 	
 	
