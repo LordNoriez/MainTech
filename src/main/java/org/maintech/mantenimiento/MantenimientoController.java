@@ -53,19 +53,20 @@ public class MantenimientoController {
 		
 		Mantenimiento mat = new Mantenimiento();
 				
-		Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.DATE, 1); //minus number would decrement the days
+		Date now = new Date();
 		
-		
-		for (Objeto objeto : objetoController.checkTimeObject()) {
-			System.out.println(objeto.getTiempoMante().toString());
-			mat.setNombreMantenimiento("Limpieza");
+        System.out.println(" 7 ");
+        Integer x= 8;
+		for (Objeto objeto : objetoController.checkTimeObject(1)) {
+			System.out.println(objeto.getMarcaObjeto() + " " + objeto.getDescripcionObjeto() + " " + objeto.getTiempoMante());
+			mat.setNombreMantenimiento("Limpieza " + x);
 			mat.setObjeto(objeto);
 			mat.setDescripcionMantenimiento("Limpieza exterior");
-			mat.setFechaMantenimiento(cal.getTime());
+			mat.setFechaMantenimiento(now);
 			mat.setActive(true);
-			mantenimientoService.addMantenimiento(mat);			
+			mantenimientoService.addMantenimiento(mat);		
+			System.out.println(x);
+			x++;
 		}
 
 		return mantenimientoService.getAllMantenimiento();

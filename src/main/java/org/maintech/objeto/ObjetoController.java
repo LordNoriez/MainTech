@@ -32,10 +32,7 @@ public class ObjetoController {
 	
 	@Autowired
 	private ObjetoService objetoService;
-	
-	@Autowired
-	private MantenimientoController mantenimientoController;
-	
+		
     @Autowired
     private JavaMailSender mailSender;
 
@@ -44,26 +41,25 @@ public class ObjetoController {
 	@RequestMapping("/objeto")
 	public List<Objeto> getAllObjeto() {
 
-		this.checkTimeObject();
+		this.checkTimeObject(0);
 		return objetoService.getAllObjeto();
 	}
 	
 	@RequestMapping("/crearObjeto")
 	public ModelAndView crearObjeto(){
-		this.checkTimeObject();
+		
 		return new ModelAndView("ObjetoCrear.html", "Crear Objeto", "Crear Objeto");
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
 	public Objeto getObjeto(@PathVariable("idObjeto") Integer id){
-		this.checkTimeObject();
+		
 		return objetoService.getObjeto(id);
 	}
 	
     @PostMapping("/objeto")
     public String addObjeto(@ModelAttribute Objeto objeto) {
-    	objetoService.addObjeto(objeto);
-    	this.checkTimeObject();
+    	objetoService.addObjeto(objeto);    	
         return "Se Ingreso Correctamente el Objeto";
     }
 
@@ -77,31 +73,23 @@ public class ObjetoController {
 		objetoService.deleteObjeto(id);
 	}
 		
-	public List<Objeto> checkTimeObject () {
+	public List<Objeto> checkTimeObject (int funcion) {
 		
 		System.out.println(" 1 ");
 		List<Objeto> objetos = objetoService.getAllObjeto();
 		List<Objeto> proximos = new ArrayList<Objeto>();
-		//DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 		
 		for(Objeto objeto : objetos){
 			try {
 				System.out.println(" 2 ");
 				if (objeto.getTiempoMante() != null) {
 					System.out.println(" 3 ");
-					//DateFormat sdf = new SimpleDateFormat("HH:mm:ss");    
-					//Date resultDate = new Date(System.currentTimeMillis());
-										
-					/*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH);
-					LocalDate date = LocalDate.parse(objeto.getTiempoMante().toString(), formatter);
-					LocalDate nowDate = LocalDate.parse(now.toString(), formatter);*/
 					
 					Date now = new Date();
 					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 				    Date date = sdf.parse(objeto.getTiempoMante().toString());
-				    //Date nowDate = sdf.parse(now.toString());
-				    long between = now.getTime() - date.getTime(); 
-				    System.out.println(between);
+				    
+				    long between = now.getTime() - date.getTime();
 				    
 					System.out.println(date);
 					System.out.println(" < ");
@@ -121,10 +109,11 @@ public class ObjetoController {
 			System.out.println(objeto.getMarcaObjeto() + " " + objeto.getDescripcionObjeto() + " " + objeto.getTiempoMante());
 			System.out.println(" 5 ");
 		}
-		
-		if (proximos.size() != 0){ 
-			this.home();
-			System.out.println(" 6 ");
+		if (funcion == 0){
+			if (proximos.size() != 0){ 
+				this.home();
+				System.out.println(" 6 ");
+			}			
 		}
 		
 		return proximos;
@@ -153,8 +142,9 @@ public class ObjetoController {
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setTo(address);
         helper.setText("<html><body><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>  "
-        		+ "<br><a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a><body></html>", true);
-        helper.setSubject("Mantenimiento Generado");
+        		+ "<br><body></html>", true);
+        //<a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a>
+        helper.setSubject("Confirmar Mantenimiento");
         mailSender.send(message);
     }
 
