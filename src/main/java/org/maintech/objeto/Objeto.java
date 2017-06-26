@@ -1,15 +1,14 @@
 package org.maintech.objeto;
 
 
-import java.sql.Time;
 import java.util.Date;
+
 import javax.persistence.Column;
-
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 import org.hibernate.annotations.Where;
 import org.maintech.categoria.Categoria;
 import org.maintech.mantenimiento.Mantenimiento;
