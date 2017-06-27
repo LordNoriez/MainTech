@@ -72,6 +72,18 @@ public class ObjetoController {
 	public void deleteObjeto(@PathVariable Integer id){
 		objetoService.deleteObjeto(id);
 	}
+	
+
+	@RequestMapping("/reporte")
+    public String sendReportEmail() {
+    	try {
+			sendReport();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return "Se ha enviado el reporte al correo de los responsables";
+    }
 		
 	public List<Objeto> checkTimeObject (int funcion) {
 		
@@ -145,6 +157,62 @@ public class ObjetoController {
         		+ "<br><body></html>", true);
         //<a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a>
         helper.setSubject("Confirmar Mantenimiento");
+        mailSender.send(message);
+    }
+    
+    
+    private void sendReport() throws Exception {
+    	
+    	// create our mysql database connection
+        String myDriver = "com.mysql.jdbc.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/DBClass";
+        Class.forName(myDriver);
+        java.sql.Connection conn = java.sql.DriverManager.getConnection(myUrl, "root", "Narutito1");
+        
+        String query = "select m.mes, sum(m.costo_actividad) as costo "
+        				+" from" 
+        				+" (select mantenimiento.id_mantenimiento, actividad.id_actividad," 
+        				+" mantenimiento.descripcion_mantenimiento," 
+        				+" mantenimiento.fecha_mantenimiento," 
+        				+" mantenimiento.nombre_mantenimiento, mantenimiento.objeto_id_objeto," 
+        				+" actividad.costo_actividad, actividad.descripcion_actividad," 
+        				+" actividad.nombre_actividad," 
+        				+" monthname(mantenimiento.fecha_mantenimiento) as mes" 
+        				+" from" 
+        				+" mantenimiento, actividad, actividad_mantenimientos" 
+        				+" where" 
+        				+" actividad.id_actividad=actividad_mantenimientos.actividad_id_actividad" 
+        				+" and" 
+        				+" mantenimiento.id_mantenimiento=actividad_mantenimientos.mantenimientos_id_mantenimiento)" 
+        				+" as m" 
+        				+" group by m.mes;";
+        
+        // create the java statement
+        java.sql.Statement st = conn.createStatement();
+        
+        // execute the query, and get a java resultset
+        java.sql.ResultSet rs = st.executeQuery(query);
+        
+        String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setTo(address);
+        String envio;
+        envio="<html><body>  Mes (Costo)<br> ";
+        
+        while (rs.next())
+        {
+          String mes = rs.getString("mes");
+          String costo= rs.getString("costo");
+          
+          envio = envio+ mes+" ("+ costo+")<br>";
+        		  
+        }
+        envio = envio+"<br><body></html>";
+        st.close();
+        helper.setText(envio, true);
+   
+        helper.setSubject("Reporte de Costos Mensuales");
         mailSender.send(message);
     }
 
