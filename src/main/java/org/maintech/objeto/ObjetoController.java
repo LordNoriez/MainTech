@@ -59,6 +59,7 @@ public class ObjetoController {
 	
     @PostMapping("/objeto")
     public String addObjeto(@ModelAttribute Objeto objeto) {
+    	objeto.setActive(true);
     	objetoService.addObjeto(objeto);    	
         return "Se Ingreso Correctamente el Objeto";
     }

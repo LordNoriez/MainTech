@@ -38,7 +38,7 @@ public class Objeto {
 	@ManyToOne
 	private Categoria categoria;
 		
-	@Column(name="is_active")
+	@Column(name="is_active", columnDefinition="tinyint(1) default 1")	
 	private Boolean active;
 		
 	public Integer getIdObjeto() {

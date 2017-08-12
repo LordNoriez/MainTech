@@ -6,52 +6,65 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+	<!-- 
         <form action="/objeto" th:action="@{/objeto}" th:object="${objeto}" method="post" >
-
-            <table>
+-->
+  	<form method="post" action="/objeto">
+  	          <table>
                 <tr>
                     <td>Serial:</td>
-                    <td><input type="text" th:field="*{SerialObjeto}" /></td>
+                    <!-- <td><input type="text" th:field="*{SerialObjeto}" /></td> -->
+                    <td><input id="SerialObjeto" name="SerialObjeto" type="text"/></td>
                 </tr>
                 <tr>
                     <td>Marca:</td>
-                    <td><input type="text" th:field="*{MarcaObjeto}" /></td>
+                    <!-- <td><input type="text" th:field="*{MarcaObjeto}" /></td>-->                    
+                    <td><input id="MarcaObjeto" name="MarcaObjeto" type="text" /></td>
                 </tr>
                 <tr>
                     <td>Modelo:</td>
-                    <td><input type="text" th:field="*{ModeloObjeto}" /></td>
+                    <!-- <td><input type="text" th:field="*{ModeloObjeto}" /></td>      -->            
+                    <td><input id="ModeloObjeto" name="ModeloObjeto" type="text" /></td>
                 </tr>
                 <tr>
                     <td>Descripción:</td>
-                    <td><input type="text" th:field="*{DescripcionObjeto}" /></td>
+                    <!--<td><input type="text" th:field="*{DescripcionObjeto}" /></td>      --> 
+                    <td><input id="ModeloObjeto" name="ModeloObjeto" type="text" /></td>
                 </tr>
                 <tr>
                     <td>Longitud:</td>
-                    <td><input type="text" th:field="*{LongitudObjeto}" /></td>
+                    <!--<td><input type="number" th:field="*{LongitudObjeto}" /></td>       -->
+                    <td><input id="ModeloObjeto" name="ModeloObjeto" type="text" /></td>
                 </tr>
                 <tr>
                     <td>Ancho:</td>
-                    <td><input type="text" th:field="*{AnchoObjeto}" /></td>
+                    <!--<td><input type="number" th:field="*{AnchoObjeto}" /></td>       -->
+                    <td><input id="AnchoObjeto" name="AnchoObjeto" type="number" /></td>
                 </tr>
                 <tr>
                     <td>Altura:</td>
-                    <td><input type="text" th:field="*{AlturaObjeto}" /></td>
+                    <!--<td><input type="number" th:field="*{AlturaObjeto}" /></td>       -->
+                    <td><input id="AlturaObjeto" name="AlturaObjeto" type="number" /></td>
                 </tr>
                 <tr>
                     <td>Área:</td>
-                    <td><input type="text" th:field="*{AreaObjeto}" /></td>
+                    <!--<td><input type="number" th:field="*{AreaObjeto}" /></td>       -->
+                    <td><input id="AreaObjeto" name="AreaObjeto" type="number" /></td>
                 </tr>
                 <tr>
                     <td>Vida Útil:</td>
-                    <td><input type="text" th:field="*{VidaObjeto}" /></td>
+                    <!--<td><input type="number" th:field="*{VidaObjeto}" /> meses</td>    -->   
+                    <td><input id="VidaObjeto" name="VidaObjeto" type="number" /></td>
                 </tr>
                 <tr>
                     <td>Fecha Creación:</td>
-                    <td><input type="date" th:field="*{FechaCreacionObjeto}" /></td>
+                    <!--<td><input type="date" th:field="*{FechaCreacionObjeto}" /></td>      --> 
+                    <td><input id="FechaCreacionObjeto" name="FechaCreacionObjeto" type="date" /></td>
                 </tr>
                 <tr>
                     <td>Fecha Obtención:</td>
-                    <td><input type="date" th:field="*{FechaObtencionObjeto}" /></td>
+                    <!--<td><input type="date" th:field="*{FechaObtencionObjeto}" /></td>       -->
+                    <td><input id="FechaObtencionObjeto" name="FechaObtencionObjeto" type="date" /></td>
                 </tr>
                 <tr>
                     <td><button type="submit">Crear Objeto</button></td>
