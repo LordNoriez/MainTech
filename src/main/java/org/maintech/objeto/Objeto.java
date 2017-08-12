@@ -37,9 +37,7 @@ public class Objeto {
 	
 	@ManyToOne
 	private Categoria categoria;
-	
-
-	
+		
 	@Column(name="is_active")
 	private Boolean active;
 		
@@ -187,10 +185,5 @@ public class Objeto {
 		this.objeto = objeto;
 		this.categoria = categoria;
 		this.active = active;
-	}
-
-	
-
-	
-	
+	}	
 }
