@@ -24,6 +24,9 @@ public class Mantenimiento {
 	private String NombreMantenimiento;
 	private Date FechaMantenimiento;
 	private String DescripcionMantenimiento;
+	@Column(columnDefinition="tinyint(1) default 1")
+	private Boolean  isProgramadoMantenimiento;
+	private String FrecuenciaMantenimiento;
 	
 	@ManyToOne
 	private Objeto objetoMantenimiento;
@@ -44,7 +47,6 @@ public class Mantenimiento {
 	
 	@Column(name="is_active")
 	private Boolean active;
-	
 	
 
 	public Integer getIdMantenimiento() {
@@ -96,44 +98,42 @@ public class Mantenimiento {
 		this.active = active;
 	}
 	
-	
-
-/*
-	public Set<Actividad> getActividad() {
-=======
-
-	public Collection<Actividad> getActividad() {
->>>>>>> origin/master
-		return actividad;
+	public String getFrecuenciaMantenimiento() {
+		return FrecuenciaMantenimiento;
 	}
 
-	public void setActividad(Collection<Actividad> actividad) {
-		this.actividad = actividad;
-	}*/
+	public void setFrecuenciaMantenimiento(String frecuenciaMantenimiento) {
+		FrecuenciaMantenimiento = frecuenciaMantenimiento;
+	}
+
+	public Boolean getIsProgramadoMantenimiento() {
+		return isProgramadoMantenimiento;
+	}
+
+	public void setIsProgramadoMantenimiento(Boolean isProgramadoMantenimiento) {
+		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
+	}
 
 	public Mantenimiento() {
 		super();
 	}
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
-			String descripcionMantenimiento, Objeto objetoMantenimiento, Collection<Actividad> actividad, Boolean active) {
+			String descripcionMantenimiento, Boolean isProgramadoMantenimiento, String frecuenciaMantenimiento,
+			Objeto objetoMantenimiento, Collection<Actividad> actividad, Boolean active) {
 		super();
 		this.idMantenimiento = idMantenimiento;
 		NombreMantenimiento = nombreMantenimiento;
 		FechaMantenimiento = fechaMantenimiento;
 		DescripcionMantenimiento = descripcionMantenimiento;
+		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
+		FrecuenciaMantenimiento = frecuenciaMantenimiento;
 		this.objetoMantenimiento = objetoMantenimiento;
-		//this.actividad = actividad;
+		this.actividad = actividad;
 		this.active = active;
 	}
 
-	public Mantenimiento(String nombreMantenimiento, Date fechaMantenimiento, String descripcionMantenimiento) {
-		super();
-		NombreMantenimiento = nombreMantenimiento;
-		FechaMantenimiento = fechaMantenimiento;
-		DescripcionMantenimiento = descripcionMantenimiento;
-		this.active = true;
-	}
+	
 
 	
 	

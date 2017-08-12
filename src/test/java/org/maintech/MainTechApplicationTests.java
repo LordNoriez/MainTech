@@ -30,9 +30,9 @@ public class MainTechApplicationTests {
 //		ObjetoController testObjetoController = new ObjetoController();
 //		testObjetoController.addObjeto(testObjeto);
 		
-		Mantenimiento testMantenimiento = new Mantenimiento("Nombre", new Date(),"Descripción");
-		MantenimientoController testMantenimientoController = new MantenimientoController();
-		testMantenimientoController.addMantenimiento(testMantenimiento);
+		//Mantenimiento testMantenimiento = new Mantenimiento("Nombre", new Date(),"Descripción");
+		//MantenimientoController testMantenimientoController = new MantenimientoController();
+		//testMantenimientoController.addMantenimiento(testMantenimiento);
 	}
 
 }

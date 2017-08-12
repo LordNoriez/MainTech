@@ -31,7 +31,6 @@ public class Objeto {
 	private String AreaObjeto;
 	private String AlturaObjeto;
 	private Integer VidaObjeto;
-	private String tiempoMante;
 	
 	@ManyToOne
 	private Objeto objeto;
@@ -39,9 +38,6 @@ public class Objeto {
 	@ManyToOne
 	private Categoria categoria;
 	
-	@ManyToOne
-	private Mantenimiento mantenimiento;
-
 
 	
 	@Column(name="is_active")
@@ -159,28 +155,12 @@ public class Objeto {
 		this.categoria = categoria;
 	}
 
-	public Mantenimiento getMantenimiento() {
-		return mantenimiento;
-	}
-
-	public void setMantenimiento(Mantenimiento mantenimiento) {
-		this.mantenimiento = mantenimiento;
-	}
-
 	public Boolean getActive() {
 		return active;
 	}
 
 	public void setActive(Boolean active) {
 		this.active = active;
-	}
-
-	public String getTiempoMante() {
-	    return tiempoMante;
-	}
-
-	public void setTiempoMante(String tiempoMante) {
-		this.tiempoMante = tiempoMante;
 	}
 
 	public Objeto() {
@@ -190,7 +170,7 @@ public class Objeto {
 	public Objeto(Integer idObjeto, String marcaObjeto, String modeloObjeto, String serialObjeto,
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
 			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objeto,
-			Categoria categoria, Mantenimiento mantenimiento, Boolean active, String tiempoMante) {
+			Categoria categoria, Boolean active) {
 		super();
 		this.idObjeto = idObjeto;
 		MarcaObjeto = marcaObjeto;
@@ -206,9 +186,7 @@ public class Objeto {
 		VidaObjeto = vidaObjeto;
 		this.objeto = objeto;
 		this.categoria = categoria;
-		this.mantenimiento = mantenimiento;
 		this.active = active;
-		this.tiempoMante = tiempoMante;
 	}
 
 	

@@ -41,7 +41,7 @@ public class ObjetoController {
 	@RequestMapping("/objeto")
 	public List<Objeto> getAllObjeto() {
 
-		this.checkTimeObject(0);
+		//this.checkTimeObject(0);
 		return objetoService.getAllObjeto();
 	}
 	
@@ -84,52 +84,52 @@ public class ObjetoController {
 		}
         return "Se ha enviado el reporte al correo de los responsables";
     }
-		
-	public List<Objeto> checkTimeObject (int funcion) {
-		
-		System.out.println(" 1 ");
-		List<Objeto> objetos = objetoService.getAllObjeto();
-		List<Objeto> proximos = new ArrayList<Objeto>();
-		
-		for(Objeto objeto : objetos){
-			try {
-				System.out.println(" 2 ");
-				if (objeto.getTiempoMante() != null) {
-					System.out.println(" 3 ");
-					
-					Date now = new Date();
-					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-				    Date date = sdf.parse(objeto.getTiempoMante().toString());
-				    
-				    long between = now.getTime() - date.getTime();
-				    
-					System.out.println(date);
-					System.out.println(" < ");
-					System.out.println(now);
-					
-					if (between >= 0){
-						System.out.println(" 4 ");
-						proximos.add(objeto);
-					}						
-				}
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		for (Objeto objeto : proximos){
-			System.out.println(objeto.getMarcaObjeto() + " " + objeto.getDescripcionObjeto() + " " + objeto.getTiempoMante());
-			System.out.println(" 5 ");
-		}
-		if (funcion == 0){
-			if (proximos.size() != 0){ 
-				this.home();
-				System.out.println(" 6 ");
-			}			
-		}
-		
-		return proximos;
-	}
+// Done for the project for crocker :D		
+//	public List<Objeto> checkTimeObject (int funcion) {
+//		
+//		System.out.println(" 1 ");
+//		List<Objeto> objetos = objetoService.getAllObjeto();
+//		List<Objeto> proximos = new ArrayList<Objeto>();
+//		
+//		for(Objeto objeto : objetos){
+//			try {
+//				System.out.println(" 2 ");
+//				if (objeto.getTiempoMante() != null) {
+//					System.out.println(" 3 ");
+//					
+//					Date now = new Date();
+//					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+//				    Date date = sdf.parse(objeto.getTiempoMante().toString());
+//				    
+//				    long between = now.getTime() - date.getTime();
+//				    
+//					System.out.println(date);
+//					System.out.println(" < ");
+//					System.out.println(now);
+//					
+//					if (between >= 0){
+//						System.out.println(" 4 ");
+//						proximos.add(objeto);
+//					}						
+//				}
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		for (Objeto objeto : proximos){
+//			System.out.println(objeto.getMarcaObjeto() + " " + objeto.getDescripcionObjeto() + " " + objeto.getTiempoMante());
+//			System.out.println(" 5 ");
+//		}
+//		if (funcion == 0){
+//			if (proximos.size() != 0){ 
+//				this.home();
+//				System.out.println(" 6 ");
+//			}			
+//		}
+//		
+//		return proximos;
+//	}
 	
 	
 	
