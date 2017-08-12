@@ -24,7 +24,7 @@ public class Mantenimiento {
 	private String NombreMantenimiento;
 	private Date FechaMantenimiento;
 	private String DescripcionMantenimiento;
-	@Column(columnDefinition="tinyint(1) default 1")
+	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean  isProgramadoMantenimiento;
 	private String FrecuenciaMantenimiento;
 	
