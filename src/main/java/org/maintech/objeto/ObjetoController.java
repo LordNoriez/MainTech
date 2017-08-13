@@ -1,8 +1,9 @@
 package org.maintech.objeto;
 
 import java.text.DateFormat;
-import java.text.ParseException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -59,7 +60,10 @@ public class ObjetoController {
 	
     @PostMapping("/objeto")
     public String addObjeto(@ModelAttribute Objeto objeto) {
-    	objeto.setActive(true);
+    	objeto.setActive(true);    	
+		Date date = new Date();
+    	objeto.setFechaCreacionObjeto(date);
+    	
     	objetoService.addObjeto(objeto);    	
         return "Se Ingreso Correctamente el Objeto";
     }
