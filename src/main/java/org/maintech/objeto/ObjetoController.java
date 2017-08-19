@@ -13,6 +13,8 @@ import java.util.Locale;
 
 import javax.mail.internet.MimeMessage;
 
+import org.maintech.categoria.Categoria;
+import org.maintech.categoria.CategoriaController;
 import org.maintech.mantenimiento.MantenimientoController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -49,7 +51,12 @@ public class ObjetoController {
 	@RequestMapping("/crearObjeto")
 	public ModelAndView crearObjeto(){
 		
-		return new ModelAndView("ObjetoCrear.html", "Crear Objeto", "Crear Objeto");
+		ModelAndView mav = new ModelAndView("ObjetoCrear.html", "Crear Objeto", "Crear Objeto");
+		List<Categoria> categorias = null;
+		CategoriaController cc = new CategoriaController();
+		
+		mav.addAttribute("categories", cc.getAllCategoria());
+		return mav;
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
