@@ -45,7 +45,7 @@ public class Mantenimiento {
 	private Collection<Actividad> actividad;
 
 	
-	@Column(name="is_active")
+	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
 	
 

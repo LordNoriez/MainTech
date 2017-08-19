@@ -26,9 +26,9 @@ public class TipoMantenimiento {
 	private Mantenimiento objetoMantenimiento;
 	
 	
-	@Column(name="is_active")
+	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
-
+	
 	public Integer getIdTipoMantenimiento() {
 		return idTipoMantenimiento;
 	}

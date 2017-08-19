@@ -10,27 +10,27 @@ import org.springframework.stereotype.Service;
 public class TipoMantenimientoService {
 
 	@Autowired
-	private TipoMantenimientoRepository mantenimientoRepository;
+	private TipoMantenimientoRepository tipomantenimientoRepository;
 
 	public List<TipoMantenimiento> getAllMantenimiento() {
 		List<TipoMantenimiento> mantenimientos = new ArrayList<>();
-		mantenimientoRepository.findAll().forEach(mantenimientos::add);
+		tipomantenimientoRepository.findAll().forEach(mantenimientos::add);
 		return mantenimientos;
 	}
 
 	public TipoMantenimiento getMantenimiento(Integer id) {
-		return mantenimientoRepository.findOne(id);
+		return tipomantenimientoRepository.findOne(id);
 	}
 
 	public void addMantenimiento(TipoMantenimiento mantenimiento) {
-		mantenimientoRepository.save(mantenimiento);
+		tipomantenimientoRepository.save(mantenimiento);
 	}
 
 	public void updateMantenimiento(Integer id, TipoMantenimiento mantenimiento) {
-		mantenimientoRepository.save(mantenimiento);
+		tipomantenimientoRepository.save(mantenimiento);
 	}
 
 	public void deleteMantenimiento(Integer id) {
-		mantenimientoRepository.delete(id);
+		tipomantenimientoRepository.delete(id);
 	}
 }
