@@ -2,6 +2,7 @@ package org.maintech.actividad;
 
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,6 +24,8 @@ public class Actividad {
 	private Double CostoActividad;
 	private String DescripcionActividad;
 	
+	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
+	private Boolean active;
 
 	//@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
 //	  @JoinTable(

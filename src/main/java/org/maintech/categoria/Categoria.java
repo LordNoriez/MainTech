@@ -17,7 +17,7 @@ public class Categoria {
 	private String NombreCategoria;
 	private String DescripcionCategoria;
 	
-	@Column(name="is_active")
+	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
 	
 	
