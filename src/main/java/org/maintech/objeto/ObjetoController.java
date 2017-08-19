@@ -1,24 +1,17 @@
 package org.maintech.objeto;
 
-import java.text.DateFormat;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 
 import org.maintech.categoria.Categoria;
 import org.maintech.categoria.CategoriaController;
-import org.maintech.mantenimiento.MantenimientoController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,10 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 //@RequestMapping("/objeto")
 public class ObjetoController {
 	
@@ -39,7 +31,13 @@ public class ObjetoController {
     @Autowired
     private JavaMailSender mailSender;
 
-	
+
+	@RequestMapping("/welcome")
+	public String welcome(Map<String, Object> model) {
+		model.put("message", "Hello World xD");
+		return "welcome";
+	}
+    
 	//@RequestMapping(value="/", method=RequestMethod.GET)
 	@RequestMapping("/objeto")
 	public List<Objeto> getAllObjeto() {
@@ -49,14 +47,12 @@ public class ObjetoController {
 	}
 	
 	@RequestMapping("/crearObjeto")
+	@ModelAttribute("categories")
 	public ModelAndView crearObjeto(){
-		
-		ModelAndView mav = new ModelAndView("ObjetoCrear.html", "Crear Objeto", "Crear Objeto");
-		List<Categoria> categorias = null;
-		CategoriaController cc = new CategoriaController();
-		
-		mav.addAttribute("categories", cc.getAllCategoria());
-		return mav;
+				
+		List<Categoria> categories = new CategoriaController().getAllCategoria();
+
+		return new ModelAndView("ObjetoCrear.html", "Crear Objeto", categories);
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
