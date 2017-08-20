@@ -168,7 +168,7 @@ public class Objeto {
 	public Objeto(Integer idObjeto, String marcaObjeto, String modeloObjeto, String serialObjeto,
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
 			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objeto,
-			Categoria categoria, Boolean active) {
+			Categoria categoria) {
 		super();
 		this.idObjeto = idObjeto;
 		MarcaObjeto = marcaObjeto;
@@ -184,6 +184,5 @@ public class Objeto {
 		VidaObjeto = vidaObjeto;
 		this.objeto = objeto;
 		this.categoria = categoria;
-		this.active = active;
 	}	
 }

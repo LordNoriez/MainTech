@@ -8,11 +8,13 @@ import javax.mail.internet.MimeMessage;
 
 import org.maintech.categoria.Categoria;
 import org.maintech.categoria.CategoriaController;
+import org.maintech.categoria.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,14 +28,17 @@ public class ObjetoController {
 	
 	@Autowired
 	private ObjetoService objetoService;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 		
     @Autowired
     private JavaMailSender mailSender;
 
 
 	@RequestMapping("/welcome")
-	public String welcome(Map<String, Object> model) {
-		model.put("message", "Hello World xD");
+	public String welcome(Model model) {
+		model.addAttribute("message", "Hello World xD");
 		return "welcome";
 	}
     
@@ -46,10 +51,10 @@ public class ObjetoController {
 	}
 	
 	@RequestMapping("/crearObjeto")
-	public String crearObjeto(){
-				
-		//List<Categoria> categories = new CategoriaController().getAllCategoria();
-
+	public String crearObjeto(Model model){
+		
+		model.addAttribute("categories", categoriaService.getAllCategoria());
+		
 		return "ObjetoCrear";
 	}
 	
