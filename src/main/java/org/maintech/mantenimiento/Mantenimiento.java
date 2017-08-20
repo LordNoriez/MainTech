@@ -129,8 +129,8 @@ public class Mantenimiento {
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 		FrecuenciaMantenimiento = frecuenciaMantenimiento;
 		this.objetoMantenimiento = objetoMantenimiento;
+		this.active = true;
 		this.actividad = actividad;
-		this.active = active;
 	}
 
 	

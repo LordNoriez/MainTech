@@ -1,14 +1,19 @@
 package org.maintech.mantenimiento;
 
 import java.util.List;
+import java.util.Map;
 
 import org.maintech.objeto.ObjetoController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MantenimientoController {
@@ -30,13 +35,15 @@ public class MantenimientoController {
 	}
 	
 	@RequestMapping("/crearMantenimiento")
-	public String crearMantenimiento(){
+	public String crearMantenimiento(@ModelAttribute("crearModelMantenimiento") Mantenimiento mantenimiento,
+			BindingResult result, Model model){
 		return "MantenimientoCrear";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
-	public void addMantenimiento(@RequestBody Mantenimiento mantenimiento) {
+	public void addMantenimiento(Mantenimiento mantenimiento) {
 		mantenimientoService.addMantenimiento(mantenimiento);
+		mantenimientoService.getAllMantenimiento();
 	}
 	
 // done for project crocker :D
