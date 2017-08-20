@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 //@RequestMapping("/objeto")
@@ -47,12 +46,11 @@ public class ObjetoController {
 	}
 	
 	@RequestMapping("/crearObjeto")
-	@ModelAttribute("categories")
-	public ModelAndView crearObjeto(){
+	public String crearObjeto(){
 				
-		List<Categoria> categories = new CategoriaController().getAllCategoria();
+		//List<Categoria> categories = new CategoriaController().getAllCategoria();
 
-		return new ModelAndView("ObjetoCrear.html", "Crear Objeto", categories);
+		return "ObjetoCrear";
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")

@@ -23,19 +23,19 @@ public class TipoMantenimientoController {
 	private TipoMantenimientoService mantenimientoService;
 	
 	
-	@RequestMapping("/tipomantenimiento")
+	@RequestMapping("/tipoMantenimiento")
 	public List<TipoMantenimiento> getAllMantenimiento() {
 		return mantenimientoService.getAllMantenimiento();
 	}
 		
-	@RequestMapping("/tipomantenimiento/{idMantenimiento}")
+	@RequestMapping("/tipoMantenimiento/{idMantenimiento}")
 	public TipoMantenimiento getMantenimiento(@PathVariable("idMantenimiento") Integer id){
 		return mantenimientoService.getMantenimiento(id);
 	}
 	
-	@RequestMapping("/creartipoMantenimiento")
-	public ModelAndView crearMantenimiento(){
-		return new ModelAndView("MantenimientoCrear.xhtml", "Crear Mantenimiento", "Crear Mantenimiento");
+	@RequestMapping("/crearTipoMantenimiento")
+	public String crearMantenimiento(){
+		return "MantenimientoCrear";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addTipoMantenimiento")
@@ -45,17 +45,17 @@ public class TipoMantenimientoController {
 	
 
 
-	@RequestMapping(method=RequestMethod.PUT, value="/Tipomantenimiento/{idMantenimiento}")
+	@RequestMapping(method=RequestMethod.PUT, value="/tipoMantenimiento/{idMantenimiento}")
 	public void updateMantenimiento(@RequestBody TipoMantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
 		mantenimientoService.updateMantenimiento(id, mantenimiento);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/Tipomantenimiento/{idMantenimiento}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/tipoMantenimiento/{idMantenimiento}")
 	public void deleteMantenimiento(@PathVariable Integer id){
 		mantenimientoService.deleteMantenimiento(id);
 	}
 
-	@RequestMapping("/TipomantenimientoDelete/{id}")
+	@RequestMapping("/eliminarTipoMantenimiento/{id}")
 	public String urlDeleteMantenimiento(@PathVariable("id") Integer id){
 		mantenimientoService.deleteMantenimiento(id);
 		return "Mantenimiento Eliminado!";

@@ -17,41 +17,41 @@ public class AreaEmpresaController {
 	private AreaEmpresaService mantenimientoService;
 	
 	
-	@RequestMapping("/areaempresa")
+	@RequestMapping("/areaEmpresa")
 	public List<AreaEmpresa> getAllMantenimiento() {
 		return mantenimientoService.getAllMantenimiento();
 	}
 		
-	@RequestMapping("/areaempresa/{idMantenimiento}")
+	@RequestMapping("/areaEmpresa/{idMantenimiento}")
 	public AreaEmpresa getMantenimiento(@PathVariable("idMantenimiento") Integer id){
 		return mantenimientoService.getMantenimiento(id);
 	}
 	
-	@RequestMapping("/crearareaempresa")
-	public ModelAndView crearMantenimiento(){
-		return new ModelAndView("MantenimientoCrear.xhtml", "Crear Mantenimiento", "Crear Mantenimiento");
+	@RequestMapping("/crearAreaEmpresa")
+	public String crearMantenimiento(){
+		return "MantenimientoCrear";
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/addareaempresa")
+	@RequestMapping(method=RequestMethod.POST, value="/addAreaEmpresa")
 	public void addMantenimiento(@RequestBody AreaEmpresa mantenimiento) {
 		mantenimientoService.addMantenimiento(mantenimiento);
 	}
 	
 
 
-	@RequestMapping(method=RequestMethod.PUT, value="/areaempresa/{idMantenimiento}")
+	@RequestMapping(method=RequestMethod.PUT, value="/areaEmpresa/{idMantenimiento}")
 	public void updateMantenimiento(@RequestBody AreaEmpresa mantenimiento, @PathVariable("idMantenimiento") Integer id) {
 		mantenimientoService.updateMantenimiento(id, mantenimiento);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/areaempresa/{idMantenimiento}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/areaEmpresa/{idMantenimiento}")
 	public void deleteMantenimiento(@PathVariable Integer id){
 		mantenimientoService.deleteMantenimiento(id);
 	}
 
-	@RequestMapping("/areaempresaDelete/{id}")
+	@RequestMapping("/eliminarAreaEmpresa/{id}")
 	public String urlDeleteMantenimiento(@PathVariable("id") Integer id){
 		mantenimientoService.deleteMantenimiento(id);
-		return "areaempresa Eliminado!";
+		return "Área Empresa Eliminado!";
 	}
 }

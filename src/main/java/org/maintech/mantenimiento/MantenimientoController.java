@@ -37,8 +37,8 @@ public class MantenimientoController {
 	}
 	
 	@RequestMapping("/crearMantenimiento")
-	public ModelAndView crearMantenimiento(){
-		return new ModelAndView("MantenimientoCrear.xhtml", "Crear Mantenimiento", "Crear Mantenimiento");
+	public String crearMantenimiento(){
+		return "MantenimientoCrear";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
@@ -83,7 +83,7 @@ public class MantenimientoController {
 		mantenimientoService.deleteMantenimiento(id);
 	}
 
-	@RequestMapping("/mantenimientoDelete/{id}")
+	@RequestMapping("/eliminarMantenimiento/{id}")
 	public String urlDeleteMantenimiento(@PathVariable("id") Integer id){
 		mantenimientoService.deleteMantenimiento(id);
 		return "Mantenimiento Eliminado!";
