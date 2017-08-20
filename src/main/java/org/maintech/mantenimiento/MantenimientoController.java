@@ -1,23 +1,16 @@
 package org.maintech.mantenimiento;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import javax.management.loading.PrivateClassLoader;
-
-import org.maintech.objeto.Objeto;
 import org.maintech.objeto.ObjetoController;
-import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class MantenimientoController {
 	
 	@Autowired
