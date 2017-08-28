@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Where;
 import org.maintech.categoria.Categoria;
 import org.maintech.mantenimiento.Mantenimiento;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Where(clause="is_active=1")
@@ -23,7 +24,9 @@ public class Objeto {
 	private String MarcaObjeto;
 	private String ModeloObjeto;
 	private String SerialObjeto;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date FechaCreacionObjeto;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date FechaObtencionObjeto;
 	private String DescripcionObjeto;
 	private String LongitudObjeto;

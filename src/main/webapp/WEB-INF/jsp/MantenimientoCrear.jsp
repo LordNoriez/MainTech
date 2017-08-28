@@ -13,7 +13,7 @@
 		<form:input path="NombreMantenimiento" type="text" /> <!-- bind to user.name-->
 		<form:errors path="NombreMantenimiento" />
 		
-		<form:input path="FechaMantenimiento" type="text" /> <!-- bind to user.name-->
+		<form:input path="FechaMantenimiento" type="date" /> <!-- bind to user.name-->
 		<form:errors path="FechaMantenimiento" />
 		
 		<form:input path="DescripcionMantenimiento" type="text" /> <!-- bind to user.name-->

@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Where;
 import org.maintech.actividad.Actividad;
 import org.maintech.objeto.Objeto;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Where(clause="is_active=1")
@@ -22,6 +25,7 @@ public class Mantenimiento {
 	@GeneratedValue
 	private Integer idMantenimiento;
 	private String NombreMantenimiento;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date FechaMantenimiento;
 	private String DescripcionMantenimiento;
 	@Column(columnDefinition="tinyint(1) default 0")

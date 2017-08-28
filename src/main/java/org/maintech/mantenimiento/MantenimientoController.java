@@ -1,9 +1,7 @@
 package org.maintech.mantenimiento;
 
 import java.util.List;
-import java.util.Map;
 
-import org.maintech.objeto.ObjetoController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +19,16 @@ public class MantenimientoController {
 	@Autowired
 	private MantenimientoService mantenimientoService;
 	
-	@Autowired
-	private ObjetoController objetoController;
+//	@Autowired
+//	private ObjetoController objetoController;
 	
-	@RequestMapping("/mantenimiento")
-	public List<Mantenimiento> getAllMantenimiento() {
-		return mantenimientoService.getAllMantenimiento();
+	@RequestMapping(value = "/mantenimiento", method = RequestMethod.GET)
+	public String showAllUsers(Model model) {
+
+		//logger.debug("showAllUsers()");
+		model.addAttribute("mantenimientos", mantenimientoService.getAllMantenimiento());
+		return "MantenimientoUpdate";
+
 	}
 		
 	@RequestMapping("/mantenimiento/{idMantenimiento}")
@@ -88,4 +90,5 @@ public class MantenimientoController {
 		mantenimientoService.deleteMantenimiento(id);
 		return "Mantenimiento Eliminado!";
 	}
+	
 }
