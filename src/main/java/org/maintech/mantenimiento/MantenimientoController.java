@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MantenimientoController {
@@ -27,13 +28,19 @@ public class MantenimientoController {
 
 		//logger.debug("showAllUsers()");
 		model.addAttribute("mantenimientos", mantenimientoService.getAllMantenimiento());
-		return "MantenimientoUpdate";
+		return "MantenimientoRead";
 
 	}
 		
+//	@RequestMapping("/mantenimiento/{idMantenimiento}")
+//	public Mantenimiento getMantenimiento(@PathVariable("idMantenimiento") Integer id){
+//		return mantenimientoService.getMantenimiento(id);
+//	}
+	
 	@RequestMapping("/mantenimiento/{idMantenimiento}")
-	public Mantenimiento getMantenimiento(@PathVariable("idMantenimiento") Integer id){
-		return mantenimientoService.getMantenimiento(id);
+	public String getMantenimientoUpdate(@PathVariable("idMantenimiento") Integer id,Model model){
+		model.addAttribute("user", mantenimientoService.getMantenimiento(id));
+		return "MantenimientoUpdate";
 	}
 	
 	@RequestMapping("/crearMantenimiento")
@@ -44,8 +51,8 @@ public class MantenimientoController {
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public void addMantenimiento(Mantenimiento mantenimiento) {
+		mantenimiento.setActive(true);
 		mantenimientoService.addMantenimiento(mantenimiento);
-		mantenimientoService.getAllMantenimiento();
 	}
 	
 // done for project crocker :D
@@ -75,9 +82,10 @@ public class MantenimientoController {
 //	
 //	}
 
-	@RequestMapping(method=RequestMethod.PUT, value="/mantenimiento/{idMantenimiento}")
-	public void updateMantenimiento(@RequestBody Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
+	@RequestMapping(method=RequestMethod.PUT, value="/mantenimientoupdate/{idMantenimiento}")
+	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
 		mantenimientoService.updateMantenimiento(id, mantenimiento);
+		return new ModelAndView("redirect:/mantenimiento");
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/mantenimiento/{idMantenimiento}")
