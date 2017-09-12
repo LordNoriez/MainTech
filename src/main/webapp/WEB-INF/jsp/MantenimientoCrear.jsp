@@ -6,7 +6,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<head>
+	
+<!-- 	<link rel="stylesheet" type="text/css" href="css/style.css"> -->
+	<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+	<script src="<c:url value="/resources/Js/scripts.js" />"></script>
+</head>
 	<body>
+	<h1>Crear Mantenimiento</h1>
 	<spring:url value="/addMantenimiento" var="variableAdd" />
 
 	<form:form method="post" modelAttribute="crearModelMantenimiento" action="${variableAdd}">
@@ -19,9 +26,10 @@
 		<form:input path="DescripcionMantenimiento" type="text" /> <!-- bind to user.name-->
 		<form:errors path="DescripcionMantenimiento" />
 
-		<button type="submit" class="btn-lg btn-primary pull-right">Ingresar
+		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
                              </button>
 	</form:form>
-	
+	        <!-- The actual snackbar -->
+        <div id="snackbar">Se Ingreso Correctamente</div>
 	</body>
 </html>
