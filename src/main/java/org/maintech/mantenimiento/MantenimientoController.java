@@ -48,9 +48,10 @@ public class MantenimientoController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
-	public void addMantenimiento(Mantenimiento mantenimiento) {
+	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
 		mantenimiento.setActive(true);
 		mantenimientoService.addMantenimiento(mantenimiento);
+		return new ModelAndView("redirect:/mantenimiento");
 	}
 	
 // done for project crocker :D

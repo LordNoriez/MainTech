@@ -7,7 +7,10 @@
 <html lang="en">
 
 <%-- <jsp:include page="../fragments/header.jsp" /> --%>
-
+<head>
+	<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+	<script src="<c:url value="/resources/Js/scripts.js" />"></script>
+</head>
 <body>
 
 	<div class="container">
@@ -42,25 +45,23 @@
 				<td>${mantenimiento.fechaMantenimiento}</td>
 
 				<td>
-				  <spring:url value="/users/${mantenimiento.idMantenimiento}" var="userUrl" />
 				  <spring:url value="/mantenimientodelete/${mantenimiento.idMantenimiento}" var="deleteUrl" />
 				  <spring:url value="/mantenimiento/${mantenimiento.idMantenimiento}" var="updateUrl" />
-
-				  <button class="btn btn-info"
-                                          onclick="location.href='${userUrl}'">Query</button>
 
 				  <button class="btn btn-primary"
                                           onclick="location.href='${updateUrl}'">Update</button>
                                                                              
-				  <button class="btn btn-danger"
+				  <button onclick="snackBarFunction(); location.href='${deleteUrl}'" class="btn btn-danger">Delete</button>
 <%--                                           onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
-                                          onclick="location.href='${deleteUrl}'">Delete</button>
+                                          
                                 </td>
 			    </tr>
 			</c:forEach>
 		</table>
 
 	</div>
+	
+	<div id="snackbar">Mantenimiento Eliminado Correctamente</div>
 
 <%-- 	<jsp:include page="../fragments/footer.jsp" /> --%>
 
