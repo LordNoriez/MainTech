@@ -29,6 +29,10 @@ public class MantenimientoService {
 	public void updateMantenimiento(Integer id, Mantenimiento mantenimiento) {
 		mantenimientoRepository.save(mantenimiento);
 	}
+	
+	public void sofDeleteMantenimiento(Integer id) {
+		mantenimientoRepository.softDeleteMantenimiento(id);
+	}
 
 	public void deleteMantenimiento(Integer id) {
 		mantenimientoRepository.delete(id);

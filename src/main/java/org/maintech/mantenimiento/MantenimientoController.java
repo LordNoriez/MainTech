@@ -8,10 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -85,6 +83,12 @@ public class MantenimientoController {
 	@RequestMapping(method=RequestMethod.PUT, value="/mantenimientoupdate/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
 		mantenimientoService.updateMantenimiento(id, mantenimiento);
+		return new ModelAndView("redirect:/mantenimiento");
+	}
+	
+	@RequestMapping(value="/mantenimientodelete/{idMantenimiento}")
+	public ModelAndView deactiveMantenimiento(@PathVariable("idMantenimiento") Integer id) {
+		mantenimientoService.sofDeleteMantenimiento(id);
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 	

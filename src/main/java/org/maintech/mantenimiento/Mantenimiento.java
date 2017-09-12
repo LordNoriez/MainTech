@@ -15,8 +15,6 @@ import org.maintech.actividad.Actividad;
 import org.maintech.objeto.Objeto;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
 @Where(clause="is_active=1")
 public class Mantenimiento {
