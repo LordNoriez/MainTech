@@ -51,7 +51,7 @@
 				  <button class="btn btn-primary"
                                           onclick="location.href='${updateUrl}'">Update</button>
                                                                              
-				  <button onclick="snackBarFunction(); location.href='${deleteUrl}'" class="btn btn-danger">Delete</button>
+				  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button>
 <%--                                           onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
                                           
                                 </td>

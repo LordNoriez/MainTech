@@ -4,56 +4,57 @@
 <html lang="en">
 <head>
  	<title>Crear Objeto</title>
-	<c:url value="/css/main.css" var="jstlCss" />
-	
-	<link href="${jstlCss}" rel="stylesheet" />
+
+	<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+	<script src="<c:url value="/resources/Js/scripts.js" />"></script>
 </head>
 <body>
 	
 	
-	<div class="container">
+	<div>
+<spring:url value="/objeto" var="varAdd" />
 
-  		<form method="post" action="/objeto">
+  		<form:form method="post" modelAttribute="crearModelObjeto" action="${varAdd}">
   	          <table>
                 <tr>
                     <td>Serial:</td>
-                    <td><input id="SerialObjeto" name="SerialObjeto" type="text"/></td>
+                    <form:input path="serialObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
                     <td>Marca:</td>                    
-                    <td><input id="MarcaObjeto" name="MarcaObjeto" type="text" /></td>
+                    <form:input path="marcaObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
                     <td>Modelo:</td>            
-                    <td><input id="ModeloObjeto" name="ModeloObjeto" type="text"/></td>
+                    <form:input path="modeloObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
                     <td>Descripcion:</td> 
-                    <td><input id="DescripcionObjeto" name="DescripcionObjeto" type="text" /></td>
+                    <form:input path="descripcionObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
                     <td>Longitud:</td>
-                    <td><input id="LongitudObjeto" name="LongitudObjeto" type="number" /></td>
+                    <form:input path="longitudObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
                     <td>Ancho:</td>
-                    <td><input id="AnchoObjeto" name="AnchoObjeto" type="number" /></td>
+                    <form:input path="anchoObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
                     <td>Altura:</td>
-                    <td><input id="AlturaObjeto" name="AlturaObjeto" type="number" /></td>
+                    <form:input path="alturaObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
-                    <td>√Årea:</td>
-                    <td><input id="AreaObjeto" name="AreaObjeto" type="number" /></td>
+                    <td>¡rea:</td>
+                    <form:input path="areaObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
                     <td>Vida ⁄til:</td>   
-                    <td><input id="VidaObjeto" name="VidaObjeto" type="number" /></td>
+                    <form:input path="vidaObjeto" type="text" /> <!-- bind to user.name-->
                 </tr>
                 <tr>
                     <td>Fecha ObtenciÛn:</td>
-                    <td><input id="FechaObtencionObjeto" name="FechaObtencionObjeto" type="text" placeholder="yyyy/mm/dd"/></td>
+                    <form:input path="fechaObtencionObjeto" type="date" /> <!-- bind to user.name-->
                 </tr>
                 <tr>    
                     <td>CategorÌa:</td>
@@ -66,10 +67,11 @@
 					</td> 
                 </tr>
                 <tr>
-                    <td><button type="submit">Crear Objeto</button></td>
+                    		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
+                             </button>
                 </tr>
             </table>
-        </form>
+        </form:form>
 	</div>
 </body>
 </html>

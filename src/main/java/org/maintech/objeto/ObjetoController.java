@@ -9,18 +9,21 @@ import javax.mail.internet.MimeMessage;
 import org.maintech.categoria.Categoria;
 import org.maintech.categoria.CategoriaController;
 import org.maintech.categoria.CategoriaService;
+import org.maintech.mantenimiento.Mantenimiento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 //@RequestMapping("/objeto")
@@ -50,12 +53,19 @@ public class ObjetoController {
 		return objetoService.getAllObjeto();
 	}
 	
-	@RequestMapping("/crearObjeto")
+	@RequestMapping("/crearObjetoV")
 	public String crearObjeto(Model model){
 		
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		
 		return "ObjetoCrear";
+	}
+	
+	@RequestMapping("/crearObjeto")
+	public String crearMantenimiento(@ModelAttribute("crearModelObjeto") Objeto objeto,
+			BindingResult result, Model model){
+		model.addAttribute("categories", categoriaService.getAllCategoria());
+		return "ObjetoCrear2";
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
@@ -64,15 +74,22 @@ public class ObjetoController {
 		return objetoService.getObjeto(id);
 	}
 	
-    @PostMapping("/objeto")
-    public String addObjeto(@ModelAttribute Objeto objeto) {
-    	objeto.setActive(true);    	
-		Date date = new Date();
-    	objeto.setFechaCreacionObjeto(date);
-    	
-    	objetoService.addObjeto(objeto);    	
-        return "Se Ingreso Correctamente el Objeto";
-    }
+//    @PostMapping("/objeto")
+//    public String addObjeto(@ModelAttribute Objeto objeto) {
+//    	objeto.setActive(true);    	
+//		Date date = new Date();
+//    	objeto.setFechaCreacionObjeto(date);
+//    	
+//    	objetoService.addObjeto(objeto);    	
+//        return "Se Ingreso Correctamente el Objeto";
+//    }
+    
+	@RequestMapping(method=RequestMethod.POST, value="/objeto")
+	public ModelAndView addObjeto(Objeto objeto) {
+		objeto.setActive(true);
+		objetoService.addObjeto(objeto);
+		return new ModelAndView("redirect:/objeto");
+	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/objeto/{idObjeto}")
 	public void updateObjeto(@RequestBody Objeto objeto, @PathVariable("idObjeto") Integer id) {
