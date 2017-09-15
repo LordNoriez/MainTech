@@ -16,7 +16,8 @@
 	<h1>Crear Objeto</h1>
 	<spring:url value="/objeto" var="variableAdd" />
 
-	<form:form method="post" modelAttribute="crearModelObjeto" action="${variableAdd}">
+
+ 	<form:form method="POST" modelAttribute="crearModelObjeto" action="${variableAdd}"> 
 		<form:input path="MarcaObjeto" type="text" /> 
 		<form:errors path="MarcaObjeto" />
 		
@@ -28,7 +29,12 @@
 		
 		<form:select path="categoria">
 			<form:option value="NONE" label="--- Select ---" />
-			<form:options items="${categories}" />
+			<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
+		</form:select>
+		
+		<form:select path="objeto">
+			<form:option value="NONE" label="--- Select ---" />
+			<form:options items="${objects}" itemLabel="MarcaObjeto" itemValue="idObjeto" />
 		</form:select>
 
 		<form:input path="FechaCreacionObjeto" type="date" /> 

@@ -65,6 +65,7 @@ public class ObjetoController {
 	public String crearMantenimiento(@ModelAttribute("crearModelObjeto") Objeto objeto,
 			BindingResult result, Model model){
 		model.addAttribute("categories", categoriaService.getAllCategoria());
+		model.addAttribute("objects", objetoService .getAllObjeto());
 		return "ObjetoCrear2";
 	}
 	
