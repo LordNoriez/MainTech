@@ -1,7 +1,5 @@
 package org.maintech.mantenimiento;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,6 +81,7 @@ public class MantenimientoController {
 
 	@RequestMapping(method=RequestMethod.PUT, value="/mantenimientoupdate/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
+		mantenimiento.setActive(true);
 		mantenimientoService.updateMantenimiento(id, mantenimiento);
 		return new ModelAndView("redirect:/mantenimiento");
 	}

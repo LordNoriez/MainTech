@@ -1,10 +1,6 @@
 package org.maintech.objeto;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +23,21 @@ public class ObjetoService {
 		return objetoRepository.findOne(id);
 	}
 
-	public void addObjeto(Objeto topic) {		
-		objetoRepository.save(topic);
+	public void addObjeto(Objeto objeto) {		
+		objetoRepository.save(objeto);
 	}
 
-	public void updateObjeto(Integer id, Objeto topic) {		
-		objetoRepository.save(topic);		
+	public void updateObjeto(Integer id, Objeto objeto) {		
+		objetoRepository.save(objeto);		
 	}
 
 	public void deleteObjeto(Integer id) {
 		objetoRepository.delete(id);
+	}
+
+	public void softDeleteObjeto(Integer id) {
+		// TODO Auto-generated method stub
+		objetoRepository.softDeleteObjeto(id);
 	}
 	
 //	public List<Objeto> timeObjeto () {

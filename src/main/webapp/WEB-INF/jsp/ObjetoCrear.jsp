@@ -1,77 +1,83 @@
-<!DOCTYPE html>
+<%@ page session="false"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
- 	<title>Crear Objeto</title>
-
+	
+<!-- 	<link rel="stylesheet" type="text/css" href="css/style.css"> -->
 	<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 	<script src="<c:url value="/resources/Js/scripts.js" />"></script>
 </head>
-<body>
-	
-	
-	<div>
-<spring:url value="/objeto" var="varAdd" />
+	<body>
+	<h1>Crear Objeto</h1>
+	<spring:url value="/objeto" var="variableAdd" />
 
-  		<form:form method="post" modelAttribute="crearModelObjeto" action="${varAdd}">
-  	          <table>
-                <tr>
-                    <td>Serial:</td>
-                    <form:input path="serialObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Marca:</td>                    
-                    <form:input path="marcaObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Modelo:</td>            
-                    <form:input path="modeloObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Descripcion:</td> 
-                    <form:input path="descripcionObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Longitud:</td>
-                    <form:input path="longitudObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Ancho:</td>
-                    <form:input path="anchoObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Altura:</td>
-                    <form:input path="alturaObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Área:</td>
-                    <form:input path="areaObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Vida Útil:</td>   
-                    <form:input path="vidaObjeto" type="text" /> <!-- bind to user.name-->
-                </tr>
-                <tr>
-                    <td>Fecha Obtención:</td>
-                    <form:input path="fechaObtencionObjeto" type="date" /> <!-- bind to user.name-->
-                </tr>
-                <tr>    
-                    <td>Categoría:</td>
-                	<td>            	
-	                	<select name="categoria" id="categoria">
-	                		<c:forEach var="categoria" items="${categories}">
-						 		<option value ="${categoria.getIdCategoria()}">${categoria.getNombreCategoria()}</option>
-						 	</c:forEach>
-						</select>
-					</td> 
-                </tr>
-                <tr>
-                    		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
+
+ 	<form:form method="POST" modelAttribute="crearModelObjeto" action="${variableAdd}"> 
+		<br><h2>Marca: </h2>
+		<form:input path="MarcaObjeto" type="text" /> 
+		<form:errors path="MarcaObjeto" />
+		
+		<br><h2>Modelo: </h2>
+		<form:input path="ModeloObjeto" type="text" /> 
+		<form:errors path="ModeloObjeto" />
+		
+		<br><h2>Serial: </h2>
+		<form:input path="SerialObjeto" type="text" /> 
+		<form:errors path="SerialObjeto" />
+		
+		<br><h2>Categoria: </h2>
+		<form:select path="categoria">
+			<form:option value="NONE" label="--- Select ---" />
+			<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
+		</form:select>
+		
+		<br><h2>Objeto Padre: </h2>
+		<form:select path="objeto">
+			<form:option value="NONE" label="--- Select ---" itemValue=""/>
+			<form:options items="${objects}" itemLabel="MarcaObjeto" itemValue="idObjeto" />
+		</form:select>
+		
+		<br><h2>Fecha Creacion: </h2>
+		<form:input path="FechaCreacionObjeto" type="date" /> 
+		<form:errors path="FechaCreacionObjeto" />
+		
+		<br><h2>Fecha Obtencion: </h2>
+		<form:input path="FechaObtencionObjeto" type="date" /> 
+		<form:errors path="FechaObtencionObjeto" />
+		
+		<br><h2>Longitud: </h2>
+		<form:input path="LongitudObjeto" type="text" /> 
+		<form:errors path="LongitudObjeto" />
+		
+		<br><h2>Ancho: </h2>
+		<form:input path="AnchoObjeto" type="text" /> 
+		<form:errors path="AnchoObjeto" />
+		
+		<br><h2>Area: </h2>
+		<form:input path="AreaObjeto" type="text" /> 
+		<form:errors path="AreaObjeto" />
+
+		<br><h2>Altura: </h2>
+		<form:input path="AlturaObjeto" type="text" /> 
+		<form:errors path="AlturaObjeto" />
+		
+		<br><h2>Vida: </h2>
+		<form:input path="VidaObjeto" type="text" /> 
+		<form:errors path="VidaObjeto" />	
+		
+		<br><h2>Descripcion: </h2>
+		<form:input path="DescripcionObjeto" type="text" />
+		<form:errors path="DescripcionObjeto" />
+
+		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
                              </button>
-                </tr>
-            </table>
-        </form:form>
-	</div>
-</body>
+	</form:form>
+	        <!-- The actual snackbar -->
+        <div id="snackbar">Se Ingreso Correctamente</div>
+	</body>
 </html>

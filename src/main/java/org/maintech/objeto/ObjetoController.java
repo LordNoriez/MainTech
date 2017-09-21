@@ -45,34 +45,27 @@ public class ObjetoController {
 		return "welcome";
 	}
     
-	//@RequestMapping(value="/", method=RequestMethod.GET)
-	@RequestMapping("/objeto")
-	public List<Objeto> getAllObjeto() {
+	@RequestMapping(value = "/objeto", method = RequestMethod.GET)
+	public String showAllUsers(Model model) {
 
-		//this.checkTimeObject(0);
-		return objetoService.getAllObjeto();
-	}
-	
-	@RequestMapping("/crearObjetoV")
-	public String crearObjeto(Model model){
-		
-		model.addAttribute("categories", categoriaService.getAllCategoria());
-		
-		return "ObjetoCrear";
+		//logger.debug("showAllUsers()");
+		model.addAttribute("objetos", objetoService.getAllObjeto());
+		return "ObjetoRead";
+
 	}
 	
 	@RequestMapping("/crearObjeto")
 	public String crearMantenimiento(@ModelAttribute("crearModelObjeto") Objeto objeto,
 			BindingResult result, Model model){
 		model.addAttribute("categories", categoriaService.getAllCategoria());
-		model.addAttribute("objects", objetoService .getAllObjeto());
-		return "ObjetoCrear2";
+		model.addAttribute("objects", objetoService.getAllObjeto());
+		return "ObjetoCrear";
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
-	public Objeto getObjeto(@PathVariable("idObjeto") Integer id){
-		
-		return objetoService.getObjeto(id);
+	public String getMantenimientoUpdate(@PathVariable("idObjeto") Integer id,Model model){
+		model.addAttribute("user", objetoService.getObjeto(id));
+		return "ObjetoUpdate";
 	}
 	
 //    @PostMapping("/objeto")
@@ -91,10 +84,18 @@ public class ObjetoController {
 		objetoService.addObjeto(objeto);
 		return new ModelAndView("redirect:/objeto");
 	}
-
-	@RequestMapping(method=RequestMethod.PUT, value="/objeto/{idObjeto}")
-	public void updateObjeto(@RequestBody Objeto objeto, @PathVariable("idObjeto") Integer id) {
+	
+	@RequestMapping(method=RequestMethod.PUT, value="/objetoupdate/{idObjeto}")
+	public ModelAndView updateMantenimiento(Objeto objeto, @PathVariable("idObjeto") Integer id) {
+		objeto.setActive(true);
 		objetoService.updateObjeto(id, objeto);
+		return new ModelAndView("redirect:/objeto");
+	}
+	
+	@RequestMapping(value="/objetodelete/{idObjeto}")
+	public ModelAndView deactiveMantenimiento(@PathVariable("idObjeto") Integer id) {
+		objetoService.softDeleteObjeto(id);
+		return new ModelAndView("redirect:/objeto");
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/objeto/{idObjeto}")

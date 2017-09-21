@@ -23,37 +23,62 @@
 
 	<h1>MANTENIMIENTO</h1>
 	<br />
-	<spring:url value="/mantenimientoupdate/${user.idMantenimiento}" var="variableAdd" />
+	<spring:url value="/objetoupdate/${user.idObjeto}" var="variableAdd" />
 
 	<form:form method="PUT" modelAttribute="user" action="${variableAdd}">
 	<div class="row">
 		<label class="col-sm-2">ID</label>
 		<div class="col-sm-10">
-		${user.idMantenimiento}
+		${user.idObjeto}
 		</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Name</label>
+		<label class="col-sm-2">Marca Objeto</label>
 		<div class="col-sm-10">
 <%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
-		<form:input type="text" path="NombreMantenimiento" value = "${user.nombreMantenimiento}"/>
+		<form:input type="text" path="MarcaObjeto" value = "${user.marcaObjeto}"/>
+		</div>
+	</div>
+	
+	<div class="row">
+		<label class="col-sm-2">Modelo Objeto</label>
+		<div class="col-sm-10">
+<%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
+		<form:input type="text" path="ModeloObjeto" value = "${user.modeloObjeto}"/>
+		</div>
+	</div>
+	
+	<div class="row">
+		<label class="col-sm-2">Serial Objeto</label>
+		<div class="col-sm-10">
+<%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
+		<form:input type="text" path="SerialObjeto" value = "${user.serialObjeto}"/>
 		</div>
 	</div>
 
-<fmt:formatDate value="${user.fechaMantenimiento}" var="dateString" pattern="yyyy-MM-dd" />
+<fmt:formatDate value="${user.fechaCreacionObjeto}" var="dateString" pattern="yyyy-MM-dd" />
 	<div class="row">
-		<label class="col-sm-2">fecha</label>
+		<label class="col-sm-2">FechaCreacionObjeto</label>
 		<div class="col-sm-10">
 <%-- 		<input type="date" value = '${dateString}'> --%>
-		<form:input type="date" path="FechaMantenimiento" value = '${dateString}'/>
+		<form:input type="date" path="FechaCreacionObjeto" value = '${dateString}'/>
+		</div>
+	</div>
+	
+<fmt:formatDate value="${user.fechaObtencionObjeto}" var="date2String" pattern="yyyy-MM-dd" />
+	<div class="row">
+		<label class="col-sm-2">FechaObtencionObjeto</label>
+		<div class="col-sm-10">
+<%-- 		<input type="date" value = '${dateString}'> --%>
+		<form:input type="date" path="FechaObtencionObjeto" value = '${date2String}'/>
 		</div>
 	</div>
 
 	<div class="row">
 		<label class="col-sm-2">descripcion</label>
 		<div class="col-sm-10">
-		<form:input type="text" path="DescripcionMantenimiento" value = "${user.descripcionMantenimiento}"/>
+		<form:input type="text" path="DescripcionObjeto" value = "${user.descripcionObjeto}"/>
 		</div>
 	</div>
 	
