@@ -13,24 +13,29 @@ public class TipoMantenimientoService {
 	private TipoMantenimientoRepository tipomantenimientoRepository;
 
 	public List<TipoMantenimiento> getAllMantenimiento() {
-		List<TipoMantenimiento> mantenimientos = new ArrayList<>();
-		tipomantenimientoRepository.findAll().forEach(mantenimientos::add);
-		return mantenimientos;
+		List<TipoMantenimiento> tipomantenimientos = new ArrayList<>();
+		tipomantenimientoRepository.findAll().forEach(tipomantenimientos::add);
+		return tipomantenimientos;
 	}
 
 	public TipoMantenimiento getMantenimiento(Integer id) {
 		return tipomantenimientoRepository.findOne(id);
 	}
 
-	public void addMantenimiento(TipoMantenimiento mantenimiento) {
-		tipomantenimientoRepository.save(mantenimiento);
+	public void addMantenimiento(TipoMantenimiento tipomantenimiento) {
+		tipomantenimientoRepository.save(tipomantenimiento);
 	}
 
-	public void updateMantenimiento(Integer id, TipoMantenimiento mantenimiento) {
-		tipomantenimientoRepository.save(mantenimiento);
+	public void updateMantenimiento(Integer id, TipoMantenimiento tipomantenimiento) {
+		tipomantenimientoRepository.save(tipomantenimiento);
 	}
 
 	public void deleteMantenimiento(Integer id) {
 		tipomantenimientoRepository.delete(id);
+	}
+
+	public void softDeleteTipoMantenimiento(Integer id) {
+		tipomantenimientoRepository.softDeleteTipoMantenimiento(id);
+		
 	}
 }

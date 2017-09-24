@@ -36,7 +36,6 @@ public class ObjetoService {
 	}
 
 	public void softDeleteObjeto(Integer id) {
-		// TODO Auto-generated method stub
 		objetoRepository.softDeleteObjeto(id);
 	}
 	
