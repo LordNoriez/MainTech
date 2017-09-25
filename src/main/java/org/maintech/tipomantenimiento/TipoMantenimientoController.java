@@ -48,9 +48,10 @@ public class TipoMantenimientoController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/tipomantenimientoupdate/{idtipomantenimiento}")
-	public ModelAndView updateTipoMantenimiento(TipoMantenimiento tipomantenimiento, @PathVariable("idtipomantenimiento") Integer id) {
+	public ModelAndView updatetipomantenimiento(TipoMantenimiento tipomantenimiento, @PathVariable("idtipomantenimiento") Integer id) {
+		tipomantenimiento.setIdTipoMantenimiento(id);
 		tipomantenimiento.setActive(true);
-		TipomantenimientoService.updateMantenimiento(id, tipomantenimiento);
+		TipomantenimientoService.updateTipoMantenimiento(id, tipomantenimiento);
 		return new ModelAndView("redirect:/tipoMantenimiento");
 	}
 	

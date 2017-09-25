@@ -50,22 +50,21 @@ public class ObjetoController {
 
 		//logger.debug("showAllUsers()");
 		model.addAttribute("objetos", objetoService.getAllObjeto());
-		return "ObjetoRead";
+		return "Objeto/ObjetoRead";
 
 	}
 	
 	@RequestMapping("/crearObjeto")
-	public String crearMantenimiento(@ModelAttribute("crearModelObjeto") Objeto objeto,
-			BindingResult result, Model model){
+	public String crearObjetivo(@ModelAttribute("crearModelObjeto") Objeto objeto,			BindingResult result, Model model){
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.getAllObjeto());
-		return "ObjetoCrear";
+		return "Objeto/ObjetoCrear";
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
 	public String getMantenimientoUpdate(@PathVariable("idObjeto") Integer id,Model model){
 		model.addAttribute("user", objetoService.getObjeto(id));
-		return "ObjetoUpdate";
+		return "Objeto/ObjetoUpdate";
 	}
 	
 //    @PostMapping("/objeto")

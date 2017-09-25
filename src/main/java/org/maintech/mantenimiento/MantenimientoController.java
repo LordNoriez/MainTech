@@ -24,7 +24,7 @@ public class MantenimientoController {
 
 		//logger.debug("showAllUsers()");
 		model.addAttribute("mantenimientos", mantenimientoService.getAllMantenimiento());
-		return "MantenimientoRead";
+		return "Mantenimiento/MantenimientoRead";
 
 	}
 		
@@ -36,13 +36,13 @@ public class MantenimientoController {
 	@RequestMapping("/mantenimiento/{idMantenimiento}")
 	public String getMantenimientoUpdate(@PathVariable("idMantenimiento") Integer id,Model model){
 		model.addAttribute("user", mantenimientoService.getMantenimiento(id));
-		return "MantenimientoUpdate";
+		return "Mantenimiento/MantenimientoUpdate";
 	}
 	
 	@RequestMapping("/crearMantenimiento")
 	public String crearMantenimiento(@ModelAttribute("crearModelMantenimiento") Mantenimiento mantenimiento,
 			BindingResult result, Model model){
-		return "MantenimientoCrear";
+		return "Mantenimiento/MantenimientoCrear";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")

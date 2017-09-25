@@ -22,8 +22,8 @@ public class TipoMantenimiento {
 	private Integer idTipoMantenimiento;
 	private String NombreTipoMantenimiento;
 	
-	@ManyToOne
-	private Mantenimiento objetoMantenimiento;
+//	@ManyToOne
+//	private Mantenimiento objetoMantenimiento;
 	
 	
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
@@ -45,13 +45,13 @@ public class TipoMantenimiento {
 		NombreTipoMantenimiento = nombreTipoMantenimiento;
 	}
 
-	public Mantenimiento getObjetoMantenimiento() {
+/*	public Mantenimiento getObjetoMantenimiento() {
 		return objetoMantenimiento;
 	}
 
 	public void setObjetoMantenimiento(Mantenimiento objetoMantenimiento) {
 		this.objetoMantenimiento = objetoMantenimiento;
-	}
+	}*/
 
 
 	public Boolean getActive() {
@@ -72,19 +72,7 @@ public class TipoMantenimiento {
 		super();
 		this.idTipoMantenimiento = idTipoMantenimiento;
 		NombreTipoMantenimiento = nombreTipoMantenimiento;
-		this.objetoMantenimiento = objetoMantenimiento;
+//		this.objetoMantenimiento = objetoMantenimiento;
 		this.active = active;
-	}
-	
-	
-	
-
-
-	
-
-	
-	
-	
-	
-	
+	}	
 }

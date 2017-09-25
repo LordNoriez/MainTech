@@ -26,7 +26,7 @@ public class TipoMantenimientoService {
 		tipomantenimientoRepository.save(tipomantenimiento);
 	}
 
-	public void updateMantenimiento(Integer id, TipoMantenimiento tipomantenimiento) {
+	public void updateTipoMantenimiento(Integer id, TipoMantenimiento tipomantenimiento) { 
 		tipomantenimientoRepository.save(tipomantenimiento);
 	}
 

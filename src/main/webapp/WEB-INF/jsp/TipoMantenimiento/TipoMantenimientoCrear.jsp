@@ -18,8 +18,7 @@
 
 	<form:form method="POST" modelAttribute="crearModelTipoMantenimiento" action="${variableAdd}">
 		<form:input path="NombreTipoMantenimiento" type="text" /> <!-- bind to user.name-->
-		<form:errors path="NombreTipoMantenimiento" />
-
+		<form:errors path="NombreTipoMantenimiento" />		
 		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
                              </button>
 	</form:form>

@@ -21,7 +21,7 @@
 <!-- 		</div> -->
 <%-- 	</c:if> --%>
 
-	<h1>MANTENIMIENTO</h1>
+	<h1>TIPO MANTENIMIENTO</h1>
 	<br />
 	<spring:url value="/tipomantenimientoupdate/${tipoMantenimiento.idTipoMantenimiento}" var="variableAdd" />
 
@@ -36,7 +36,7 @@
 	<div class="row">
 		<label class="col-sm-2">Name</label>
 		<div class="col-sm-10">
-
+<%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
 		<form:input type="text" path="NombreTipoMantenimiento" value = "${tipoMantenimiento.nombreTipoMantenimiento}"/>
 		</div>
 	</div>
