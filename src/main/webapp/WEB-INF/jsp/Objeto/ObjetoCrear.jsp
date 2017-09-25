@@ -32,14 +32,14 @@
 		
 		<br><h2>Categoria: </h2>
 		<form:select path="categoria">
-			<form:option value="NONE" label="--- Select ---" />
+			<form:option value="NULL" label="--- Select ---" />
 			<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
 		</form:select>
 		
 		<br><h2>Objeto Padre: </h2>
-		<form:select path="objeto">
-			<form:option value="NONE" label="--- Select ---" itemValue=""/>
-			<form:options items="${objects}" itemLabel="MarcaObjeto" itemValue="idObjeto" />
+		<form:select path="objetoPadre">
+			<form:option value="NULL" label="--- Select ---" itemValue=""/>
+			<form:options items="${objects}" itemLabel="objetoPadre" itemValue="idObjeto" />
 		</form:select>
 		
 		<br><h2>Fecha Creacion: </h2>
@@ -74,6 +74,7 @@
 		<form:input path="DescripcionObjeto" type="text" />
 		<form:errors path="DescripcionObjeto" />
 
+		<br>
 		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
                              </button>
 	</form:form>

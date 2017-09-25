@@ -1,25 +1,16 @@
 package org.maintech.objeto;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import javax.mail.internet.MimeMessage;
 
-import org.maintech.categoria.Categoria;
-import org.maintech.categoria.CategoriaController;
 import org.maintech.categoria.CategoriaService;
-import org.maintech.mantenimiento.Mantenimiento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,33 +28,25 @@ public class ObjetoController {
 		
     @Autowired
     private JavaMailSender mailSender;
-
-
-	@RequestMapping("/welcome")
-	public String welcome(Model model) {
-		model.addAttribute("message", "Hello World xD");
-		return "welcome";
-	}
     
 	@RequestMapping(value = "/objeto", method = RequestMethod.GET)
-	public String showAllUsers(Model model) {
+	public String showAllObjetos(Model model) {
 
-		//logger.debug("showAllUsers()");
 		model.addAttribute("objetos", objetoService.getAllObjeto());
 		return "Objeto/ObjetoRead";
 
 	}
 	
 	@RequestMapping("/crearObjeto")
-	public String crearObjetivo(@ModelAttribute("crearModelObjeto") Objeto objeto,			BindingResult result, Model model){
+	public String crearObjeto(@ModelAttribute("crearModelObjeto") Objeto objeto,			BindingResult result, Model model){
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.getAllObjeto());
 		return "Objeto/ObjetoCrear";
 	}
 	
 	@RequestMapping("/objeto/{idObjeto}")
-	public String getMantenimientoUpdate(@PathVariable("idObjeto") Integer id,Model model){
-		model.addAttribute("user", objetoService.getObjeto(id));
+	public String getObjetoUpdate(@PathVariable("idObjeto") Integer id,Model model){
+		model.addAttribute("objeto", objetoService.getObjeto(id));
 		return "Objeto/ObjetoUpdate";
 	}
 	
@@ -84,15 +67,15 @@ public class ObjetoController {
 		return new ModelAndView("redirect:/objeto");
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/objetoupdate/{idObjeto}")
-	public ModelAndView updateMantenimiento(Objeto objeto, @PathVariable("idObjeto") Integer id) {
+	@RequestMapping(method=RequestMethod.PUT, value="/updateObjeto/{idObjeto}")
+	public ModelAndView updateObjeto(Objeto objeto, @PathVariable("idObjeto") Integer id) {
 		objeto.setActive(true);
 		objetoService.updateObjeto(id, objeto);
 		return new ModelAndView("redirect:/objeto");
 	}
 	
-	@RequestMapping(value="/objetodelete/{idObjeto}")
-	public ModelAndView deactiveMantenimiento(@PathVariable("idObjeto") Integer id) {
+	@RequestMapping(value="/deleteObjeto/{idObjeto}")
+	public ModelAndView deactiveObjeto(@PathVariable("idObjeto") Integer id) {
 		objetoService.softDeleteObjeto(id);
 		return new ModelAndView("redirect:/objeto");
 	}

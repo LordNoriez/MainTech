@@ -17,8 +17,11 @@
 	<spring:url value="/addTipoMantenimiento" var="variableAdd" />
 
 	<form:form method="POST" modelAttribute="crearModelTipoMantenimiento" action="${variableAdd}">
+		<h2>Tipo de Mantenimiento: </h2>
 		<form:input path="NombreTipoMantenimiento" type="text" /> <!-- bind to user.name-->
 		<form:errors path="NombreTipoMantenimiento" />		
+		
+		<br>
 		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
                              </button>
 	</form:form>

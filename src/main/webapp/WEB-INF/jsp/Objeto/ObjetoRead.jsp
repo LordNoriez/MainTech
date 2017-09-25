@@ -25,12 +25,12 @@
 <!-- 		    </div> -->
 <%-- 		</c:if> --%>
 
-		<h1>All Users</h1>
+		<h1>Ver Objetos</h1>
 
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>id Objeto</th>
+					<th>ID</th>
 					<th>marcaObjeto</th>
 					<th>modeloObjeto</th>
 					<th>fechaCreacionObjeto</th>
@@ -40,18 +40,18 @@
 				</tr>
 			</thead>
 
-			<c:forEach var="mantenimiento" items="${objetos}">
+			<c:forEach var="objeto" items="${objetos}">
 			    <tr>
-				<td>${mantenimiento.idObjeto}</td>
-				<td>${mantenimiento.marcaObjeto}</td>
-				<td>${mantenimiento.modeloObjeto}</td>
-				<td>${mantenimiento.fechaCreacionObjeto}</td>
-				<td>${mantenimiento.fechaObtencionObjeto}</td>
-				<td>${mantenimiento.categoria}</td>
-				<td>${mantenimiento.descripcionObjeto}</td>
+				<td>${objeto.idObjeto}</td>
+				<td>${objeto.marcaObjeto}</td>
+				<td>${objeto.modeloObjeto}</td>
+				<td>${objeto.fechaCreacionObjeto}</td>
+				<td>${objeto.fechaObtencionObjeto}</td>
+				<td>${objeto.categoria}</td>
+				<td>${objeto.descripcionObjeto}</td>
 				<td>
-				  <spring:url value="/objetodelete/${mantenimiento.idObjeto}" var="deleteUrl" />
-				  <spring:url value="/objeto/${mantenimiento.idObjeto}" var="updateUrl" />
+				  <spring:url value="/deleteObjeto/${objeto.idObjeto}" var="deleteUrl" />
+				  <spring:url value="/objeto/${objeto.idObjeto}" var="updateUrl" />
 
 				  <button class="btn btn-primary"
                                           onclick="location.href='${updateUrl}'">Update</button>
@@ -66,7 +66,7 @@
 
 	</div>
 	
-	<div id="snackbar">Mantenimiento Eliminado Correctamente</div>
+	<div id="snackbar">Objeto Eliminado Correctamente</div>
 
 <%-- 	<jsp:include page="../fragments/footer.jsp" /> --%>
 

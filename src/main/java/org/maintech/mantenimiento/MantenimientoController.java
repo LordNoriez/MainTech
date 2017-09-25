@@ -86,7 +86,7 @@ public class MantenimientoController {
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 	
-	@RequestMapping(value="/mantenimientodelete/{idMantenimiento}")
+	@RequestMapping(value="/deleteMantenimiento/{idMantenimiento}")
 	public ModelAndView deactiveMantenimiento(@PathVariable("idMantenimiento") Integer id) {
 		mantenimientoService.sofDeleteMantenimiento(id);
 		return new ModelAndView("redirect:/mantenimiento");

@@ -12,10 +12,9 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
-	public List<Categoria> getAllCategoria(){
+	public List<Categoria> getAllCategoria() {
 		List<Categoria> categorias = new ArrayList<>();
-		categoriaRepository.findAll()
-		.forEach(categorias::add);
+		categoriaRepository.findAll().forEach(categorias::add);
 		return categorias;
 	}
 	
@@ -33,5 +32,9 @@ public class CategoriaService {
 
 	public void deleteCategoria(Integer id) {
 		categoriaRepository.delete(id);
+	}
+	
+	public void sofDeleteMantenimiento(Integer id) {
+		categoriaRepository.softDeleteCategoria(id);
 	}
 }

@@ -13,27 +13,23 @@
 	<script src="<c:url value="/resources/Js/scripts.js" />"></script>
 </head>
 	<body>
-	<h1>Crear Mantenimiento</h1>
-	<spring:url value="/addMantenimiento" var="variableAdd" />
+	<h1>Crear Categoría</h1>
+	<spring:url value="/addCategoria" var="variableAdd" />
 
-	<form:form method="post" modelAttribute="crearModelMantenimiento" action="${variableAdd}">
-		<h2>Nombre: </h2>
-		<form:input path="NombreMantenimiento" type="text" /> <!-- bind to user.name-->
-		<form:errors path="NombreMantenimiento" />
-		
-		<br><h2>Fecha: </h2>
-		<form:input path="FechaMantenimiento" type="date" /> <!-- bind to user.name-->
-		<form:errors path="FechaMantenimiento" />
+	<form:form method="post" modelAttribute="crearModelCategoria" action="${variableAdd}">
+		<br><h2>Nombre Categoría: </h2>
+		<form:input path="NombreCategoria" type="text" /> <!-- bind to user.name-->
+		<form:errors path="NombreCategoria" />
 		
 		<br><h2>Descripción: </h2>
-		<form:input path="DescripcionMantenimiento" type="text" /> <!-- bind to user.name-->
-		<form:errors path="DescripcionMantenimiento" />
-
+		<form:input path="DescripcionCategoria" type="text" /> <!-- bind to user.name-->
+		<form:errors path="DescripcionCategoria" />
+		
 		<br>
 		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
                              </button>
 	</form:form>
 	        <!-- The actual snackbar -->
-        <div id="snackbar">Se Ingreso Correctamente</div>
+        <div id="snackbar">Se Ingresó Correctamente</div>
 	</body>
 </html>

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Where;
 import org.maintech.categoria.Categoria;
-import org.maintech.mantenimiento.Mantenimiento;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -36,7 +35,7 @@ public class Objeto {
 	private Integer VidaObjeto;
 	
 	@ManyToOne
-	private Objeto objeto;
+	private Objeto objetoPadre;
 	
 	@ManyToOne
 	private Categoria categoria;
@@ -141,11 +140,11 @@ public class Objeto {
 	}
 
 	public Objeto getObjeto() {
-		return objeto;
+		return objetoPadre;
 	}
 
 	public void setObjeto(Objeto objeto) {
-		this.objeto = objeto;
+		this.objetoPadre = objeto;
 	}
 
 	public Categoria getCategoria() {
@@ -185,7 +184,7 @@ public class Objeto {
 		AreaObjeto = areaObjeto;
 		AlturaObjeto = alturaObjeto;
 		VidaObjeto = vidaObjeto;
-		this.objeto = objeto;
+		this.objetoPadre = objeto;
 		this.categoria = categoria;
 	}	
 }

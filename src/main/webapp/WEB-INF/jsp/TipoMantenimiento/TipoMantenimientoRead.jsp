@@ -25,12 +25,12 @@
 <!-- 		    </div> -->
 <%-- 		</c:if> --%>
 
-		<h1>All Tipo Mantenimientos</h1>
+		<h1>Ver Tipos de Mantenimiento</h1>
 
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>#ID</th>
+					<th>ID</th>
 					<th>Nombre</th>
 				</tr>
 			</thead>

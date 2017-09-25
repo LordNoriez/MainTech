@@ -21,15 +21,15 @@
 <!-- 		</div> -->
 <%-- 	</c:if> --%>
 
-	<h1>MANTENIMIENTO</h1>
+	<h1>Actualizar Objeto</h1>
 	<br />
-	<spring:url value="/objetoupdate/${user.idObjeto}" var="variableAdd" />
+	<spring:url value="/updateObjeto/${objeto.idObjeto}" var="variableAdd" />
 
-	<form:form method="PUT" modelAttribute="user" action="${variableAdd}">
+	<form:form method="PUT" modelAttribute="objeto" action="${variableAdd}">
 	<div class="row">
 		<label class="col-sm-2">ID</label>
 		<div class="col-sm-10">
-		${user.idObjeto}
+		${objeto.idObjeto}
 		</div>
 	</div>
 
@@ -37,7 +37,7 @@
 		<label class="col-sm-2">Marca Objeto</label>
 		<div class="col-sm-10">
 <%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
-		<form:input type="text" path="MarcaObjeto" value = "${user.marcaObjeto}"/>
+		<form:input type="text" path="MarcaObjeto" value = "${objeto.marcaObjeto}"/>
 		</div>
 	</div>
 	
@@ -45,7 +45,7 @@
 		<label class="col-sm-2">Modelo Objeto</label>
 		<div class="col-sm-10">
 <%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
-		<form:input type="text" path="ModeloObjeto" value = "${user.modeloObjeto}"/>
+		<form:input type="text" path="ModeloObjeto" value = "${objeto.modeloObjeto}"/>
 		</div>
 	</div>
 	
@@ -53,11 +53,11 @@
 		<label class="col-sm-2">Serial Objeto</label>
 		<div class="col-sm-10">
 <%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
-		<form:input type="text" path="SerialObjeto" value = "${user.serialObjeto}"/>
+		<form:input type="text" path="SerialObjeto" value = "${objeto.serialObjeto}"/>
 		</div>
 	</div>
 
-<fmt:formatDate value="${user.fechaCreacionObjeto}" var="dateString" pattern="yyyy-MM-dd" />
+<fmt:formatDate value="${objeto.fechaCreacionObjeto}" var="dateString" pattern="yyyy-MM-dd" />
 	<div class="row">
 		<label class="col-sm-2">FechaCreacionObjeto</label>
 		<div class="col-sm-10">
@@ -66,7 +66,7 @@
 		</div>
 	</div>
 	
-<fmt:formatDate value="${user.fechaObtencionObjeto}" var="date2String" pattern="yyyy-MM-dd" />
+<fmt:formatDate value="${objeto.fechaObtencionObjeto}" var="date2String" pattern="yyyy-MM-dd" />
 	<div class="row">
 		<label class="col-sm-2">FechaObtencionObjeto</label>
 		<div class="col-sm-10">
@@ -78,7 +78,7 @@
 	<div class="row">
 		<label class="col-sm-2">descripcion</label>
 		<div class="col-sm-10">
-		<form:input type="text" path="DescripcionObjeto" value = "${user.descripcionObjeto}"/>
+		<form:input type="text" path="DescripcionObjeto" value = "${objeto.descripcionObjeto}"/>
 		</div>
 	</div>
 	

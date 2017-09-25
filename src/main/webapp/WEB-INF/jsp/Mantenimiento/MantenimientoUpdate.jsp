@@ -21,7 +21,7 @@
 <!-- 		</div> -->
 <%-- 	</c:if> --%>
 
-	<h1>MANTENIMIENTO</h1>
+	<h1>Actualizar Mantenimiento</h1>
 	<br />
 	<spring:url value="/mantenimientoupdate/${user.idMantenimiento}" var="variableAdd" />
 

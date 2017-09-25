@@ -25,28 +25,28 @@
 <!-- 		    </div> -->
 <%-- 		</c:if> --%>
 
-		<h1>Ver Mantenimientos</h1>
+		<h1>Ver Categorías</h1>
 
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>ID</th>
+					<th>Descripción</th>
 					<th>Nombre</th>
-					<th>Fecha</th>
 				</tr>
 			</thead>
 
-			<c:forEach var="mantenimiento" items="${mantenimientos}">
+			<c:forEach var="categoria" items="${categorias}">
 			    <tr>
 				<td>
-					${mantenimiento.idMantenimiento}
+					${categoria.idCategoria}
 				</td>
-				<td>${mantenimiento.nombreMantenimiento}</td>
-				<td>${mantenimiento.fechaMantenimiento}</td>
+				<td>${categoria.descripcionCategoria}</td>
+				<td>${categoria.nombreCategoria}</td>
 
 				<td>
-				  <spring:url value="/deleteMantenimiento/${mantenimiento.idMantenimiento}" var="deleteUrl" />
-				  <spring:url value="/mantenimiento/${mantenimiento.idMantenimiento}" var="updateUrl" />
+				  <spring:url value="/deleteCategoria/${categoria.idCategoria}" var="deleteUrl" />
+				  <spring:url value="/categoria/${categoria.idCategoria}" var="updateUrl" />
 
 				  <button class="btn btn-primary"
                                           onclick="location.href='${updateUrl}'">Update</button>
@@ -61,7 +61,7 @@
 
 	</div>
 	
-	<div id="snackbar">Mantenimiento Eliminado Correctamente</div>
+	<div id="snackbar">Categoría Eliminada Correctamente</div>
 
 <%-- 	<jsp:include page="../fragments/footer.jsp" /> --%>
 
