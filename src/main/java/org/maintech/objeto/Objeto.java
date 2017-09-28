@@ -139,11 +139,11 @@ public class Objeto {
 		VidaObjeto = vidaObjeto;
 	}
 
-	public Objeto getObjeto() {
+	public Objeto getObjetoPadre() {
 		return objetoPadre;
 	}
 
-	public void setObjeto(Objeto objeto) {
+	public void setObjetoPadre(Objeto objeto) {
 		this.objetoPadre = objeto;
 	}
 
@@ -169,7 +169,7 @@ public class Objeto {
 
 	public Objeto(Integer idObjeto, String marcaObjeto, String modeloObjeto, String serialObjeto,
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
-			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objeto,
+			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objetoPadre,
 			Categoria categoria) {
 		super();
 		this.idObjeto = idObjeto;
@@ -184,7 +184,7 @@ public class Objeto {
 		AreaObjeto = areaObjeto;
 		AlturaObjeto = alturaObjeto;
 		VidaObjeto = vidaObjeto;
-		this.objetoPadre = objeto;
+		this.objetoPadre = objetoPadre;
 		this.categoria = categoria;
 	}	
 }

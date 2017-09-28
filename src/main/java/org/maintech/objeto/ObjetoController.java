@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,7 +39,8 @@ public class ObjetoController {
 	}
 	
 	@RequestMapping("/crearObjeto")
-	public String crearObjeto(@ModelAttribute("crearModelObjeto") Objeto objeto,			BindingResult result, Model model){
+	public String crearObjeto(@ModelAttribute("crearModelObjeto") Objeto objeto, 
+			BindingResult result, Model model){
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.getAllObjeto());
 		return "Objeto/ObjetoCrear";
@@ -62,6 +64,9 @@ public class ObjetoController {
     
 	@RequestMapping(method=RequestMethod.POST, value="/objeto")
 	public ModelAndView addObjeto(Objeto objeto) {
+//		Objeto objetopadre;
+//		objetopadre = objetoService.getObjeto(idObjPadre);
+//		objeto.setObjetoPadre(objetopadre);
 		objeto.setActive(true);
 		objetoService.addObjeto(objeto);
 		return new ModelAndView("redirect:/objeto");

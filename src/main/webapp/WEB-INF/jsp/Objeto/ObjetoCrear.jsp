@@ -17,7 +17,7 @@
 	<spring:url value="/objeto" var="variableAdd" />
 
 
- 	<form:form method="POST" modelAttribute="crearModelObjeto" action="${variableAdd}"> 
+ 	<form:form method="POST" modelAttribute="crearModelObjeto" action="${variableAdd}" id="myForm"> 
 		<br><h2>Marca: </h2>
 		<form:input path="MarcaObjeto" type="text" /> 
 		<form:errors path="MarcaObjeto" />
@@ -37,10 +37,22 @@
 		</form:select>
 		
 		<br><h2>Objeto Padre: </h2>
-		<form:select path="objetoPadre">
-			<form:option value="NULL" label="--- Select ---" itemValue=""/>
-			<form:options items="${objects}" itemLabel="objetoPadre" itemValue="idObjeto" />
+		<form:select path="objetoPadre" onchange="document.getElementById('objtPadre').value = this.value;">
+			<form:option value="" label="--- Select ---" itemValue=""/>
+			<form:options items="${objects}" itemLabel="MarcaObjeto" itemValue="idObjeto" />
 		</form:select>
+
+		
+<!-- 		<select id="objPadreInput" name="titleId" onchange="document.getElementById('objtPadre').value = this.value;"> -->
+<!-- 		    <option value="NULL" label="--- Select ---" /> -->
+<%-- 		    <c:forEach items="${objects}" var="objs"> --%>
+<%-- 		            <option value="${objs.idObjeto}" selected>${objs.marcaObjeto}</option> --%>
+<%-- 		    </c:forEach> --%>
+<!-- 		</select> -->
+		
+<!--  used for take the id and then assign it to the Objeto -->
+		<form:input type="hidden" path="objetoPadre" id = "objtPadre" /> 
+		
 		
 		<br><h2>Fecha Creacion: </h2>
 		<form:input path="FechaCreacionObjeto" type="date" /> 
@@ -79,6 +91,6 @@
                              </button>
 	</form:form>
 	        <!-- The actual snackbar -->
-        <div id="snackbar">Se Ingreso Correctamente</div>
+        <div id="snackbar">Se Ingreso Correctamente</div>	
 	</body>
 </html>
