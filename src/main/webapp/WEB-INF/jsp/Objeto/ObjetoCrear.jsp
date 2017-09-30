@@ -32,7 +32,7 @@
 		
 		<br><h2>Categoria: </h2>
 		<form:select path="categoria">
-			<form:option value="NULL" label="--- Select ---" />
+			<form:option value="" label="--- Select ---" />
 			<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
 		</form:select>
 		

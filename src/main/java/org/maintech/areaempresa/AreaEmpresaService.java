@@ -12,25 +12,29 @@ public class AreaEmpresaService {
 	@Autowired
 	private AreaEmpresaRepository areaEmpresaRepository;
 
-	public List<AreaEmpresa> getAllMantenimiento() {
+	public List<AreaEmpresa> getAllAreaEmpresa() {
 		List<AreaEmpresa> mantenimientos = new ArrayList<>();
 		areaEmpresaRepository.findAll().forEach(mantenimientos::add);
 		return mantenimientos;
 	}
 
-	public AreaEmpresa getMantenimiento(Integer id) {
+	public AreaEmpresa getAreaEmpresa(Integer id) {
 		return areaEmpresaRepository.findOne(id);
 	}
 
-	public void addMantenimiento(AreaEmpresa mantenimiento) {
+	public void addAreaEmpresa(AreaEmpresa mantenimiento) {
 		areaEmpresaRepository.save(mantenimiento);
 	}
 
-	public void updateMantenimiento(Integer id, AreaEmpresa mantenimiento) {
-		areaEmpresaRepository.save(mantenimiento);
+	public void updateAreaEmpresa(Integer id, AreaEmpresa areaEmpresa) {
+		areaEmpresaRepository.save(areaEmpresa);
+	}
+	
+	public void sofDeleteAreaEmpresa(Integer id) {
+		areaEmpresaRepository.softDeleteAreaEmpresa(id);
 	}
 
-	public void deleteMantenimiento(Integer id) {
+	public void deleteAreaEmpresa(Integer id) {
 		areaEmpresaRepository.delete(id);
 	}
 }

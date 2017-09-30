@@ -14,18 +14,18 @@ public class AreaEmpresa {
 
 	@Id
 	@GeneratedValue
-	private Integer idTipoMantenimiento;
+	private Integer idAreaEmpresa;
 	private String NombreAreaEmpresa;	
 	
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
 
-	public Integer getIdTipoMantenimiento() {
-		return idTipoMantenimiento;
+	public Integer getIdAreaEmpresa() {
+		return idAreaEmpresa;
 	}
 
-	public void setIdTipoMantenimiento(Integer idTipoMantenimiento) {
-		this.idTipoMantenimiento = idTipoMantenimiento;
+	public void setIdAreaEmpresa(Integer idAreaEmpresa) {
+		this.idAreaEmpresa = idAreaEmpresa;
 	}
 
 	public String getNombreAreaEmpresa() {
@@ -46,15 +46,14 @@ public class AreaEmpresa {
 	
 	public AreaEmpresa() {
 		super();
-	}
-	
 
-	public AreaEmpresa(Integer idTipoMantenimiento, String nombreAreaEmpresa, Boolean active) {
+	}	
+
+	public AreaEmpresa(Integer idAreaEmpresa, String nombreAreaEmpresa, Boolean active) {
 		super();
-		this.idTipoMantenimiento = idTipoMantenimiento;
+		this.idAreaEmpresa = idAreaEmpresa;
 		NombreAreaEmpresa = nombreAreaEmpresa;
 		this.active = active;
-	}
-	
+	}	
 	
 }
