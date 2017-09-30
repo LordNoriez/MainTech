@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,6 +33,8 @@ public class ObjetoController {
 	public String showAllObjetos(Model model) {
 
 		model.addAttribute("objetos", objetoService.getAllObjeto());
+		model.addAttribute("categories", categoriaService.getAllCategoria());
+		model.addAttribute("objetosPadre", objetoService.getAllObjeto());
 		return "Objeto/ObjetoRead";
 
 	}
@@ -49,6 +50,8 @@ public class ObjetoController {
 	@RequestMapping("/objeto/{idObjeto}")
 	public String getObjetoUpdate(@PathVariable("idObjeto") Integer id,Model model){
 		model.addAttribute("objeto", objetoService.getObjeto(id));
+		model.addAttribute("categories", categoriaService.getAllCategoria());
+		model.addAttribute("objects", objetoService.getAllObjeto());
 		return "Objeto/ObjetoUpdate";
 	}
 	

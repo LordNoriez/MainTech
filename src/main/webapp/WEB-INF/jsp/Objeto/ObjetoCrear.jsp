@@ -39,7 +39,7 @@
 		<br><h2>Objeto Padre: </h2>
 		<form:select path="objetoPadre" onchange="document.getElementById('objtPadre').value = this.value;">
 			<form:option value="" label="--- Select ---" itemValue=""/>
-			<form:options items="${objects}" itemLabel="MarcaObjeto" itemValue="idObjeto" />
+			<form:options items="${objects}" itemLabel="DescripcionObjeto" itemValue="idObjeto" />
 		</form:select>
 
 		

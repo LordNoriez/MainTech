@@ -79,7 +79,7 @@ public class MantenimientoController {
 //	
 //	}
 
-	@RequestMapping(method=RequestMethod.PUT, value="/mantenimientoupdate/{idMantenimiento}")
+	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
 		mantenimiento.setActive(true);
 		mantenimientoService.updateMantenimiento(id, mantenimiento);

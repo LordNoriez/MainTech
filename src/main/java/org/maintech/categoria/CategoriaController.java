@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,9 +28,10 @@ public class CategoriaController {
 		return "Categoria/CategoriaRead";
 	}
 		
-	@RequestMapping("/categoria/{idObjeto}")
-	public Categoria getCategoria(@PathVariable("idCategoria") Integer id){
-		return categoriaService.getCategoria(id);
+	@RequestMapping("/categoria/{idCategoria}")
+	public String getCategoria(@PathVariable("idCategoria") Integer id, Model model){		
+		model.addAttribute("categoria", categoriaService.getCategoria(id));
+		return "Categoria/CategoriaUpdate";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addCategoria")
@@ -41,9 +41,11 @@ public class CategoriaController {
 		return new ModelAndView("redirect:/categoria");
 	}
 
-	@RequestMapping(method=RequestMethod.PUT, value="/categoria/{idCategoria}")
-	public void updateCategoria(@RequestBody Categoria categoria, @PathVariable("idCategoria") Integer id) {
+	@RequestMapping(method=RequestMethod.PUT, value="/updateCategoria/{idCategoria}")
+	public ModelAndView updateCategoria(Categoria categoria, @PathVariable("idCategoria") Integer id) {
+		categoria.setActive(true);
 		categoriaService.updateCategoria(id, categoria);
+		return new ModelAndView("redirect:/categoria");
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/categoria/{idCategoria}")

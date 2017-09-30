@@ -37,6 +37,7 @@
 					<th>fechaObtencionObjeto</th>
 					<th>Categoria</th>
 					<th>descripcionObjeto</th>
+					<th>objetoPadre</th>
 				</tr>
 			</thead>
 
@@ -47,8 +48,9 @@
 				<td>${objeto.modeloObjeto}</td>
 				<td>${objeto.fechaCreacionObjeto}</td>
 				<td>${objeto.fechaObtencionObjeto}</td>
-				<td>${objeto.categoria}</td>
+				<td>${objeto.categoria.getNombreCategoria()}</td>
 				<td>${objeto.descripcionObjeto}</td>
+				<td>${objeto.objetoPadre.getDescripcionObjeto()}</td>
 				<td>
 				  <spring:url value="/deleteObjeto/${objeto.idObjeto}" var="deleteUrl" />
 				  <spring:url value="/objeto/${objeto.idObjeto}" var="updateUrl" />

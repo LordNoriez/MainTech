@@ -45,7 +45,7 @@
 				<td>${categoria.nombreCategoria}</td>
 
 				<td>
-				  <spring:url value="/deleteCategoria/${categoria.idCategoria}" var="deleteUrl" />
+				  <spring:url value="/deleteCategoria/${categoria.idCategoria}" var="deleteUrl" />				  
 				  <spring:url value="/categoria/${categoria.idCategoria}" var="updateUrl" />
 
 				  <button class="btn btn-primary"

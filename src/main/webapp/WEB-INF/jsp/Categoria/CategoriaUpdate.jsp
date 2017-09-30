@@ -21,15 +21,15 @@
 <!-- 		</div> -->
 <%-- 	</c:if> --%>
 
-	<h1>MANTENIMIENTO</h1>
+	<h1>ACTUALIZAR CATEGORÍA</h1>
 	<br />
-	<spring:url value="/mantenimientoupdate/${user.idMantenimiento}" var="variableAdd" />
+	<spring:url value="/updateCategoria/${categoria.idCategoria}" var="variableAdd" />
 
-	<form:form method="PUT" modelAttribute="user" action="${variableAdd}">
+	<form:form method="PUT" modelAttribute="categoria" action="${variableAdd}">
 	<div class="row">
 		<label class="col-sm-2">ID</label>
 		<div class="col-sm-10">
-		${user.idMantenimiento}
+		${categoria.idCategoria}
 		</div>
 	</div>
 
@@ -37,23 +37,14 @@
 		<label class="col-sm-2">Name</label>
 		<div class="col-sm-10">
 <%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
-		<form:input type="text" path="NombreMantenimiento" value = "${user.nombreMantenimiento}"/>
-		</div>
-	</div>
-
-<fmt:formatDate value="${user.fechaMantenimiento}" var="dateString" pattern="yyyy-MM-dd" />
-	<div class="row">
-		<label class="col-sm-2">fecha</label>
-		<div class="col-sm-10">
-<%-- 		<input type="date" value = '${dateString}'> --%>
-		<form:input type="date" path="FechaMantenimiento" value = '${dateString}'/>
+		<form:input type="text" path="NombreCategoria" value = "${categoria.nombreCategoria}"/>
 		</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">descripcion</label>
+		<label class="col-sm-2">Descripción:</label>
 		<div class="col-sm-10">
-		<form:input type="text" path="DescripcionMantenimiento" value = "${user.descripcionMantenimiento}"/>
+		<form:input type="text" path="DescripcionCategoria" value = "${categoria.descripcionCategoria}"/>
 		</div>
 	</div>
 	

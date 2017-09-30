@@ -45,7 +45,7 @@
 		<label class="col-sm-2">Modelo Objeto</label>
 		<div class="col-sm-10">
 <%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
-		<form:input type="text" path="ModeloObjeto" value = "${objeto.modeloObjeto}"/>
+		<form:input type="text" path="DescripcionObjeto" value = "${objeto.modeloObjeto}"/>
 		</div>
 	</div>
 	
@@ -81,6 +81,19 @@
 		<form:input type="text" path="DescripcionObjeto" value = "${objeto.descripcionObjeto}"/>
 		</div>
 	</div>
+	
+	
+	<br><h2>Objeto Padre: </h2>
+	<form:select path="objetoPadre" onchange="document.getElementById('objtPadre').value = this.value;">
+		<form:option value="" label="--- Select ---" itemValue=""/>
+		<form:options items="${objects}" itemLabel="MarcaObjeto" itemValue="idObjeto" />
+	</form:select>
+			
+	<br><h2>Categoria: </h2>
+	<form:select path="categoria">
+		<form:option value="" label="--- Select ---" />
+		<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
+	</form:select>
 	
 	<div class="row">
 		<button type="submit" class="btn-lg btn-primary pull-right">ACTUALIZAR
