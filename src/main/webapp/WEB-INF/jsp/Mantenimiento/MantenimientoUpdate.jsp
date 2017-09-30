@@ -23,7 +23,7 @@
 
 	<h1>Actualizar Mantenimiento</h1>
 	<br />
-	<spring:url value="/mantenimientoupdate/${user.idMantenimiento}" var="variableAdd" />
+	<spring:url value="/updateMantenimiento/${user.idMantenimiento}" var="variableAdd" />
 
 	<form:form method="PUT" modelAttribute="user" action="${variableAdd}">
 	<div class="row">
