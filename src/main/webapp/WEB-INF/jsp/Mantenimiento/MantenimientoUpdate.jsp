@@ -23,25 +23,25 @@
 
 	<h1>Actualizar Mantenimiento</h1>
 	<br />
-	<spring:url value="/updateMantenimiento/${user.idMantenimiento}" var="variableAdd" />
+	<spring:url value="/updateMantenimiento/${varMantenmiento.idMantenimiento}" var="variableAdd" />
 
-	<form:form method="PUT" modelAttribute="user" action="${variableAdd}">
+	<form:form method="PUT" modelAttribute="varMantenmiento" action="${variableAdd}">
 	<div class="row">
 		<label class="col-sm-2">ID</label>
 		<div class="col-sm-10">
-		${user.idMantenimiento}
+		${varMantenmiento.idMantenimiento}
 		</div>
 	</div>
 
 	<div class="row">
 		<label class="col-sm-2">Name</label>
 		<div class="col-sm-10">
-<%-- 		<input type="text" value = "${user.nombreMantenimiento}"> --%>
-		<form:input type="text" path="NombreMantenimiento" value = "${user.nombreMantenimiento}"/>
+<%-- 		<input type="text" value = "${varMantenmiento.nombreMantenimiento}"> --%>
+		<form:input type="text" path="NombreMantenimiento" value = "${varMantenmiento.nombreMantenimiento}"/>
 		</div>
 	</div>
 
-<fmt:formatDate value="${user.fechaMantenimiento}" var="dateString" pattern="yyyy-MM-dd" />
+<fmt:formatDate value="${varMantenmiento.fechaMantenimiento}" var="dateString" pattern="yyyy-MM-dd" />
 	<div class="row">
 		<label class="col-sm-2">fecha</label>
 		<div class="col-sm-10">
@@ -49,11 +49,36 @@
 		<form:input type="date" path="FechaMantenimiento" value = '${dateString}'/>
 		</div>
 	</div>
+	
+	<div class="row">
+		<label class="col-sm-2">descripcion</label>
+		<div class="col-sm-10">
+		<form:input type="text" path="DescripcionMantenimiento" value = "${varMantenmiento.descripcionMantenimiento}"/>
+		</div>
+	</div>
+	
+	<div class="row">
+		<label class="col-sm-2">Frecuencia Mantenimiento</label>
+		<div class="col-sm-10">
+		<form:input type="text" path="FrecuenciaMantenimiento" value = "${varMantenmiento.frecuenciaMantenimiento}"/>
+		</div>
+	</div>
 
 	<div class="row">
 		<label class="col-sm-2">descripcion</label>
 		<div class="col-sm-10">
-		<form:input type="text" path="DescripcionMantenimiento" value = "${user.descripcionMantenimiento}"/>
+		<form:checkbox path="isProgramadoMantenimiento" value = "${varMantenmiento.isProgramadoMantenimiento}"/>
+		</div>
+	</div>
+	
+	<div class="row">
+		<label class="col-sm-2">objeto Mantenimiento</label>
+		<div class="col-sm-10">
+			<form:select path="objetoMantenimiento">
+			    <c:forEach var="Itemobjetos" items="${Itemobjeto}">
+			        <option value="${Itemobjetos.idObjeto}" ${Itemobjetos.idObjeto == varMantenmiento.objetoMantenimiento.idObjeto ? 'selected="selected"' : ''}>${Itemobjetos.marcaObjeto}</option>
+			    </c:forEach>
+			</form:select>
 		</div>
 	</div>
 	

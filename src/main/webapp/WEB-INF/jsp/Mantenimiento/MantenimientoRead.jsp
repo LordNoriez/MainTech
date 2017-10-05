@@ -33,16 +33,20 @@
 					<th>ID</th>
 					<th>Nombre</th>
 					<th>Fecha</th>
+					<th>Es Programado ?</th>
+					<th>Frecuencia</th>
+					<th>Objeto</th>
 				</tr>
 			</thead>
 
 			<c:forEach var="mantenimiento" items="${mantenimientos}">
 			    <tr>
-				<td>
-					${mantenimiento.idMantenimiento}
-				</td>
+				<td>${mantenimiento.idMantenimiento}</td>
 				<td>${mantenimiento.nombreMantenimiento}</td>
 				<td>${mantenimiento.fechaMantenimiento}</td>
+				<td>${mantenimiento.isProgramadoMantenimiento}</td>
+				<td>${mantenimiento.frecuenciaMantenimiento}</td>
+				<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td>
 
 				<td>
 				  <spring:url value="/deleteMantenimiento/${mantenimiento.idMantenimiento}" var="deleteUrl" />

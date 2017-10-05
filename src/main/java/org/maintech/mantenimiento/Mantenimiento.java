@@ -83,15 +83,6 @@ public class Mantenimiento {
 		DescripcionMantenimiento = descripcionMantenimiento;
 	}
 
-	public Objeto getObjeto() {
-		return objetoMantenimiento;
-	}
-
-	public void setObjeto(Objeto objeto) {
-		this.objetoMantenimiento = objeto;
-	}
-
-
 	public Boolean getActive() {
 		return active;
 	}
@@ -115,6 +106,14 @@ public class Mantenimiento {
 	public void setIsProgramadoMantenimiento(Boolean isProgramadoMantenimiento) {
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 	}
+	
+	public Objeto getObjetoMantenimiento() {
+		return objetoMantenimiento;
+	}
+
+	public void setObjetoMantenimiento(Objeto objetoMantenimiento) {
+		this.objetoMantenimiento = objetoMantenimiento;
+	}
 
 	public Mantenimiento() {
 		super();
@@ -131,15 +130,7 @@ public class Mantenimiento {
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 		FrecuenciaMantenimiento = frecuenciaMantenimiento;
 		this.objetoMantenimiento = objetoMantenimiento;
-		this.active = true;
 		this.actividad = actividad;
+		this.active = active;
 	}
-
-	
-
-	
-	
-	
-	
-	
 }

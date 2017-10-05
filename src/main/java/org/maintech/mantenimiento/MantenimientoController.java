@@ -1,5 +1,6 @@
 package org.maintech.mantenimiento;
 
+import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MantenimientoController {
+	
+	@Autowired
+	private ObjetoService objetoService;
 	
 	@Autowired
 	private MantenimientoService mantenimientoService;
@@ -35,13 +39,15 @@ public class MantenimientoController {
 	
 	@RequestMapping("/mantenimiento/{idMantenimiento}")
 	public String getMantenimientoUpdate(@PathVariable("idMantenimiento") Integer id,Model model){
-		model.addAttribute("user", mantenimientoService.getMantenimiento(id));
+		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
+		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
 		return "Mantenimiento/MantenimientoUpdate";
 	}
 	
 	@RequestMapping("/crearMantenimiento")
 	public String crearMantenimiento(@ModelAttribute("crearModelMantenimiento") Mantenimiento mantenimiento,
 			BindingResult result, Model model){
+		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
 		return "Mantenimiento/MantenimientoCrear";
 	}
 	

@@ -30,18 +30,18 @@
 		<form:errors path="DescripcionMantenimiento" />
 		
 		<br><h2>Es programado?: </h2>
-		<form:input path="isProgramadoMantenimiento" type="text" /> <!-- bind to user.name-->
+		<form:checkbox path="isProgramadoMantenimiento" value="true"/>
 		<form:errors path="isProgramadoMantenimiento" />
 
 		<br><h2>Frecuencia Mantenimiento: </h2>
 		<form:input path="FrecuenciaMantenimiento" type="text" /> <!-- bind to user.name-->
 		<form:errors path="FrecuenciaMantenimiento" />
 		
-<!-- 		<br><h2>Categoria: </h2> -->
-<%-- 		<form:select path="objetoMantenimiento"> --%>
-<%-- 			<form:option value="" label="--- Select ---" /> --%>
-<%-- 			<form:options items="${objetosPadre}" itemLabel="MarcaObjeto" itemValue="idObjeto" /> --%>
-<%-- 		</form:select> --%>
+		<br><h2>Objeto: </h2>
+		<form:select path="objetoMantenimiento">
+			<form:option value="" label="--- Select ---" />
+			<form:options items="${Itemobjeto}" itemLabel="MarcaObjeto" itemValue="idObjeto" />
+		</form:select>
 		
 		<br>
 		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
