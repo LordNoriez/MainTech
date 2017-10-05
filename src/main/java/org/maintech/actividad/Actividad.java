@@ -89,27 +89,27 @@ public class Actividad {
 	public void setMantenimiento(Collection<Mantenimiento> mantenimiento) {
 		this.mantenimientos = mantenimiento;
 	}
+	
+	public Boolean getActive() {
+		return active;
+	}
 
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 
 	public Actividad() {
 		super();
 	}
 
 	public Actividad(Integer idActividad, String nombreActividad, Double costoActividad, String descripcionActividad,
-			Collection<Mantenimiento> mantenimiento) {
+			Boolean active, Collection<Mantenimiento> mantenimientos) {
 		super();
 		this.idActividad = idActividad;
 		NombreActividad = nombreActividad;
 		CostoActividad = costoActividad;
 		DescripcionActividad = descripcionActividad;
-
-		//this.mantenimiento = mantenimiento;
-
-		this.mantenimientos = mantenimiento;
-
-	}
-	
-	
-	
-	
+		this.active = active;
+		this.mantenimientos = mantenimientos;
+	}	
 }

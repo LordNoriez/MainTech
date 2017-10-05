@@ -30,6 +30,11 @@ public class ActividadService {
 	public void updateActividad(Integer id, Actividad actividad) {		
 		actividadRepository.save(actividad);
 	}
+	
+	
+	public void sofDeleteActividad(Integer id) {
+		actividadRepository.softDeleteActividad(id);
+	}
 
 	public void deleteActividad(Integer id) {
 		actividadRepository.delete(id);
