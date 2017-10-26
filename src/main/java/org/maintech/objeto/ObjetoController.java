@@ -6,6 +6,7 @@ import org.maintech.categoria.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -151,6 +152,11 @@ public class ObjetoController {
 //		return proximos;
 //	}
 	
+	
+	@Scheduled(fixedRate=120000)
+	public void Rep(){
+		this.home();
+	}
 	
 	
 	// ------------- send mail

@@ -1,7 +1,10 @@
 package org.maintech.mantenimiento;
 
+import java.util.Date;
+
 import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,8 @@ public class MantenimientoController {
 	
 	@Autowired
 	private ObjetoService objetoService;
+	
+	Integer aux = 0;
 	
 	@Autowired
 	private MantenimientoService mantenimientoService;
@@ -59,31 +64,28 @@ public class MantenimientoController {
 	}
 	
 // done for project crocker :D
-//	@RequestMapping(value="/cMantenimiento")
-//	public List<Mantenimiento>  addMantnmailProvider() {
-//		
-//		
-//		Mantenimiento mat = new Mantenimiento();
-//				
-//		Date now = new Date();
-//		
-//        System.out.println(" 7 ");
-//        Integer x= 8;
-//		for (Objeto objeto : objetoController.checkTimeObject(1)) {
-//			System.out.println(objeto.getMarcaObjeto() + " " + objeto.getDescripcionObjeto() + " " + objeto.getTiempoMante());
-//			mat.setNombreMantenimiento("Limpieza " + x);
-//			mat.setObjeto(objeto);
-//			mat.setDescripcionMantenimiento("Limpieza exterior");
-//			mat.setFechaMantenimiento(now);
-//			mat.setActive(true);
-//			mantenimientoService.addMantenimiento(mat);		
-//			System.out.println(x);
-//			x++;
-//		}
-//
-//		return mantenimientoService.getAllMantenimiento();
-//	
-//	}
+	@RequestMapping(value="/cMantenimiento")
+	public ModelAndView  addMantnmailProvider() {
+		
+		
+		Mantenimiento mat = new Mantenimiento();
+				
+		Date now = new Date();
+		
+			mat.setNombreMantenimiento("Limpieza ");
+			mat.setDescripcionMantenimiento("Limpieza exterior");
+			mat.setFechaMantenimiento(now);
+			mat.setActive(true);
+			mantenimientoService.addMantenimiento(mat);		
+				
+			return new ModelAndView("redirect:/mantenimiento");
+	}
+	
+	@Scheduled(fixedRate=1000)
+	public void Rep(){
+			aux = aux + 1;
+		System.out.println(aux.toString());
+	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
