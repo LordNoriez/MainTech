@@ -1,8 +1,13 @@
 package org.maintech.objeto;
 
+import java.util.List;
+
 import javax.mail.internet.MimeMessage;
 
 import org.maintech.categoria.CategoriaService;
+import org.maintech.mantenimiento.Mantenimiento;
+import org.maintech.mantenimiento.MantenimientoController;
+import org.maintech.mantenimiento.MantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -26,9 +31,6 @@ public class ObjetoController {
 	
 	@Autowired
 	private CategoriaService categoriaService;
-		
-    @Autowired
-    private JavaMailSender mailSender;
     
 	@RequestMapping(value = "/objeto", method = RequestMethod.GET)
 	public String showAllObjetos(Model model) {
@@ -153,68 +155,6 @@ public class ObjetoController {
 //	}
 	
 	
-	@Scheduled(fixedRate=600000)
-	public void Rep(){
-		this.home();
-	}
-	
-	
-	// ------------- send mail
-	
-	@RequestMapping("/simpleemail")
-    @ResponseBody
-    String home() {
-        try {
-            sendEmail();
-            return "Email Sent!";
-        }catch(Exception ex) {
-            return "Error in sending email: "+ex;
-        }
-    } 
-
-    private void sendEmail() throws Exception{
-    	
-    	String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
-    	
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setTo(address);
-        /*helper.setText("<html><body><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>  "
-        		+ "<br><body></html>", true);*/
-        
-        helper.setText("<html> " 
-			+"<head><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>"
-			+"<link href='<c:url value='/resources/css/style.css' />"
-			+"<script src='<c:url value='/resources/Js/scripts.js' />'></script>"
-			+"</head><body>"
-			+"<div class='container'>"
-			+"<h1>Ver Mantenimientos</h1>"
-			+"<tble class='table table-striped'>"
-			+"<thead>"
-			+"<tr>"
-			+"<th>ID</th>"
-			+"<th>Nombre</th>"
-			+"<th>Fecha</th>"
-			+"<th>Es Programado ?</th>"
-			+"<th>Frecuencia</th>"
-			+"<th>Objeto</th>"
-			+"</tr></thead>"
-			+"<c:forEach var='mantenimiento' items='${mantenimientos}'>"
-			+"<tr>"
-			+"<td>${mantenimiento.idMantenimiento}</td>"
-			+"<td>${mantenimiento.nombreMantenimiento}</td>"
-			+"<td>${mantenimiento.fechaMantenimiento}</td>"
-			+"<td>${mantenimiento.isProgramadoMantenimiento}</td>"
-			+"<td>${mantenimiento.frecuenciaMantenimiento}</td>"
-			+"<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td>"                                                                                                                 
-			+"</tr></c:forEach></table></div>"	
-			+"</body></html>", true);
-        //<a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a>
-        helper.setSubject("Confirmar Mantenimiento");
-        mailSender.send(message);
-    }
-    
-    
     private void sendReport() throws Exception {
     	
     	// create our mysql database connection
