@@ -119,7 +119,7 @@ public class MantenimientoController {
 		return "Mantenimiento Eliminado!";
 	}
 	
-	@Scheduled(fixedRate=600000)
+	@Scheduled(fixedRate=240000)
 	public void Rep(){
 		this.home();
 	}

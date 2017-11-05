@@ -31,6 +31,8 @@ public class ObjetoController {
 	
 	@Autowired
 	private CategoriaService categoriaService;
+    @Autowired
+    private JavaMailSender mailSender;
     
 	@RequestMapping(value = "/objeto", method = RequestMethod.GET)
 	public String showAllObjetos(Model model) {
