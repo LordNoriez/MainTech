@@ -9,8 +9,8 @@
 <head>
 	
 <!-- 	<link rel="stylesheet" type="text/css" href="css/style.css"> -->
-	<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-	<script src="<c:url value="/resources/Js/scripts.js" />"></script>
+	<link href="<c:url value="css/style.css" />" rel="stylesheet">
+	<script src="<c:url value="js/scripts.js" />"></script>
 </head>
 	<body>
 	<h1>Crear Actividad</h1>

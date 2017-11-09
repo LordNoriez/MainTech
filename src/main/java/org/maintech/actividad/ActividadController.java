@@ -21,18 +21,17 @@ public class ActividadController {
 	
 	@Autowired
 	private ActividadService ActividadService;
-		
+	
 	@RequestMapping(value = "/actividad", method = RequestMethod.GET)
 	public String getAllActividad(Model model) {
-
 		model.addAttribute("actividades", ActividadService.getAllActividad());
 		return "Actividad/ActividadRead";
-
 	}
 	
 	@RequestMapping("/actividad/{idActividad}")
 	public String getMantenimientoUpdate(@PathVariable("idActividad") Integer id,Model model){
 		model.addAttribute("VarActividad", ActividadService.getActividad(id));
+		
 		return "Actividad/ActividadUpdate";
 	}
 	
