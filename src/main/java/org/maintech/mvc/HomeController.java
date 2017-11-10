@@ -1,16 +1,13 @@
 package org.maintech.mvc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.security.core.userdetails.User;
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @SuppressWarnings("unused")
 @Controller
@@ -24,8 +21,8 @@ public class HomeController {
         if (principal == null) {
             return "redirect:/logout";
         }
-                
-        model.put("userId", principal);
+        
+        model.put("userId", name);
         return "home";
     }
 }

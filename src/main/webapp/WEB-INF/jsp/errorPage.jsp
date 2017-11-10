@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicio</title>
+    <title>Error</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -22,8 +22,7 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li class="active" id="home"><a href="/">Inicio</a></li>
-                <li id="logout"><a href="#">Salir</a></li>
+                <li class="active" id="home"><a href="/login">Login</a></li>                
             </ul>
         </nav>
         <h3 class="text-muted">MainTech</h3>
@@ -37,82 +36,13 @@
 				<div class="panel-heading">
 					
 					<div class="jumbotron">
-						<img class="p-img" alt="" src="">	
-				        <h3>Hola ${userId}!</h3>				        
+				        <h3>Error!</h3>				        
 				    </div>				
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">Email :
-						</div>					
 				</div>
 			</div>
 			<!-- End Home Panel -->
 
-		</div>
-		<div class=" col-md-5">						
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h2>Menú</h2>
-				</div>
-				
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/reporte">Enviar Reporte de Costos</a>
-					</div>					
-				</div>
-				<br>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearObjeto">Crear Objeto</a>
-					</div>	
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/objeto">Ver Objetos</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearMantenimiento">Crear Mantenimiento</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/mantenimiento">Ver Mantenimientos</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearAreaEmpresa">Crear Area Empresa</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/areaEmpresa">Ver Area Empresa</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearActividad">Crear Actividad</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/actividad">Ver Actividad</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearCategoria">Crear Categoría</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" href="/categoria">Ver Categorías</a>
-					</div>					
-				</div>
-			</div>
-			<!-- End Home Panel -->
-		</div>
-	</div>
+		</div>		
     
     <div class="row marketing">
         <div class="col-lg-6">
