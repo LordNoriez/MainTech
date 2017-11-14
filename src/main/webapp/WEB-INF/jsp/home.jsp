@@ -34,93 +34,92 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
 
-<div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills pull-right">
-                <li class="active" ng-show="user" id="home"><a href="/google/login">Inicio</a></li>
-                <li class="active" ng-show="!user" id="home"><a href="/google/login">Login</a></li>
-                <li><a href="#" ng-show="user" ng-click="logout()">Salir</a></li>
-            </ul>
-        </nav>
-        <h3 class="text-muted">MainTech</h3>
-    </div>
     
-    <div class="container" style="margin-top: 50px;">
+	<div class="container">
+    
+    <!--<div class="container" style="margin-top: 50px;">-->
 		<!-- Login panel -->
-		
-		
-		<div class="jumbotron">						
-			<img class="p-img" ng-show="user" alt="" ng-src="{{user.userAuthentication.details.picture}}">
-			<h3 ng-show="!user">Hola!</h3>
-			<h3 ng-show="user">Hola {{user.name}}</h3>
-			<h4 ng-show="user">Email: {{user.userAuthentication.details.email}}</h4>				        
-	    </div>	
-		
-		<div ng-show="user" class=" col-md-12">						
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h2 ng-show="user">Menú</h2>
-				</div>
-				
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/reporte">Enviar Reporte de Costos</a>
-					</div>					
-				</div>
-				<br>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/crearObjeto">Crear Objeto</a>
-					</div>	
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/objeto">Ver Objetos</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/crearMantenimiento">Crear Mantenimiento</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/mantenimiento">Ver Mantenimientos</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/crearAreaEmpresa">Crear Area Empresa</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/areaEmpresa">Ver Area Empresa</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/crearActividad">Crear Actividad</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/actividad">Ver Actividad</a>
-					</div>					
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/crearCategoria">Crear Categoría</a>
-					</div>		
-					<div class="col-md-12">
-						<a class="btn btn-default" ng-show="user" href="/categoria">Ver Categorías</a>
-					</div>					
-				</div>
+		<div class="row">
+			<div class=" col-lg-12">		
+				<div class="header clearfix">
+			        <nav>
+			            <ul class="nav nav-pills pull-right">
+			                <li class="active" ng-show="user" id="home"><a href="/google/login">Inicio</a></li>
+			                <li class="active" ng-show="!user" id="home"><a href="/google/login">Login</a></li>
+			                <li><a href="#" ng-show="user" ng-click="logout()">Salir</a></li>
+			            </ul>
+			        </nav>
+			        <h2 class="text-muted">MainTech</h2>
+			    </div>
 			</div>
-			<!-- End Home Panel -->
 		</div>
-	</div>
+		
+		<div class="row">
+			<div class="jumbotron">						
+				<img class="p-img" ng-show="user" alt="" ng-src="{{user.userAuthentication.details.picture}}">
+				<h3 ng-show="!user">Hola!</h3>
+				<h3 ng-show="user">Hola {{user.name}}</h3>
+				<h4 ng-show="user">Email: {{user.userAuthentication.details.email}}</h4>				        
+		    </div>	
+	    </div>
+		
+		<div ng-show="user" class="row">
+			<div class=" col-md-12">						
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2>Menú</h2>
+					</div>
+					
+					<div class="panel-body">
+						<div class="col-md-12">
+							<a class="btn btn-default" ng-show="user" href="/reporte">Enviar Reporte de Costos</a>
+						</div>	
+						<br><br>
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/crearObjeto">Crear Objeto</a>
+						</div>	
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/objeto">Ver Objetos</a>
+						</div>		
+						<br>	<br>						
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/crearMantenimiento">Crear Mantenimiento</a>
+						</div>		
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/mantenimiento">Ver Mantenimientos</a>
+						</div>	
+						<br>	<br>
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
+						</div>		
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
+						</div>	
+						<br>	<br>
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/crearAreaEmpresa">Crear Area Empresa</a>
+						</div>		
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/areaEmpresa">Ver Area Empresa</a>
+						</div>	
+						<br><br>
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/crearActividad">Crear Actividad</a>
+						</div>		
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/actividad">Ver Actividad</a>
+						</div>	
+						<br><br>
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/crearCategoria">Crear Categoría</a>
+						</div>		
+						<div class="col-md-6">
+							<a class="btn btn-default" ng-show="user" href="/categoria">Ver Categorías</a>
+						</div>					
+					</div>
+				</div>				
+			</div>
+		</div>	
     
     <div class="row marketing">
         <div class="col-lg-6">
