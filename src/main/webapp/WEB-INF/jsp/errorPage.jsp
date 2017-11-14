@@ -42,7 +42,8 @@
 			</div>
 			<!-- End Home Panel -->
 
-		</div>		
+		</div>	
+	</div>	
     
     <div class="row marketing">
         <div class="col-lg-6">
@@ -69,6 +70,7 @@
     </footer>
 
 </div>
+
 
 <script type="text/javascript">
     $(function () {

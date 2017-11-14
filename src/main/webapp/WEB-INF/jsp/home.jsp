@@ -14,16 +14,33 @@
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/js/jquery.growl.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
 </head>
 
-<body>
+<style>
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+
+.margin-top-5 {
+	margin-top: 10px;
+}
+
+.p-img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}
+</style>
+<body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
 
 <div class="container">
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li class="active" id="home"><a href="/">Inicio</a></li>
-                <li id="logout"><a href="#">Salir</a></li>
+                <li class="active" ng-show="user" id="home"><a href="/google/login">Inicio</a></li>
+                <li class="active" ng-show="!user" id="home"><a href="/google/login">Login</a></li>
+                <li><a href="#" ng-click="logout()">Salir</a></li>
             </ul>
         </nav>
         <h3 class="text-muted">MainTech</h3>
@@ -36,13 +53,14 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					
-					<div class="jumbotron">
-						<img class="p-img" alt="" src="">	
-				        <h3>Hola ${userId}!</h3>				        
+					<div class="jumbotron">						
+						<img class="p-img" ng-show="user" alt="" ng-src="{{user.userAuthentication.details.picture}}">
+						<h3 ng-show="!user">Hola!</h3>
+						<h3 ng-show="user">Hola {{user.name}}</h3>				        
 				    </div>				
 				</div>
-				<div class="panel-body">
-					<div class="col-md-12">Email :
+				<div class="panel-body" ng-show="user">
+					<div class="col-md-12">Email: {{user.userAuthentication.details.email}}
 						</div>					
 				</div>
 			</div>
@@ -52,61 +70,61 @@
 		<div class=" col-md-5">						
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h2>Menú</h2>
+					<h2 ng-show="user">Menú</h2>
 				</div>
 				
 				<div class="panel-body">
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/reporte">Enviar Reporte de Costos</a>
+						<a class="btn btn-default" ng-show="user" href="/reporte">Enviar Reporte de Costos</a>
 					</div>					
 				</div>
 				<br>
 				<div class="panel-body">
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearObjeto">Crear Objeto</a>
+						<a class="btn btn-default" ng-show="user" href="/crearObjeto">Crear Objeto</a>
 					</div>	
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/objeto">Ver Objetos</a>
+						<a class="btn btn-default" ng-show="user" href="/objeto">Ver Objetos</a>
 					</div>					
 				</div>
 				<div class="panel-body">
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearMantenimiento">Crear Mantenimiento</a>
+						<a class="btn btn-default" ng-show="user" href="/crearMantenimiento">Crear Mantenimiento</a>
 					</div>		
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/mantenimiento">Ver Mantenimientos</a>
+						<a class="btn btn-default" ng-show="user" href="/mantenimiento">Ver Mantenimientos</a>
 					</div>					
 				</div>
 				<div class="panel-body">
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
+						<a class="btn btn-default" ng-show="user" href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
 					</div>		
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
+						<a class="btn btn-default" ng-show="user" href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
 					</div>					
 				</div>
 				<div class="panel-body">
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearAreaEmpresa">Crear Area Empresa</a>
+						<a class="btn btn-default" ng-show="user" href="/crearAreaEmpresa">Crear Area Empresa</a>
 					</div>		
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/areaEmpresa">Ver Area Empresa</a>
+						<a class="btn btn-default" ng-show="user" href="/areaEmpresa">Ver Area Empresa</a>
 					</div>					
 				</div>
 				<div class="panel-body">
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearActividad">Crear Actividad</a>
+						<a class="btn btn-default" ng-show="user" href="/crearActividad">Crear Actividad</a>
 					</div>		
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/actividad">Ver Actividad</a>
+						<a class="btn btn-default" ng-show="user" href="/actividad">Ver Actividad</a>
 					</div>					
 				</div>
 				<div class="panel-body">
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/crearCategoria">Crear Categoría</a>
+						<a class="btn btn-default" ng-show="user" href="/crearCategoria">Crear Categoría</a>
 					</div>		
 					<div class="col-md-12">
-						<a class="btn btn-default" href="/categoria">Ver Categorías</a>
+						<a class="btn btn-default" ng-show="user" href="/categoria">Ver Categorías</a>
 					</div>					
 				</div>
 			</div>
@@ -140,19 +158,38 @@
 
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        $.growl({title: "Welcome ${userId}", message: "We hope you enjoy using this site!"});
-    });
-    $("#logout").click(function(e) {
-        e.preventDefault();
-        $("#home").removeClass("active");
-        $("#password-login").removeClass("active");
-        $("#logout").addClass("active");
-        // assumes we are not part of SSO so just logout of local session
-        window.location = "${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, '')}/logout";
-    });
-</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('MainTech', []);
+	
+		app.config([ '$httpProvider', function($httpProvider) {
+			$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+		} ]);
+		app.controller('AppCtrl', function($http, $scope) {
+	
+		// method for getting user details
+		var getUser = function() {
+			$http.get('/user').success(function(user) {
+				$scope.user = user;
+				console.log('Logged User : ', user);
+				// welcome message
+				$.growl({title: "Bienvenido(a)", message: "POFASA S.A."});			   
+			}).error(function(error) {
+				$scope.resource = error;
+			});
+		};
+		getUser();
+	    
+		// method for logout
+		$scope.logout = function() {
+			$http.post('/logout').success(function(res) {
+				$scope.user = null;
+			}).error(function(error) {
+				console.log("Logout error : ", error);
+			});
+		};
+	});
+	</script>
 
 </body>
 </html>
