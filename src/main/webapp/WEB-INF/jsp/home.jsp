@@ -40,7 +40,7 @@
             <ul class="nav nav-pills pull-right">
                 <li class="active" ng-show="user" id="home"><a href="/google/login">Inicio</a></li>
                 <li class="active" ng-show="!user" id="home"><a href="/google/login">Login</a></li>
-                <li><a href="#" ng-click="logout()">Salir</a></li>
+                <li><a href="#" ng-show="user" ng-click="logout()">Salir</a></li>
             </ul>
         </nav>
         <h3 class="text-muted">MainTech</h3>
@@ -49,25 +49,15 @@
     <div class="container" style="margin-top: 50px;">
 		<!-- Login panel -->
 		
-		<div class=" col-md-5">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					
-					<div class="jumbotron">						
-						<img class="p-img" ng-show="user" alt="" ng-src="{{user.userAuthentication.details.picture}}">
-						<h3 ng-show="!user">Hola!</h3>
-						<h3 ng-show="user">Hola {{user.name}}</h3>				        
-				    </div>				
-				</div>
-				<div class="panel-body" ng-show="user">
-					<div class="col-md-12">Email: {{user.userAuthentication.details.email}}
-						</div>					
-				</div>
-			</div>
-			<!-- End Home Panel -->
-
-		</div>
-		<div class=" col-md-5">						
+		
+		<div class="jumbotron">						
+			<img class="p-img" ng-show="user" alt="" ng-src="{{user.userAuthentication.details.picture}}">
+			<h3 ng-show="!user">Hola!</h3>
+			<h3 ng-show="user">Hola {{user.name}}</h3>
+			<h4 ng-show="user">Email: {{user.userAuthentication.details.email}}</h4>				        
+	    </div>	
+		
+		<div ng-show="user" class=" col-md-12">						
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2 ng-show="user">Menú</h2>
