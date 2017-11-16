@@ -1,5 +1,5 @@
 // Creating angular Application with module name "GoogleOAuthDemoApp"
-var app = angular.module('GoogleOAuthDemoApp', []);
+var app = angular.module('MainTech', []);
 
 app.config([ '$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

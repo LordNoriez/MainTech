@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserRestController {
+	
 	@RequestMapping("/user")
 	public Principal sayHello(Principal principal) {
 		return principal;

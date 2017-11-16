@@ -2,6 +2,7 @@ package org.maintech.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,10 +17,10 @@ import org.springframework.security.oauth2.client.token.grant.code.Authorization
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-
+@EnableOAuth2Sso
 @Configurable
 @EnableWebSecurity
-public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
+public class AppConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	OAuth2ClientContext oauth2ClientContext;
@@ -77,7 +78,7 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
 				// starts authorizing configurations
 				.authorizeRequests()
 				// ignore the "/" and "/index.html"
-				.antMatchers("/", "/**.html", "/app/**.js").permitAll()
+				.antMatchers("/").permitAll()
 				// authenticate all remaining URLS
 				.anyRequest().fullyAuthenticated()//
 				.and()//
