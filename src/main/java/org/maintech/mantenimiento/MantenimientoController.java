@@ -1,5 +1,7 @@
 package org.maintech.mantenimiento;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 @Controller
 public class MantenimientoController {
@@ -119,6 +123,7 @@ public class MantenimientoController {
 		return "Mantenimiento Eliminado!";
 	}
 	
+
 	@Scheduled(fixedRate=240000)
 	public void Rep(){
 		this.home();
@@ -169,14 +174,14 @@ public class MantenimientoController {
         String texto2="";
         
         for (Mantenimiento mantenimiento: mantenimientoService.getAllMantenimiento()) {
-        	if (mantenimiento.getIsProgramadoMantenimiento()){
-	        	texto2 = texto2 + "<td>" + mantenimiento.getIdMantenimiento() + "</td>"
+        	
+	        	texto2 = texto2 + "<td>" + mantenimiento.toString() + "</td>"
 					+"<td>" + mantenimiento.getNombreMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>";
-        	};
+        	
         };
         		
         
@@ -188,4 +193,135 @@ public class MantenimientoController {
         mailSender.send(message);
     }
 	
+    @RequestMapping("/reporteCostos")
+    private void sendEmailCostsReport() throws Exception{
+    	
+    	String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
+    	
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setTo(address);
+        /*helper.setText("<html><body><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>  "
+        		+ "<br><body></html>", true);*/
+        String texto1 = "<html> " 
+    			+"<head>"
+    			+"<link href='<c:url value='/resources/css/style.css' />"
+    			+"<script src='<c:url value='/resources/Js/scripts.js' />'></script>"
+    			+"</head><body>"
+    			+"<div class='container'>"
+    			+"<h1>Mantenimiento Costos Noviembre</h1>"
+    			+"<table style=\"text-align: left;font-weight: 600;font-family: 'Raleway',sans-serif;font-size: 15px;color: #008080;\">"
+    			+"<tr>"
+    			//+"<th>ID</th>"
+    			+"<th>Nombre Mantenimiento</th>"
+    			//+"<th>Fecha</th>"
+    			+"<th>Costos</th>"
+    			//+"<th>Objeto</th>"
+    			+"</tr>";
+        
+        String texto2="";
+        
+        for (Object[] mantenimiento: mantenimientoService.CostoMantenimiento()) {
+        	
+        	texto2 = texto2 + "<tr><td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:"
+        		+ "1px;border-color: #5F9EA0;\">" + mantenimiento[0].toString() + "</td>"
+				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
+				+"1px;border-color: #5F9EA0;\">" + mantenimiento[1].toString() + "</td></tr>";
+//				+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
+//				+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
+//				+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
+//				+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>";
+    	
+    };
+        		
+        
+        helper.setText(texto1
+			+ texto2                                                                                                                 
+			+"</tr></table></div></body></html>", true);
+        //<a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a>
+        helper.setSubject("Confirmar Mantenimiento");
+        mailSender.send(message);
+    }
+    
+    @RequestMapping("/reporteEmergentes")
+    private void sendEmailEmergenteReport() throws Exception{
+    	
+    	String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
+    	
+    	String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+    	
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setTo(address);
+        /*helper.setText("<html><body><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>  "
+        		+ "<br><body></html>", true);*/
+        String texto1 = "<html> " 
+    			+"<head>"
+    			+"<link href='<c:url value='/resources/css/style.css' />"
+    			+"<script src='<c:url value='/resources/Js/scripts.js' />'></script>"
+    			+"</head><body>"
+    			+"<div class='container'>"
+    			+"<h1>Mantenimiento Emergentes "+ timeStamp  +"</h1>"
+    			+"<table style=\"text-align: left;font-weight: 600;font-family: 'Raleway',sans-serif;font-size: 15px;color: #008080;\">"
+    			+"<tr>"
+    			//+"<th>ID</th>"
+    			+"<th>Nombre Mantenimiento</th>"
+    			+"<th>Fecha</th>"
+    			+"<th>Objeto</th>"
+    			+"</tr>";
+        
+        String texto2="";
+        
+        for (Mantenimiento mantenimiento: mantenimientoService.MantenimientoEmergente()) {
+        	
+        	texto2 = texto2 + "<tr><td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:"
+        		+ "1px;border-color: #5F9EA0;\">" + mantenimiento.getNombreMantenimiento() + "</td>"
+				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
+				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getFechaMantenimiento() + "</td>"
+				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
+				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td></tr>";
+//				+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
+//				+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
+//				+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
+//				+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>";
+    	
+    };
+        		
+        
+        helper.setText(texto1
+			+ texto2                                                                                                                 
+			+"</tr></table></div></body></html>", true);
+        //<a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a>
+        helper.setSubject("Confirmar Mantenimiento");
+        mailSender.send(message);
+    }
+    
+	@RequestMapping(method=RequestMethod.GET, value="/MantenimientoProgramado")
+	public void AutomatizacionMantenimiento(){
+		Mantenimiento MantProg;
+		Mantenimiento NewMante;
+		Date now = new Date();
+		for (Object[] revisiontiemp: mantenimientoService.MantenimientoRevisionFrecuenciaxTiempo()){
+			
+
+			
+			if(Float.parseFloat(revisiontiemp[1].toString()) < 0){
+				NewMante = new Mantenimiento();
+				MantProg = mantenimientoService.getMantenimiento(Integer.parseInt(revisiontiemp[0].toString()));
+				
+				NewMante.setNombreMantenimiento(MantProg.getNombreMantenimiento());
+				NewMante.setFechaMantenimiento(now);
+				NewMante.setDescripcionMantenimiento(MantProg.getDescripcionMantenimiento());
+				NewMante.setIsProgramadoMantenimiento(true);
+				NewMante.setFrecuenciaMantenimiento(MantProg.getFrecuenciaMantenimiento());
+				NewMante.setObjetoMantenimiento(MantProg.getObjetoMantenimiento());
+				NewMante.setActive(true);
+				
+				
+				mantenimientoService.addMantenimiento(NewMante);
+			}
+		}
+		       
+	}
+    
 }

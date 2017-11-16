@@ -29,6 +29,9 @@ public class Mantenimiento {
 	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean  isProgramadoMantenimiento;
 	private String FrecuenciaMantenimiento;
+	private Boolean isAceptadoMantenimiento;
+	private Boolean isEnProcesoMantenimiento;
+	private Boolean isTerminadoMantenimiento;
 	
 	@ManyToOne
 	private Objeto objetoMantenimiento;
@@ -115,13 +118,38 @@ public class Mantenimiento {
 		this.objetoMantenimiento = objetoMantenimiento;
 	}
 
+	public Boolean getIsAceptadoMantenimiento() {
+		return isAceptadoMantenimiento;
+	}
+
+	public void setIsAceptadoMantenimiento(Boolean isAceptadoMantenimiento) {
+		this.isAceptadoMantenimiento = isAceptadoMantenimiento;
+	}
+
+	public Boolean getIsEnProcesoMantenimiento() {
+		return isEnProcesoMantenimiento;
+	}
+
+	public void setIsEnProcesoMantenimiento(Boolean isEnProcesoMantenimiento) {
+		this.isEnProcesoMantenimiento = isEnProcesoMantenimiento;
+	}
+
+	public Boolean getIsTerminadoMantenimiento() {
+		return isTerminadoMantenimiento;
+	}
+
+	public void setIsTerminadoMantenimiento(Boolean isTerminadoMantenimiento) {
+		this.isTerminadoMantenimiento = isTerminadoMantenimiento;
+	}
+
 	public Mantenimiento() {
 		super();
 	}
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
 			String descripcionMantenimiento, Boolean isProgramadoMantenimiento, String frecuenciaMantenimiento,
-			Objeto objetoMantenimiento, Collection<Actividad> actividad, Boolean active) {
+			Objeto objetoMantenimiento, Collection<Actividad> actividad, Boolean active, Boolean isAceptadoMantenimiento,
+			Boolean isEnProcesoMantenimiento, Boolean isTerminadoMantenimiento) {
 		super();
 		this.idMantenimiento = idMantenimiento;
 		NombreMantenimiento = nombreMantenimiento;
@@ -132,5 +160,8 @@ public class Mantenimiento {
 		this.objetoMantenimiento = objetoMantenimiento;
 		this.actividad = actividad;
 		this.active = active;
+		this.isAceptadoMantenimiento = isAceptadoMantenimiento;
+		this.isEnProcesoMantenimiento = isEnProcesoMantenimiento;
+		this.isTerminadoMantenimiento = isTerminadoMantenimiento;
 	}
 }
