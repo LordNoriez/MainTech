@@ -55,7 +55,7 @@ public class CategoriaController {
 	
 	@RequestMapping(value="/deleteCategoria/{idCategoria}")
 	public ModelAndView deactiveCategoria(@PathVariable("idCategoria") Integer id) {
-		categoriaService.sofDeleteMantenimiento(id);
+		categoriaService.softDeleteCategoria(id);
 		return new ModelAndView("redirect:/categoria");
 	}
 

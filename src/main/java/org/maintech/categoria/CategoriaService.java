@@ -34,7 +34,7 @@ public class CategoriaService {
 		categoriaRepository.delete(id);
 	}
 	
-	public void sofDeleteMantenimiento(Integer id) {
+	public void softDeleteCategoria(Integer id) {
 		categoriaRepository.softDeleteCategoria(id);
 	}
 }

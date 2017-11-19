@@ -11,7 +11,9 @@ public class UserRestController {
 	
 	@RequestMapping("/user")
 	public Principal sayHello(Principal principal) {
+		
 		return principal;
 	}
-
+	
+	
 }
