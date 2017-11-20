@@ -1,23 +1,26 @@
-<%@ page session="false"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
-	
-<!-- 	<link rel="stylesheet" type="text/css" href="css/style.css"> -->
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crear Objeto</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
     <link rel="stylesheet" type="text/css" href="/css/jquery.growl.css"/>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/js/jquery.growl.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
     <link href="<c:url value="css/style.css" />" rel="stylesheet">
 	<script src="<c:url value="js/scripts.js" />"></script>
+    
 </head>
 
 <style>
@@ -35,124 +38,106 @@
 	border-radius: 50%;
 }
 </style>
+<body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
 
-	<body>
-	
-	<div class="container">
+    
+	<div class="container" id="main">
+    
+    <!--<div class="container" style="margin-top: 50px;">-->
+		<!-- Login panel -->
 		<div class="row">
-			<div class=" col-lg-12">		
+			<div class=" col-md-12">		
 				<div class="header clearfix">
-			        <div class=" col-md-6"><h2 class="text-muted">MainTech</h2></div>
 			        <div class=" col-md-6">
-				        <nav>
-				            <ul class="nav nav-pills pull-right">
-				            	<li> <h4 class="text-muted">Crear Objeto         </h4></li>				            	
-				                <li class="active" id="home"><a href="/google/login">Inicio</a></li>			                
-				                <li><a href="#" onclick="logout()">Salir</a></li>
-				            </ul>
-				        </nav>
+			        	<h2 class="text-muted">MainTech</h2>						
+				        <h4 class="text-muted">Crear Objeto</h4>
+			        </div>
+			        <div class=" col-md-6">
+			        	<nav>
+			            	<ul class="nav nav-pills pull-right">
+			                	<li class="active" id="home"><a href="/google/login">Inicio</a></li>
+			            	</ul>
+			        	</nav>			        
 					</div>
 			    </div>
 			</div>
 		</div>
-		
 		<div class="row">
 			<div class=" col-md-4">
 				<div class="jumbotron">						
 					<img class="p-img" alt="" src="{{user.userAuthentication.details.picture}}">
-					<h5>Hola ${usu}</h5>
-					<h6>Email: {{user.userAuthentication.details.email}}</h6>				        
+					<h5>${usu}</h5>
+					<h6>{{user.userAuthentication.details.email}}</h6>		
+					<a href="/logout">Salir</a>		        
 			    </div>	
 			    
 			    					
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h2>Menú</h2>
+						<h3>Menú</h3>
 					</div>
 					
 					<div class="panel-body">
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/reporte">Enviar Reporte de Costos</a>
-						</div>	
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/crearObjeto">Crear Objeto</a>
-						</div>	
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/objeto">Ver Objetos</a>
-						</div>		
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/crearMantenimiento">Crear Mantenimiento</a>
-						</div>		
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/mantenimiento">Ver Mantenimientos</a>
-						</div>	
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
-						</div>		
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
-						</div>	
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default"  href="/crearAreaEmpresa">Crear Area Empresa</a>
-						</div>		
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default"  href="/areaEmpresa">Ver Area Empresa</a>
-						</div>	
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/crearActividad">Crear Actividad</a>
-						</div>		
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/actividad">Ver Actividad</a>
-						</div>	
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/crearCategoria">Crear Categoría</a>
-						</div>		
-						<br><br>
-						<div class="col-sm-4">
-							<a class="btn btn-default" href="/categoria">Ver Categorías</a>
-						</div>					
+					
+			            <div id="mySidenav" class="sidenav">
+						  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+						  <a href="/reporte">Enviar Reporte de Costos</a>
+						  <a href="/crearObjeto">Crear Objeto</a>
+						  <a href="/objeto">Ver Objetos</a>
+						  <a href="/crearMantenimiento">Crear Mantenimiento</a>
+						  <a href="/mantenimiento">Ver Mantenimientos</a>
+						  <a href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
+						  <a href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
+						  <a href="/crearAreaEmpresa">Crear Area Empresa</a>
+						  <a href="/areaEmpresa">Ver Area Empresa</a>
+						  <a href="/crearActividad">Crear Actividad</a>
+						  <a href="/actividad">Ver Actividad</a>
+						  <a href="/crearCategoria">Crear Categoría</a>
+						  <a href="/categoria">Ver Categorías</a>
+						</div>
+						
+						<!-- Use any element to open the sidenav -->
+						<span onclick="openNav()">open</span>			
 					</div>
 				</div>
 			</div>
 			
-			<div class=" col-md-6">
+			
+			
+			<div class=" col-md-6"  >
 				<spring:url value="/objeto" var="variableAdd" />
 			
 			 	<form:form method="POST" modelAttribute="crearModelObjeto" action="${variableAdd}" id="myForm"> 
-					<br><h2>Marca: </h2>
-					<form:input path="MarcaObjeto" type="text" /> 
+										
+					<label>Marca:</label>
+					<form:input path="MarcaObjeto" class="form-control" type="text" /> 
 					<form:errors path="MarcaObjeto" />
+					<br>
 					
-					<br><h2>Modelo: </h2>
-					<form:input path="ModeloObjeto" type="text" /> 
+					<label>Modelo: </label>
+					<form:input path="ModeloObjeto"  class="form-control" type="text" /> 
 					<form:errors path="ModeloObjeto" />
+					<br>
 					
-					<br><h2>Serial: </h2>
-					<form:input path="SerialObjeto" type="text" /> 
+					<label>Serial: </label>
+					<form:input path="SerialObjeto"  class="form-control" type="text" /> 
 					<form:errors path="SerialObjeto" />
+					<br>
 					
-					<br><h2>Categoria: </h2>
-					<form:select path="categoria">
+					<label>Categoria: </label>
+						        
+					<form:select class="form-control" path="categoria">
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
 					</form:select>
+					<br>
 					
-					<br><h2>Objeto Padre: </h2>
-					<form:select path="objetoPadre" onchange="document.getElementById('objtPadre').value = this.value;">
+					<label>Objeto Padre: </label>
+					<form:select class="form-control" path="objetoPadre" onchange="document.getElementById('objtPadre').value = this.value;">
 						<form:option value="" label="--- Select ---" itemValue=""/>
 						<form:options items="${objects}" itemLabel="DescripcionObjeto" itemValue="idObjeto" />
 					</form:select>
+					<br>
 			
 			<!-- 		<select id="objPadreInput" name="titleId" onchange="document.getElementById('objtPadre').value = this.value;"> -->
 			<!-- 		    <option value="NULL" label="--- Select ---" /> -->
@@ -165,37 +150,45 @@
 					<form:input type="hidden" path="objetoPadre" id = "objtPadre" /> 
 					
 					
-					<br><h2>Fecha Creacion: </h2>
-					<form:input path="FechaCreacionObjeto" type="date" /> 
+					<label>Fecha Creacion: </label>
+					<form:input path="FechaCreacionObjeto"  class="form-control" type="date" /> 
 					<form:errors path="FechaCreacionObjeto" />
+					<br>
 					
-					<br><h2>Fecha Obtencion: </h2>
-					<form:input path="FechaObtencionObjeto" type="date" /> 
+					<label>Fecha Obtencion: </label>
+					<form:input path="FechaObtencionObjeto" class="form-control"  type="date" /> 
 					<form:errors path="FechaObtencionObjeto" />
+					<br>
 					
-					<br><h2>Longitud: </h2>
-					<form:input path="LongitudObjeto" type="text" /> 
+					<label>Longitud: </label>
+					<form:input path="LongitudObjeto" class="form-control"  type="text" /> 
 					<form:errors path="LongitudObjeto" />
+					<br>
 					
-					<br><h2>Ancho: </h2>
-					<form:input path="AnchoObjeto" type="text" /> 
+					<label>Ancho: </label>
+					<form:input path="AnchoObjeto"  class="form-control" type="text" /> 
 					<form:errors path="AnchoObjeto" />
+					<br>
 					
-					<br><h2>Area: </h2>
-					<form:input path="AreaObjeto" type="text" /> 
+					<label>Area: </label>
+					<form:input path="AreaObjeto"  class="form-control" type="text" /> 
 					<form:errors path="AreaObjeto" />
+					<br>
 			
-					<br><h2>Altura: </h2>
-					<form:input path="AlturaObjeto" type="text" /> 
+					<label>Altura: </label>
+					<form:input path="AlturaObjeto"  class="form-control" type="text" /> 
 					<form:errors path="AlturaObjeto" />
+					<br>
 					
-					<br><h2>Vida: </h2>
-					<form:input path="VidaObjeto" type="text" /> 
+					<label>Vida: </label>
+					<form:input path="VidaObjeto"  class="form-control" type="text" /> 
 					<form:errors path="VidaObjeto" />	
+					<br>
 					
-					<br><h2>Descripcion: </h2>
-					<form:input path="DescripcionObjeto" type="text" />
+					<label>Descripcion: </label>
+					<form:input path="DescripcionObjeto" class="form-control"  type="text" />
 					<form:errors path="DescripcionObjeto" />
+					
 			
 					<br>
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
@@ -203,43 +196,68 @@
 				</form:form>
 			</div>
 		</div>
-	</div>
+	
 		
 	        <!-- The actual snackbar -->
-        <div id="snackbar">Se Ingreso Correctamente</div>	
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
         
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-		<script type="text/javascript">
-			var app = angular.module('MainTech', []);
-		
-			app.config([ '$httpProvider', function($httpProvider) {
-				$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-			} ]);
-			app.controller('AppCtrl', function($http, $scope) {
-		
-			// method for getting user details
-			var getUser = function() {
-				$http.get('/user').success(function(user) {
-					$scope.user = user;
-					console.log('Logged User : ', user);
-					// welcome message
-					$.growl({title: "Bienvenido(a)", message: "POFASA S.A."});			   
-				}).error(function(error) {
-					$scope.resource = error;
-					$.growl({title: "No logeado", message: "POFASA S.A."});
-				});
-			};
-			getUser();
-		    
-			// method for logout
-			$scope.logout = function() {
-				$http.post('/logout').success(function(res) {
-					$scope.user = null;
-				}).error(function(error) {
-					console.log("Logout error : ", error);
-				});
-			};
-		});
-		</script>
-	</body>
+    
+    <div class="row marketing">
+        <div class="col-lg-6">
+            <h4>Subheading</h4>
+            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+            <h4>Subheading</h4>
+            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
+                fermentum.</p>
+        </div>
+
+        <div class="col-lg-6">
+            <h4>Subheading</h4>
+            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+            <h4>Subheading</h4>
+            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
+                fermentum.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p> &copy; 2017 POFASA S.A.</p>
+    </footer>
+
+</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('MainTech', []);
+	
+		app.config([ '$httpProvider', function($httpProvider) {
+			$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+		} ]);
+		app.controller('AppCtrl', function($http, $scope) {
+	
+		// method for getting user details
+		var getUser = function() {
+			$http.get('/user').success(function(user) {
+				$scope.user = user;
+				console.log('Logged User : ', user);		   
+			}).error(function(error) {
+				$scope.resource = error;
+			});
+		};
+		getUser();
+	    
+		// method for logout
+		$scope.logout = function() {
+			$http.post('/logout').success(function(res) {
+				$scope.user = null;
+			}).error(function(error) {
+				console.log("Logout error : ", error);
+			});
+		};
+	});
+	</script>
+
+</body>
 </html>

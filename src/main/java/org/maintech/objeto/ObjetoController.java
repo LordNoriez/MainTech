@@ -57,7 +57,7 @@ public class ObjetoController {
 	
 	@RequestMapping("/crearObjeto")
 	public String crearObjeto(@ModelAttribute("crearModelObjeto") Objeto objeto, 
-			BindingResult result, Model model, Principal principal, OAuth2Authentication auth){
+			BindingResult result, Model model, Principal principal){
 		
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.getAllObjeto());
@@ -80,7 +80,7 @@ public class ObjetoController {
 		
 	     SecurityContextHolder.getContext().setAuthentication(newAuth);*/
 		
-		model.addAttribute("usu",  auth.getOAuth2Request().getRequestParameters());
+		model.addAttribute("usu",  principal.getName());
 		return "Objeto/ObjetoCrear";
 	}
 	
