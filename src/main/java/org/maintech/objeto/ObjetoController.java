@@ -2,6 +2,8 @@ package org.maintech.objeto;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -12,9 +14,13 @@ import org.maintech.login.UserRestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.ldap.userdetails.InetOrgPerson;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,14 +57,30 @@ public class ObjetoController {
 	
 	@RequestMapping("/crearObjeto")
 	public String crearObjeto(@ModelAttribute("crearModelObjeto") Objeto objeto, 
-			BindingResult result, Model model, Principal principal){
+			BindingResult result, Model model, Principal principal, OAuth2Authentication auth){
 		
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.getAllObjeto());
+		 
+		/*StringTokenizer st = new StringTokenizer(principal.toString(),",");
 		
-		ArrayList<String> data = new ArrayList<String>();
+	     while (st.hasMoreTokens()) {
+	    	 if (st.nextToken().toLowerCase().contains("email")) {
+	    		 model.addAttribute("usu", st.nextToken());
+	    		 System.out.println("----------------------   " + st.nextToken()); 
+	    	 }
+	     }*/
+	     
+	     
+	    
+	     /*List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+	     updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_MANAGER")); 
 		
-		model.addAttribute("usu", principal.toString());
+	     Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
+		
+	     SecurityContextHolder.getContext().setAuthentication(newAuth);*/
+		
+		model.addAttribute("usu",  auth.getOAuth2Request().getRequestParameters());
 		return "Objeto/ObjetoCrear";
 	}
 	
