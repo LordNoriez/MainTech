@@ -42,14 +42,16 @@
 		<div class="row">
 			<div class=" col-lg-12">		
 				<div class="header clearfix">
-			        <nav>
-			            <ul class="nav nav-pills pull-right">
-			                <li class="active" ng-show="user" id="home"><a href="/google/login">Inicio</a></li>
-			                <li class="active" ng-show="!user" id="home"><a href="/google/login">Login</a></li>
-			                <li><a href="#" ng-show="user" ng-click="logout()">Salir</a></li>
-			            </ul>
-			        </nav>
-			        <h2 class="text-muted">MainTech</h2>
+			        <div class=" col-md-6"><h2 class="text-muted">MainTech</h2></div>
+			        <div class=" col-md-6">
+			        	<nav>
+			            	<ul class="nav nav-pills pull-right">
+			                	<li class="active" ng-show="user" id="home"><a href="/google/login">Inicio</a></li>
+			                	<li class="active" ng-show="!user" id="home"><a href="/google/login">Login</a></li>
+			                	<li><a href="#" ng-show="user" ng-click="logout()">Salir</a></li>
+			            	</ul>
+			        	</nav>
+			        </div>
 			    </div>
 			</div>
 		</div>
