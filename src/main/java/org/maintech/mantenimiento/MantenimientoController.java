@@ -1,11 +1,15 @@
 package org.maintech.mantenimiento;
 
+import java.awt.List;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
 
+import org.maintech.actividad.Actividad;
 import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,7 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
@@ -59,6 +64,13 @@ public class MantenimientoController {
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
 		return "Mantenimiento/MantenimientoUpdate";
+	}
+	
+	@RequestMapping("/emailAcepted/{idMantenimiento}")
+	public ModelAndView AceptMantenimientoEmail(@PathVariable("idMantenimiento") Integer id,Model model){
+
+		mantenimientoService.Acept_mantenimiento(id);
+		return new ModelAndView("redirect:/mantenimiento");
 	}
 	
 	@RequestMapping("/crearMantenimiento")
@@ -168,19 +180,20 @@ public class MantenimientoController {
     			+"<th>Es Programado ?</th>"
     			+"<th>Frecuencia</th>"
     			+"<th>Objeto</th>"
-    			+"</tr></thead>"
-    			+"<tr>";
+    			+"</tr></thead>";
         
         String texto2="";
         
-        for (Mantenimiento mantenimiento: mantenimientoService.getAllMantenimiento()) {
+        for (Mantenimiento mantenimiento: mantenimientoService.MantenimientoxAceptar()) {
         	
-	        	texto2 = texto2 + "<td>" + mantenimiento.toString() + "</td>"
+	        	texto2 = texto2 + "<tr><td>" + mantenimiento.getIdMantenimiento().toString() + "</td>"
 					+"<td>" + mantenimiento.getNombreMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
-					+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>";
+					+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
+					+"<a href=\"http://localhost:8080/emailAcepted/" + mantenimiento.getIdMantenimiento().toString() + "\">Aceptar Mantenimiento</a>"
+					+ "</tr>";
         	
         };
         		
@@ -297,16 +310,17 @@ public class MantenimientoController {
     }
     
 	@RequestMapping(method=RequestMethod.GET, value="/MantenimientoProgramado")
-	public void AutomatizacionMantenimiento(){
+	public ModelAndView AutomatizacionMantenimiento(){
 		Mantenimiento MantProg;
-		Mantenimiento NewMante;
 		Date now = new Date();
+		
+		
 		for (Object[] revisiontiemp: mantenimientoService.MantenimientoRevisionFrecuenciaxTiempo()){
 			
 
 			
 			if(Float.parseFloat(revisiontiemp[1].toString()) < 0){
-				NewMante = new Mantenimiento();
+				Mantenimiento NewMante = new Mantenimiento();
 				MantProg = mantenimientoService.getMantenimiento(Integer.parseInt(revisiontiemp[0].toString()));
 				
 				NewMante.setNombreMantenimiento(MantProg.getNombreMantenimiento());
@@ -315,13 +329,17 @@ public class MantenimientoController {
 				NewMante.setIsProgramadoMantenimiento(true);
 				NewMante.setFrecuenciaMantenimiento(MantProg.getFrecuenciaMantenimiento());
 				NewMante.setObjetoMantenimiento(MantProg.getObjetoMantenimiento());
-				NewMante.setActive(true);
-				
-				
+				NewMante.setActive(true);			
 				mantenimientoService.addMantenimiento(NewMante);
+	
+				for(Actividad actividad: MantProg.getActividad()){
+					
+					mantenimientoService.LinkActividad_mantenimiento(actividad.getIdActividad(),
+							mantenimientoService.IdUltimoMante());
+				}
 			}
 		}
-		       
+		return new ModelAndView("redirect:/mantenimiento");    
 	}
     
 }

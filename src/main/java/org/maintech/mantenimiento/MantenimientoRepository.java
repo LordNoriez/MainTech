@@ -35,4 +35,25 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		        nativeQuery=true
 		    )
 		    public List<Object[]> MantenimientoxTiempo();
+		    
+		@Query(value = "select * from mantenimiento where is_aceptado_mantenimiento = 0 and is_programado_mantenimiento = 1",
+		        nativeQuery=true
+		    )
+		    public List<Mantenimiento> MantexAceptar();
+		
+		@Query(value = "select id_mantenimiento from mantenimiento order by id_mantenimiento desc limit 1;",
+		        nativeQuery=true
+		    )
+		    public Integer UltimoMantenimientoId();
+		
+		@Query(nativeQuery = true, value= "insert into actividad_mantenimientos(actividad_id_actividad, mantenimientos_id_mantenimiento) values (?1,?2)")
+		@Transactional
+		@Modifying
+		void LinkActividad_mantenimiento(Integer idActividad, Integer idMantenimiento);
+
+		@Query(nativeQuery = true, value= "update mantenimiento set is_aceptado_mantenimiento = 1 where id_mantenimiento = ?1")
+		@Transactional
+		@Modifying
+		void Acept_mantenimiento(Integer id);
+				
 }

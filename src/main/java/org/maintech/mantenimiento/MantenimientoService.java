@@ -62,4 +62,25 @@ public class MantenimientoService {
 		mantenimientoRepository.MantenimientoxTiempo().forEach(mantenimientos::add);
 		return mantenimientos;
 	}
+	
+	public List<Mantenimiento> MantenimientoxAceptar() {
+		List<Mantenimiento> mantenimientos = new ArrayList<>();
+		mantenimientoRepository.MantexAceptar().forEach(mantenimientos::add);
+		return mantenimientos;
+	}
+	
+	public Integer IdUltimoMante() {
+	
+		return mantenimientoRepository.UltimoMantenimientoId();
+		
+	}
+	
+	public void LinkActividad_mantenimiento(Integer idActividad, Integer idMantenimiento) {
+		mantenimientoRepository.LinkActividad_mantenimiento(idActividad, idMantenimiento);
+	}
+	
+	public void Acept_mantenimiento(Integer id) {
+		mantenimientoRepository.Acept_mantenimiento(id);
+	}
+
 }

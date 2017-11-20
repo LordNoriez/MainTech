@@ -1,6 +1,7 @@
 package org.maintech.actividad;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Actividad {
 	//private Set<Mantenimiento> mantenimiento = new HashSet<Mantenimiento>();
 
 	@ManyToMany
-	private Collection<Mantenimiento> mantenimientos;
+	private Set<Mantenimiento> mantenimientos;
 
 	
 
@@ -82,11 +83,11 @@ public class Actividad {
 		this.mantenimiento = mantenimiento;
 	}*/
 
-	public Collection<Mantenimiento> getMantenimiento() {
+	public Set<Mantenimiento> getMantenimiento() {
 		return mantenimientos;
 	}
 
-	public void setMantenimiento(Collection<Mantenimiento> mantenimiento) {
+	public void setMantenimiento(Set<Mantenimiento> mantenimiento) {
 		this.mantenimientos = mantenimiento;
 	}
 	
@@ -103,7 +104,7 @@ public class Actividad {
 	}
 
 	public Actividad(Integer idActividad, String nombreActividad, Double costoActividad, String descripcionActividad,
-			Boolean active, Collection<Mantenimiento> mantenimientos) {
+			Boolean active, Set<Mantenimiento> mantenimientos) {
 		super();
 		this.idActividad = idActividad;
 		NombreActividad = nombreActividad;

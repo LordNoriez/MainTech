@@ -2,6 +2,7 @@ package org.maintech.mantenimiento;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,7 +48,7 @@ public class Mantenimiento {
 
 	
 	@ManyToMany(mappedBy="mantenimientos")//mantenimientos is the objetc from Actividad that i created
-	private Collection<Actividad> actividad;
+	private Set<Actividad> actividad;
 
 	
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
@@ -141,6 +142,14 @@ public class Mantenimiento {
 	public void setIsTerminadoMantenimiento(Boolean isTerminadoMantenimiento) {
 		this.isTerminadoMantenimiento = isTerminadoMantenimiento;
 	}
+	
+	public Set<Actividad> getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(Set<Actividad> actividad) {
+		this.actividad = actividad;
+	}
 
 	public Mantenimiento() {
 		super();
@@ -148,7 +157,7 @@ public class Mantenimiento {
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
 			String descripcionMantenimiento, Boolean isProgramadoMantenimiento, String frecuenciaMantenimiento,
-			Objeto objetoMantenimiento, Collection<Actividad> actividad, Boolean active, Boolean isAceptadoMantenimiento,
+			Objeto objetoMantenimiento, Set<Actividad> actividad, Boolean active, Boolean isAceptadoMantenimiento,
 			Boolean isEnProcesoMantenimiento, Boolean isTerminadoMantenimiento) {
 		super();
 		this.idMantenimiento = idMantenimiento;
