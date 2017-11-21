@@ -84,7 +84,11 @@
 						<div class="col-md-12">
 							<a class="btn btn-default btn-block" ng-show="user" href="/objeto">Objetos</a>
 						</div>		
-						<br>	<br>		
+						<br>	<br>	
+						<div class="col-md-12">
+							<a class="btn btn-default btn-block" ng-show="user" href="/categoria">Categorías</a>
+						</div>		
+						<br>	<br>	
 						<div class="col-md-12">
 							<a class="btn btn-default btn-block" ng-show="user" href="/mantenimiento">Mantenimientos</a>
 						</div>	
@@ -94,16 +98,12 @@
 <!-- 						</div>	 -->
 						<br>	<br>
 						<div class="col-md-12">
-							<a class="btn btn-default btn-block" ng-show="user" href="/areaEmpresa">Áreas de Empresa</a>
-						</div>	
-						<br><br>
-						<div class="col-md-12">
 							<a class="btn btn-default btn-block" ng-show="user" href="/actividad">Actividades</a>
 						</div>	
 						<br><br>
 						<div class="col-md-12">
-							<a class="btn btn-default btn-block" ng-show="user" href="/categoria">Categorías</a>
-						</div>					
+							<a class="btn btn-default btn-block" ng-show="user" href="/areaEmpresa">Áreas de Empresa</a>
+						</div>				
 					</div>
 				</div>				
 			</div>

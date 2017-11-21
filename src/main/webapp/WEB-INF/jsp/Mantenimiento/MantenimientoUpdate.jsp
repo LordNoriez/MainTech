@@ -111,7 +111,7 @@
 					<br>
 					<br>
 				
-					<label>Frecuencia de Mantenimiento (días): </label>
+					<label>Frecuencia de Mantenimiento (horas): </label>
 					<form:input path="FrecuenciaMantenimiento" class="form-control" type="number" value="${varMantenmiento.frecuenciaMantenimiento}"/>					
 					<br>
 					
