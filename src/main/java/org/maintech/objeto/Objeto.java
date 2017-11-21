@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Where;
+import org.maintech.areaempresa.AreaEmpresa;
 import org.maintech.categoria.Categoria;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,6 +40,9 @@ public class Objeto {
 	
 	@ManyToOne
 	private Categoria categoria;
+	
+	@ManyToOne
+	private AreaEmpresa AreaEmpresa;
 		
 	@Column(name="is_active", columnDefinition="tinyint(1) default 1")	
 	private Boolean active;
@@ -155,6 +159,14 @@ public class Objeto {
 		this.categoria = categoria;
 	}
 
+	public AreaEmpresa getAreaEmpresa() {
+		return AreaEmpresa;
+	}
+
+	public void setAreaEmpresa(AreaEmpresa areaEmpresa) {
+		AreaEmpresa = areaEmpresa;
+	}
+
 	public Boolean getActive() {
 		return active;
 	}
@@ -170,7 +182,7 @@ public class Objeto {
 	public Objeto(Integer idObjeto, String marcaObjeto, String modeloObjeto, String serialObjeto,
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
 			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objetoPadre,
-			Categoria categoria) {
+			Categoria categoria, AreaEmpresa areaEmpresa) {
 		super();
 		this.idObjeto = idObjeto;
 		MarcaObjeto = marcaObjeto;
@@ -186,5 +198,6 @@ public class Objeto {
 		VidaObjeto = vidaObjeto;
 		this.objetoPadre = objetoPadre;
 		this.categoria = categoria;
+		this.AreaEmpresa = areaEmpresa;
 	}	
 }

@@ -123,26 +123,19 @@
 					<form:select class="form-control" path="objetoMantenimiento">
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${Itemobjeto}" itemLabel="DescripcionObjeto" itemValue="idObjeto" />
-					</form:select>					
+					</form:select>				
+						
 					<br>
 					
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
-			                             </button>
+					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />
+					
+					<br>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
+			                             
 				</form:form>
 	        </div>
 		</div>
-	
-		
-<<<<<<< HEAD
-		<br>
-		
-		<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />
-		
-		<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
-                             </button>
-	</form:form>
-=======
->>>>>>> ee14c9c18dcdec6bee7802ec48c5dbca46318f55
+
 	        <!-- The actual snackbar -->
         <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
         

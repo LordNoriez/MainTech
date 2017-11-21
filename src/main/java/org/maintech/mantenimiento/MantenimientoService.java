@@ -1,10 +1,7 @@
 package org.maintech.mantenimiento;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +46,6 @@ public class MantenimientoService {
 	}
 	
 	public List<Mantenimiento> MantenimientoEmergente() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Date fechaHoy = new Date();
 		List<Mantenimiento> mantenimientos = new ArrayList<>();
 		mantenimientoRepository.findByIsProgramadoMantenimientoFalse().forEach(mantenimientos::add);
 		return mantenimientos;
@@ -77,6 +72,10 @@ public class MantenimientoService {
 	
 	public void LinkActividad_mantenimiento(Integer idActividad, Integer idMantenimiento) {
 		mantenimientoRepository.LinkActividad_mantenimiento(idActividad, idMantenimiento);
+	}
+	
+	public void DeleteLinkActividad_mantenimiento(Integer idMantenimiento) {
+		mantenimientoRepository.DeleteLinkActividad_mantenimiento(idMantenimiento);
 	}
 	
 	public void Acept_mantenimiento(Integer id) {

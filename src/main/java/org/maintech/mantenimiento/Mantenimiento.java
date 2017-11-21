@@ -1,6 +1,5 @@
 package org.maintech.mantenimiento;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 
@@ -14,6 +13,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Where;
 import org.maintech.actividad.Actividad;
 import org.maintech.objeto.Objeto;
+import org.maintech.tipomantenimiento.TipoMantenimiento;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -37,6 +37,8 @@ public class Mantenimiento {
 	@ManyToOne
 	private Objeto objetoMantenimiento;
 	
+	@ManyToOne
+	private TipoMantenimiento objTipoMantenimiento;
 
 	//@ManyToMany(cascade = CascadeType.ALL)
 	//@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
@@ -118,6 +120,14 @@ public class Mantenimiento {
 	public void setObjetoMantenimiento(Objeto objetoMantenimiento) {
 		this.objetoMantenimiento = objetoMantenimiento;
 	}
+	
+	public TipoMantenimiento getObjTipoMantenimiento() {
+		return objTipoMantenimiento;
+	}
+
+	public void setObjTipoMantenimiento(TipoMantenimiento objTipoMantenimiento) {
+		this.objTipoMantenimiento = objTipoMantenimiento;
+	}
 
 	public Boolean getIsAceptadoMantenimiento() {
 		return isAceptadoMantenimiento;
@@ -157,7 +167,7 @@ public class Mantenimiento {
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
 			String descripcionMantenimiento, Boolean isProgramadoMantenimiento, String frecuenciaMantenimiento,
-			Objeto objetoMantenimiento, Set<Actividad> actividad, Boolean active, Boolean isAceptadoMantenimiento,
+			Objeto objetoMantenimiento, TipoMantenimiento objTipoMantenimiento,Set<Actividad> actividad, Boolean active, Boolean isAceptadoMantenimiento,
 			Boolean isEnProcesoMantenimiento, Boolean isTerminadoMantenimiento) {
 		super();
 		this.idMantenimiento = idMantenimiento;
@@ -166,6 +176,7 @@ public class Mantenimiento {
 		DescripcionMantenimiento = descripcionMantenimiento;
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 		FrecuenciaMantenimiento = frecuenciaMantenimiento;
+		this.objTipoMantenimiento = objTipoMantenimiento;
 		this.objetoMantenimiento = objetoMantenimiento;
 		this.actividad = actividad;
 		this.active = active;

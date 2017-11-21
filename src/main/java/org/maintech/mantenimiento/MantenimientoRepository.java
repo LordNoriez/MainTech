@@ -50,6 +50,11 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		@Transactional
 		@Modifying
 		void LinkActividad_mantenimiento(Integer idActividad, Integer idMantenimiento);
+		
+		@Query(nativeQuery = true, value= "delete from actividad_mantenimientos where mantenimientos_id_mantenimiento = ?1")
+		@Transactional
+		@Modifying
+		void DeleteLinkActividad_mantenimiento(Integer idMantenimiento);
 
 		@Query(nativeQuery = true, value= "update mantenimiento set is_aceptado_mantenimiento = 1 where id_mantenimiento = ?1")
 		@Transactional

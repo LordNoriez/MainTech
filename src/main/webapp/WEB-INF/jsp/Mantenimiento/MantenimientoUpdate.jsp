@@ -121,7 +121,10 @@
 					        <option value="${Itemobjetos.idObjeto}" ${Itemobjetos.idObjeto == varMantenmiento.objetoMantenimiento.idObjeto ? 'selected="selected"' : ''}>${Itemobjetos.descripcionObjeto}</option>
 					    </c:forEach>
 					</form:select>					
-					<br>						
+					<br>		
+					
+					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />
+					<br>				
 				
 					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>
 				

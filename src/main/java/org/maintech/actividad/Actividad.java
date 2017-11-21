@@ -1,6 +1,6 @@
 package org.maintech.actividad;
 
-import java.util.Collection;
+
 import java.util.Set;
 
 import javax.persistence.Column;

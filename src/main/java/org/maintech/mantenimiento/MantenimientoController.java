@@ -8,7 +8,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
-import org.maintech.actividad.ActividadWrapper;
 import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,6 +61,7 @@ public class MantenimientoController {
 	public String getMantenimientoUpdate(@PathVariable("idMantenimiento") Integer id,Model model){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
+		model.addAttribute("ItemActividad", actividadService.getAllActividad());
 		return "Mantenimiento/MantenimientoUpdate";
 	}
 	
@@ -80,37 +79,16 @@ public class MantenimientoController {
 		model.addAttribute("ItemActividad", actividadService.getAllActividad());
 		return "Mantenimiento/MantenimientoCrear";
 	}
-	
-	public String CrearMantneimiento_Actividad(Model model){
-		ActividadWrapper actividadWrap = new ActividadWrapper();
 		
-		for (Actividad adctividad : actividadService.getAllActividad()) {
-			actividadWrap.add(adctividad);
-		}
-		
-		model.addAttribute("ItemActividad", actividadWrap);
-		return "Mantenimiento/Mantenimiento_ActividadCrear";
-	}
-	
-	@RequestMapping(value = { "/h2" }, method = RequestMethod.POST)
-	public String savePerson(@ModelAttribute("functionList") ActividadWrapper actividades) {
-	        // process your list
-		for (Actividad actividad : actividades.getActividadList()) {
-			System.out.println(actividad.getNombreActividad());
-		}
-		return "";
-    }
-	
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
 		mantenimiento.setActive(true);
-		
-		for (Actividad activMante: mantenimiento.getActividad()) {
-			System.out.println(activMante.getIdActividad().toString() + " " 
-		+ activMante.getNombreActividad());
-		}
-		
 		mantenimientoService.addMantenimiento(mantenimiento);
+		for (Actividad activMante: mantenimiento.getActividad()) {
+			
+			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(),
+					mantenimientoService.IdUltimoMante());
+		}
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 	
@@ -142,6 +120,31 @@ public class MantenimientoController {
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
 		mantenimiento.setActive(true);
 		mantenimientoService.updateMantenimiento(id, mantenimiento);
+		
+		mantenimientoService.DeleteLinkActividad_mantenimiento(id);
+		
+		for (Actividad activMante: mantenimiento.getActividad()) {
+			
+			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
+		} 
+		
+//		if (mantenimiento.getActividad().isEmpty()){
+//			System.out.println("ta vacio lol xdxd");
+//			
+//				for (Actividad activMante: mantenimiento.getActividad()) {
+//				
+//					mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
+//				} 
+//			
+//		}else{			
+//		
+//			mantenimientoService.DeleteLinkActividad_mantenimiento(id);
+//			
+//			for (Actividad activMante: mantenimiento.getActividad()) {
+//				
+//				mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
+//			} 
+//		}
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 	
