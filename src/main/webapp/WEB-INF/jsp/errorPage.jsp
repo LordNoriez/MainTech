@@ -84,7 +84,7 @@
 <!-- 						</div>	 -->
 <!-- 						<br><br> -->
 						<div class="col-md-4">
-							<a class="btn btn-default btn-block" ng-show="user" href="/objeto">Objetos</a>
+							<a class="btn btn-default btn-block" ng-show="user" href="/objeto">Equipos</a>
 						</div>		
 <!-- 						<br>	<br>	 -->
 <!-- 						<div class="col-md-12"> -->
