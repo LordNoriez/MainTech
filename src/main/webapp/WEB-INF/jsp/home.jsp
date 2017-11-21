@@ -77,33 +77,33 @@
 					</div>
 					
 					<div class="panel-body">
-						<div class="col-md-12">
-							<a class="btn btn-default btn-block" ng-show="user" href="/reporte">Enviar Reporte de Costos</a>
-						</div>	
-						<br><br>
-						<div class="col-md-12">
+<!-- 						<div class="col-md-12"> -->
+<!-- 							<a class="btn btn-default btn-block" ng-show="user" href="/reporte">Enviar Reporte de Costos</a> -->
+<!-- 						</div>	 -->
+<!-- 						<br><br> -->
+						<div class="col-md-4">
 							<a class="btn btn-default btn-block" ng-show="user" href="/objeto">Objetos</a>
 						</div>		
-						<br>	<br>		
-						<div class="col-md-12">
+<!-- 						<br>	<br>	 -->
+<!-- 						<div class="col-md-12"> -->
+<!-- 							<a class="btn btn-default btn-block" ng-show="user" href="/categoria">Categorías</a> -->
+<!-- 						</div>		 -->
+<!-- 						<br>	<br>	 -->
+						<div class="col-md-4">
 							<a class="btn btn-default btn-block" ng-show="user" href="/mantenimiento">Mantenimientos</a>
 						</div>	
 <!-- 						<br>	<br> -->
 <!-- 						<div class="col-md-12"> -->
 <!-- 							<a class="btn btn-default btn-block" ng-show="user" href="/tipoMantenimiento">Tipos de Mantenimiento</a> -->
 <!-- 						</div>	 -->
-						<br>	<br>
-						<div class="col-md-12">
+<!-- 						<br>	<br> -->
+<!-- 						<div class="col-md-12"> -->
+<!-- 							<a class="btn btn-default btn-block" ng-show="user" href="/actividad">Actividades</a> -->
+<!-- 						</div>	 -->
+<!-- 						<br><br> -->
+						<div class="col-md-4">
 							<a class="btn btn-default btn-block" ng-show="user" href="/areaEmpresa">Áreas de Empresa</a>
-						</div>	
-						<br><br>
-						<div class="col-md-12">
-							<a class="btn btn-default btn-block" ng-show="user" href="/actividad">Actividades</a>
-						</div>	
-						<br><br>
-						<div class="col-md-12">
-							<a class="btn btn-default btn-block" ng-show="user" href="/categoria">Categorías</a>
-						</div>					
+						</div>				
 					</div>
 				</div>				
 			</div>

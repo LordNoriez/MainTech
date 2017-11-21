@@ -8,6 +8,10 @@ import javax.mail.internet.MimeMessage;
 
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
+<<<<<<< HEAD
+=======
+//import org.maintech.actividad.ActividadWrapper;
+>>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
 import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -79,7 +83,31 @@ public class MantenimientoController {
 		model.addAttribute("ItemActividad", actividadService.getAllActividad());
 		return "Mantenimiento/MantenimientoCrear";
 	}
+<<<<<<< HEAD
 		
+=======
+	
+//	public String CrearMantneimiento_Actividad(Model model){
+//		ActividadWrapper actividadWrap = new ActividadWrapper();
+//		
+//		for (Actividad adctividad : actividadService.getAllActividad()) {
+//			actividadWrap.add(adctividad);
+//		}
+//		
+//		model.addAttribute("ItemActividad", actividadWrap);
+//		return "Mantenimiento/Mantenimiento_ActividadCrear";
+//	}
+//	
+//	@RequestMapping(value = { "/h2" }, method = RequestMethod.POST)
+//	public String savePerson(@ModelAttribute("functionList") ActividadWrapper actividades) {
+//	        // process your list
+//		for (Actividad actividad : actividades.getActividadList()) {
+//			System.out.println(actividad.getNombreActividad());
+//		}
+//		return "";
+//    }
+	
+>>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
 		mantenimiento.setActive(true);

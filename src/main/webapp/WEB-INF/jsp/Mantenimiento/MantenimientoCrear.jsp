@@ -40,22 +40,25 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-					
+		
      <div id="mySidenav" class="sidenav">
-	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a class="active" id="home" href="/google/login">Inicio</a>
-<!-- 	  <a href="/crearObjeto">Crear Objeto</a> -->
-<!-- 	  <a href="/objeto">Ver Objetos</a> -->
-	  <a href="/crearMantenimiento">Crear Mantenimiento</a>
-	  <a href="/mantenimiento">Ver Mantenimientos</a>
-	  <a href="/crearTipoMantenimiento">Crear Tipo de Mantenimiento</a>
-	  <a href="/tipoMantenimiento">Ver Tipos de Mantenimiento</a>
-<!-- 	  <a href="/crearAreaEmpresa">Crear Area Empresa</a> -->
-<!-- 	  <a href="/areaEmpresa">Ver Area Empresa</a> -->
-<!-- 	  <a href="/crearActividad">Crear Actividad</a> -->
-<!-- 	  <a href="/actividad">Ver Actividad</a> -->
-<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
-<!-- 	  <a href="/categoria">Ver Categorías</a> -->
+		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		  <a class="active" id="home" href="/google/login">Inicio</a>
+	<!-- 	  <a href="/crearObjeto">Crear Objeto</a> -->
+	<!-- 	  <a href="/objeto">Ver Objetos</a> -->
+			<p>Mantenimientos
+		  <a href="/crearMantenimiento">Crear</a>
+		  <a href="/mantenimiento">Ver</a>
+			<p>Tipos de Mantenimientos
+		  <a href="/crearTipoMantenimiento">Crear</a>
+		  <a href="/tipoMantenimiento">Ver</a>
+	<!-- 	  <a href="/crearAreaEmpresa">Crear Area Empresa</a> -->
+	<!-- 	  <a href="/areaEmpresa">Ver Area Empresa</a> -->
+			<p>Actividades
+		  <a href="/crearActividad">Crear</a>
+		  <a href="/actividad">Ver</a>
+	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
+	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
 	</div>
 	<div class="container-fluid" id="main">
     
@@ -114,7 +117,7 @@
 					<br>
 					<br>
 					
-					<label>Frecuencia de Mantenimiento (días): </label>
+					<label>Frecuencia de Mantenimiento (horas): </label>
 					<form:input path="FrecuenciaMantenimiento" class="form-control" type="number" value="0"/>
 					<form:errors path="FrecuenciaMantenimiento" />
 					<br>
@@ -127,6 +130,7 @@
 						
 					<br>
 					
+<<<<<<< HEAD
 					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />
 					
 					<br>
@@ -135,6 +139,17 @@
 				</form:form>
 	        </div>
 		</div>
+=======
+					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />					
+					<br>
+					
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
+				</form:form>
+	        </div>
+		</div>
+		<br>
+		
+>>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
 
 	        <!-- The actual snackbar -->
         <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
