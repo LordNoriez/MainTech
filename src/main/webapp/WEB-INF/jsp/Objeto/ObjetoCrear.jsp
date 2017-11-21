@@ -39,9 +39,25 @@
 }
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
-
     
-	<div class="container" id="main">
+					
+     <div id="mySidenav" class="sidenav">
+	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	  <a class="active" id="home" href="/google/login">Inicio</a>
+	  <a href="/crearObjeto">Crear Objeto</a>
+	  <a href="/objeto">Ver Objetos</a>
+	  <!--  <a href="/crearMantenimiento">Crear Mantenimiento</a>
+	  <a href="/mantenimiento">Ver Mantenimientos</a>
+	  <a href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
+	  <a href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
+	  <a href="/crearAreaEmpresa">Crear Area Empresa</a>
+	  <a href="/areaEmpresa">Ver Area Empresa</a>
+	  <a href="/crearActividad">Crear Actividad</a>
+	  <a href="/actividad">Ver Actividad</a>
+	  <a href="/crearCategoria">Crear Categoría</a>
+	  <a href="/categoria">Ver Categorías</a>-->
+	</div>
+	<div class="container-fluid" id="main">
     
     <!--<div class="container" style="margin-top: 50px;">-->
 		<!-- Login panel -->
@@ -52,62 +68,32 @@
 			        	<h2 class="text-muted">MainTech</h2>						
 				        <h4 class="text-muted">Crear Objeto</h4>
 			        </div>
-			        <div class=" col-md-6">
-			        	<nav>
-			            	<ul class="nav nav-pills pull-right">
-			                	<li class="active" id="home"><a href="/google/login">Inicio</a></li>
-			            	</ul>
-			        	</nav>			        
-					</div>
 			    </div>
 			</div>
 		</div>
 		<div class="row">
-			<div class=" col-md-4">
+			<div class=" col-md-3">
 				<div class="jumbotron">						
 					<img class="p-img" alt="" src="{{user.userAuthentication.details.picture}}">
-					<h5>${usu}</h5>
+					<h5>{{user.userAuthentication.details.name}}</h5>
 					<h6>{{user.userAuthentication.details.email}}</h6>		
 					<a href="/logout">Salir</a>		        
 			    </div>	
 			    
 			    					
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3>Menú</h3>
-					</div>
+				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
 					
-					<div class="panel-body">
-					
-			            <div id="mySidenav" class="sidenav">
-						  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-						  <a href="/reporte">Enviar Reporte de Costos</a>
-						  <a href="/crearObjeto">Crear Objeto</a>
-						  <a href="/objeto">Ver Objetos</a>
-						  <a href="/crearMantenimiento">Crear Mantenimiento</a>
-						  <a href="/mantenimiento">Ver Mantenimientos</a>
-						  <a href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
-						  <a href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
-						  <a href="/crearAreaEmpresa">Crear Area Empresa</a>
-						  <a href="/areaEmpresa">Ver Area Empresa</a>
-						  <a href="/crearActividad">Crear Actividad</a>
-						  <a href="/actividad">Ver Actividad</a>
-						  <a href="/crearCategoria">Crear Categoría</a>
-						  <a href="/categoria">Ver Categorías</a>
-						</div>
-						
-						<!-- Use any element to open the sidenav -->
-						<span onclick="openNav()">open</span>			
-					</div>
-				</div>
-			</div>
+			</div>					
 			
-			
-			
-			<div class=" col-md-6"  >
+			<div class=" col-md-8"  >
 				<spring:url value="/objeto" var="variableAdd" />
 			
 			 	<form:form method="POST" modelAttribute="crearModelObjeto" action="${variableAdd}" id="myForm"> 
+					
+					<label>Descripción: </label>
+					<form:input path="DescripcionObjeto" class="form-control"  type="text" />
+					<form:errors path="DescripcionObjeto" />
+					<br>
 										
 					<label>Marca:</label>
 					<form:input path="MarcaObjeto" class="form-control" type="text" /> 
@@ -124,8 +110,7 @@
 					<form:errors path="SerialObjeto" />
 					<br>
 					
-					<label>Categoria: </label>
-						        
+					<label>Categoría: </label>						        
 					<form:select class="form-control" path="categoria">
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
@@ -150,44 +135,40 @@
 					<form:input type="hidden" path="objetoPadre" id = "objtPadre" /> 
 					
 					
-					<label>Fecha Creacion: </label>
+					<label>Creado El: </label>
 					<form:input path="FechaCreacionObjeto"  class="form-control" type="date" /> 
 					<form:errors path="FechaCreacionObjeto" />
 					<br>
 					
-					<label>Fecha Obtencion: </label>
+					<label>Obtenido El: </label>
 					<form:input path="FechaObtencionObjeto" class="form-control"  type="date" /> 
 					<form:errors path="FechaObtencionObjeto" />
 					<br>
 					
 					<label>Longitud: </label>
-					<form:input path="LongitudObjeto" class="form-control"  type="text" /> 
+					<form:input path="LongitudObjeto" class="form-control"  type="number" /> 
 					<form:errors path="LongitudObjeto" />
 					<br>
 					
 					<label>Ancho: </label>
-					<form:input path="AnchoObjeto"  class="form-control" type="text" /> 
+					<form:input path="AnchoObjeto"  class="form-control" type="number" /> 
 					<form:errors path="AnchoObjeto" />
-					<br>
-					
-					<label>Area: </label>
-					<form:input path="AreaObjeto"  class="form-control" type="text" /> 
-					<form:errors path="AreaObjeto" />
 					<br>
 			
 					<label>Altura: </label>
-					<form:input path="AlturaObjeto"  class="form-control" type="text" /> 
+					<form:input path="AlturaObjeto"  class="form-control" type="number" /> 
 					<form:errors path="AlturaObjeto" />
 					<br>
 					
-					<label>Vida: </label>
-					<form:input path="VidaObjeto"  class="form-control" type="text" /> 
-					<form:errors path="VidaObjeto" />	
+					<label>Área: </label>
+					<form:input path="AreaObjeto"  class="form-control" type="number" /> 
+					<form:errors path="AreaObjeto" />
 					<br>
 					
-					<label>Descripcion: </label>
-					<form:input path="DescripcionObjeto" class="form-control"  type="text" />
-					<form:errors path="DescripcionObjeto" />
+					<label>Vida: </label>
+					<form:input path="VidaObjeto"  class="form-control" type="number" /> 
+					<form:errors path="VidaObjeto" />	
+					<br>
 					
 			
 					<br>
@@ -201,26 +182,6 @@
 	        <!-- The actual snackbar -->
         <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
         
-    
-    <div class="row marketing">
-        <div class="col-lg-6">
-            <h4>Subheading</h4>
-            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-            <h4>Subheading</h4>
-            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
-                fermentum.</p>
-        </div>
-
-        <div class="col-lg-6">
-            <h4>Subheading</h4>
-            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-            <h4>Subheading</h4>
-            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
-                fermentum.</p>
-        </div>
-    </div>
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>

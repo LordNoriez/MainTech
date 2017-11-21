@@ -80,7 +80,7 @@ public class ObjetoController {
 		
 	     SecurityContextHolder.getContext().setAuthentication(newAuth);*/
 		
-		model.addAttribute("usu",  principal.getName());
+		
 		return "Objeto/ObjetoCrear";
 	}
 	

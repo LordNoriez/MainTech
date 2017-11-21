@@ -79,6 +79,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				// ignore the "/" and "/index.html"
 				.antMatchers("/").permitAll()
+				.antMatchers("/error").permitAll()
 				// authenticate all remaining URLS
 				.anyRequest().fullyAuthenticated()//
 				.and()//

@@ -35,7 +35,7 @@
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
 
     
-	<div class="container">
+	<div class="container-fluid">
     
     <!--<div class="container" style="margin-top: 50px;">-->
 		<!-- Login panel -->
@@ -57,16 +57,20 @@
 		</div>
 		
 		<div class="row">
-			<div class="jumbotron">						
-				<img class="p-img" ng-show="user" alt="" ng-src="{{user.userAuthentication.details.picture}}">
-				<h3 ng-show="!user">Hola!</h3>
-				<h3 ng-show="user">Hola {{user.name}}</h3>
-				<h4 ng-show="user">Email: {{user.userAuthentication.details.email}}</h4>				        
-		    </div>	
-	    </div>
-		
-		<div ng-show="user" class="row">
-			<div class=" col-md-12">						
+			<div ng-show="!user" class=" col-md-12">	
+				<div class="jumbotron">					
+					<h3 >Hola! Bienvenido(a) Por favor identificate</h3>			        
+			    </div>	
+			 </div>
+			<div ng-show="user" class=" col-md-3">	
+				<div class="jumbotron">						
+					<img class="p-img" ng-show="user" alt="" ng-src="{{user.userAuthentication.details.picture}}">					
+					<h3 ng-show="user">Hola {{user.name}}</h3>
+					<h4 ng-show="user">Email: {{user.userAuthentication.details.email}}</h4>				        
+			    </div>	
+			 </div>
+			 
+			<div ng-show="user" class=" col-md-8">						
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h2>Menú</h2>
@@ -74,54 +78,37 @@
 					
 					<div class="panel-body">
 						<div class="col-md-12">
-							<a class="btn btn-default" ng-show="user" href="/reporte">Enviar Reporte de Costos</a>
+							<a class="btn btn-default btn-block" ng-show="user" href="/reporte">Enviar Reporte de Costos</a>
 						</div>	
 						<br><br>
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/crearObjeto">Crear Objeto</a>
-						</div>	
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/objeto">Ver Objetos</a>
+						<div class="col-md-12">
+							<a class="btn btn-default btn-block" ng-show="user" href="/objeto">Objetos</a>
 						</div>		
-						<br>	<br>						
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/crearMantenimiento">Crear Mantenimiento</a>
-						</div>		
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/mantenimiento">Ver Mantenimientos</a>
+						<br>	<br>		
+						<div class="col-md-12">
+							<a class="btn btn-default btn-block" ng-show="user" href="/mantenimiento">Mantenimientos</a>
 						</div>	
+<!-- 						<br>	<br> -->
+<!-- 						<div class="col-md-12"> -->
+<!-- 							<a class="btn btn-default btn-block" ng-show="user" href="/tipoMantenimiento">Tipos de Mantenimiento</a> -->
+<!-- 						</div>	 -->
 						<br>	<br>
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
-						</div>		
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
-						</div>	
-						<br>	<br>
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/crearAreaEmpresa">Crear Area Empresa</a>
-						</div>		
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/areaEmpresa">Ver Area Empresa</a>
+						<div class="col-md-12">
+							<a class="btn btn-default btn-block" ng-show="user" href="/areaEmpresa">Áreas de Empresa</a>
 						</div>	
 						<br><br>
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/crearActividad">Crear Actividad</a>
-						</div>		
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/actividad">Ver Actividad</a>
+						<div class="col-md-12">
+							<a class="btn btn-default btn-block" ng-show="user" href="/actividad">Actividades</a>
 						</div>	
 						<br><br>
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/crearCategoria">Crear Categoría</a>
-						</div>		
-						<div class="col-md-6">
-							<a class="btn btn-default" ng-show="user" href="/categoria">Ver Categorías</a>
+						<div class="col-md-12">
+							<a class="btn btn-default btn-block" ng-show="user" href="/categoria">Categorías</a>
 						</div>					
 					</div>
 				</div>				
 			</div>
-		</div>	
+	    </div>
+		
     
     <div class="row marketing">
         <div class="col-lg-6">
@@ -164,7 +151,7 @@
 				$scope.user = user;
 				console.log('Logged User : ', user);
 				// welcome message
-				$.growl({title: "Bienvenido(a)", message: "POFASA S.A."});			   
+				$.growl({title: "Bienvenido(a) " + user.name, message: "POFASA S.A."});			   
 			}).error(function(error) {
 				$scope.resource = error;
 			});

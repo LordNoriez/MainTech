@@ -1,10 +1,7 @@
 package org.maintech.mantenimiento;
 
-import java.awt.List;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
@@ -24,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Controller
@@ -46,9 +41,8 @@ public class MantenimientoController {
 //	private ObjetoController objetoController;
 	
 	@RequestMapping(value = "/mantenimiento", method = RequestMethod.GET)
-	public String showAllUsers(Model model) {
+	public String showAllMantenimientos(Model model) {
 
-		//logger.debug("showAllUsers()");
 		model.addAttribute("mantenimientos", mantenimientoService.getAllMantenimiento());
 		return "Mantenimiento/MantenimientoRead";
 
