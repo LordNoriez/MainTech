@@ -42,20 +42,22 @@
     
 					
      <div id="mySidenav" class="sidenav">
-	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a class="active" id="home" href="/google/login">Inicio</a>
-	  <a href="/crearObjeto">Crear Objeto</a>
-	  <a href="/objeto">Ver Objetos</a>
-	  <!--  <a href="/crearMantenimiento">Crear Mantenimiento</a>
-	  <a href="/mantenimiento">Ver Mantenimientos</a>
-	  <a href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
-	  <a href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
-	  <a href="/crearAreaEmpresa">Crear Area Empresa</a>
-	  <a href="/areaEmpresa">Ver Area Empresa</a>
-	  <a href="/crearActividad">Crear Actividad</a>
-	  <a href="/actividad">Ver Actividad</a>-->
-	  <a href="/crearCategoria">Crear Categoría</a>
-	  <a href="/categoria">Ver Categorías</a>
+		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		  <a class="active" id="home" href="/google/login">Inicio</a>
+		  <p>Objetos
+		  <a href="/crearObjeto">Crear</a>
+		  <a href="/objeto">Ver</a>
+		  <!--  <a href="/crearMantenimiento">Crear Mantenimiento</a>
+		  <a href="/mantenimiento">Ver Mantenimientos</a>
+		  <a href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
+		  <a href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>
+		  <a href="/crearAreaEmpresa">Crear Area Empresa</a>
+		  <a href="/areaEmpresa">Ver Area Empresa</a>
+		  <a href="/crearActividad">Crear Actividad</a>
+		  <a href="/actividad">Ver Actividad</a>-->
+		  <p>Categorías
+		  <a href="/crearCategoria">Crear</a>
+		  <a href="/categoria">Ver</a>
 	</div>
 	<div class="container-fluid" id="main">
     

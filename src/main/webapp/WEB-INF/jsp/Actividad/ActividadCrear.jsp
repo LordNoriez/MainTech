@@ -46,14 +46,17 @@
 		  <a class="active" id="home" href="/google/login">Inicio</a>
 	<!-- 	  <a href="/crearObjeto">Crear Objeto</a> -->
 	<!-- 	  <a href="/objeto">Ver Objetos</a> -->
-<!-- 		  <a href="/crearMantenimiento">Crear Mantenimiento</a> -->
-<!-- 		  <a href="/mantenimiento">Ver Mantenimientos</a> -->
-<!-- 		  <a href="/crearTipoMantenimiento">Crear Tipo de Mantenimiento</a> -->
-<!-- 		  <a href="/tipoMantenimiento">Ver Tipos de Mantenimiento</a> -->
+			<p>Mantenimientos
+		  <a href="/crearMantenimiento">Crear</a>
+		  <a href="/mantenimiento">Ver</a>
+			<p>Tipos de Mantenimientos
+		  <a href="/crearTipoMantenimiento">Crear</a>
+		  <a href="/tipoMantenimiento">Ver</a>
 	<!-- 	  <a href="/crearAreaEmpresa">Crear Area Empresa</a> -->
 	<!-- 	  <a href="/areaEmpresa">Ver Area Empresa</a> -->
-		  <a href="/crearActividad">Crear Actividad</a>
-		  <a href="/actividad">Ver Actividades</a>
+			<p>Actividades
+		  <a href="/crearActividad">Crear</a>
+		  <a href="/actividad">Ver</a>
 	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
 	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
 	</div>
