@@ -53,9 +53,9 @@
 	  <a href="/crearAreaEmpresa">Crear Area Empresa</a>
 	  <a href="/areaEmpresa">Ver Area Empresa</a>
 	  <a href="/crearActividad">Crear Actividad</a>
-	  <a href="/actividad">Ver Actividad</a>
+	  <a href="/actividad">Ver Actividad</a>-->
 	  <a href="/crearCategoria">Crear Categoría</a>
-	  <a href="/categoria">Ver Categorías</a>-->
+	  <a href="/categoria">Ver Categorías</a>
 	</div>
 	<div class="container-fluid" id="main">
     

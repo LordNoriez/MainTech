@@ -87,10 +87,10 @@
 							<a class="btn btn-default btn-block" ng-show="user" href="/objeto">Objetos</a>
 						</div>		
 						<br>	<br>	
-						<div class="col-md-12">
-							<a class="btn btn-default btn-block" ng-show="user" href="/categoria">Categorías</a>
-						</div>		
-						<br>	<br>	
+<!-- 						<div class="col-md-12"> -->
+<!-- 							<a class="btn btn-default btn-block" ng-show="user" href="/categoria">Categorías</a> -->
+<!-- 						</div>		 -->
+<!-- 						<br>	<br>	 -->
 						<div class="col-md-12">
 							<a class="btn btn-default btn-block" ng-show="user" href="/mantenimiento">Mantenimientos</a>
 						</div>	
