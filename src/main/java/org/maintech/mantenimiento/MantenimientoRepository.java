@@ -27,11 +27,15 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 	    )
 	    public List<Object[]> CostosMantenimiento();
 	    
-	    public List<Mantenimiento> findByIsProgramadoMantenimientoFalse();
 	    
-		@Query(value = "select id_mantenimiento, "
-				+ "frecuencia_mantenimiento -( timestampdiff(hour,fecha_mantenimiento, now())) as TimpoRespctFrecuencia "
-				+ "from mantenimiento where is_programado_mantenimiento = 1",
+		@Query(value = "select * from mantenimiento where date(fecha_mantenimiento) = '?1'", 
+		        nativeQuery=true
+		    )
+	    	public List<Mantenimiento> EmergentesDiaMantenimiento(String FechaHoy);
+	    
+		@Query(value = "select id_mantenimiento, frecuencia_mantenimiento -( timestampdiff(hour,fecha_mantenimiento,"
+				+ " now())) as TimpoRespctFrecuencia from mantenimiento "
+				+ "where is_programado_mantenimiento = 1 and is_aceptado_mantenimiento = 0",
 		        nativeQuery=true
 		    )
 		    public List<Object[]> MantenimientoxTiempo();

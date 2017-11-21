@@ -130,7 +130,6 @@
 						
 					<br>
 					
-<<<<<<< HEAD
 					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />
 					
 					<br>
@@ -139,17 +138,6 @@
 				</form:form>
 	        </div>
 		</div>
-=======
-					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />					
-					<br>
-					
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
-				</form:form>
-	        </div>
-		</div>
-		<br>
-		
->>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
 
 	        <!-- The actual snackbar -->
         <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	

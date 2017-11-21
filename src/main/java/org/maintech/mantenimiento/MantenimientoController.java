@@ -8,10 +8,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
-<<<<<<< HEAD
-=======
-//import org.maintech.actividad.ActividadWrapper;
->>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
+
 import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sun.mail.imap.Rights.Right;
 
 
 @Controller
@@ -83,34 +82,11 @@ public class MantenimientoController {
 		model.addAttribute("ItemActividad", actividadService.getAllActividad());
 		return "Mantenimiento/MantenimientoCrear";
 	}
-<<<<<<< HEAD
-		
-=======
-	
-//	public String CrearMantneimiento_Actividad(Model model){
-//		ActividadWrapper actividadWrap = new ActividadWrapper();
-//		
-//		for (Actividad adctividad : actividadService.getAllActividad()) {
-//			actividadWrap.add(adctividad);
-//		}
-//		
-//		model.addAttribute("ItemActividad", actividadWrap);
-//		return "Mantenimiento/Mantenimiento_ActividadCrear";
-//	}
-//	
-//	@RequestMapping(value = { "/h2" }, method = RequestMethod.POST)
-//	public String savePerson(@ModelAttribute("functionList") ActividadWrapper actividades) {
-//	        // process your list
-//		for (Actividad actividad : actividades.getActividadList()) {
-//			System.out.println(actividad.getNombreActividad());
-//		}
-//		return "";
-//    }
-	
->>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
+
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
 		mantenimiento.setActive(true);
+		mantenimiento.setIsAceptadoMantenimiento(false);
 		mantenimientoService.addMantenimiento(mantenimiento);
 		for (Actividad activMante: mantenimiento.getActividad()) {
 			
@@ -229,7 +205,7 @@ public class MantenimientoController {
     			+"</head><body>"
     			+"<div class='container'>"
     			+"<h1>Ver Mantenimientos</h1>"
-    			+"<tble class='table table-striped'>"
+    			+"<table class='table table-striped'>"
     			+"<thead>"
     			+"<tr>"
     			+"<th>ID</th>"
@@ -339,6 +315,7 @@ public class MantenimientoController {
     			+"<th>Nombre Mantenimiento</th>"
     			+"<th>Fecha</th>"
     			+"<th>Objeto</th>"
+    			+"<th>Descripción Mantenimiento</th>"
     			+"</tr>";
         
         String texto2="";
@@ -350,7 +327,9 @@ public class MantenimientoController {
 				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
 				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getFechaMantenimiento() + "</td>"
 				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
-				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td></tr>";
+				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
+				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
+				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getDescripcionMantenimiento() + "</td></tr>";
 //				+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
 //				+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
 //				+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
@@ -366,11 +345,13 @@ public class MantenimientoController {
         helper.setSubject("Confirmar Mantenimiento");
         mailSender.send(message);
     }
-    
-	@RequestMapping(method=RequestMethod.GET, value="/MantenimientoProgramado")
-	public ModelAndView AutomatizacionMantenimiento(){
+    @Scheduled(fixedRate=60000)
+	public void AutomatizacionMantenimiento(){
 		Mantenimiento MantProg;
 		Date now = new Date();
+		Integer auxForMantNumber;
+		String newnumber;
+		String NewNameMante;
 		
 		
 		for (Object[] revisiontiemp: mantenimientoService.MantenimientoRevisionFrecuenciaxTiempo()){
@@ -381,9 +362,15 @@ public class MantenimientoController {
 				Mantenimiento NewMante = new Mantenimiento();
 				MantProg = mantenimientoService.getMantenimiento(Integer.parseInt(revisiontiemp[0].toString()));
 				
-				NewMante.setNombreMantenimiento(MantProg.getNombreMantenimiento());
+				auxForMantNumber = Integer.parseInt(MantProg.getNombreMantenimiento().substring(MantProg.getNombreMantenimiento().length() - 3));
+				auxForMantNumber = auxForMantNumber + 1;
+				newnumber = "00000" + auxForMantNumber.toString();
+				NewNameMante = MantProg.getNombreMantenimiento().substring(0,MantProg.getNombreMantenimiento().length() - 3) + newnumber.substring(newnumber.length() - 3); 
+				
+				NewMante.setNombreMantenimiento(NewNameMante);
 				NewMante.setFechaMantenimiento(now);
 				NewMante.setDescripcionMantenimiento(MantProg.getDescripcionMantenimiento());
+				NewMante.setIsAceptadoMantenimiento(false);
 				NewMante.setIsProgramadoMantenimiento(true);
 				NewMante.setFrecuenciaMantenimiento(MantProg.getFrecuenciaMantenimiento());
 				NewMante.setObjetoMantenimiento(MantProg.getObjetoMantenimiento());
@@ -397,7 +384,7 @@ public class MantenimientoController {
 				}
 			}
 		}
-		return new ModelAndView("redirect:/mantenimiento");    
+		//return new ModelAndView("redirect:/mantenimiento");    
 	}
     
 }
