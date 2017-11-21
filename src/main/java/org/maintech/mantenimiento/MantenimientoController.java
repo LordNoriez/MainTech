@@ -8,11 +8,8 @@ import javax.mail.internet.MimeMessage;
 
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
-<<<<<<< HEAD
-=======
-//import org.maintech.actividad.ActividadWrapper;
->>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
 import org.maintech.objeto.ObjetoService;
+import org.maintech.tipomantenimiento.TipoMantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -41,6 +38,9 @@ public class MantenimientoController {
 	
 	@Autowired
 	private MantenimientoService mantenimientoService;
+	
+	@Autowired
+	private TipoMantenimientoService tipoMantenimientoService;
 		
     @Autowired
     private JavaMailSender mailSender;
@@ -66,6 +66,8 @@ public class MantenimientoController {
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
 		model.addAttribute("ItemActividad", actividadService.getAllActividad());
+		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
+		
 		return "Mantenimiento/MantenimientoUpdate";
 	}
 	
@@ -81,11 +83,10 @@ public class MantenimientoController {
 			BindingResult result, Model model){
 		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
 		model.addAttribute("ItemActividad", actividadService.getAllActividad());
+		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
+		
 		return "Mantenimiento/MantenimientoCrear";
 	}
-<<<<<<< HEAD
-		
-=======
 	
 //	public String CrearMantneimiento_Actividad(Model model){
 //		ActividadWrapper actividadWrap = new ActividadWrapper();
@@ -107,7 +108,7 @@ public class MantenimientoController {
 //		return "";
 //    }
 	
->>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
+
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
 		mantenimiento.setActive(true);

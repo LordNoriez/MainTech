@@ -92,6 +92,13 @@
 			
 			 	<form:form method="POST" modelAttribute="crearModelObjeto" action="${variableAdd}" id="myForm"> 
 					
+					<label>Área de la Empresa: </label>						        
+					<form:select class="form-control" path="AreaEmpresa">
+						<form:option value="" label="--- Select ---" />
+						<form:options items="${areas}" itemLabel="NombreAreaEmpresa" itemValue="idAreaEmpresa" />
+					</form:select>
+					<br>
+					
 					<label>Descripción: </label>
 					<form:input path="DescripcionObjeto" class="form-control"  type="text" />
 					<form:errors path="DescripcionObjeto" />

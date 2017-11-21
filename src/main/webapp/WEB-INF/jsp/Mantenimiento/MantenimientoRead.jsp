@@ -94,6 +94,7 @@
 					<thead>
 						<tr>
 							<th>Nombre</th>
+							<th>Tipo</th>
 							<th>Fecha</th>
 							<th>Programado?</th>
 							<th>Frecuencia</th>
@@ -104,6 +105,7 @@
 					<c:forEach var="mantenimiento" items="${mantenimientos}">
 					    <tr>
 							<td>${mantenimiento.nombreMantenimiento}</td>
+							<td>${mantenimiento.objTipoMantenimiento.getNombreTipoMantenimiento()}</td>							
 							<td>${mantenimiento.fechaMantenimiento}</td>
 							<td>${mantenimiento.isProgramadoMantenimiento}</td>
 							<td>${mantenimiento.frecuenciaMantenimiento}</td>

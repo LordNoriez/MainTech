@@ -108,6 +108,13 @@
 					<form:errors path="DescripcionMantenimiento" />
 					<br>
 					
+					<label>Tipo de Mantenimiento: </label>						        
+					<form:select class="form-control" path="objTipoMantenimiento">
+						<form:option value="" label="--- Select ---" />
+						<form:options items="${tipos}" itemLabel="NombreTipoMantenimiento" itemValue="idTipoMantenimiento" />
+					</form:select>
+					<br>
+					
 					<label class="col-md-2">Programado?</label>
 					<div class="col-md-2 ">
 						<form:checkbox path="isProgramadoMantenimiento" class="form-control" value="true"/>
@@ -130,7 +137,7 @@
 						
 					<br>
 					
-<<<<<<< HEAD
+
 					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />
 					
 					<br>
@@ -139,17 +146,6 @@
 				</form:form>
 	        </div>
 		</div>
-=======
-					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />					
-					<br>
-					
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
-				</form:form>
-	        </div>
-		</div>
-		<br>
-		
->>>>>>> a7a29c4f16f160673472fcbea73b2761fa61fd6f
 
 	        <!-- The actual snackbar -->
         <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	

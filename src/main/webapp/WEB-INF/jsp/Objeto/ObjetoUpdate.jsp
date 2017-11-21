@@ -91,6 +91,13 @@
 				<spring:url value="/updateObjeto/${objeto.idObjeto}" var="variableAdd" />
 			
 				<form:form method="PUT" modelAttribute="objeto" action="${variableAdd}">
+					
+					<label>Área de la Empresa: </label>						        
+					<form:select class="form-control" path="AreaEmpresa">
+						<form:option value="" label="--- Select ---" />
+						<form:options items="${areas}" itemLabel="NombreAreaEmpresa" itemValue="idAreaEmpresa" />
+					</form:select>
+					<br>
 				
 					<label>Descripción:</label>
 					<form:input type="text" class="form-control" path="DescripcionObjeto" value = "${objeto.descripcionObjeto}"/>

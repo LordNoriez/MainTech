@@ -92,24 +92,26 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
+							<th>Área</th>
+							<th>Descripción</th>
 							<th>Marca</th>
 							<th>Modelo</th>
 							<th>Creado El</th>
 							<th>Obtenido El</th>
 							<th>Categoría</th>
-							<th>Descripción</th>
 							<th>Padre</th>
 						</tr>
 					</thead>
 		
 					<c:forEach var="objeto" items="${objetos}">
 					    <tr>
+						<td>${objeto.areaEmpresa.getNombreAreaEmpresa()}</td>
+						<td>${objeto.descripcionObjeto}</td>
 						<td>${objeto.marcaObjeto}</td>
 						<td>${objeto.modeloObjeto}</td>
 						<td>${objeto.fechaCreacionObjeto}</td>
 						<td>${objeto.fechaObtencionObjeto}</td>
 						<td>${objeto.categoria.getNombreCategoria()}</td>
-						<td>${objeto.descripcionObjeto}</td>
 						<td>${objeto.objetoPadre.getDescripcionObjeto()}</td>
 						<td>
 						  <spring:url value="/deleteObjeto/${objeto.idObjeto}" var="deleteUrl" />
