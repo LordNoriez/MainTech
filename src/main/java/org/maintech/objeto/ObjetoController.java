@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 
 import javax.mail.internet.MimeMessage;
 
+import org.maintech.areaempresa.AreaEmpresaService;
 import org.maintech.categoria.CategoriaService;
 import org.maintech.login.UserRestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class ObjetoController {
 	@Autowired
 	private CategoriaService categoriaService;
 	
+	@Autowired
+	private AreaEmpresaService areaEmpresaService;
+	
     @Autowired
     private JavaMailSender mailSender;
     
@@ -51,6 +55,7 @@ public class ObjetoController {
 		model.addAttribute("objetos", objetoService.getAllObjeto());
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objetosPadre", objetoService.getAllObjeto());
+		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
 		return "Objeto/ObjetoRead";
 
 	}
@@ -61,6 +66,7 @@ public class ObjetoController {
 		
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.getAllObjeto());
+		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
 		 
 		/*StringTokenizer st = new StringTokenizer(principal.toString(),",");
 		
@@ -89,6 +95,7 @@ public class ObjetoController {
 		model.addAttribute("objeto", objetoService.getObjeto(id));
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.getAllObjeto());
+		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
 		return "Objeto/ObjetoUpdate";
 	}
 	

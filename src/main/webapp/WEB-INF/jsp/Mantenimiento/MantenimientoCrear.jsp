@@ -108,6 +108,13 @@
 					<form:errors path="DescripcionMantenimiento" />
 					<br>
 					
+					<label>Tipo de Mantenimiento: </label>						        
+					<form:select class="form-control" path="objTipoMantenimiento">
+						<form:option value="" label="--- Select ---" />
+						<form:options items="${tipos}" itemLabel="NombreTipoMantenimiento" itemValue="idTipoMantenimiento" />
+					</form:select>
+					<br>
+					
 					<label class="col-md-2">Programado?</label>
 					<div class="col-md-2 ">
 						<form:checkbox path="isProgramadoMantenimiento" class="form-control" value="true"/>
@@ -130,6 +137,10 @@
 						
 					<br>
 					
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b7ae770157c606209a3a2ba608e35b6bba6f5d9
 					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />
 					
 					<br>

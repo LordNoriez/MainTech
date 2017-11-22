@@ -8,8 +8,12 @@ import javax.mail.internet.MimeMessage;
 
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2b7ae770157c606209a3a2ba608e35b6bba6f5d9
 import org.maintech.objeto.ObjetoService;
+import org.maintech.tipomantenimiento.TipoMantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -40,6 +44,9 @@ public class MantenimientoController {
 	
 	@Autowired
 	private MantenimientoService mantenimientoService;
+	
+	@Autowired
+	private TipoMantenimientoService tipoMantenimientoService;
 		
     @Autowired
     private JavaMailSender mailSender;
@@ -65,6 +72,8 @@ public class MantenimientoController {
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
 		model.addAttribute("ItemActividad", actividadService.getAllActividad());
+		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
+		
 		return "Mantenimiento/MantenimientoUpdate";
 	}
 	
@@ -80,8 +89,34 @@ public class MantenimientoController {
 			BindingResult result, Model model){
 		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
 		model.addAttribute("ItemActividad", actividadService.getAllActividad());
+		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
+		
 		return "Mantenimiento/MantenimientoCrear";
 	}
+<<<<<<< HEAD
+=======
+	
+//	public String CrearMantneimiento_Actividad(Model model){
+//		ActividadWrapper actividadWrap = new ActividadWrapper();
+//		
+//		for (Actividad adctividad : actividadService.getAllActividad()) {
+//			actividadWrap.add(adctividad);
+//		}
+//		
+//		model.addAttribute("ItemActividad", actividadWrap);
+//		return "Mantenimiento/Mantenimiento_ActividadCrear";
+//	}
+//	
+//	@RequestMapping(value = { "/h2" }, method = RequestMethod.POST)
+//	public String savePerson(@ModelAttribute("functionList") ActividadWrapper actividades) {
+//	        // process your list
+//		for (Actividad actividad : actividades.getActividadList()) {
+//			System.out.println(actividad.getNombreActividad());
+//		}
+//		return "";
+//    }
+	
+>>>>>>> 2b7ae770157c606209a3a2ba608e35b6bba6f5d9
 
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
@@ -170,7 +205,7 @@ public class MantenimientoController {
 	}
 	
 
-	@Scheduled(fixedRate=240000)
+	@Scheduled(fixedRate=1000)
 	public void Rep(){
 		this.home();
 	}

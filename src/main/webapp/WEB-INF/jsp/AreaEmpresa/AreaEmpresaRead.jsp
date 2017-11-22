@@ -53,8 +53,8 @@
 <!-- 		  <a href="/crearTipoMantenimiento">Crear</a> -->
 <!-- 		  <a href="/tipoMantenimiento">Ver</a> -->
 			<p>Áreas de la Empresa
-		  <a href="/crearAreaEmpresa">Crear Area Empresa</a>
-		  <a href="/areaEmpresa">Ver Area Empresa</a>
+		  <a href="/crearAreaEmpresa">Crear</a>
+		  <a href="/areaEmpresa">Ver</a>
 <!-- 			<p>Actividades -->
 <!-- 		  <a href="/crearActividad">Crear</a> -->
 <!-- 		  <a href="/actividad">Ver</a> -->
