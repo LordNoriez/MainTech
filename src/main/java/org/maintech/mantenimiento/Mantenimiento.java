@@ -30,8 +30,11 @@ public class Mantenimiento {
 	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean  isProgramadoMantenimiento;
 	private String FrecuenciaMantenimiento;
+	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean isAceptadoMantenimiento;
+	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean isEnProcesoMantenimiento;
+	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean isTerminadoMantenimiento;
 	
 	@ManyToOne
