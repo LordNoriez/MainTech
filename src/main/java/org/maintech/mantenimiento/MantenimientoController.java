@@ -251,7 +251,7 @@ public class MantenimientoController {
 					+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
 					+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
-					+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
+					//+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
 					+"<a href=\"http://localhost:8080/emailAcepted/" + mantenimiento.getIdMantenimiento().toString() + "\">Aceptar Mantenimiento</a>"
 					+ "</tr>";
         	
@@ -353,7 +353,7 @@ public class MantenimientoController {
 				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
 				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getFechaMantenimiento() + "</td>"
 				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
-				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
+				//+"1px;border-color: #5F9EA0;\">" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
 				+"<td style=\"text-align: center;font-weight: 400;font-family: 'Raleway',sans-serif;font-size: 15px;border-style: dotted;border-width:" 
 				+"1px;border-color: #5F9EA0;\">" + mantenimiento.getDescripcionMantenimiento() + "</td></tr>";
 //				+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
@@ -399,7 +399,7 @@ public class MantenimientoController {
 				NewMante.setIsAceptadoMantenimiento(false);
 				NewMante.setIsProgramadoMantenimiento(true);
 				NewMante.setFrecuenciaMantenimiento(MantProg.getFrecuenciaMantenimiento());
-				NewMante.setObjetoMantenimiento(MantProg.getObjetoMantenimiento());
+				//NewMante.setObjetoMantenimiento(MantProg.getObjetoMantenimiento());
 				NewMante.setActive(true);			
 				mantenimientoService.addMantenimiento(NewMante);
 	
