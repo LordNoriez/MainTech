@@ -8,10 +8,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
-<<<<<<< HEAD
-
-=======
->>>>>>> 2b7ae770157c606209a3a2ba608e35b6bba6f5d9
 import org.maintech.objeto.ObjetoService;
 import org.maintech.tipomantenimiento.TipoMantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.sun.mail.imap.Rights.Right;
 
 
 @Controller
@@ -93,8 +87,6 @@ public class MantenimientoController {
 		
 		return "Mantenimiento/MantenimientoCrear";
 	}
-<<<<<<< HEAD
-=======
 	
 //	public String CrearMantneimiento_Actividad(Model model){
 //		ActividadWrapper actividadWrap = new ActividadWrapper();
@@ -116,7 +108,6 @@ public class MantenimientoController {
 //		return "";
 //    }
 	
->>>>>>> 2b7ae770157c606209a3a2ba608e35b6bba6f5d9
 
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
