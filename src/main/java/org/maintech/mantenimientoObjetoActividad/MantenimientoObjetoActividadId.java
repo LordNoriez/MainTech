@@ -1,4 +1,4 @@
-package org.maintech.MantenimientoObjetoActividad;
+package org.maintech.mantenimientoObjetoActividad;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
