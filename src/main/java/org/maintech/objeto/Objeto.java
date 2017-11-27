@@ -2,16 +2,21 @@ package org.maintech.objeto;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Where;
 import org.maintech.areaempresa.AreaEmpresa;
 import org.maintech.categoria.Categoria;
+import org.maintech.objetoActividad.ObjetoActividad;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -43,6 +48,8 @@ public class Objeto {
 	
 	@ManyToOne
 	private AreaEmpresa AreaEmpresa;
+	
+	private Set<ObjetoActividad> ObjetoActividad = new HashSet<ObjetoActividad>();
 		
 	@Column(name="is_active", columnDefinition="tinyint(1) default 1")	
 	private Boolean active;
@@ -174,15 +181,25 @@ public class Objeto {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-
+	
 	public Objeto() {
 		super();
+	}
+	//---
+    @OneToMany(mappedBy = "primaryKey.group",
+            cascade = CascadeType.ALL)
+	public Set<ObjetoActividad> getObjetoActividad() {
+		return ObjetoActividad;
+	}
+    //---
+	public void setObjetoActividad(Set<ObjetoActividad> objetoActividad) {
+		ObjetoActividad = objetoActividad;
 	}
 
 	public Objeto(Integer idObjeto, String marcaObjeto, String modeloObjeto, String serialObjeto,
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
 			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objetoPadre,
-			Categoria categoria, AreaEmpresa areaEmpresa) {
+			Categoria categoria, AreaEmpresa areaEmpresa, Set<ObjetoActividad> objetoactividad) {
 		super();
 		this.idObjeto = idObjeto;
 		MarcaObjeto = marcaObjeto;
@@ -199,5 +216,6 @@ public class Objeto {
 		this.objetoPadre = objetoPadre;
 		this.categoria = categoria;
 		this.AreaEmpresa = areaEmpresa;
+		this.ObjetoActividad = objetoactividad;
 	}	
 }

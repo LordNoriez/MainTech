@@ -38,9 +38,6 @@ public class Mantenimiento {
 	private Boolean isTerminadoMantenimiento;
 	
 	@ManyToOne
-	private Objeto objetoMantenimiento;
-	
-	@ManyToOne
 	private TipoMantenimiento objTipoMantenimiento;
 
 	//@ManyToMany(cascade = CascadeType.ALL)
@@ -115,15 +112,7 @@ public class Mantenimiento {
 	public void setIsProgramadoMantenimiento(Boolean isProgramadoMantenimiento) {
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 	}
-	
-	public Objeto getObjetoMantenimiento() {
-		return objetoMantenimiento;
-	}
-
-	public void setObjetoMantenimiento(Objeto objetoMantenimiento) {
-		this.objetoMantenimiento = objetoMantenimiento;
-	}
-	
+		
 	public TipoMantenimiento getObjTipoMantenimiento() {
 		return objTipoMantenimiento;
 	}
@@ -180,7 +169,6 @@ public class Mantenimiento {
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 		FrecuenciaMantenimiento = frecuenciaMantenimiento;
 		this.objTipoMantenimiento = objTipoMantenimiento;
-		this.objetoMantenimiento = objetoMantenimiento;
 		this.actividad = actividad;
 		this.active = active;
 		this.isAceptadoMantenimiento = isAceptadoMantenimiento;
