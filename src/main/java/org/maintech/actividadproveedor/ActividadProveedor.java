@@ -16,7 +16,7 @@ import org.maintech.costo.Costo;
 import org.maintech.proveedor.Proveedor;
 
 @Entity
-@Table(name = "actividad_proveedor", catalog = "DBClass")
+//@Table(name = "actividad_proveedor", catalog = "DBClassdummy")
 @AssociationOverrides({
 		@AssociationOverride(name = "pk.actividad",
 			joinColumns = @JoinColumn(name = "id_actividad")),

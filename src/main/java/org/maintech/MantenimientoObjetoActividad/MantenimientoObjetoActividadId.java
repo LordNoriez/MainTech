@@ -1,16 +1,27 @@
-package org.maintech.objetoactividad;
+package org.maintech.MantenimientoObjetoActividad;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 import org.maintech.actividad.Actividad;
+import org.maintech.mantenimiento.Mantenimiento;
 import org.maintech.objeto.Objeto;
 
 @Embeddable
-public class ObjetoActividadId implements java.io.Serializable {
+public class MantenimientoObjetoActividadId implements java.io.Serializable {
 
+	private Mantenimiento mantenimiento;
 	private Objeto objeto;
     private Actividad actividad;
+    
+	@ManyToOne
+	public Mantenimiento getMantenimiento () {
+		return mantenimiento;
+	}
+
+	public void setMantenimiento (Mantenimiento mantenimiento) {
+		this.mantenimiento = mantenimiento;
+	}
     
 	@ManyToOne
 	public Objeto getObjeto () {
@@ -34,8 +45,9 @@ public class ObjetoActividadId implements java.io.Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ObjetoActividadId that = (ObjetoActividadId) o;
-
+        MantenimientoObjetoActividadId that = (MantenimientoObjetoActividadId) o;
+        
+        if (mantenimiento != null ? !mantenimiento.equals(that.mantenimiento) : that.mantenimiento != null) return false;
         if (actividad != null ? !actividad.equals(that.actividad) : that.actividad != null) return false;
         if (objeto != null ? !objeto.equals(that.objeto) : that.objeto != null)
             return false;

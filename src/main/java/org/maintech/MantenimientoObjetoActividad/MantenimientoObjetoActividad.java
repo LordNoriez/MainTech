@@ -1,4 +1,4 @@
-package org.maintech.objetoactividad;
+package org.maintech.MantenimientoObjetoActividad;
 
 
 import javax.persistence.AssociationOverride;
@@ -10,29 +10,43 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.maintech.actividad.Actividad;
+import org.maintech.mantenimiento.Mantenimiento;
 import org.maintech.objeto.Objeto;
 
 @Entity
 //@Table(name = "actividad_proveedor", catalog = "DBClassdummy")
 @AssociationOverrides({
+		@AssociationOverride(name = "pk.mantenimiento",
+			joinColumns = @JoinColumn(name = "id_mantenimiento")),
 		@AssociationOverride(name = "pk.actividad",
 			joinColumns = @JoinColumn(name = "id_actividad")),
 		@AssociationOverride(name = "pk.proveedor",
 			joinColumns = @JoinColumn(name = "id_proveedor")) })
-public class ObjetoActividad implements java.io.Serializable {
 
-	private ObjetoActividadId pk = new ObjetoActividadId();
 
-	public ObjetoActividad() {
+public class MantenimientoObjetoActividad implements java.io.Serializable {
+
+	private MantenimientoObjetoActividadId pk = new MantenimientoObjetoActividadId();
+
+	public MantenimientoObjetoActividad() {
 	}
 
 	@EmbeddedId
-	public ObjetoActividadId getPk() {
+	public MantenimientoObjetoActividadId getPk() {
 		return pk;
 	}
 
-	public void setPk(ObjetoActividadId pk) {
+	public void setPk(MantenimientoObjetoActividadId pk) {
 		this.pk = pk;
+	}
+	
+	@Transient
+	public Mantenimiento getMantenimiento () {
+		return getPk().getMantenimiento();
+	}
+
+	public void setMantenimiento (Mantenimiento mantenimiento) {
+		getPk().setMantenimiento(mantenimiento);
 	}
 
 	@Transient
@@ -59,7 +73,7 @@ public class ObjetoActividad implements java.io.Serializable {
 		if (o == null || getClass() != o.getClass())
 			return false;
 
-		ObjetoActividad that = (ObjetoActividad) o;
+		MantenimientoObjetoActividad that = (MantenimientoObjetoActividad) o;
 
 		if (getPk() != null ? !getPk().equals(that.getPk())
 				: that.getPk() != null)
