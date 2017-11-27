@@ -22,7 +22,6 @@ public class Actividad {
 	@GeneratedValue
 	private Integer idActividad;
 	private String NombreActividad;
-	private Double CostoActividad;
 	private String DescripcionActividad;
 	
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
@@ -55,15 +54,8 @@ public class Actividad {
 	public void setNombreActividad(String nombreActividad) {
 		NombreActividad = nombreActividad;
 	}
-
-	public Double getCostoActividad() {
-		return CostoActividad;
-	}
-
-	public void setCostoActividad(Double costoActividad) {
-		CostoActividad = costoActividad;
-	}
-
+	
+	
 	public String getDescripcionActividad() {
 		return DescripcionActividad;
 	}
@@ -103,12 +95,11 @@ public class Actividad {
 		super();
 	}
 
-	public Actividad(Integer idActividad, String nombreActividad, Double costoActividad, String descripcionActividad,
+	public Actividad(Integer idActividad, String nombreActividad, String descripcionActividad,
 			Boolean active, Set<Mantenimiento> mantenimientos) {
 		super();
 		this.idActividad = idActividad;
 		NombreActividad = nombreActividad;
-		CostoActividad = costoActividad;
 		DescripcionActividad = descripcionActividad;
 		this.active = active;
 		this.mantenimientos = mantenimientos;
