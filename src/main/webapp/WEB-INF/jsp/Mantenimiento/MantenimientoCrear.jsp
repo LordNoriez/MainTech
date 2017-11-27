@@ -137,10 +137,6 @@
 						
 					<br>
 					
-<<<<<<< HEAD
-=======
-
->>>>>>> 2b7ae770157c606209a3a2ba608e35b6bba6f5d9
 					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" />
 					
 					<br>
