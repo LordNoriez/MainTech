@@ -62,11 +62,11 @@ public class ActividadProveedorController {
 		return "ActividadProveedor/ActividadProveedorUpdate";
 	}
     
-	@RequestMapping(method=RequestMethod.POST, value="/actividadProveedor")
+	@RequestMapping(method=RequestMethod.POST, value="/addActividadProveedor")
 	public ModelAndView addActividadProveedor(ActividadProveedor actividadProveedor) {
-
+		
 		actividadProveedorService.addActividadProveedor(actividadProveedor);
-		return new ModelAndView("redirect:/actividadProveedor");
+		return new ModelAndView("redirect:/actividad");
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/updateActividadProveedor/{idActividadProveedor}")

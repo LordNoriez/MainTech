@@ -39,4 +39,8 @@ public class ActividadService {
 	public void deleteActividad(Integer id) {
 		actividadRepository.delete(id);
 	}
+	
+	public Actividad getLastActividad () {
+		return actividadRepository.findLast();
+	}
 }

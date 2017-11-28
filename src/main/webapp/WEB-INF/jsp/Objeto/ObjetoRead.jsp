@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Objetos</title>
+    <title>Ver Equipos</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -44,7 +44,7 @@
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
-		  <p>Objetos
+		  <p>Equipos
 		  <a href="/crearObjeto">Crear</a>
 		  <a href="/objeto">Ver</a>
 		  <!--  <a href="/crearMantenimiento">Crear Mantenimiento</a>
@@ -68,7 +68,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Ver Objetos</h4>
+				        <h4 class="text-muted">Ver Equipos</h4>
 			        </div>
 			    </div>
 			</div>
@@ -131,7 +131,7 @@
 
 	</div>
 	
-	<div id="snackbar" class="alert alert-danger">Objeto Eliminado Correctamente</div>
+	<div id="snackbar" class="alert alert-danger">Equipo Eliminado Correctamente</div>
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>

@@ -2,6 +2,10 @@ package org.maintech.costo;
 
 import java.security.Principal;
 
+import org.maintech.actividad.Actividad;
+import org.maintech.actividad.ActividadService;
+import org.maintech.actividadproveedor.ActividadProveedor;
+import org.maintech.proveedor.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,12 @@ public class CostoController {
 	
 	@Autowired
 	private CostoService costoService;    
+
+	@Autowired
+	private ActividadService actividadService;   
+	
+	@Autowired
+	private ProveedorService proveedorService;
     
 	@RequestMapping(value = "/costo", method = RequestMethod.GET)
 	public String showAllCostos(Model model) {
@@ -39,12 +49,16 @@ public class CostoController {
 		return "Costo/CostoUpdate";
 	}
 	
-    
-	@RequestMapping(method=RequestMethod.POST, value="/costo") 	
-	public ModelAndView addCosto(Costo costo) {
+	@RequestMapping(method=RequestMethod.POST, value="/addCosto") 	
+	public String addCosto(Costo costo, @ModelAttribute("crearModelActividadProveedor") ActividadProveedor actividadProveedor, 
+			BindingResult result, Model model, Principal principal) {
+		
 		costo.setActive(true);
 		costoService.addCosto(costo);
-		return new ModelAndView("redirect:/costo");
+		model.addAttribute("costo", costo);
+		model.addAttribute("actividad", actividadService.getLastActividad());
+		model.addAttribute("proveedores", proveedorService.getAllProveedores());
+		return "ActividadProveedor/ActividadProveedorCrear";
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/updateCosto/{idCosto}")

@@ -57,6 +57,9 @@
 			<p>Actividades
 		  <a href="/crearActividad">Crear</a>
 		  <a href="/actividad">Ver</a>
+		  	<p>Proveedores
+		  <a href="/crearProveedor">Crear</a>
+		  <a href="/proveedor">Ver</a>
 	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
 	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
 	</div>

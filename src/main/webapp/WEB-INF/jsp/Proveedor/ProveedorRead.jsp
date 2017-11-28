@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Actividad</title>
+    <title>Ver Proveedores</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,7 +40,7 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-					
+				
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Editar Actividad</h4>
+				        <h4 class="text-muted">Ver Proveedores</h4>
 			        </div>
 			    </div>
 			</div>
@@ -89,27 +89,45 @@
 			    					
 				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
 					
-			</div>					
-			
-			<div class=" col-md-8"  >
-				<spring:url value="/updateActividad/${actividad.idActividad}" var="variableAdd" />
-			
-				<form:form method="PUT" modelAttribute="actividad" action="${variableAdd}">
-				
-					<label>Nombre: </label>
-					<form:input type="text" path="NombreActividad" class="form-control" value = "${actividad.nombreActividad}"/>					
-					<br>
-
-					<label>Descripción: </label>
-					<form:input type="text" path="DescripcionActividad" class="form-control" value = "${actividad.descripcionActividad}"/>					
-					<br>
-				
-					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>				
-				
-				</form:form>
 			</div>
-		</div>
+			
+
+			<div class=" col-md-8 table-responsive"  >
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Proveedor</th>
+							<th>Teléfono</th>
+							<th>E-mail</th>							
+						</tr>
+					</thead>
+		
+					<c:forEach var="proveedor" items="${proveedores}">
+					    <tr>
+							<td>${proveedor.nombreProveedor}</td>
+							<td>${proveedor.telefonoProveedor}</td>
+							<td>${proveedor.emailProveedor}</td>
+							
+							<td>
+							  <spring:url value="/deleteProveedor/${proveedor.idProveedor}" var="deleteUrl" />
+							  <spring:url value="/proveedor/${proveedor.idProveedor}" var="updateUrl" />
+			
+							  <button class="btn btn-primary"
+			                                          onclick="location.href='${updateUrl}'">Update</button>
+			                                                                             
+							  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button>
+			<%--                                           onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
+			                                          
+			                                </td>						
+					    </tr>
+					</c:forEach>
+				</table>
+			</div>
+
+	</div>
 	
+	<div id="snackbar" class="alert alert-danger">Proveedor Eliminado Correctamente</div>
+
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
     </footer>

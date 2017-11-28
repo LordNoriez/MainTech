@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Actividad</title>
+    <title>Crear Actividad</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Editar Actividad</h4>
+				        <h4 class="text-muted">Crear Actividad</h4>
 			        </div>
 			    </div>
 			</div>
@@ -92,24 +92,51 @@
 			</div>					
 			
 			<div class=" col-md-8"  >
-				<spring:url value="/updateActividad/${actividad.idActividad}" var="variableAdd" />
 			
-				<form:form method="PUT" modelAttribute="actividad" action="${variableAdd}">
-				
-					<label>Nombre: </label>
-					<form:input type="text" path="NombreActividad" class="form-control" value = "${actividad.nombreActividad}"/>					
+				<spring:url value="/addActividadProveedor" var="variableAdd" />
+				<form:form method="post" modelAttribute="crearModelActividadProveedor" action="${variableAdd}">
+					
+					<label>Actividad: </label>					        
+					<form:select class="form-control" path="actividad">
+						<form:option value="${actividad.idActividad}" label="${actividad.nombreActividad}" />				
+					</form:select>
 					<br>
-
-					<label>Descripción: </label>
-					<form:input type="text" path="DescripcionActividad" class="form-control" value = "${actividad.descripcionActividad}"/>					
-					<br>
-				
-					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>				
-				
-				</form:form>
-			</div>
-		</div>
+					
+<!-- 					<label>Nombre: </label> -->
+<%-- 					<input type="text" class="form-control" readonly value = "${actividad.nombreActividad}"/>					 --%>
+<!-- 					<br> -->
 	
+					<label>Descripción: </label>
+					<input type="text" class="form-control" readonly value = "${actividad.descripcionActividad}"/>					
+					<br>						
+					
+					<label>Costo ($): </label>				        
+					<form:select class="form-control" path="costo">
+						<form:option value="${costo.idCosto}" label="${costo.costo}" />						
+					</form:select>				
+					<br>	
+									
+					<fmt:formatDate value="${costo.fechaInicioCosto}" var="dateString" pattern="yyyy-MM-dd" />
+					<label>Fecha de Inicio: </label>
+					<input class="form-control" type="date" readonly value = "${dateString}" /> <!-- bind to user.name-->
+					<br>
+					
+					<label>Proveedor: </label>						        
+					<form:select class="form-control" path="proveedor">
+						<form:options items="${proveedores}" itemLabel="NombreProveedor" itemValue="idProveedor" />
+					</form:select>
+					<br>
+					
+					<br>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Proveedor</button>
+				</form:form>
+	        </div>
+		</div>
+		
+	        <!-- The actual snackbar -->
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
+        
+
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
     </footer>

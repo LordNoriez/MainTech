@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Objeto</title>
+    <title>Crear Equipo</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -44,7 +44,7 @@
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
-		  <p>Objetos
+		  <p>Equipos
 		  <a href="/crearObjeto">Crear</a>
 		  <a href="/objeto">Ver</a>
 		  <!--  <a href="/crearMantenimiento">Crear Mantenimiento</a>
@@ -68,7 +68,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Crear Objeto</h4>
+				        <h4 class="text-muted">Crear Equipo</h4>
 			        </div>
 			    </div>
 			</div>
@@ -126,7 +126,7 @@
 					</form:select>
 					<br>
 					
-					<label>Objeto Padre: </label>
+					<label>Equipo Padre: </label>
 					<form:select class="form-control" path="objetoPadre" onchange="document.getElementById('objtPadre').value = this.value;">
 						<form:option value="" label="--- Select ---" itemValue=""/>
 						<form:options items="${objects}" itemLabel="DescripcionObjeto" itemValue="idObjeto" />

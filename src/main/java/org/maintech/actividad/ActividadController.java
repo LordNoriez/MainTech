@@ -1,6 +1,9 @@
 package org.maintech.actividad;
 
 
+import java.security.Principal;
+
+import org.maintech.costo.Costo;
 import org.maintech.objeto.ObjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,10 +46,12 @@ public class ActividadController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addActividad")
-	public ModelAndView addActividad(Actividad actividad) {
+	public String addActividad(Actividad actividad,  @ModelAttribute("crearModelCosto") Costo costo, 
+			BindingResult result, Model model, Principal principal) {
 		actividad.setActive(true);
 		ActividadService.addActividad(actividad);
-		return new ModelAndView("redirect:/actividad");
+		model.addAttribute("actividad", actividad);
+		return "Costo/CostoCrear";
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/actividad/{idActividad}")

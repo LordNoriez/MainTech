@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface ProveedorRepository extends CrudRepository<Proveedor, Integer> {
 
-	@Query(nativeQuery = true, value= "update proveedor e set e.is_active=0 where e.id_objeto = ?1")
+	@Query(nativeQuery = true, value= "update proveedor e set e.is_active=0 where e.id_proveedor = ?1")
 	@Transactional
 	@Modifying
 	void softDeleteProveedor(Integer id);

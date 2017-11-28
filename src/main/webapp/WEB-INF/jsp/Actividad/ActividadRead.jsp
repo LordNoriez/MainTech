@@ -57,6 +57,9 @@
 			<p>Actividades
 		  <a href="/crearActividad">Crear</a>
 		  <a href="/actividad">Ver</a>
+		  	<p>Proveedores
+		  <a href="/crearProveedor">Crear</a>
+		  <a href="/proveedor">Ver</a>
 	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
 	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
 	</div>
@@ -94,15 +97,13 @@
 					<thead>
 						<tr>
 							<th>Nombre</th>
-							<th>Costo</th>
 							<th>Descripción</th>
 						</tr>
 					</thead>
 		
 					<c:forEach var="activida" items="${actividades}">
 					    <tr>
-							<td>${activida.nombreActividad}</td>						
-							<td>$ ${activida.costoActividad}</td>						
+							<td>${activida.nombreActividad}</td>					
 							<td>${activida.descripcionActividad}</td>						
 							<td>
 							  <spring:url value="/deleteActividad/${activida.idActividad}" var="deleteUrl" />
