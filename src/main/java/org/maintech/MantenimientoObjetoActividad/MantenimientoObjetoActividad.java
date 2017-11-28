@@ -3,10 +3,10 @@ package org.maintech.MantenimientoObjetoActividad;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.maintech.actividad.Actividad;
@@ -27,6 +27,8 @@ import org.maintech.objeto.Objeto;
 public class MantenimientoObjetoActividad implements java.io.Serializable {
 
 	private MantenimientoObjetoActividadId pk = new MantenimientoObjetoActividadId();
+	@Column(name="costo",columnDefinition="double(10,2) default 0")
+	private Double costo;
 
 	public MantenimientoObjetoActividad() {
 	}
@@ -65,6 +67,16 @@ public class MantenimientoObjetoActividad implements java.io.Serializable {
 
 	public void setActividad (Actividad stock) {
 		getPk().setActividad(stock);
+	}
+
+	
+	
+	public Double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(Double costo) {
+		this.costo = costo;
 	}
 
 	public boolean equals(Object o) {

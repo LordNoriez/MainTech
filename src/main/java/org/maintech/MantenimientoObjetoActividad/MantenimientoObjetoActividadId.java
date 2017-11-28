@@ -1,5 +1,6 @@
 package org.maintech.MantenimientoObjetoActividad;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
@@ -13,6 +14,8 @@ public class MantenimientoObjetoActividadId implements java.io.Serializable {
 	private Mantenimiento mantenimiento;
 	private Objeto objeto;
     private Actividad actividad;
+    
+    //private Double costo;
     
 	@ManyToOne
 	public Mantenimiento getMantenimiento () {
@@ -40,6 +43,14 @@ public class MantenimientoObjetoActividadId implements java.io.Serializable {
 	public void setActividad(Actividad actividad) {
 		this.actividad = actividad;
 	}
+	
+//	public Double getCosto() {
+//		return costo;
+//	}
+//
+//	public void setCosto(Double costo) {
+//		this.costo = costo;
+//	}
 
 	public boolean equals(Object o) {
         if (this == o) return true;
