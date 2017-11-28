@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Actividad</title>
+    <title>Crear Proveedor</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Editar Actividad</h4>
+				        <h4 class="text-muted">Crear Proveedor</h4>
 			        </div>
 			    </div>
 			</div>
@@ -92,24 +92,47 @@
 			</div>					
 			
 			<div class=" col-md-8"  >
-				<spring:url value="/updateActividad/${actividad.idActividad}" var="variableAdd" />
+				<spring:url value="/proveedor" var="variableAdd" />
 			
-				<form:form method="PUT" modelAttribute="actividad" action="${variableAdd}">
-				
-					<label>Nombre: </label>
-					<form:input type="text" path="NombreActividad" class="form-control" value = "${actividad.nombreActividad}"/>					
+			 	<form:form method="POST" modelAttribute="crearModelProveedor" action="${variableAdd}" id="myForm"> 
+					
+					<label>Nombre Proveedor: </label>		
+					<form:input path="NombreProveedor" class="form-control"  type="text" />
+					<form:errors path="NombreProveedor" />
 					<br>
-
-					<label>Descripción: </label>
-					<form:input type="text" path="DescripcionActividad" class="form-control" value = "${actividad.descripcionActividad}"/>					
+					
+					<label>Teléfono: </label>
+					<form:input path="TelefonoProveedor" class="form-control"  type="tel" />
+					<form:errors path="TelefonoProveedor" />
 					<br>
-				
-					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>				
-				
+										
+					<label>Dirección: </label>
+					<form:input path="DireccionProveedor" class="form-control" type="text" /> 
+					<form:errors path="DireccionProveedor" />
+					<br>
+					
+					<label>E-mail: </label>
+					<form:input path="EmailProveedor"  class="form-control" type="email" /> 
+					<form:errors path="EmailProveedor" />
+					<br>
+					
+					<label>Fecha de Ingreso: </label>
+					<form:input path="FechaIngresoProveedor"  id="theDate" class="form-control" type="date" /> 
+					<form:errors path="FechaIngresoProveedor" />
+					<br>
+					
+					<br>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
+			                             </button>
 				</form:form>
 			</div>
 		</div>
 	
+		
+	        <!-- The actual snackbar -->
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
+        
+
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
     </footer>
@@ -145,6 +168,17 @@
 			});
 		};
 	});
+	</script>
+	
+	<script>
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+	
+		var yyyy = today.getFullYear();
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = mm+'/'+dd+'/'+yyyy;
+	
+		$('#theDate').attr('value', today);
 	</script>
 
 </body>

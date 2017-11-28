@@ -84,6 +84,10 @@ public class Proveedor {
 		this.active = active;
 	}
 
+	public Proveedor() {
+		super();
+	}
+
 	public Proveedor(Integer idProveedor, String nombreProveedor, String emailProveedor, String direccionProveedor,
 			String telefonoProveedor, Date fechaIngresoProveedor) {
 		super();

@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Actividad</title>
+    <title>Crear Actividad</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Editar Actividad</h4>
+				        <h4 class="text-muted">Crear Actividad</h4>
 			        </div>
 			    </div>
 			</div>
@@ -92,24 +92,38 @@
 			</div>					
 			
 			<div class=" col-md-8"  >
-				<spring:url value="/updateActividad/${actividad.idActividad}" var="variableAdd" />
 			
-				<form:form method="PUT" modelAttribute="actividad" action="${variableAdd}">
-				
-					<label>Nombre: </label>
-					<form:input type="text" path="NombreActividad" class="form-control" value = "${actividad.nombreActividad}"/>					
-					<br>
+				<label>Nombre: </label>
+				<input type="text" class="form-control" readonly value = "${actividad.nombreActividad}"/>					
+				<br>
 
-					<label>Descripción: </label>
-					<form:input type="text" path="DescripcionActividad" class="form-control" value = "${actividad.descripcionActividad}"/>					
+				<label>Descripción: </label>
+				<input type="text" class="form-control" readonly value = "${actividad.descripcionActividad}"/>					
+				<br>	
+				<br>	
+				
+				<spring:url value="/addCosto" var="variableAdd" />
+				<form:form method="post" modelAttribute="crearModelCosto" action="${variableAdd}">
+					<label>Costo ($): </label>
+					<form:input path="Costo" class="form-control" type="number" /> <!-- bind to user.name-->
+					<form:errors path="Costo" />
 					<br>
-				
-					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>				
-				
+					
+					<label>Fecha de Inicio: </label>
+					<form:input path="FechaInicioCosto" class="form-control" type="date" /> <!-- bind to user.name-->
+					<form:errors path="FechaInicioCosto" />
+					<br>
+					
+					<br>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
 				</form:form>
-			</div>
+	        </div>
 		</div>
-	
+		
+	        <!-- The actual snackbar -->
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
+        
+
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
     </footer>

@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Actividad</title>
+    <title>Editar Proveedor</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,7 +40,7 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-					
+						
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Editar Actividad</h4>
+				        <h4 class="text-muted">Editar Proveedor</h4>
 			        </div>
 			    </div>
 			</div>
@@ -92,19 +92,32 @@
 			</div>					
 			
 			<div class=" col-md-8"  >
-				<spring:url value="/updateActividad/${actividad.idActividad}" var="variableAdd" />
+				<spring:url value="/updateProveedor/${proveedor.idProveedor}" var="variableAdd" />
 			
-				<form:form method="PUT" modelAttribute="actividad" action="${variableAdd}">
-				
-					<label>Nombre: </label>
-					<form:input type="text" path="NombreActividad" class="form-control" value = "${actividad.nombreActividad}"/>					
+				<form:form method="PUT" modelAttribute="proveedor" action="${variableAdd}">
+					
+					<label>Nombre Proveedor: </label>
+					<form:input type="text" class="form-control" path="NombreProveedor" value = "${proveedor.nombreProveedor}"/>
 					<br>
-
-					<label>Descripción: </label>
-					<form:input type="text" path="DescripcionActividad" class="form-control" value = "${actividad.descripcionActividad}"/>					
+					
+					<label>Teléfono: </label>
+					<form:input type="tel" class="form-control" path="TelefonoProveedor" value = "${proveedor.telefonoProveedor}"/>
+					<br>
+										
+					<label>Dirección: </label>
+					<form:input type="text" class="form-control" path="DireccionProveedor" value = "${proveedor.direccionProveedor}"/>					
+					<br>
+					
+					<label>E-mail: </label>
+					<form:input type="email" class="form-control" path="EmailProveedor" value = "${proveedor.emailProveedor}"/>
+					<br>
+					
+					<fmt:formatDate value="${proveedor.fechaIngresoProveedor}" var="dateString" pattern="yyyy-MM-dd" />
+					<label>Fecha de Ingreso: </label>
+					<form:input type="date" class="form-control" path="FechaIngresoProveedor" value = "${dateString}"/>
 					<br>
 				
-					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>				
+					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>
 				
 				</form:form>
 			</div>

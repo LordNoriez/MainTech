@@ -21,7 +21,9 @@ import org.maintech.proveedor.Proveedor;
 		@AssociationOverride(name = "pk.actividad",
 			joinColumns = @JoinColumn(name = "id_actividad")),
 		@AssociationOverride(name = "pk.proveedor",
-			joinColumns = @JoinColumn(name = "id_proveedor")) })
+			joinColumns = @JoinColumn(name = "id_proveedor")),
+		@AssociationOverride(name = "pk.costo",
+			joinColumns = @JoinColumn(name = "id_costo")) })
 public class ActividadProveedor implements java.io.Serializable {
 
 	private ActividadProveedorId pk = new ActividadProveedorId();

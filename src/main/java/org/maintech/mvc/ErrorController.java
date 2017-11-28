@@ -10,25 +10,25 @@ import java.io.IOException;
 
 @SuppressWarnings("unused")
 @Controller
-//public class ErrorController {
-public class ErrorController implements org.springframework.boot.autoconfigure.web.ErrorController {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private static final String PATH = "/error";
-
-    @RequestMapping("/error")
-    protected String error(final RedirectAttributes redirectAttributes) throws IOException {
-        logger.error("Handling error");
-        redirectAttributes.addFlashAttribute("error", true);
-        
-        return "errorPage";
-        
-    }
-
-    @Override
-    public String getErrorPath() {
-        return PATH;
-    }
-
+public class ErrorController {
+//public class ErrorController implements org.springframework.boot.autoconfigure.web.ErrorController {
+//
+//    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+//
+//    private static final String PATH = "/error";
+//
+//    @RequestMapping("/error")
+//    protected String error(final RedirectAttributes redirectAttributes) throws IOException {
+//        logger.error("Handling error");
+//        redirectAttributes.addFlashAttribute("error", true);
+//        
+//        return "errorPage";
+//        
+//    }
+//
+//    @Override
+//    public String getErrorPath() {
+//        return PATH;
+//    }
+//
 }

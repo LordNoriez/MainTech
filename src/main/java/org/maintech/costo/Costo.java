@@ -67,6 +67,10 @@ public class Costo {
 		this.active = active;
 	}
 
+	public Costo() {
+		super();
+	}
+
 	public Costo(Integer idCosto, Double costo, Date fechaInicioCosto, Date fechaFinCosto) {
 		super();
 		this.idCosto = idCosto;

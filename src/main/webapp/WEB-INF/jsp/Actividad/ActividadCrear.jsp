@@ -57,6 +57,9 @@
 			<p>Actividades
 		  <a href="/crearActividad">Crear</a>
 		  <a href="/actividad">Ver</a>
+		  	<p>Proveedores
+		  <a href="/crearProveedor">Crear</a>
+		  <a href="/proveedor">Ver</a>
 	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
 	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
 	</div>
@@ -95,11 +98,6 @@
 					<label>Nombre: </label>
 					<form:input path="NombreActividad" class="form-control" type="text" /> <!-- bind to user.name-->
 					<form:errors path="NombreActividad" />
-					<br>
-					
-					<label>Costo ($): </label>
-					<form:input path="CostoActividad" class="form-control" type="text" />
-					<form:errors path="CostoActividad" />
 					<br>
 					
 					<label>Descripción: </label>
