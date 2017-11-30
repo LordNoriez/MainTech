@@ -39,31 +39,11 @@ public class ObjetoService {
 		objetoRepository.softDeleteObjeto(id);
 	}
 	
-//	public List<Objeto> timeObjeto () {
-//		Integer i = 0;
-//		
-//		List<Objeto> objetos = null;
-//		objetos=this.getAllObjeto();
-//		List<Objeto> proximos = new ArrayList<Objeto>();
-//		DateFormat formatter = new SimpleDateFormat("HH:mm");
-//		
-//		for (i=0;i<objetos.size();i++) {
-//			try {
-//				if (objetos.get(i).getTiempoMante() != null) {
-//					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");    
-//					Date resultdate = new Date(System.currentTimeMillis());
-//					
-//					if (formatter.parse(objetos.get(i).getTiempoMante()).getTime() < formatter.parse(sdf.format(resultdate)).getTime()) {
-//						proximos.add(objetos.get(i));
-//					}
-//				}
-//			} catch (ParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		return proximos;
-//	}
+	public Integer UltimoObjetoId() {
+		return objetoRepository.UltimoObjetoId();
+	}
 	
+	public void Link(Integer idActividad, Integer idObjeto){
+		objetoRepository.LinkActividad_objeto(idActividad, idObjeto);
+	}
 }

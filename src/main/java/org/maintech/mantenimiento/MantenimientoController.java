@@ -87,27 +87,6 @@ public class MantenimientoController {
 		
 		return "Mantenimiento/MantenimientoCrear";
 	}
-	
-//	public String CrearMantneimiento_Actividad(Model model){
-//		ActividadWrapper actividadWrap = new ActividadWrapper();
-//		
-//		for (Actividad adctividad : actividadService.getAllActividad()) {
-//			actividadWrap.add(adctividad);
-//		}
-//		
-//		model.addAttribute("ItemActividad", actividadWrap);
-//		return "Mantenimiento/Mantenimiento_ActividadCrear";
-//	}
-//	
-//	@RequestMapping(value = { "/h2" }, method = RequestMethod.POST)
-//	public String savePerson(@ModelAttribute("functionList") ActividadWrapper actividades) {
-//	        // process your list
-//		for (Actividad actividad : actividades.getActividadList()) {
-//			System.out.println(actividad.getNombreActividad());
-//		}
-//		return "";
-//    }
-	
 
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
@@ -121,30 +100,6 @@ public class MantenimientoController {
 		}
 		return new ModelAndView("redirect:/mantenimiento");
 	}
-	
-// done for project crocker :D
-	@RequestMapping(value="/cMantenimiento")
-	public ModelAndView  addMantnmailProvider() {
-		
-		
-		Mantenimiento mat = new Mantenimiento();
-				
-		Date now = new Date();
-		
-			mat.setNombreMantenimiento("Limpieza ");
-			mat.setDescripcionMantenimiento("Limpieza exterior");
-			mat.setFechaMantenimiento(now);
-			mat.setActive(true);
-			mantenimientoService.addMantenimiento(mat);		
-				
-			return new ModelAndView("redirect:/mantenimiento");
-	}
-	
-	/*@Scheduled(fixedRate=1000)
-	public void Rep2(){
-			aux = aux + 1;
-		System.out.println(aux.toString());
-	}*/
 
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
@@ -157,24 +112,7 @@ public class MantenimientoController {
 			
 			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
 		} 
-		
-//		if (mantenimiento.getActividad().isEmpty()){
-//			System.out.println("ta vacio lol xdxd");
-//			
-//				for (Actividad activMante: mantenimiento.getActividad()) {
-//				
-//					mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
-//				} 
-//			
-//		}else{			
-//		
-//			mantenimientoService.DeleteLinkActividad_mantenimiento(id);
-//			
-//			for (Actividad activMante: mantenimiento.getActividad()) {
-//				
-//				mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
-//			} 
-//		}
+
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 	

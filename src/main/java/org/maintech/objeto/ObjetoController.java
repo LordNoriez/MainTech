@@ -1,28 +1,17 @@
 package org.maintech.objeto;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.mail.internet.MimeMessage;
 
+import org.maintech.actividad.Actividad;
+import org.maintech.actividad.ActividadService;
 import org.maintech.areaempresa.AreaEmpresaService;
 import org.maintech.categoria.CategoriaService;
-import org.maintech.login.UserRestController;
+import org.maintech.objetoactividad.ObjetoListActividad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.ldap.userdetails.InetOrgPerson;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +27,9 @@ public class ObjetoController {
 	
 	@Autowired
 	private ObjetoService objetoService;
+	
+	@Autowired
+	private ActividadService actividadService;
 	
 	@Autowired
 	private CategoriaService categoriaService;
@@ -116,8 +108,25 @@ public class ObjetoController {
 //		objeto.setObjetoPadre(objetopadre);
 		objeto.setActive(true);
 		objetoService.addObjeto(objeto);
+		return new ModelAndView("redirect:/objetoLinkActividad");
+	}
+	
+	@RequestMapping("/objetoLinkActividad")
+	public String ObjetoLinkActividad(@ModelAttribute("crearModellistActividad") ObjetoListActividad listActividad, 
+			BindingResult result, Model model, Principal principal) {
+		model.addAttribute("actividades", actividadService.getAllActividad());
+		return "ObjetoActividad/ObjetoActividadCrear";
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/addobjetoLinkActividad")
+	public ModelAndView addObjetoLinkActividad(ObjetoListActividad listActividad) {
+		
+		for (Actividad actividades : listActividad.getActividades()) {
+			objetoService.Link(actividades.getIdActividad(), objetoService.UltimoObjetoId());
+		}
 		return new ModelAndView("redirect:/objeto");
 	}
+	
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/updateObjeto/{idObjeto}")
 	public ModelAndView updateObjeto(Objeto objeto, @PathVariable("idObjeto") Integer id) {

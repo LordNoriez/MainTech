@@ -10,7 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Where;
-import org.maintech.tipomantenimiento.TipoMantenimiento;
+import org.maintech.objeto.Objeto;
+import org.maintech.tipomovimiento.TipoMovimiento;
 
 
 
@@ -29,8 +30,11 @@ public class Movimiento {
 	private Boolean active;
 	
 	@ManyToOne
-	private TipoMantenimiento objTipoMantenimiento;
+	private TipoMovimiento tipomovimiento;
 
+	@ManyToOne
+	private Objeto objeto;
+	
 	public Integer getIdMovimiento() {
 		return idMovimiento;
 	}
@@ -71,23 +75,32 @@ public class Movimiento {
 		this.active = active;
 	}
 
-	public TipoMantenimiento getObjTipoMantenimiento() {
-		return objTipoMantenimiento;
+	public TipoMovimiento getTipomovimiento() {
+		return tipomovimiento;
 	}
 
-	public void setObjTipoMantenimiento(TipoMantenimiento objTipoMantenimiento) {
-		this.objTipoMantenimiento = objTipoMantenimiento;
+	public void setTipomovimiento(TipoMovimiento tipomovimiento) {
+		this.tipomovimiento = tipomovimiento;
+	}
+
+	public Objeto getObjeto() {
+		return objeto;
+	}
+
+	public void setObjeto(Objeto objeto) {
+		this.objeto = objeto;
 	}
 
 	public Movimiento(Integer idMovimiento, String nombreMovimiento, Date fechaMovimiento, String descripcionMovimiento,
-			Boolean active, TipoMantenimiento objTipoMantenimiento) {
+			Boolean active, TipoMovimiento tipomovimiento, Objeto objeto) {
 		super();
 		this.idMovimiento = idMovimiento;
 		NombreMovimiento = nombreMovimiento;
 		FechaMovimiento = fechaMovimiento;
 		DescripcionMovimiento = descripcionMovimiento;
 		this.active = active;
-		this.objTipoMantenimiento = objTipoMantenimiento;
+		this.tipomovimiento = tipomovimiento;
+		this.objeto = objeto;
 	}
 
 	public Movimiento() {

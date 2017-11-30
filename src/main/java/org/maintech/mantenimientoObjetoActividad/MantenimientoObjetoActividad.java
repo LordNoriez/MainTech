@@ -1,4 +1,4 @@
-package org.maintech.mantenimientoObjetoActividad;
+package org.maintech.MantenimientoObjetoActividad;
 
 
 import javax.persistence.AssociationOverride;
@@ -12,16 +12,19 @@ import javax.persistence.Transient;
 import org.maintech.actividad.Actividad;
 import org.maintech.mantenimiento.Mantenimiento;
 import org.maintech.objeto.Objeto;
+import org.maintech.proveedor.Proveedor;
 
 @Entity
 //@Table(name = "actividad_proveedor", catalog = "DBClassdummy")
 @AssociationOverrides({
 		@AssociationOverride(name = "pk.mantenimiento",
 			joinColumns = @JoinColumn(name = "id_mantenimiento")),
+		@AssociationOverride(name = "pk.objeto",
+			joinColumns = @JoinColumn(name = "id_objeto")),
 		@AssociationOverride(name = "pk.actividad",
 			joinColumns = @JoinColumn(name = "id_actividad")),
 		@AssociationOverride(name = "pk.proveedor",
-			joinColumns = @JoinColumn(name = "id_proveedor")) })
+			joinColumns = @JoinColumn(name = "id_proveedor")), })
 
 
 public class MantenimientoObjetoActividad implements java.io.Serializable {
@@ -59,7 +62,7 @@ public class MantenimientoObjetoActividad implements java.io.Serializable {
 	public void setObjeto (Objeto objeto) {
 		getPk().setObjeto(objeto);
 	}
-	
+		
 	@Transient
 	public Actividad getActividad () {
 		return getPk().getActividad();
@@ -67,9 +70,16 @@ public class MantenimientoObjetoActividad implements java.io.Serializable {
 
 	public void setActividad (Actividad stock) {
 		getPk().setActividad(stock);
+	}	
+	
+	@Transient
+	public Proveedor getProveedor () {
+		return getPk().getProveedor();
 	}
 
-	
+	public void setActividad (Proveedor proveedor) {
+		getPk().setProveedor(proveedor);
+	}	
 	
 	public Double getCosto() {
 		return costo;
@@ -79,22 +89,55 @@ public class MantenimientoObjetoActividad implements java.io.Serializable {
 		this.costo = costo;
 	}
 
-	public boolean equals(Object o) {
-		if (this == o)
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((costo == null) ? 0 : costo.hashCode());
+		result = prime * result + ((pk == null) ? 0 : pk.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		if (obj == null)
 			return false;
-
-		MantenimientoObjetoActividad that = (MantenimientoObjetoActividad) o;
-
-		if (getPk() != null ? !getPk().equals(that.getPk())
-				: that.getPk() != null)
+		if (getClass() != obj.getClass())
 			return false;
-
+		MantenimientoObjetoActividad other = (MantenimientoObjetoActividad) obj;
+		if (costo == null) {
+			if (other.costo != null)
+				return false;
+		} else if (!costo.equals(other.costo))
+			return false;
+		if (pk == null) {
+			if (other.pk != null)
+				return false;
+		} else if (!pk.equals(other.pk))
+			return false;
 		return true;
 	}
+	
+	
 
-	public int hashCode() {
-		return (getPk() != null ? getPk().hashCode() : 0);
-	}
+//	public boolean equals(Object o) {
+//		if (this == o)
+//			return true;
+//		if (o == null || getClass() != o.getClass())
+//			return false;
+//
+//		MantenimientoObjetoActividad that = (MantenimientoObjetoActividad) o;
+//
+//		if (getPk() != null ? !getPk().equals(that.getPk())
+//				: that.getPk() != null)
+//			return false;
+//
+//		return true;
+//	}
+//
+//	public int hashCode() {
+//		return (getPk() != null ? getPk().hashCode() : 0);
+//	}
 }
