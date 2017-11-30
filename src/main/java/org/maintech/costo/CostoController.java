@@ -69,13 +69,13 @@ public class CostoController {
 	}
 	
 	@RequestMapping(value="/deleteCosto/{idCosto}")
-	public ModelAndView deactiveProveedor(@PathVariable("idCosto") Integer id) {
+	public ModelAndView deactiveCosto(@PathVariable("idCosto") Integer id) {
 		costoService.softDeleteCosto(id);
 		return new ModelAndView("redirect:/costo");
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/costo/{idCosto}")
-	public void deleteProveedor(@PathVariable Integer id){
+	public void deleteCosto(@PathVariable Integer id){
 		costoService.deleteCosto(id);
 	}
 }

@@ -98,16 +98,24 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Descripción</th>
+							<th>Proveedor</th>
+							<th>Costo ($)</th>
+							<th>Desde El</th>
+							<th>Hasta El</th>
 						</tr>
 					</thead>
 		
 					<c:forEach var="activida" items="${actividades}">
 					    <tr>
-							<td>${activida.nombreActividad}</td>					
-							<td>${activida.descripcionActividad}</td>						
+							<td>${activida[2].toString()}</td>					
+							<td>${activida[1].toString()}</td>					
+							<td>${activida[3].toString()}</td>					
+							<td>$ ${activida[4].toString()}</td>
+							<td>${activida[5].toString()}</td>
+							<td>${activida[6].toString()}</td>					
 							<td>
-							  <spring:url value="/deleteActividad/${activida.idActividad}" var="deleteUrl" />
-							  <spring:url value="/actividad/${activida.idActividad}" var="updateUrl" />
+							  <spring:url value="/deleteActividad/${activida[0]}" var="deleteUrl" />
+							  <spring:url value="/actualizarActividad/${activida[0]}" var="updateUrl" />
 			
 							  <button class="btn btn-primary"
 			                                          onclick="location.href='${updateUrl}'">Update</button>

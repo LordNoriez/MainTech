@@ -3,6 +3,7 @@ package org.maintech.actividad;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.maintech.actividadproveedor.ActividadProveedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,21 @@ public class ActividadService {
 	
 	public Actividad getLastActividad () {
 		return actividadRepository.findLast();
+	}
+	
+	public List<Object> getActividadesProveedores(){
+		return actividadRepository.getActividadesProveedores();
+	}
+	
+	public Integer getCostoActividad(Integer id){
+		return actividadRepository.getCostoActividad(id);
+	}
+	
+	public Integer getProveedorActividad(Integer id) {
+		return actividadRepository.getProveedorActividad(id);
+	}
+	
+	public ActividadProveedor getActividadProveedor(Integer idAct, Integer idProv, Integer idControl) {
+		return actividadRepository.getActividadProveedor(idAct, idProv, idControl);
 	}
 }

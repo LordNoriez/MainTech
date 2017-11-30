@@ -3,12 +3,9 @@ package org.maintech.actividadproveedor;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.maintech.actividad.Actividad;
@@ -29,6 +26,7 @@ public class ActividadProveedor implements java.io.Serializable {
 	private ActividadProveedorId pk = new ActividadProveedorId();
 
 	public ActividadProveedor() {
+		super();
 	}
 
 	@EmbeddedId
@@ -65,6 +63,11 @@ public class ActividadProveedor implements java.io.Serializable {
 
 	public void setCosto(Costo costo) {
 		getPk().setCosto(costo);
+	}
+
+	public ActividadProveedor(ActividadProveedorId pk) {
+		super();
+		this.pk = pk;
 	}
 
 	public boolean equals(Object o) {

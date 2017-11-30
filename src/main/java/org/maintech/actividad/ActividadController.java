@@ -4,14 +4,15 @@ package org.maintech.actividad;
 import java.security.Principal;
 
 import org.maintech.costo.Costo;
+import org.maintech.costo.CostoService;
 import org.maintech.objeto.ObjetoService;
+import org.maintech.proveedor.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,16 +26,21 @@ public class ActividadController {
 	@Autowired
 	private ActividadService ActividadService;
 	
+	@Autowired
+	private CostoService costoService;
+	
+	@Autowired
+	private ProveedorService proveedorService;
+	
 	@RequestMapping(value = "/actividad", method = RequestMethod.GET)
 	public String getAllActividad(Model model) {
-		model.addAttribute("actividades", ActividadService.getAllActividad());
+		model.addAttribute("actividades", ActividadService.getActividadesProveedores());
 		return "Actividad/ActividadRead";
 	}
 	
-	@RequestMapping("/actividad/{idActividad}")
+	@RequestMapping("/actualizarActividad/{idActividad}")
 	public String getMantenimientoUpdate(@PathVariable("idActividad") Integer id,Model model){
-		model.addAttribute("VarActividad", ActividadService.getActividad(id));
-		
+		model.addAttribute("actividad", ActividadService.getActividad(id));	
 		return "Actividad/ActividadUpdate";
 	}
 	
@@ -53,21 +59,21 @@ public class ActividadController {
 		model.addAttribute("actividad", actividad);
 		return "Costo/CostoCrear";
 	}
-
-	@RequestMapping(method=RequestMethod.PUT, value="/actividad/{idActividad}")
-	public void updateActividad(@RequestBody Actividad actividad, @PathVariable("idActividad") Integer id) {
-		ActividadService.updateActividad(id, actividad);
-	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/updateActividad/{idActividad}")
-	public ModelAndView updateMantenimiento(Actividad actividad, @PathVariable("idActividad") Integer id) {
+	public String updateActividad(Actividad actividad, @PathVariable("idActividad") Integer id, Model model){
+
 		actividad.setActive(true);
 		ActividadService.updateActividad(id, actividad);
-		return new ModelAndView("redirect:/actividad");
+		model.addAttribute("costo", costoService.getCosto(ActividadService.getCostoActividad(id)).getIdCosto());
+		model.addAttribute("proveedor", proveedorService.getProveedor(ActividadService.getProveedorActividad(id)).getIdProveedor());
+		model.addAttribute("actividadProveedor", ActividadService.getActividadProveedor(id, proveedorService.getProveedor(ActividadService.getProveedorActividad(id)).getIdProveedor(), costoService.getCosto(ActividadService.getCostoActividad(id)).getIdCosto()));
+		return "Costo/CostoUpdate";
+//		return new ModelAndView("redirect:/actividad");
 	}
 	
 	@RequestMapping(value="/deleteActividad/{idActividad}")
-	public ModelAndView deactiveMantenimiento(@PathVariable("idActividad") Integer id) {
+	public ModelAndView deactiveActividad(@PathVariable("idActividad") Integer id) {
 		ActividadService.sofDeleteActividad(id);
 		return new ModelAndView("redirect:/actividad");
 	}
