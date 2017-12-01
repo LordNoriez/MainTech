@@ -101,6 +101,7 @@
 							<th>Equipo</th>
 							<th>Fecha</th>
 							<th>Proveedor</th>
+							<th>Costo Total ($)</th>
 							<th>Programado?</th>
 							<th>Frecuencia</th>
 							<th>Aceptado?</th>
@@ -117,6 +118,7 @@
 							<td>${mantenimiento[6].toString()} ${mantenimiento[7].toString()}</td>				
 							<td>${mantenimiento[4].toString()}</td>			
 							<td>${mantenimiento[9].toString()}</td>	
+							<td>${mantenimiento[15]}</td>	
 							<td>${mantenimiento[10]}</td>	
 							<td>${mantenimiento[11]}</td>	
 							<td>${mantenimiento[12]}</td>	
