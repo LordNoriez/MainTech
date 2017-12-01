@@ -101,8 +101,8 @@
 							<th>Equipo</th>
 							<th>Fecha</th>
 							<th>Proveedor</th>
-							<th>Costo Total ($)</th>
-							<th>Programado?</th>
+							<th>Costo ($)</th>
+							<th>Program?</th>
 							<th>Frecuencia</th>
 							<th>Aceptado?</th>
 							<th>En Proceso?</th>
@@ -122,8 +122,8 @@
 							<td>${mantenimiento[10]}</td>	
 							<td>${mantenimiento[11]}</td>	
 							<td><a href="/mantenimientoAceptado/${mantenimiento[0]}">${mantenimiento[12]}</a></td>	
-							<td>${mantenimiento[13]}</td>	
-							<td>${mantenimiento[14]}</td>
+							<td><a href="/mantenimientoProceso/${mantenimiento[0]}">${mantenimiento[13]}</a></td>
+							<td><a href="/mantenimientoTerminado/${mantenimiento[0]}">${mantenimiento[14]}</a></td>							
 <%-- 							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td> --%>
 			
 							<td>

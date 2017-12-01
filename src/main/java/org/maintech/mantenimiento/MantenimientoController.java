@@ -166,16 +166,54 @@ public class MantenimientoController {
 	}
 	
 
-	@RequestMapping(method=RequestMethod.PUT, value="/mantenimientoAceptado/{idMantenimiento}")
+	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoAceptado/{idMantenimiento}")
 	public ModelAndView updateMantenimientoAceptado(@PathVariable("idMantenimiento") Integer id) {
 		
 		Mantenimiento mantenimiento = mantenimientoService.getMantenimiento(id);
 		if (mantenimiento.getIsAceptadoMantenimiento()) {
 			mantenimiento.setIsAceptadoMantenimiento(false);
+			mantenimiento.setIsEnProcesoMantenimiento(false);
+			mantenimiento.setIsTerminadoMantenimiento(false);
 		} else{
 			mantenimiento.setIsAceptadoMantenimiento(true);
 		}
 		mantenimientoService.updateMantenimiento(id, mantenimiento);
+		
+		return new ModelAndView("redirect:/mantenimiento");
+	}
+	
+
+	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoProceso/{idMantenimiento}")
+	public ModelAndView updateMantenimientoProceso(@PathVariable("idMantenimiento") Integer id) {
+		
+		Mantenimiento mantenimiento = mantenimientoService.getMantenimiento(id);
+		if (mantenimiento.getIsAceptadoMantenimiento()) {
+			if (mantenimiento.getIsEnProcesoMantenimiento()) {
+				mantenimiento.setIsEnProcesoMantenimiento(false);
+				mantenimiento.setIsTerminadoMantenimiento(false);
+			} else{
+				mantenimiento.setIsEnProcesoMantenimiento(true);
+			}
+			mantenimientoService.updateMantenimiento(id, mantenimiento);
+		}		
+		
+		return new ModelAndView("redirect:/mantenimiento");
+	}
+
+	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoTerminado/{idMantenimiento}")
+	public ModelAndView updateMantenimientoTerminado(@PathVariable("idMantenimiento") Integer id) {
+		
+		Mantenimiento mantenimiento = mantenimientoService.getMantenimiento(id);
+		if (mantenimiento.getIsAceptadoMantenimiento()) {
+			if (mantenimiento.getIsEnProcesoMantenimiento()) {
+				if (mantenimiento.getIsTerminadoMantenimiento()) {
+					mantenimiento.setIsTerminadoMantenimiento(false);
+				} else{
+					mantenimiento.setIsTerminadoMantenimiento(true);
+				}
+				mantenimientoService.updateMantenimiento(id, mantenimiento);
+			}
+		}
 		
 		return new ModelAndView("redirect:/mantenimiento");
 	}
