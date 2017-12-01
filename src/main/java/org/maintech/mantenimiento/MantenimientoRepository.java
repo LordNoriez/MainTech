@@ -64,6 +64,7 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		@Transactional
 		@Modifying
 		void Acept_mantenimiento(Integer id);
+<<<<<<< HEAD
 	    
 		@Query(value = "select mantenimiento.id_mantenimiento, nombre_mantenimiento, descripcion_mantenimiento, " + 
 						" nombre_tipo_mantenimiento, fecha_mantenimiento, " +
@@ -76,5 +77,12 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		        nativeQuery=true
 		    )
 		    public List<Object[]> getFullMantenimientos();
+=======
+		
+		@Query(nativeQuery = true, value= "insert into mantenimiento_objeto_actividad(id_actividad,id_mantenimiento, id_proveedor, id_objeto, costo) values(?1,?1,?1,?1,?1);")
+		@Transactional
+		@Modifying
+		void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo);
+>>>>>>> 68e7adb27c7509b98d56fd44308ca2c82a26cd14
 				
 }

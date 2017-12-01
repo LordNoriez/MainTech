@@ -103,14 +103,19 @@
 							<th>Proveedor</th>
 							<th>Programado?</th>
 							<th>Frecuencia</th>
+<<<<<<< HEAD
 							<th>Aceptado?</th>
 							<th>En Proceso?</th>
 							<th>Terminado?</th>
+=======
+<!-- 							<th>Objeto</th> -->
+>>>>>>> 68e7adb27c7509b98d56fd44308ca2c82a26cd14
 						</tr>
 					</thead>
 		
 					<c:forEach var="mantenimiento" items="${mantenimientos}">
 					    <tr>
+<<<<<<< HEAD
 							<td>${mantenimiento[1].toString()}</td>
 							<td>${mantenimiento[3].toString()}</td>		
 							<td>${mantenimiento[6].toString()} ${mantenimiento[7].toString()}</td>				
@@ -121,6 +126,14 @@
 							<td>${mantenimiento[12].toString()}</td>	
 							<td>${mantenimiento[13].toString()}</td>	
 							<td>${mantenimiento[14].toString()}</td>
+=======
+							<td>${mantenimiento.nombreMantenimiento}</td>
+							<td>${mantenimiento.objTipoMantenimiento.getNombreTipoMantenimiento()}</td>							
+							<td>${mantenimiento.fechaMantenimiento}</td>
+							<td>${mantenimiento.isProgramadoMantenimiento}</td>
+							<td>${mantenimiento.frecuenciaMantenimiento}</td>
+<%-- 							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td> --%>
+>>>>>>> 68e7adb27c7509b98d56fd44308ca2c82a26cd14
 			
 							<td>
 							  <spring:url value="/deleteMantenimiento/${mantenimiento.idMantenimiento}" var="deleteUrl" />

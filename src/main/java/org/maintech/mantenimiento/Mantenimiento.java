@@ -49,10 +49,6 @@ public class Mantenimiento {
 	//private Set<Actividad> actividad = new HashSet<Actividad>();
 
 	
-	@ManyToMany(mappedBy="mantenimientos")//mantenimientos is the objetc from Actividad that i created
-	private Set<Actividad> actividad;
-
-	
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
 	
@@ -144,14 +140,7 @@ public class Mantenimiento {
 	public void setIsTerminadoMantenimiento(Boolean isTerminadoMantenimiento) {
 		this.isTerminadoMantenimiento = isTerminadoMantenimiento;
 	}
-	
-	public Set<Actividad> getActividad() {
-		return actividad;
-	}
 
-	public void setActividad(Set<Actividad> actividad) {
-		this.actividad = actividad;
-	}
 
 	public Mantenimiento() {
 		super();
@@ -169,7 +158,6 @@ public class Mantenimiento {
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 		FrecuenciaMantenimiento = frecuenciaMantenimiento;
 		this.objTipoMantenimiento = objTipoMantenimiento;
-		this.actividad = actividad;
 		this.active = active;
 		this.isAceptadoMantenimiento = isAceptadoMantenimiento;
 		this.isEnProcesoMantenimiento = isEnProcesoMantenimiento;

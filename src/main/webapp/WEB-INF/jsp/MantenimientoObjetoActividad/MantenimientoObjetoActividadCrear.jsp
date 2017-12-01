@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Mantenimiento</title>
+    <title>Crear Actividad</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,7 +40,7 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-		
+					
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Crear Mantenimiento</h4>
+				        <h4 class="text-muted">Crear Objeto</h4>
 			        </div>
 			    </div>
 			</div>
@@ -92,65 +92,32 @@
 			</div>					
 			
 			<div class=" col-md-8"  >
-				<spring:url value="/addMantenimiento" var="variableAdd" />
 			
-				<form:form method="post" modelAttribute="crearModelMantenimiento" action="${variableAdd}">
-					
-					<label>Nombre: </label>
-					<form:input path="NombreMantenimiento" class="form-control" type="text" /> <!-- bind to user.name-->
-					<form:errors path="NombreMantenimiento" />
-					<br>
-					
-					<label>Fecha: </label>
-					<form:input path="FechaMantenimiento" class="form-control" type="date" /> 
-					<form:errors path="FechaMantenimiento" />
-					<br>
-					
-					<label>Descripción: </label>
-					<form:input path="DescripcionMantenimiento" class="form-control" type="text" /> <!-- bind to user.name-->
-					<form:errors path="DescripcionMantenimiento" />
-					<br>
-					
-					<label>Tipo de Mantenimiento: </label>						        
-					<form:select class="form-control" path="objTipoMantenimiento">
+				<label>Marca: </label>
+				<input type="text" class="form-control" readonly value = "${crearModelGroupMantenimientoObjeto.mantenimientos}"/>					
+				<br>
+				
+				<spring:url value="/addobjetoLinkActividad" var="variableAdd" />
+				<form:form method="post" modelAttribute="crearModelGroupMantenimientoObjeto" action="${variableAdd}">
+					<label>Actividades </label>
+					<form:select class="form-control" path="idobjeto">
 						<form:option value="" label="--- Select ---" />
-						<form:options items="${tipos}" itemLabel="NombreTipoMantenimiento" itemValue="idTipoMantenimiento" />
+						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
 					</form:select>
+					<label>Actividades: </label>
+					<form:select multiple="true" path="actividadesProveedores.actividades" items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" />
 					<br>
-					
-					<label class="col-md-2">Programado?</label>
-					<div class="col-md-2 ">
-						<form:checkbox path="isProgramadoMantenimiento" class="form-control" value="true"/>
-						<form:errors path="isProgramadoMantenimiento" />	
-					</div>
-					<br>
-					<br>
-					<br>
-					
-					<label>Frecuencia de Mantenimiento (horas): </label>
-					<form:input path="FrecuenciaMantenimiento" class="form-control" type="number" value="0"/>
-					<form:errors path="FrecuenciaMantenimiento" />
-					<br>
-					
-<!-- 					<label>Objeto: </label> -->
-<%-- 					<form:select class="form-control" path="objetoMantenimiento"> --%>
-<%-- 						<form:option value="" label="--- Select ---" /> --%>
-<%-- 						<form:options items="${Itemobjeto}" itemLabel="DescripcionObjeto" itemValue="idObjeto" /> --%>
-<%-- 					</form:select>				 --%>
-						
-<!-- 					<br> -->
-					
-<%-- 					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" /> --%>
+					<label>Proveedores: </label>
+					<form:select multiple="true" path="actividadesProveedores.proveedores" items="${proveedores}" itemLabel="nombreProveedor" itemValue="idProveedor" />
 					
 					<br>
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
-			                             
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
 				</form:form>
 	        </div>
 		</div>
-
+		
 	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>
         
 
     <footer class="footer">

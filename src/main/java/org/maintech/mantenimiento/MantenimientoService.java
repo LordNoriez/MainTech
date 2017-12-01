@@ -88,8 +88,16 @@ public class MantenimientoService {
 		mantenimientoRepository.Acept_mantenimiento(id);
 	}
 	
+<<<<<<< HEAD
 	public List<Object[]> getFullMantenimientos (){
 		return mantenimientoRepository.getFullMantenimientos();
 	}
+=======
+	public void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo) {
+		mantenimientoRepository.LinkMantenimiento_Actividad_Obj_Provee(idActividad, idMantenimiento, idProveedor, idObjeto, costo);
+	}
+	
+	
+>>>>>>> 68e7adb27c7509b98d56fd44308ca2c82a26cd14
 
 }
