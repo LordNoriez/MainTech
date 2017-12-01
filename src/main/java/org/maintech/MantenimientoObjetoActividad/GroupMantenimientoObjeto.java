@@ -1,4 +1,4 @@
-package org.maintech.MantenimientoObjetoActividad;
+package org.maintech.mantenimientoObjetoActividad;
 
 import java.util.List;
 

@@ -6,12 +6,9 @@ import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
 
-import org.maintech.MantenimientoObjetoActividad.GroupMantenimientoObjeto;
-import org.maintech.MantenimientoObjetoActividad.MantenimientoObjetoActividad;
-import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
 import org.maintech.actividadproveedor.ActividadProveedor;
-import org.maintech.objeto.Objeto;
+import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
 import org.maintech.objeto.ObjetoService;
 import org.maintech.proveedor.ProveedorService;
 import org.maintech.tipomantenimiento.TipoMantenimientoService;
