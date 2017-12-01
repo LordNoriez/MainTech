@@ -101,7 +101,7 @@
 							<th>Fecha</th>
 							<th>Programado?</th>
 							<th>Frecuencia</th>
-							<th>Objeto</th>
+<!-- 							<th>Objeto</th> -->
 						</tr>
 					</thead>
 		
@@ -112,7 +112,7 @@
 							<td>${mantenimiento.fechaMantenimiento}</td>
 							<td>${mantenimiento.isProgramadoMantenimiento}</td>
 							<td>${mantenimiento.frecuenciaMantenimiento}</td>
-							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td>
+<%-- 							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td> --%>
 			
 							<td>
 							  <spring:url value="/deleteMantenimiento/${mantenimiento.idMantenimiento}" var="deleteUrl" />

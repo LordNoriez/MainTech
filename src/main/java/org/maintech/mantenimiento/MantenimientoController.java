@@ -6,9 +6,14 @@ import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
 
+import org.maintech.MantenimientoObjetoActividad.GroupMantenimientoObjeto;
+import org.maintech.MantenimientoObjetoActividad.MantenimientoObjetoActividad;
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
+import org.maintech.actividadproveedor.ActividadProveedor;
+import org.maintech.objeto.Objeto;
 import org.maintech.objeto.ObjetoService;
+import org.maintech.proveedor.ProveedorService;
 import org.maintech.tipomantenimiento.TipoMantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -33,6 +38,9 @@ public class MantenimientoController {
 	
 	@Autowired
 	private ActividadService actividadService;
+	
+	@Autowired
+	private ProveedorService proveedorService;
 	
 	Integer aux = 0;
 	
@@ -81,25 +89,60 @@ public class MantenimientoController {
 	@RequestMapping("/crearMantenimiento")
 	public String crearMantenimiento(@ModelAttribute("crearModelMantenimiento") Mantenimiento mantenimiento,
 			BindingResult result, Model model){
-		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
-		model.addAttribute("ItemActividad", actividadService.getAllActividad());
+		//model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
+		//model.addAttribute("ItemActividad", actividadService.getAllActividad());
 		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
 		
 		return "Mantenimiento/MantenimientoCrear";
 	}
 
+//	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
+//	public String addMantenimiento(Mantenimiento mantenimiento) {
+//		mantenimiento.setActive(true);
+//		mantenimiento.setIsAceptadoMantenimiento(true);
+//		mantenimientoService.addMantenimiento(mantenimiento);
+////		for (Actividad activMante: mantenimiento.getActividad()) {
+////			
+////			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(),
+////					mantenimientoService.IdUltimoMante());
+////		}
+//		return "MantenimientoObjetoActividad/MantenimientoObjetoCrear";
+//	}
+	
+//	@RequestMapping("/crearMantenimiento")
+//	public String crearMantenimiento(@ModelAttribute("crearModelMantenimiento") MantenimientoObjetoActividad MantenimientoObjetoActividad,
+//			BindingResult result, Model model){
+//		//model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
+//		//model.addAttribute("ItemActividad", actividadService.getAllActividad());
+//		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
+//		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
+//		return "Mantenimiento/MantenimientoCrear";
+//	}
+	
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
-	public ModelAndView addMantenimiento(Mantenimiento mantenimiento) {
-		mantenimiento.setActive(true);
-		mantenimiento.setIsAceptadoMantenimiento(false);
-		mantenimientoService.addMantenimiento(mantenimiento);
-		for (Actividad activMante: mantenimiento.getActividad()) {
-			
-			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(),
-					mantenimientoService.IdUltimoMante());
-		}
+	public String crearobjmantenimientoObjetoActividad(Mantenimiento mantenimiento, @ModelAttribute("crearModelGroupMantenimientoObjeto") GroupMantenimientoObjeto groupMantenimientoObjeto,
+			BindingResult result, Model model){
+		groupMantenimientoObjeto.setMantenimientos(mantenimiento.getIdMantenimiento());
+		model.addAttribute("itemobjeto", objetoService.getAllObjeto());
+		model.addAttribute("actividades", actividadService.getAllActividad());
+		model.addAttribute("proveedores",  proveedorService.getAllProveedores());
+		return "MantenimientoObjetoActividad/MantenimientoObjetoActividadCrear";
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/LinkMantObjeto")
+	public ModelAndView addMantObjeto(@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantenimientoObjeto,
+			BindingResult result, Model model) {
+
+		for (ActividadProveedor actividadProveedor: groupMantenimientoObjeto.getActividadesProveedores()) {
+		
+			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(actividadProveedor.getActividad().getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
+					, actividadProveedor.getProveedor().getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), actividadProveedor.getCosto().getCosto());
+		} 
+		
 		return new ModelAndView("redirect:/mantenimiento");
 	}
+	
+	
 
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
@@ -108,10 +151,10 @@ public class MantenimientoController {
 		
 		mantenimientoService.DeleteLinkActividad_mantenimiento(id);
 		
-		for (Actividad activMante: mantenimiento.getActividad()) {
-			
-			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
-		} 
+//		for (Actividad activMante: mantenimiento.getActividad()) {
+//			
+//			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
+//		} 
 
 		return new ModelAndView("redirect:/mantenimiento");
 	}
@@ -341,11 +384,11 @@ public class MantenimientoController {
 				NewMante.setActive(true);			
 				mantenimientoService.addMantenimiento(NewMante);
 	
-				for(Actividad actividad: MantProg.getActividad()){
-					
-					mantenimientoService.LinkActividad_mantenimiento(actividad.getIdActividad(),
-							mantenimientoService.IdUltimoMante());
-				}
+//				for(Actividad actividad: MantProg.getActividad()){
+//					
+//					mantenimientoService.LinkActividad_mantenimiento(actividad.getIdActividad(),
+//							mantenimientoService.IdUltimoMante());
+//				}
 			}
 		}
 		//return new ModelAndView("redirect:/mantenimiento");    

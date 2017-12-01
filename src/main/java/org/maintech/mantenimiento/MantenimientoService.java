@@ -87,5 +87,11 @@ public class MantenimientoService {
 	public void Acept_mantenimiento(Integer id) {
 		mantenimientoRepository.Acept_mantenimiento(id);
 	}
+	
+	public void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo) {
+		mantenimientoRepository.LinkMantenimiento_Actividad_Obj_Provee(idActividad, idMantenimiento, idProveedor, idObjeto, costo);
+	}
+	
+	
 
 }
