@@ -94,6 +94,7 @@
 						<tr>
 							<th>Área</th>
 							<th>Descripción</th>
+							<th>Stock</th>
 							<th>Marca</th>
 							<th>Modelo</th>
 							<th>Creado El</th>
@@ -105,17 +106,18 @@
 		
 					<c:forEach var="objeto" items="${objetos}">
 					    <tr>
-						<td>${objeto.areaEmpresa.getNombreAreaEmpresa()}</td>
-						<td>${objeto.descripcionObjeto}</td>
-						<td>${objeto.marcaObjeto}</td>
-						<td>${objeto.modeloObjeto}</td>
-						<td>${objeto.fechaCreacionObjeto}</td>
-						<td>${objeto.fechaObtencionObjeto}</td>
-						<td>${objeto.categoria.getNombreCategoria()}</td>
-						<td>${objeto.objetoPadre.getDescripcionObjeto()}</td>
+						<td>${objeto[6].toString()}</td>
+						<td>${objeto[7].toString()}</td>
+						<td>${objeto[0].toString()}</td>
+						<td>${objeto[2].toString()}</td>
+						<td>${objeto[3].toString()}</td>
+						<td>${objeto[8].toString()}</td>
+						<td>${objeto[9].toString()}</td>
+						<td>${objeto[10].toString()}</td>
+						<td>${objeto[11].toString()}</td>
 						<td>
-						  <spring:url value="/deleteObjeto/${objeto.idObjeto}" var="deleteUrl" />
-						  <spring:url value="/objeto/${objeto.idObjeto}" var="updateUrl" />
+						  <spring:url value="/deleteObjeto/${objeto[1]}" var="deleteUrl" />
+						  <spring:url value="/objeto/${objeto[1]}" var="updateUrl" />
 		
 						  <button class="btn btn-primary"
 		                                          onclick="location.href='${updateUrl}'">Update</button>

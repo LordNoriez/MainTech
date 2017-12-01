@@ -12,9 +12,9 @@ public class ObjetoService {
 	@Autowired
 	private ObjetoRepository objetoRepository;
 	
-	public List<Objeto> getAllObjeto(){
-		List<Objeto> objetos = new ArrayList<>();
-		objetoRepository.findAll()
+	public List<Object[]> getAllObjeto(){
+		List<Object[]> objetos = new ArrayList<>();
+		objetoRepository.getFullObjeto()
 		.forEach(objetos::add);
 		return objetos;
 	}

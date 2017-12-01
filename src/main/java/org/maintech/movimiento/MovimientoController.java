@@ -29,8 +29,7 @@ public class MovimientoController {
 	
 	@RequestMapping("/Movimiento/{idMovimiento}")
 	public String getMovimientoUpdate(@PathVariable("idMovimiento") Integer id,Model model){
-		model.addAttribute("VarMovimiento", movimientoService.getMovimiento(id));
-		
+		model.addAttribute("movimiento", movimientoService.getMovimiento(id));
 		return "Movimiento/MovimientoUpdate";
 	}
 	

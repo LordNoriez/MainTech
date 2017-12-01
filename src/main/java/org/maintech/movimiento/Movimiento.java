@@ -25,15 +25,32 @@ public class Movimiento {
 	private String NombreMovimiento;
 	private Date FechaMovimiento;
 	private String DescripcionMovimiento;
-	
+	private Integer CantidadMovimiento;
+
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
 	
 	@ManyToOne
-	private TipoMovimiento tipomovimiento;
+	private TipoMovimiento tipoMovimiento;
 
 	@ManyToOne
 	private Objeto objeto;
+	
+	public Integer getCantidadMovimiento() {
+		return CantidadMovimiento;
+	}
+
+	public void setCantidadMovimiento(Integer cantidadMovimiento) {
+		CantidadMovimiento = cantidadMovimiento;
+	}
+
+	public TipoMovimiento getTipoMovimiento() {
+		return tipoMovimiento;
+	}
+
+	public void setTipoMovimiento(TipoMovimiento tipoMovimiento) {
+		this.tipoMovimiento = tipoMovimiento;
+	}
 	
 	public Integer getIdMovimiento() {
 		return idMovimiento;
@@ -76,11 +93,11 @@ public class Movimiento {
 	}
 
 	public TipoMovimiento getTipomovimiento() {
-		return tipomovimiento;
+		return tipoMovimiento;
 	}
 
 	public void setTipomovimiento(TipoMovimiento tipomovimiento) {
-		this.tipomovimiento = tipomovimiento;
+		this.tipoMovimiento = tipomovimiento;
 	}
 
 	public Objeto getObjeto() {
@@ -92,14 +109,15 @@ public class Movimiento {
 	}
 
 	public Movimiento(Integer idMovimiento, String nombreMovimiento, Date fechaMovimiento, String descripcionMovimiento,
-			Boolean active, TipoMovimiento tipomovimiento, Objeto objeto) {
+			Integer cantidadMovimiento, Boolean active, TipoMovimiento tipoMovimiento, Objeto objeto) {
 		super();
 		this.idMovimiento = idMovimiento;
 		NombreMovimiento = nombreMovimiento;
 		FechaMovimiento = fechaMovimiento;
 		DescripcionMovimiento = descripcionMovimiento;
+		CantidadMovimiento = cantidadMovimiento;
 		this.active = active;
-		this.tipomovimiento = tipomovimiento;
+		this.tipoMovimiento = tipoMovimiento;
 		this.objeto = objeto;
 	}
 
