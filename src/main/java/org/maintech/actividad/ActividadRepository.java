@@ -22,7 +22,7 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer> 
 	    )
 	public Actividad findLast();
 	
-	@Query(value = "select actividad.id_actividad, descripcion_actividad, nombre_actividad, nombre_proveedor, costo, DATE_FORMAT(fecha_inicio_costo, '%d/%M/%Y'), DATE_FORMAT(fecha_fin_costo, '%d/%M/%Y') from " + 
+	@Query(value = "select actividad.id_actividad, descripcion_actividad, nombre_actividad, nombre_proveedor, costo, DATE_FORMAT(fecha_inicio_costo, '%d/%M/%Y'), DATE_FORMAT(fecha_fin_costo, '%d/%M/%Y'), proveedor.id_proveedor, costo.id_costo from " + 
 	    " actividad, proveedor, (select id_actividad, id_proveedor, max(id_costo) as idC from actividad_proveedor group by id_actividad, id_proveedor) as actProv, costo where " + 
 	    " actividad.is_active=true and actProv.id_actividad=actividad.id_actividad and actProv.id_proveedor=proveedor.id_proveedor and " + 
 	    " actProv.idC=costo.id_costo;", nativeQuery=true)
@@ -36,7 +36,7 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer> 
 			nativeQuery=true)
 	public Integer getProveedorActividad(Integer id);
 	
-	@Query(value = "select * from actividad_proveedor where id_actividad=?1 and id_proveedor=?2 and id_costo=?3", 
+	@Query(value = "select * from actividad_proveedor where id_actividad=?1 and id_proveedor=?2 and id_costo=?3;", 
 			nativeQuery=true)
 	public ActividadProveedor getActividadProveedor(Integer idActividad, Integer idProveedor, Integer idCosto);
 }

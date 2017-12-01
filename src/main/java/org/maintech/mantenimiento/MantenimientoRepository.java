@@ -64,5 +64,17 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		@Transactional
 		@Modifying
 		void Acept_mantenimiento(Integer id);
+	    
+		@Query(value = "select mantenimiento.id_mantenimiento, nombre_mantenimiento, descripcion_mantenimiento, " + 
+						" nombre_tipo_mantenimiento, fecha_mantenimiento, " +
+						" objeto.id_objeto, marca_objeto, descripcion_objeto, proveedor.id_proveedor, nombre_proveedor " + 
+				" from tipo_mantenimiento, proveedor, objeto, mantenimiento, mantenimiento_objeto_actividad " + 
+				" where mantenimiento.obj_tipo_mantenimiento_id_tipo_mantenimiento=tipo_mantenimiento.id_tipo_mantenimiento and " + 
+					" mantenimiento_objeto_actividad.id_mantenimiento=mantenimiento.id_mantenimiento and " + 
+					" mantenimiento_objeto_actividad.id_proveedor=proveedor.id_proveedor and " + 
+					" mantenimiento_objeto_actividad.id_objeto=objeto.id_objeto and mantenimiento.is_active=-1;",
+		        nativeQuery=true
+		    )
+		    public List<Object[]> getFullMantenimientos();
 				
 }

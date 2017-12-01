@@ -1,8 +1,13 @@
 package org.maintech.actividadproveedor;
 
 import java.security.Principal;
+import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
+import org.maintech.costo.Costo;
 import org.maintech.costo.CostoService;
 import org.maintech.proveedor.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +64,35 @@ public class ActividadProveedorController {
 		model.addAttribute("proveedores", proveedorService.getAllProveedores());
 		model.addAttribute("costos", costoService.getAllCostos());
 		 
+		return "ActividadProveedor/ActividadProveedorUpdate";
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT, value="/actualizarActividadProveedor/{idActividad}/{idProveedor}/{idCosto}")  	
+	public String getProveedorActividadProveedorUpdate(HttpServletRequest request, @ModelAttribute("crearProveedorActividadProveedor") ActividadProveedor actividadProveedor, 
+			BindingResult result, Model model, Principal principal) {
+		
+		String url = request.getRequestURL().toString();
+		StringTokenizer params=new StringTokenizer(url, "/");
+		params.nextToken();
+		params.nextToken();
+        Integer idActividad = Integer.parseInt(params.nextToken());
+        Integer idProveedor = Integer.parseInt(params.nextToken());
+        Integer idCosto = Integer.parseInt(params.nextToken());
+		
+		ActividadProveedor ad = new ActividadProveedor();
+		Costo cost = new Costo();
+		Actividad act = new Actividad();
+		
+		if (idActividad != null && idProveedor != null && idCosto != null){
+			ad = actividadService.getActividadProveedor(idActividad, idProveedor, idCosto);
+			cost = ad.getCosto();
+			act = ad.getActividad();			
+		}
+		
+		model.addAttribute("actividadProveedor", ad);
+		model.addAttribute("costo", cost);
+		model.addAttribute("actividad", act);
+		model.addAttribute("proveedores", proveedorService.getAllProveedores());		
 		return "ActividadProveedor/ActividadProveedorUpdate";
 	}
     

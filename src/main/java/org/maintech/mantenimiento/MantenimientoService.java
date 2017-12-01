@@ -87,5 +87,9 @@ public class MantenimientoService {
 	public void Acept_mantenimiento(Integer id) {
 		mantenimientoRepository.Acept_mantenimiento(id);
 	}
+	
+	public List<Object[]> getFullMantenimientos (){
+		return mantenimientoRepository.getFullMantenimientos();
+	}
 
 }

@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Actividades</title>
+    <title>Editar Actividad</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,7 +40,7 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-		
+					
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Ver Actividades</h4>
+				        <h4 class="text-muted">Editar Actividad</h4>
 			        </div>
 			    </div>
 			</div>
@@ -89,54 +89,52 @@
 			    					
 				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
 					
-			</div>
+			</div>					
 			
-
-			<div class=" col-md-8 table-responsive"  >
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Descripción</th>
-							<th>Proveedor</th>
-							<th>Costo ($)</th>
-							<th>Desde El</th>
-							<th>Hasta El</th>
-						</tr>
-					</thead>
-		
-					<c:forEach var="activida" items="${actividades}">
-					    <tr>
-							<td>${activida[2].toString()}</td>					
-							<td>
-								<spring:url value="/actualizarActividad/${activida[0]}" var="updateUrl" />
-								<a href="${updateUrl}">${activida[1].toString()}</a>
-							</td>	
-<!-- 							<td> -->
-<%-- 								<spring:url value="/actualizarActividad/${activida[0]}" var="updateUrl" /> --%>
-<%-- 							  	<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>								 --%>
-<!-- 							</td>				 -->
-							<td>
-								<spring:url value="/actualizarActividadProveedor/${activida[0]}/${activida[7]}/${activida[8]}" var="updateUrl2" />
-			
-								<a href="${updateUrl2}">${activida[3].toString()}</a>
-							</td>					
-							<td>$ ${activida[4].toString()}</td>
-							<td>${activida[5].toString()}</td>
-							<td>${activida[6].toString()}</td>					
-							<td>
-								  <spring:url value="/deleteActividad/${activida[0]}" var="deleteUrl" />							  
-				                                                                             
-								  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button>
-		                     </td>
-					    </tr>
-					</c:forEach>
-				</table>
-			</div>
-
-	</div>
+			<div class=" col-md-8"  >
+				
+				<form:form method="post" modelAttribute="crearProveedorActividadProveedor" action="/addActividadProveedor">
+					
+					<label>Actividad: </label>					        
+					<form:select class="form-control" path="actividad">
+						<form:option value="${actividad.idActividad}" label="${actividad.nombreActividad}" />				
+					</form:select>
+					<br>
+					
+<!-- 					<label>Nombre: </label> -->
+<%-- 					<input type="text" class="form-control" readonly value = "${actividad.nombreActividad}"/>					 --%>
+<!-- 					<br> -->
 	
-	<div id="snackbar" class="alert alert-danger">Actividad Eliminada Correctamente</div>
+					<label>Descripción: </label>
+					<input type="text" class="form-control" readonly value = "${actividad.descripcionActividad}"/>					
+					<br>						
+					
+					<label>Costo ($): </label>				        
+					<form:select class="form-control" path="costo">
+						<form:option value="${costo.idCosto}" label="${costo.costo}" />						
+					</form:select>				
+					<br>	
+									
+					<fmt:formatDate value="${costo.fechaInicioCosto}" var="dateString" pattern="yyyy-MM-dd" />
+					<label>Fecha de Inicio: </label>
+					<input class="form-control" type="date" readonly value = "${dateString}" /> <!-- bind to user.name-->
+					<br>
+					
+					<label>Proveedor: </label>						        
+					<form:select class="form-control" path="proveedor">
+						<form:options items="${proveedores}" itemLabel="NombreProveedor" itemValue="idProveedor" />
+					</form:select>
+					<br>
+					
+					<br>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Proveedor</button>
+				</form:form>
+	        </div>
+		</div>
+		
+	        <!-- The actual snackbar -->
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
+        
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>

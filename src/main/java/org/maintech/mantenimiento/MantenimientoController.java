@@ -51,7 +51,7 @@ public class MantenimientoController {
 	@RequestMapping(value = "/mantenimiento", method = RequestMethod.GET)
 	public String showAllMantenimientos(Model model) {
 
-		model.addAttribute("mantenimientos", mantenimientoService.getAllMantenimiento());
+		model.addAttribute("mantenimientos", mantenimientoService.getFullMantenimientos());
 		return "Mantenimiento/MantenimientoRead";
 
 	}

@@ -98,21 +98,29 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Tipo</th>
+							<th>Objeto</th>
 							<th>Fecha</th>
+							<th>Proveedor</th>
 							<th>Programado?</th>
 							<th>Frecuencia</th>
-							<th>Objeto</th>
+							<th>Aceptado?</th>
+							<th>En Proceso?</th>
+							<th>Terminado?</th>
 						</tr>
 					</thead>
 		
 					<c:forEach var="mantenimiento" items="${mantenimientos}">
 					    <tr>
-							<td>${mantenimiento.nombreMantenimiento}</td>
-							<td>${mantenimiento.objTipoMantenimiento.getNombreTipoMantenimiento()}</td>							
-							<td>${mantenimiento.fechaMantenimiento}</td>
-							<td>${mantenimiento.isProgramadoMantenimiento}</td>
-							<td>${mantenimiento.frecuenciaMantenimiento}</td>
-							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td>
+							<td>${mantenimiento[1].toString()}</td>
+							<td>${mantenimiento[3].toString()}</td>		
+							<td>${mantenimiento[6].toString()} ${mantenimiento[7].toString()}</td>				
+							<td>${mantenimiento[4].toString()}</td>			
+							<td>${mantenimiento[9].toString()}</td>	
+							<td>${mantenimiento[10].toString()}</td>	
+							<td>${mantenimiento[11].toString()}</td>	
+							<td>${mantenimiento[12].toString()}</td>	
+							<td>${mantenimiento[13].toString()}</td>	
+							<td>${mantenimiento[14].toString()}</td>
 			
 							<td>
 							  <spring:url value="/deleteMantenimiento/${mantenimiento.idMantenimiento}" var="deleteUrl" />

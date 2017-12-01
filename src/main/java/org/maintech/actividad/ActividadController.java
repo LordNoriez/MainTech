@@ -61,15 +61,12 @@ public class ActividadController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/updateActividad/{idActividad}")
-	public String updateActividad(Actividad actividad, @PathVariable("idActividad") Integer id, Model model){
+	public ModelAndView updateActividad(Actividad actividad, @PathVariable("idActividad") Integer id){
 
 		actividad.setActive(true);
 		ActividadService.updateActividad(id, actividad);
-		model.addAttribute("costo", costoService.getCosto(ActividadService.getCostoActividad(id)).getIdCosto());
-		model.addAttribute("proveedor", proveedorService.getProveedor(ActividadService.getProveedorActividad(id)).getIdProveedor());
-		model.addAttribute("actividadProveedor", ActividadService.getActividadProveedor(id, proveedorService.getProveedor(ActividadService.getProveedorActividad(id)).getIdProveedor(), costoService.getCosto(ActividadService.getCostoActividad(id)).getIdCosto()));
-		return "Costo/CostoUpdate";
-//		return new ModelAndView("redirect:/actividad");
+		
+		return new ModelAndView("redirect:/actividad");
 	}
 	
 	@RequestMapping(value="/deleteActividad/{idActividad}")
