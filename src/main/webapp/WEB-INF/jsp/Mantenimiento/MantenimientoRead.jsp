@@ -121,7 +121,7 @@
 							<td>${mantenimiento[15]}</td>	
 							<td>${mantenimiento[10]}</td>	
 							<td>${mantenimiento[11]}</td>	
-							<td>${mantenimiento[12]}</td>	
+							<td><a href="/mantenimientoAceptado/${mantenimiento[0]}">${mantenimiento[12]}</a></td>	
 							<td>${mantenimiento[13]}</td>	
 							<td>${mantenimiento[14]}</td>
 <%-- 							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td> --%>

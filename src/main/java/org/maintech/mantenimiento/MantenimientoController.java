@@ -165,6 +165,21 @@ public class MantenimientoController {
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 	
+
+	@RequestMapping(method=RequestMethod.PUT, value="/mantenimientoAceptado/{idMantenimiento}")
+	public ModelAndView updateMantenimientoAceptado(@PathVariable("idMantenimiento") Integer id) {
+		
+		Mantenimiento mantenimiento = mantenimientoService.getMantenimiento(id);
+		if (mantenimiento.getIsAceptadoMantenimiento()) {
+			mantenimiento.setIsAceptadoMantenimiento(false);
+		} else{
+			mantenimiento.setIsAceptadoMantenimiento(true);
+		}
+		mantenimientoService.updateMantenimiento(id, mantenimiento);
+		
+		return new ModelAndView("redirect:/mantenimiento");
+	}
+	
 	@RequestMapping(value="/deleteMantenimiento/{idMantenimiento}")
 	public ModelAndView deactiveMantenimiento(@PathVariable("idMantenimiento") Integer id) {
 		mantenimientoService.sofDeleteMantenimiento(id);

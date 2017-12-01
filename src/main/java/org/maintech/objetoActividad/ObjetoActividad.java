@@ -1,4 +1,4 @@
-package org.maintech.objetoactividad;
+package org.maintech.objetoActividad;
 
 
 import javax.persistence.AssociationOverride;
