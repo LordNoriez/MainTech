@@ -98,7 +98,7 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Tipo</th>
-							<th>Objeto</th>
+							<th>Equipo</th>
 							<th>Fecha</th>
 							<th>Proveedor</th>
 							<th>Programado?</th>
@@ -117,21 +117,16 @@
 							<td>${mantenimiento[6].toString()} ${mantenimiento[7].toString()}</td>				
 							<td>${mantenimiento[4].toString()}</td>			
 							<td>${mantenimiento[9].toString()}</td>	
-							<td>${mantenimiento[10].toString()}</td>	
-							<td>${mantenimiento[11].toString()}</td>	
-							<td>${mantenimiento[12].toString()}</td>	
-							<td>${mantenimiento[13].toString()}</td>	
-							<td>${mantenimiento[14].toString()}</td>
-							<td>${mantenimiento.nombreMantenimiento}</td>
-							<td>${mantenimiento.objTipoMantenimiento.getNombreTipoMantenimiento()}</td>							
-							<td>${mantenimiento.fechaMantenimiento}</td>
-							<td>${mantenimiento.isProgramadoMantenimiento}</td>
-							<td>${mantenimiento.frecuenciaMantenimiento}</td>
+							<td>${mantenimiento[10]}</td>	
+							<td>${mantenimiento[11]}</td>	
+							<td>${mantenimiento[12]}</td>	
+							<td>${mantenimiento[13]}</td>	
+							<td>${mantenimiento[14]}</td>
 <%-- 							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td> --%>
 			
 							<td>
-							  <spring:url value="/deleteMantenimiento/${mantenimiento.idMantenimiento}" var="deleteUrl" />
-							  <spring:url value="/mantenimiento/${mantenimiento.idMantenimiento}" var="updateUrl" />
+							  <spring:url value="/deleteMantenimiento/${mantenimiento[0].toString()}" var="deleteUrl" />
+							  <spring:url value="/mantenimiento/${mantenimiento[0].toString()}" var="updateUrl" />
 			
 							  <button class="btn btn-primary"
 			                                          onclick="location.href='${updateUrl}'">Update</button>
