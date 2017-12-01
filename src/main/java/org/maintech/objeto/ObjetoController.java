@@ -8,7 +8,7 @@ import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
 import org.maintech.areaempresa.AreaEmpresaService;
 import org.maintech.categoria.CategoriaService;
-import org.maintech.objetoActividad.ObjetoListActividad;
+import org.maintech.objetoactividad.ObjetoListActividad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

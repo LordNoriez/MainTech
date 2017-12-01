@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.mail.internet.MimeMessage;
 
+import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
 import org.maintech.actividadproveedor.ActividadProveedor;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
@@ -119,7 +120,8 @@ public class MantenimientoController {
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public String crearobjmantenimientoObjetoActividad(Mantenimiento mantenimiento, @ModelAttribute("crearModelGroupMantenimientoObjeto") GroupMantenimientoObjeto groupMantenimientoObjeto,
 			BindingResult result, Model model){
-		groupMantenimientoObjeto.setMantenimientos(mantenimiento.getIdMantenimiento());
+		mantenimientoService.addMantenimiento(mantenimiento);
+		model.addAttribute("idMantenimiento",  mantenimiento.getIdMantenimiento());
 		model.addAttribute("itemobjeto", objetoService.getAllObjeto());
 		model.addAttribute("actividades", actividadService.getAllActividad());
 		model.addAttribute("proveedores",  proveedorService.getAllProveedores());
@@ -130,13 +132,20 @@ public class MantenimientoController {
 	public ModelAndView addMantObjeto(@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantenimientoObjeto,
 			BindingResult result, Model model) {
 
-		for (ActividadProveedor actividadProveedor: groupMantenimientoObjeto.getActividadesProveedores()) {
+//		for (ActividadProveedor actividadProveedor: groupMantenimientoObjeto.getActividadesProveedores()) {
+//		
+//			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(actividadProveedor.getActividad().getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
+//					, actividadProveedor.getProveedor().getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), actividadProveedor.getCosto().getCosto());
+//		} 
 		
-			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(actividadProveedor.getActividad().getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
-					, actividadProveedor.getProveedor().getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), actividadProveedor.getCosto().getCosto());
+		for (Actividad actividadProveedor: groupMantenimientoObjeto.getActividades()) {
+		
+			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(actividadProveedor.getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
+					, 1, groupMantenimientoObjeto.getIdobjeto(), 2.6);
 		} 
 		
 		return new ModelAndView("redirect:/mantenimiento");
+
 	}
 	
 	
