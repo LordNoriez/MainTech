@@ -95,5 +95,11 @@ public class MantenimientoService {
 	public void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo) {
 		mantenimientoRepository.LinkMantenimiento_Actividad_Obj_Provee(idActividad, idMantenimiento, idProveedor, idObjeto, costo);
 	}
+	
+	public List<Object[]> getAct_ProvxObjt(Integer idObjeto) {
+		List<Object[]> ActvObjProve = new ArrayList<>();
+		mantenimientoRepository.getAct_ProvxObjt(idObjeto).forEach(ActvObjProve::add);
+		return ActvObjProve;
+	}
 
 }

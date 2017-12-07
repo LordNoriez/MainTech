@@ -60,8 +60,8 @@
 		  	<p>Proveedores
 		  <a href="/crearProveedor">Crear</a>
 		  <a href="/proveedor">Ver</a>
-	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
-	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
+	<!-- 	  <a href="/crearCategoria">Crear CategorÃ­a</a> -->
+	<!-- 	  <a href="/categoria">Ver CategorÃ­as</a> -->
 	</div>
 	<div class="container-fluid" id="main">
     
@@ -87,7 +87,7 @@
 			    </div>	
 			    
 			    					
-				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
+				<button type="button" onclick="openNav()" class="btn btn-info btn-block">MenÃº</button>				
 					
 			</div>					
 			
@@ -105,7 +105,7 @@
 					<br>
 					
 					<label>Objetos </label>
-					<form:select class="form-control" path="idobjeto">
+					<form:select class="form-control" path="idobjeto" onchange="callMe(this)">
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
 					</form:select>
@@ -115,15 +115,24 @@
 					<br>
 					<label>Proveedores: </label>
 					<form:select class="form-control" multiple="true" path="proveedores" items="${proveedores}" itemLabel="nombreProveedor" itemValue="idProveedor" />
-					
 					<br>
+					<br>
+					<select id="ddl" onchange="callMe(this,document.getElementById('ddl2'))">
+					<option value=""></option>
+					<option value="Colours">Colours</option>
+					<option value="Shapes">Shapes</option>
+					<option value="Names">Names</option>
+					</select>
+					
+					<select id="ddl2" name="ddl2" multiple="true">
+					</select>
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
 				</form:form>
 	        </div>
 		</div>
 		
 	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>
+        <div id="snackbar" class="alert alert-success">Se IngresÃ³ Correctamente</div>
         
 
     <footer class="footer">
@@ -162,6 +171,71 @@
 		};
 	});
 	</script>
+	
+	<script type="text/javascript">
+	     function configureDropDownLists(ddl1,ddl2) {
+	    var colours = ['Black', 'White', 'Blue'];
+	    var shapes = ['Square', 'Circle', 'Triangle'];
+	    var names = ['John', 'David', 'Sarah'];
+	
+	    switch (ddl1.value) {
+	        case 'Colours':
+	            ddl2.options.length = 0;
+	            for (i = 0; i < colours.length; i++) {
+	                createOption(ddl2, colours[i], colours[i]);
+	            }
+	            break;
+	        case 'Shapes':
+	            ddl2.options.length = 0; 
+	        for (i = 0; i < shapes.length; i++) {
+	            createOption(ddl2, shapes[i], shapes[i]);
+	            }
+	            break;
+	        case 'Names':
+	            ddl2.options.length = 0;
+	            for (i = 0; i < names.length; i++) {
+	                createOption(ddl2, names[i], names[i]);
+	            }
+	            break;
+	            default:
+	                ddl2.options.length = 0;
+	            break;
+	    }â€‹
+
+	}
+	
+	    function createOption(ddl, text, value) {
+	        var opt = document.createElement('option');
+	        opt.value = value;
+	        opt.text = text;
+	        ddl.options.add(opt);
+	    }
+	    
+	    
+	</script>
+	
+	<script type="text/javascript">
+        function callMe(objtoid) {
+            var districtId = objtoid.value;
+          
+            $.ajax({
+                type: "POST",
+                url: "someUrl",
+                dataType: "json",
+                data: {
+                    varname1 : "varvalue1",
+                    varname2 : "varvalue2"
+                },
+                success: function (data) {
+                    $('#ddl2').empty(); // empty existing list
+                    $('#ddl2').append('<option value="">Some Label</option>');
+                    $.each(data, function (varvalue, vartext){
+                        $('#ddl2').append($('<option></option>').val(varvalue).html(vartext));
+                    });  
+                }
+            });
+        }    
+    </script> 
 
 </body>
 </html>

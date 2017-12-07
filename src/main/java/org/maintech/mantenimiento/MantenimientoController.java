@@ -3,9 +3,11 @@ package org.maintech.mantenimiento;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 
+import org.dom4j.Branch;
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
@@ -21,8 +23,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -170,6 +174,31 @@ public class MantenimientoController {
 
 	}
 	
+	@RequestMapping(value = "/addBranch", method = RequestMethod.POST)
+	public @ResponseBody 
+	List getForm1(@ModelAttribute Branch branch, Model model,@RequestParam("districtId")    
+	int districtId) {
+
+	       List<Object[]> districtVillageList = mantenimientoService.getAct_ProvxObjt(districtId);
+
+
+	    return districtVillageList;
+	 }
+	
+	@RequestMapping(value="phcheck", method=RequestMethod.GET,
+            produces="application/json")
+	public @ResponseBody List<Object[]> pay(@RequestParam("empid") int empid) {
+		List<Object[]> districtVillageList = mantenimientoService.getAct_ProvxObjt(empid);
+	//get your employee list here
+	return districtVillageList;
+	}
+	
+	@RequestMapping(value = "/someUrl", method=RequestMethod.POST)
+	@ResponseBody
+	public String getJsonData(@RequestBody String parameters) {
+	    String exampleData = "{\"somename1\":\"somevalue1\",\"somename2\":\"somevalue2\"}";
+	    return exampleData;
+	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {

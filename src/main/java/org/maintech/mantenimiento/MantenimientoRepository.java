@@ -90,4 +90,9 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		@Modifying
 		void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo);
 				
+		
+		@Query(value = "select descripcion_actividad, actividad.id_actividad,nombre_proveedor,actividad_proveedor.id_proveedor from objeto_actividad INNER JOIN actividad ON actividad.id_actividad = objeto_actividad.id_actividad INNER JOIN actividad_proveedor ON actividad.id_actividad = actividad_proveedor.id_actividad INNER JOIN proveedor ON proveedor.id_proveedor= actividad_proveedor.id_proveedor where objeto_actividad.objeto_id_objeto = ?1",
+		        nativeQuery=true
+		    )
+		    public List<Object[]> getAct_ProvxObjt(Integer idObjeto);
 }
