@@ -19,6 +19,13 @@ public class ObjetoService {
 		return objetos;
 	}
 	
+	public List<Object> returnAllObjeto(){
+		List<Object> objetos = new ArrayList<>();
+		objetoRepository.findAll()
+		.forEach(objetos::add);
+		return objetos;
+	}
+	
 	public Objeto getObjeto (Integer id) {
 		return objetoRepository.findOne(id);
 	}

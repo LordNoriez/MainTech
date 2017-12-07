@@ -8,7 +8,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
-import org.maintech.actividadproveedor.ActividadProveedor;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
 import org.maintech.objeto.ObjetoService;
 import org.maintech.proveedor.ProveedorService;
@@ -122,7 +121,7 @@ public class MantenimientoController {
 			BindingResult result, Model model){
 		mantenimientoService.addMantenimiento(mantenimiento);
 		model.addAttribute("idMantenimiento",  mantenimiento.getIdMantenimiento());
-		model.addAttribute("itemobjeto", objetoService.getAllObjeto());
+		model.addAttribute("itemobjeto", objetoService.returnAllObjeto());
 		model.addAttribute("actividades", actividadService.getAllActividad());
 		model.addAttribute("proveedores",  proveedorService.getAllProveedores());
 		return "MantenimientoObjetoActividad/MantenimientoObjetoActividadCrear";
@@ -138,16 +137,38 @@ public class MantenimientoController {
 //					, actividadProveedor.getProveedor().getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), actividadProveedor.getCosto().getCosto());
 //		} 
 		
-		for (Actividad actividadProveedor: groupMantenimientoObjeto.getActividades()) {
+//		for (Actividad actividadProveedor: groupMantenimientoObjeto.getActividades()) {
+//		
+//			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(actividadProveedor.getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
+//					, 1, groupMantenimientoObjeto.getIdobjeto(), 2.6);
+//		}
 		
-			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(actividadProveedor.getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
-					, 1, groupMantenimientoObjeto.getIdobjeto(), 2.6);
-		} 
+		for (int i = 0; i < groupMantenimientoObjeto.getActividades().size(); i++) {
+			
+			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(groupMantenimientoObjeto.getActividades().get(i).getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
+					, groupMantenimientoObjeto.getProveedores().get(i).getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), 2.6);
+		}
+		
+		
 		
 		return new ModelAndView("redirect:/mantenimiento");
 
 	}
 	
+	@RequestMapping(method=RequestMethod.POST, value="/LinkMantObjeto1")
+	public String zz(@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantenimientoObjeto,
+			BindingResult result, Model model) {
+		
+		model.addAttribute("idmantenimiento", groupMantenimientoObjeto.getMantenimientos());
+		model.addAttribute("idobjeto", groupMantenimientoObjeto.getIdobjeto());
+		model.addAttribute("actividades",groupMantenimientoObjeto.getActividades());
+		model.addAttribute("proveedor",groupMantenimientoObjeto.getProveedores());
+		
+		
+		
+		return "MantenimientoObjetoActividad/prueba";
+
+	}
 	
 
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")

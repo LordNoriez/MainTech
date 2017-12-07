@@ -99,25 +99,23 @@
 				
 				<spring:url value="/LinkMantObjeto" var="variableAdd" />
 				<form:form method="post" modelAttribute="crearModelGroupMantenimientoObjeto" action="${variableAdd}">
-					
-					<label>idMantenimiento: </label>
-					<form:input type="text" path="mantenimientos" class="form-control" value = "${idMantenimiento}"/>					
+					<label>mante</label>
+					${idmantenimiento}
+					<br>					
+					<label>obj</label>
+					${idobjeto}
 					<br>
-					
-					<label>Objetos </label>
-					<form:select class="form-control" path="idobjeto">
-						<form:option value="" label="--- Select ---" />
-						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
-					</form:select>
-					
-					<label>Actividades: </label>
-					<form:select class="form-control" multiple="true" path="actividades" items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" />
+					<label>actividades</label>
+				<c:forEach var="actividad" items="${actividades}">						
+					${actividad.nombreActividad}
 					<br>
-					<label>Proveedores: </label>
-					<form:select class="form-control" multiple="true" path="proveedores" items="${proveedores}" itemLabel="nombreProveedor" itemValue="idProveedor" />
-					
+				</c:forEach>
+				<label>proveedor</label>
+				<c:forEach var="proveedores" items="${proveedor}">						
+					${proveedores.nombreProveedor}
 					<br>
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
+				</c:forEach>
+				
 				</form:form>
 	        </div>
 		</div>
