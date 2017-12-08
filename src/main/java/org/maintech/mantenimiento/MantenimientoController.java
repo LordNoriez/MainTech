@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.mail.internet.MimeMessage;
 
@@ -117,12 +118,14 @@ public class MantenimientoController {
 	@RequestMapping(method=RequestMethod.POST, value="/LinkMantObjeto")
 	public ModelAndView addMantObjeto(@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantenimientoObjeto,
 			BindingResult result, Model model) {
-
+		double number = ThreadLocalRandom.current().nextDouble(0, 60);
+		number = Math.round(number * 100);
+		number = number/100;
 		
 		for (int i = 0; i < groupMantenimientoObjeto.getActividades().size(); i++) {
 			
 			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(groupMantenimientoObjeto.getActividades().get(i).getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
-					, groupMantenimientoObjeto.getProveedores().get(i).getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), 2.6);
+					, groupMantenimientoObjeto.getProveedores().get(i).getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), number);
 		}
 		
 		return new ModelAndView("redirect:/mantenimiento");
