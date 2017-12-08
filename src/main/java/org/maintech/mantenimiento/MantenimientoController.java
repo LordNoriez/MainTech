@@ -7,12 +7,14 @@ import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.dom4j.Branch;
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
 import org.maintech.objeto.ObjetoService;
 import org.maintech.proveedor.ProveedorService;
+import org.maintech.reporterol.ReporteRolService;
 import org.maintech.tipomantenimiento.TipoMantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -50,12 +52,12 @@ public class MantenimientoController {
 	
 	@Autowired
 	private TipoMantenimientoService tipoMantenimientoService;
+	
+	@Autowired
+	private ReporteRolService reporteRolService;
 		
     @Autowired
     private JavaMailSender mailSender;
-	
-//	@Autowired
-//	private ObjetoController objetoController;
 	
 	@RequestMapping(value = "/mantenimiento", method = RequestMethod.GET)
 	public String showAllMantenimientos(Model model) {
@@ -65,11 +67,6 @@ public class MantenimientoController {
 
 	}
 		
-//	@RequestMapping("/mantenimiento/{idMantenimiento}")
-//	public Mantenimiento getMantenimiento(@PathVariable("idMantenimiento") Integer id){
-//		return mantenimientoService.getMantenimiento(id);
-//	}
-	
 	@RequestMapping("/mantenimiento/{idMantenimiento}")
 	public String getMantenimientoUpdate(@PathVariable("idMantenimiento") Integer id,Model model){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
@@ -230,11 +227,25 @@ public class MantenimientoController {
 					mantenimiento.setIsTerminadoMantenimiento(false);
 				} else{
 					mantenimiento.setIsTerminadoMantenimiento(true);
+					if (mantenimiento.getIsProgramadoMantenimiento()) {
+//						Mantenimiento mant = new Mantenimiento();
+//						mant.setNombreMantenimiento(mantenimiento.getNombreMantenimiento());
+//						mant.setDescripcionMantenimiento(mantenimiento.getDescripcionMantenimiento());
+//						mant.setIsProgramadoMantenimiento(true);
+//						mant.setFrecuenciaMantenimiento(mantenimiento.getFrecuenciaMantenimiento());
+//						mant.setObjTipoMantenimiento(mantenimiento.getObjTipoMantenimiento());
+//						mant.setActive(true);
+//						mant.setIsAceptadoMantenimiento(false);
+//						mant.setIsEnProcesoMantenimiento(false);
+//						mant.setIsTerminadoMantenimiento(false);
+//						
+//						mant.setFechaMantenimiento(mantenimiento.getFechaMantenimiento());
+//						mantenimientoService.addMantenimiento(mant);
+					}
 				}
 				mantenimientoService.updateMantenimiento(id, mantenimiento);
 			}
 		}
-		
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 	
@@ -256,13 +267,10 @@ public class MantenimientoController {
 	}
 	
 
-	@Scheduled(fixedRate=240000)
+	@Scheduled(fixedRate=30000)
 	public void Rep(){
 		this.home();
 	}
-	
-	
-	// ------------- send mail
 	
 	@RequestMapping("/simpleemail")
     @ResponseBody
@@ -278,53 +286,67 @@ public class MantenimientoController {
     private void sendEmail() throws Exception{
     	
     	String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
-    	
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setTo(address);
-        /*helper.setText("<html><body><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>  "
-        		+ "<br><body></html>", true);*/
-        String texto1 = "<html> " 
-    			+"<head><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>"
-    			+"<link href='<c:url value='/resources/css/style.css' />"
-    			+"<script src='<c:url value='/resources/Js/scripts.js' />'></script>"
-    			+"</head><body>"
-    			+"<div class='container'>"
-    			+"<h1>Ver Mantenimientos</h1>"
-    			+"<table class='table table-striped'>"
-    			+"<thead>"
-    			+"<tr>"
-    			+"<th>ID</th>"
-    			+"<th>Nombre</th>"
-    			+"<th>Fecha</th>"
-    			+"<th>Es Programado ?</th>"
-    			+"<th>Frecuencia</th>"
-    			+"<th>Objeto</th>"
-    			+"</tr></thead>";
-        
-        String texto2="";
-        
-        for (Mantenimiento mantenimiento: mantenimientoService.MantenimientoxAceptar()) {
-        	
-	        	texto2 = texto2 + "<tr><td>" + mantenimiento.getIdMantenimiento().toString() + "</td>"
-					+"<td>" + mantenimiento.getNombreMantenimiento() + "</td>"
-					+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
-					+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
-					+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
-					//+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
-					+"<a href=\"http://localhost:8080/emailAcepted/" + mantenimiento.getIdMantenimiento().toString() + "\">Aceptar Mantenimiento</a>"
-					+ "</tr>";
-        	
-        };
-        		
-        
-        helper.setText(texto1
-			+ texto2                                                                                                                 
-			+"</tr></table></div></body></html>", true);
-        //<a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a>
-        helper.setSubject("Confirmar Mantenimiento");
-        mailSender.send(message);
+//    	String[] address = reporteRolService.getAllCorreos("Mantenimientos Emergentes");
+
+    	if (!isEmptyStringArray(address)) {
+
+	        MimeMessage message = mailSender.createMimeMessage();
+	        MimeMessageHelper helper = new MimeMessageHelper(message);
+	        helper.setTo(address);
+	        String texto1 = "<html> " 
+	    			+"<head><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>"
+	    			+"<link href='<c:url value='/resources/css/style.css' />"
+	    			+"<script src='<c:url value='/resources/Js/scripts.js' />'></script>"
+	    			+"</head><body>"
+	    			+"<div class='container'>"
+	    			+"<h1>Ver Mantenimientos</h1>"
+	    			+"<table class='table table-striped'>"
+	    			+"<thead>"
+	    			+"<tr>"
+	    			+"<th>ID</th>"
+	    			+"<th>Nombre</th>"
+	    			+"<th>Fecha</th>"
+	    			+"<th>Es Programado ?</th>"
+	    			+"<th>Frecuencia</th>"
+	    			+"<th>Objeto</th>"
+	    			+"</tr></thead>";
+	        
+	        String texto2="";
+	        
+	        if (mantenimientoService.MantenimientoxAceptar().size()!=0) {
+
+		        for (Mantenimiento mantenimiento: mantenimientoService.MantenimientoxAceptar()) {
+		        	
+			        	texto2 = texto2 + "<tr><td>" + mantenimiento.getIdMantenimiento().toString() + "</td>"
+							+"<td>" + mantenimiento.getNombreMantenimiento() + "</td>"
+							+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
+							+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
+							+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
+							//+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
+							+"<a href=\"http://localhost:8080/emailAcepted/" + mantenimiento.getIdMantenimiento().toString() + "\">Aceptar Mantenimiento</a>"
+							+ "</tr>";
+		        	
+		        };
+		        		
+		        
+		        helper.setText(texto1
+					+ texto2                                                                                                                 
+					+"</tr></table></div></body></html>", true);
+		        //<a href='http://localhost:8080/cMantenimiento'><img src='https://c24e867c169a525707e0-bfbd62e61283d807ee2359a795242ecb.ssl.cf3.rackcdn.com/imagenes/gato/etapas-clave-de-su-vida/gatitos/nuevo-gatito-en-casa/gatito-tumbado-lamiendo-sus-patitas.jpg'/></a>
+		        helper.setSubject("Confirmar Mantenimiento");
+		        mailSender.send(message);
+	        }
+    	}
     }
+    
+    public boolean isEmptyStringArray(String [] array){
+		 for(int i=0; i<array.length; i++){ 
+		  if(array[i]!=null){
+		   return false;
+		  }
+		  }
+		  return true;
+	}
 	
     @RequestMapping("/reporteCostos")
     private void sendEmailCostsReport() throws Exception{
@@ -431,46 +453,46 @@ public class MantenimientoController {
         helper.setSubject("Confirmar Mantenimiento");
         mailSender.send(message);
     }
-    @Scheduled(fixedRate=60000)
-	public void AutomatizacionMantenimiento(){
-		Mantenimiento MantProg;
-		Date now = new Date();
-		Integer auxForMantNumber;
-		String newnumber;
-		String NewNameMante;
-		
-		
-		for (Object[] revisiontiemp: mantenimientoService.MantenimientoRevisionFrecuenciaxTiempo()){
-			
-
-			
-			if(Float.parseFloat(revisiontiemp[1].toString()) < 0){
-				Mantenimiento NewMante = new Mantenimiento();
-				MantProg = mantenimientoService.getMantenimiento(Integer.parseInt(revisiontiemp[0].toString()));
-				
-				auxForMantNumber = Integer.parseInt(MantProg.getNombreMantenimiento().substring(MantProg.getNombreMantenimiento().length() - 3));
-				auxForMantNumber = auxForMantNumber + 1;
-				newnumber = "00000" + auxForMantNumber.toString();
-				NewNameMante = MantProg.getNombreMantenimiento().substring(0,MantProg.getNombreMantenimiento().length() - 3) + newnumber.substring(newnumber.length() - 3); 
-				
-				NewMante.setNombreMantenimiento(NewNameMante);
-				NewMante.setFechaMantenimiento(now);
-				NewMante.setDescripcionMantenimiento(MantProg.getDescripcionMantenimiento());
-				NewMante.setIsAceptadoMantenimiento(false);
-				NewMante.setIsProgramadoMantenimiento(true);
-				NewMante.setFrecuenciaMantenimiento(MantProg.getFrecuenciaMantenimiento());
-				//NewMante.setObjetoMantenimiento(MantProg.getObjetoMantenimiento());
-				NewMante.setActive(true);			
-				mantenimientoService.addMantenimiento(NewMante);
-	
-//				for(Actividad actividad: MantProg.getActividad()){
-//					
-//					mantenimientoService.LinkActividad_mantenimiento(actividad.getIdActividad(),
-//							mantenimientoService.IdUltimoMante());
-//				}
-			}
-		}
-		//return new ModelAndView("redirect:/mantenimiento");    
-	}
+//    @Scheduled(fixedRate=60000)
+//	public void AutomatizacionMantenimiento(){
+//		Mantenimiento MantProg;
+//		Date now = new Date();
+//		Integer auxForMantNumber;
+//		String newnumber;
+//		String NewNameMante;
+//		
+//		
+//		for (Object[] revisiontiemp: mantenimientoService.MantenimientoRevisionFrecuenciaxTiempo()){
+//			
+//
+//			
+//			if(Float.parseFloat(revisiontiemp[1].toString()) < 0){
+//				Mantenimiento NewMante = new Mantenimiento();
+//				MantProg = mantenimientoService.getMantenimiento(Integer.parseInt(revisiontiemp[0].toString()));
+//				
+//				auxForMantNumber = Integer.parseInt(MantProg.getNombreMantenimiento().substring(MantProg.getNombreMantenimiento().length() - 3));
+//				auxForMantNumber = auxForMantNumber + 1;
+//				newnumber = "00000" + auxForMantNumber.toString();
+//				NewNameMante = MantProg.getNombreMantenimiento().substring(0,MantProg.getNombreMantenimiento().length() - 3) + newnumber.substring(newnumber.length() - 3); 
+//				
+//				NewMante.setNombreMantenimiento(NewNameMante);
+//				NewMante.setFechaMantenimiento(now);
+//				NewMante.setDescripcionMantenimiento(MantProg.getDescripcionMantenimiento());
+//				NewMante.setIsAceptadoMantenimiento(false);
+//				NewMante.setIsProgramadoMantenimiento(true);
+//				NewMante.setFrecuenciaMantenimiento(MantProg.getFrecuenciaMantenimiento());
+//				//NewMante.setObjetoMantenimiento(MantProg.getObjetoMantenimiento());
+//				NewMante.setActive(true);
+//				mantenimientoService.addMantenimiento(NewMante);
+//	
+////				for(Actividad actividad: MantProg.getActividad()){
+////					
+////					mantenimientoService.LinkActividad_mantenimiento(actividad.getIdActividad(),
+////							mantenimientoService.IdUltimoMante());
+////				}
+//			}
+//		}
+//		//return new ModelAndView("redirect:/mantenimiento");    
+//	}
     
 }

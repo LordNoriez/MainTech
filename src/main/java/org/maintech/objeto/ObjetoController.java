@@ -1,19 +1,13 @@
 package org.maintech.objeto;
 
 import java.security.Principal;
-import java.util.List;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletResponse;
 
-import org.dom4j.Branch;
 import org.maintech.actividad.Actividad;
-import org.maintech.actividad.ActividadService;
 import org.maintech.actividadproveedor.ActividadProveedorService;
 import org.maintech.areaempresa.AreaEmpresaService;
 import org.maintech.categoria.CategoriaService;
-import org.maintech.costo.Costo;
-import org.maintech.mantenimiento.MantenimientoService;
 import org.maintech.objetoActividad.ObjetoListActividad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -25,8 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -35,9 +27,6 @@ public class ObjetoController {
 	
 	@Autowired
 	private ObjetoService objetoService;
-	
-	@Autowired
-	private ActividadService actividadService;
 	
 	@Autowired
 	private ActividadProveedorService actividadProveedorService;
@@ -144,53 +133,6 @@ public class ObjetoController {
 		}
         return "Se ha enviado el reporte al correo de los responsables";
     }
-// Done for the project for crocker :D		
-//	public List<Objeto> checkTimeObject (int funcion) {
-//		
-//		System.out.println(" 1 ");
-//		List<Objeto> objetos = objetoService.getAllObjeto();
-//		List<Objeto> proximos = new ArrayList<Objeto>();
-//		
-//		for(Objeto objeto : objetos){
-//			try {
-//				System.out.println(" 2 ");
-//				if (objeto.getTiempoMante() != null) {
-//					System.out.println(" 3 ");
-//					
-//					Date now = new Date();
-//					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-//				    Date date = sdf.parse(objeto.getTiempoMante().toString());
-//				    
-//				    long between = now.getTime() - date.getTime();
-//				    
-//					System.out.println(date);
-//					System.out.println(" < ");
-//					System.out.println(now);
-//					
-//					if (between >= 0){
-//						System.out.println(" 4 ");
-//						proximos.add(objeto);
-//					}						
-//				}
-//			} catch (ParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		for (Objeto objeto : proximos){
-//			System.out.println(objeto.getMarcaObjeto() + " " + objeto.getDescripcionObjeto() + " " + objeto.getTiempoMante());
-//			System.out.println(" 5 ");
-//		}
-//		if (funcion == 0){
-//			if (proximos.size() != 0){ 
-//				this.home();
-//				System.out.println(" 6 ");
-//			}			
-//		}
-//		
-//		return proximos;
-//	}
-	
 	
     private void sendReport() throws Exception {
     	

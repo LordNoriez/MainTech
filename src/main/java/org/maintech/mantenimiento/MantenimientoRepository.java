@@ -40,7 +40,8 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		    )
 		    public List<Object[]> MantenimientoxTiempo();
 		    
-		@Query(value = "select * from mantenimiento where is_aceptado_mantenimiento = 0 and is_programado_mantenimiento = 1",
+		@Query(value = "select * from mantenimiento where is_active=1 and is_aceptado_mantenimiento = 0 and " + 
+				" is_programado_mantenimiento = 1 and fecha_mantenimiento <= now()",
 		        nativeQuery=true
 		    )
 		    public List<Mantenimiento> MantexAceptar();

@@ -29,7 +29,7 @@ public class Mantenimiento {
 	private String DescripcionMantenimiento;
 	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean  isProgramadoMantenimiento;
-	private String FrecuenciaMantenimiento;
+	private Integer FrecuenciaMantenimiento;
 	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean isAceptadoMantenimiento;
 	@Column(columnDefinition="tinyint(1) default 0")
@@ -93,11 +93,11 @@ public class Mantenimiento {
 		this.active = active;
 	}
 	
-	public String getFrecuenciaMantenimiento() {
+	public Integer getFrecuenciaMantenimiento() {
 		return FrecuenciaMantenimiento;
 	}
 
-	public void setFrecuenciaMantenimiento(String frecuenciaMantenimiento) {
+	public void setFrecuenciaMantenimiento(Integer frecuenciaMantenimiento) {
 		FrecuenciaMantenimiento = frecuenciaMantenimiento;
 	}
 
@@ -148,7 +148,7 @@ public class Mantenimiento {
 	}
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
-			String descripcionMantenimiento, Boolean isProgramadoMantenimiento, String frecuenciaMantenimiento,
+			String descripcionMantenimiento, Boolean isProgramadoMantenimiento, Integer frecuenciaMantenimiento,
 			Objeto objetoMantenimiento, TipoMantenimiento objTipoMantenimiento,Set<Actividad> actividad, Boolean active, Boolean isAceptadoMantenimiento,
 			Boolean isEnProcesoMantenimiento, Boolean isTerminadoMantenimiento) {
 		super();

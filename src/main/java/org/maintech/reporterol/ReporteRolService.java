@@ -33,4 +33,8 @@ public class ReporteRolService {
 	public void deleteReporteRol(Integer id) {
 		reporteRolRepository.delete(id);
 	}
+	
+	public String[] getAllCorreos(String reporte){
+		return reporteRolRepository.getAllCorreos(reporte);
+	}
 }
