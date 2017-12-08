@@ -118,17 +118,47 @@
 							<td>${mantenimiento[6].toString()} ${mantenimiento[7].toString()}</td>				
 							<td>${mantenimiento[4].toString()}</td>			
 							<td>${mantenimiento[9].toString()}</td>	
-							<td>${mantenimiento[15]}</td>	
-							<td>${mantenimiento[10]}</td>	
-							<td>
-								
-								<input type="checkbox" class="form-control" checked>									
-								
-							
+							<td>${mantenimiento[15]}</td>
+							<td>	
+								<c:choose>
+								  <c:when test="${mantenimiento[10]==true}">
+								    <input type="checkbox" checked>
+								  </c:when>
+								  <c:otherwise>
+								    <input type="checkbox">
+								  </c:otherwise>
+								</c:choose>
 							</td>	
-							<td><a href="/mantenimientoAceptado/${mantenimiento[0]}">${mantenimiento[12]}</a></td>	
-							<td><a href="/mantenimientoProceso/${mantenimiento[0]}">${mantenimiento[13]}</a></td>
-							<td><a href="/mantenimientoTerminado/${mantenimiento[0]}">${mantenimiento[14]}</a></td>							
+							<td>${mantenimiento[11]}</td>
+							<td>							
+								<c:choose>
+								  <c:when test="${mantenimiento[12]==true}">
+								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoAceptado/${mantenimiento[0]}'">
+								  </c:when>
+								  <c:otherwise>
+								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoAceptado/${mantenimiento[0]}'">
+								  </c:otherwise>
+								</c:choose></td>	
+							<td>			
+								<c:choose>
+								  <c:when test="${mantenimiento[13]==true}">
+								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}'">
+								  </c:when>
+								  <c:otherwise>
+								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}'">
+								  </c:otherwise>
+								</c:choose></td>
+							
+							<td>	
+								<c:choose>
+								  <c:when test="${mantenimiento[14]==true}">
+								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}'">
+								  </c:when>
+								  <c:otherwise>
+								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}'">
+								  </c:otherwise>
+								</c:choose></td>
+										
 <%-- 							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td> --%>
 			
 							<td>

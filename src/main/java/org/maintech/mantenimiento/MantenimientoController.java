@@ -226,6 +226,7 @@ public class MantenimientoController {
 	public ModelAndView updateMantenimientoAceptado(@PathVariable("idMantenimiento") Integer id) {
 		
 		Mantenimiento mantenimiento = mantenimientoService.getMantenimiento(id);
+		
 		if (mantenimiento.getIsAceptadoMantenimiento()) {
 			mantenimiento.setIsAceptadoMantenimiento(false);
 			mantenimiento.setIsEnProcesoMantenimiento(false);
@@ -233,6 +234,7 @@ public class MantenimientoController {
 		} else{
 			mantenimiento.setIsAceptadoMantenimiento(true);
 		}
+		
 		mantenimientoService.updateMantenimiento(id, mantenimiento);
 		
 		return new ModelAndView("redirect:/mantenimiento");
