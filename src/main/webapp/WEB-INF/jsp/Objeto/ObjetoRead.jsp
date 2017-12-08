@@ -114,7 +114,7 @@
 						<td>${objeto[8].toString()}</td>
 						<td>${objeto[9].toString()}</td>
 						<td>${objeto[10].toString()}</td>
-						<td>${objeto[11].toString()}</td>
+						<td>${objeto[11].toString()} ${objeto[12].toString()}</td>
 						<td>
 						  <spring:url value="/deleteObjeto/${objeto[1]}" var="deleteUrl" />
 						  <spring:url value="/objeto/${objeto[1]}" var="updateUrl" />

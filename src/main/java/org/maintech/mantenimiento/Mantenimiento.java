@@ -144,6 +144,7 @@ public class Mantenimiento {
 
 	public Mantenimiento() {
 		super();
+		this.active = true;
 	}
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
@@ -158,7 +159,7 @@ public class Mantenimiento {
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 		FrecuenciaMantenimiento = frecuenciaMantenimiento;
 		this.objTipoMantenimiento = objTipoMantenimiento;
-		this.active = active;
+		this.active = true;
 		this.isAceptadoMantenimiento = isAceptadoMantenimiento;
 		this.isEnProcesoMantenimiento = isEnProcesoMantenimiento;
 		this.isTerminadoMantenimiento = isTerminadoMantenimiento;

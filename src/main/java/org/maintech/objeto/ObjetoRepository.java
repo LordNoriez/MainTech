@@ -28,7 +28,7 @@ public interface ObjetoRepository extends CrudRepository<Objeto, Integer> {
 	@Query(value="Select if(isnull(Egresos),if(isnull(Ingresos), '0',Ingresos),if(isnull(Ingresos), Egresos*-1, (Ingresos-Egresos))) as Stock, " + 
 			" objeto.id_objeto, objeto.marca_objeto, objeto.modelo_objeto, objeto.serial_objeto, objeto.vida_objeto, nombre_area_empresa , " +
 			" objeto.descripcion_objeto, DATE_FORMAT(objeto.fecha_creacion_objeto, '%d/%M/%Y') as fecha_creacion,  " +
-			" DATE_FORMAT(objeto.fecha_obtencion_objeto , '%d/%M/%Y') as fecha_obtencion, nombre_categoria , (objP.marca_objeto + ' ' + objP.descripcion_objeto) as Padre " +
+			" DATE_FORMAT(objeto.fecha_obtencion_objeto , '%d/%M/%Y') as fecha_obtencion, nombre_categoria , objP.marca_objeto as MarcaPadre, objP.descripcion_objeto as Padre " +
 			" from objeto left join objeto as objP  on objP.id_objeto=objeto.objeto_padre_id_objeto left join ( " +
 			" (select sum(cantidad_movimiento) as Ingresos, objeto_id_objeto  " +
 			" from movimiento where tipo_movimiento_id_tipo_movimiento=1  " +

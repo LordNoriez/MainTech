@@ -120,7 +120,12 @@
 							<td>${mantenimiento[9].toString()}</td>	
 							<td>${mantenimiento[15]}</td>	
 							<td>${mantenimiento[10]}</td>	
-							<td>${mantenimiento[11]}</td>	
+							<td>
+								
+								<input type="checkbox" class="form-control" checked>									
+								
+							
+							</td>	
 							<td><a href="/mantenimientoAceptado/${mantenimiento[0]}">${mantenimiento[12]}</a></td>	
 							<td><a href="/mantenimientoProceso/${mantenimiento[0]}">${mantenimiento[13]}</a></td>
 							<td><a href="/mantenimientoTerminado/${mantenimiento[0]}">${mantenimiento[14]}</a></td>							

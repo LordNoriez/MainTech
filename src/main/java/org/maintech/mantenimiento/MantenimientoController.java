@@ -123,12 +123,18 @@ public class MantenimientoController {
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public String crearobjmantenimientoObjetoActividad(Mantenimiento mantenimiento, @ModelAttribute("crearModelGroupMantenimientoObjeto") GroupMantenimientoObjeto groupMantenimientoObjeto,
 			BindingResult result, Model model){
+		mantenimiento.setActive(true);
+		mantenimiento.setIsAceptadoMantenimiento(true);
+		mantenimiento.setIsEnProcesoMantenimiento(false);
+		mantenimiento.setIsTerminadoMantenimiento(false);
 		mantenimientoService.addMantenimiento(mantenimiento);
+		
 		model.addAttribute("idMantenimiento",  mantenimiento.getIdMantenimiento());
 		model.addAttribute("itemobjeto", objetoService.returnAllObjeto());
 		model.addAttribute("actividades", actividadService.getAllActividad());
 		model.addAttribute("proveedores",  proveedorService.getAllProveedores());
 		return "MantenimientoObjetoActividad/MantenimientoObjetoActividadCrear";
+		//return "/";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/LinkMantObjeto")

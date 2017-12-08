@@ -52,7 +52,7 @@ public class ObjetoController {
 
 		model.addAttribute("objetos", objetoService.getAllObjeto());
 		model.addAttribute("categories", categoriaService.getAllCategoria());
-		model.addAttribute("objetosPadre", objetoService.getAllObjeto());
+		model.addAttribute("objetosPadre", objetoService.returnAllObjeto());
 		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
 		return "Objeto/ObjetoRead";
 
@@ -63,7 +63,7 @@ public class ObjetoController {
 			BindingResult result, Model model, Principal principal){
 		
 		model.addAttribute("categories", categoriaService.getAllCategoria());
-		model.addAttribute("objects", objetoService.getAllObjeto());
+		model.addAttribute("objects", objetoService.returnAllObjeto());
 		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
 		 
 		/*StringTokenizer st = new StringTokenizer(principal.toString(),",");
@@ -92,7 +92,7 @@ public class ObjetoController {
 	public String getObjetoUpdate(@PathVariable("idObjeto") Integer id,Model model){
 		model.addAttribute("objeto", objetoService.getObjeto(id));
 		model.addAttribute("categories", categoriaService.getAllCategoria());
-		model.addAttribute("objects", objetoService.getAllObjeto());
+		model.addAttribute("objects", objetoService.returnAllObjeto());
 		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
 		return "Objeto/ObjetoUpdate";
 	}
