@@ -106,23 +106,23 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th>Reporte</th>
 							<th>Rol</th>
 						</tr>
 					</thead>
     				<tbody id="myTable">
 		
-					<c:forEach var="rol" items="${roles}">
+					<c:forEach var="reporteRol" items="${reportesRol}">
 					    <tr>
-						<td>${rol.idRol}</td>
-						<td>${rol.nombreRol}</td>
+						<td>${reporteRol.getPk().getRol().getNombreRol()}</td>
+						<td>${reporteRol.getPk().getReporte().getNombreReporte()}</td>
 		
 						<td>
-						  <spring:url value="/deleteRol/${rol.idRol}" var="deleteUrl" />
-						  <spring:url value="/rol/${rol.idRol}" var="updateUrl" />
+<%-- 						  <spring:url value="/deleteRol/${rol.idRol}" var="deleteUrl" /> --%>
+<%-- 						  <spring:url value="/rol/${rol.idRol}" var="updateUrl" /> --%>
 		
-						  <button class="btn btn-primary"
-		                                          onclick="location.href='${updateUrl}'">Update</button>
+<!-- 						  <button class="btn btn-primary" -->
+<%-- 		                                          onclick="location.href='${updateUrl}'">Update</button> --%>
 		                                                                             
 <%-- 						  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button> --%>
 		                                          
@@ -135,7 +135,7 @@
 
 	</div>
 	
-	<div id="snackbar" class="alert alert-danger">Rol Eliminado Correctamente</div>
+	<div id="snackbar" class="alert alert-danger">Vínculo Eliminado Correctamente</div>
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>

@@ -63,6 +63,8 @@
 		  <a href="/rol">Ver</a>
 			<p>Reportes
 		  <a href="/reporte">Ver</a>
+		  <a href="/reporteRol">Vículo con Roles</a>
+		  <a href="/crearReporteRol">Vícular con Roles</a>
 <!-- 			<p>Actividades -->
 <!-- 		  <a href="/crearActividad">Crear</a> -->
 <!-- 		  <a href="/actividad">Ver</a> -->
