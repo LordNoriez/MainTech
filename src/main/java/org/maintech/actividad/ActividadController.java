@@ -57,6 +57,7 @@ public class ActividadController {
 		actividad.setActive(true);
 		ActividadService.addActividad(actividad);
 		model.addAttribute("actividad", actividad);
+		model.addAttribute("objetos", objetoService.returnAllObjeto());
 		return "Costo/CostoCrear";
 	}
 	

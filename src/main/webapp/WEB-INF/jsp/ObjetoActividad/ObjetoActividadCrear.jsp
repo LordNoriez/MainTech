@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Actividad</title>
+    <title>Crear Equipo</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Crear Objeto</h4>
+				        <h4 class="text-muted">Crear Equipo</h4>
 			        </div>
 			    </div>
 			</div>
@@ -94,20 +94,22 @@
 			<div class=" col-md-8"  >
 			
 				<label>Marca: </label>
-				<input type="text" class="form-control" readonly value = "${objetos.marcaObjeto}"/>					
+				<input type="text" class="form-control" readonly value = "${objetos.getMarcaObjeto()}"/>					
 				<br>
 
-				<label>Modelo: </label>
-				<input type="text" class="form-control" readonly value = "${objetos.modeloObjeto}"/>					
-				<br>	
-				<br>	
+				<label>Descripción: </label>
+				<input type="text" class="form-control" readonly value = "${objetos.getDescripcionObjeto()}"/>					
+				<br>
+				<br>
 				
-				<spring:url value="/addobjetoLinkActividad" var="variableAdd" />
+				<spring:url value="/addObjetoLinkActividad" var="variableAdd" />
 				<form:form method="post" modelAttribute="crearModellistActividad" action="${variableAdd}">
-					<label>Actividades </label>
+					<label>Actividades: </label>
 					<form:select class="form-control" path="actividades">
-						<form:option value="" label="--- Select ---" />
-						<form:options items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" />
+						
+						<c:forEach var="activida" items="${actividades}">
+							<form:option label="${activida[1]}" value="${activida[0]}" />
+						</c:forEach>
 					</form:select>
 					
 					<br>

@@ -38,5 +38,9 @@ public class ActividadProveedorService {
 	public void softDeleteActividadProveedor (Integer id) {
 		actividadProveedorRepository.softDeleteActividadProveedor(id);
 	}
+	
+	public List<Object[]> getActividadProveedorCosto(){
+		return actividadProveedorRepository.getActividadProveedorCosto();
+	}
 		
 }

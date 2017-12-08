@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.dom4j.Branch;
 import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
+import org.maintech.actividadproveedor.ActividadProveedorService;
 import org.maintech.areaempresa.AreaEmpresaService;
 import org.maintech.categoria.CategoriaService;
+import org.maintech.costo.Costo;
 import org.maintech.mantenimiento.MantenimientoService;
 import org.maintech.objetoActividad.ObjetoListActividad;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class ObjetoController {
 	
 	@Autowired
 	private ActividadService actividadService;
+	
+	@Autowired
+	private ActividadProveedorService actividadProveedorService;
 	
 	@Autowired
 	private CategoriaService categoriaService;
@@ -107,24 +112,26 @@ public class ObjetoController {
 //        return "Se Ingreso Correctamente el Objeto";
 //    }
     
-	@RequestMapping(method=RequestMethod.POST, value="/objeto")
-	public ModelAndView addObjeto(Objeto objeto) {
-//		Objeto objetopadre;
-//		objetopadre = objetoService.getObjeto(idObjPadre);
-//		objeto.setObjetoPadre(objetopadre);
+	@RequestMapping(method=RequestMethod.POST, value="/addObjeto")
+	public String addObjeto(Objeto objeto, @ModelAttribute("crearModellistActividad") ObjetoListActividad listActividad, 
+			BindingResult result, Model model, Principal principal) {
+
 		objeto.setActive(true);
 		objetoService.addObjeto(objeto);
-		return new ModelAndView("redirect:/objetoLinkActividad");
-	}
-	
-	@RequestMapping("/objetoLinkActividad")
-	public String ObjetoLinkActividad(@ModelAttribute("crearModellistActividad") ObjetoListActividad listActividad, 
-			BindingResult result, Model model, Principal principal) {
-		model.addAttribute("actividades", actividadService.getAllActividad());
+		
+		model.addAttribute("actividades", actividadProveedorService.getActividadProveedorCosto());
+		model.addAttribute("objetos", objeto);
 		return "ObjetoActividad/ObjetoActividadCrear";
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/addobjetoLinkActividad")
+//	@RequestMapping("/objetoLinkActividad")
+//	public String ObjetoLinkActividad(@ModelAttribute("crearModellistActividad") ObjetoListActividad listActividad, 
+//			BindingResult result, Model model, Principal principal) {
+//		model.addAttribute("actividades", actividadService.getAllActividad());
+//		return "ObjetoActividad/ObjetoActividadCrear";
+//	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/addObjetoLinkActividad")
 	public ModelAndView addObjetoLinkActividad(ObjetoListActividad listActividad) {
 		
 		for (Actividad actividades : listActividad.getActividades()) {

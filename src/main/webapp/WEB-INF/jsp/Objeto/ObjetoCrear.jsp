@@ -88,7 +88,7 @@
 			</div>					
 			
 			<div class=" col-md-8"  >
-				<spring:url value="/objeto" var="variableAdd" />
+				<spring:url value="/addObjeto" var="variableAdd" />
 			
 			 	<form:form method="POST" modelAttribute="crearModelObjeto" action="${variableAdd}" id="myForm"> 
 					
