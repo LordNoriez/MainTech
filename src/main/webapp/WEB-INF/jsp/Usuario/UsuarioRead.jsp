@@ -121,7 +121,7 @@
 						<td>${usuario.nombreUsuario}</td>
 						<td>${usuario.correoUsuario}</td>
 						<td>${usuario.rol.getNombreRol()}</td>
-						<td>${usuario.areaEmpresa.getNombreAreaEmpresa()}</td>
+						<td>${usuario.getAreaEmpresa().getNombreAreaEmpresa()}</td>
 		
 						<td>
 						  <spring:url value="/deleteUsuario/${usuario.idUsuario}" var="deleteUrl" />

@@ -28,7 +28,6 @@ public class UsuarioController {
 	public String showAllUsuario(Model model) {
 
 		model.addAttribute("usuarios", usuarioService.getAllUsuario());
-		model.addAttribute("areaEmpresas", areaEmpresaService.getAllAreaEmpresa());
 		return "Usuario/UsuarioRead";
 	}
 		
@@ -69,6 +68,7 @@ public class UsuarioController {
 	public String crearUsuario(@ModelAttribute("crearModelUsuario") Usuario usuario,
 			BindingResult result, Model model){
 		model.addAttribute("roles", rolService.getAllRol());
+		model.addAttribute("areaEmpresas", areaEmpresaService.getAllAreaEmpresa());		
 		return "Usuario/UsuarioCrear";
 	}
 }

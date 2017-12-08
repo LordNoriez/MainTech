@@ -120,7 +120,7 @@
 					<br>
 					
 					<label>Área de Empresa: </label>						        
-					<form:select class="form-control" path="rol">
+					<form:select class="form-control" path="areaEmpresa">
 						<form:options items="${areaEmpresas}" itemLabel="NombreAreaEmpresa" itemValue="idAreaEmpresa" />
 					</form:select>
 					<br>
