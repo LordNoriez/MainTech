@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Crear Objeto</h4>
+				        <h4 class="text-muted">Crear Vinculo Objeto, Actividades, Proveedor</h4>
 			        </div>
 			    </div>
 			</div>
@@ -93,9 +93,6 @@
 			
 			<div class=" col-md-8"  >
 			
-				<label>Marca: </label>
-				<input type="text" class="form-control" readonly value = "${crearModelGroupMantenimientoObjeto.mantenimientos}"/>					
-				<br>
 				
 				<spring:url value="/LinkMantObjeto" var="variableAdd" />
 				<form:form method="post" modelAttribute="crearModelGroupMantenimientoObjeto" action="${variableAdd}">
@@ -105,7 +102,8 @@
 					<br>
 					
 					<label>Objetos </label>
-					<form:select class="form-control" path="idobjeto" onchange="callMe(this)">
+					<form:select class="form-control" path="idobjeto" >
+<!-- 					 onchange="callMe(this)"> -->
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
 					</form:select>
@@ -117,15 +115,15 @@
 					<form:select class="form-control" multiple="true" path="proveedores" items="${proveedores}" itemLabel="nombreProveedor" itemValue="idProveedor" />
 					<br>
 					<br>
-					<select id="ddl" onchange="callMe(this,document.getElementById('ddl2'))">
-					<option value=""></option>
-					<option value="Colours">Colours</option>
-					<option value="Shapes">Shapes</option>
-					<option value="Names">Names</option>
-					</select>
+<!-- 					<select id="ddl" onchange="callMe(this,document.getElementById('ddl2'))"> -->
+<!-- 					<option value=""></option> -->
+<!-- 					<option value="Colours">Colours</option> -->
+<!-- 					<option value="Shapes">Shapes</option> -->
+<!-- 					<option value="Names">Names</option> -->
+<!-- 					</select> -->
 					
-					<select id="ddl2" name="ddl2" multiple="true">
-					</select>
+<!-- 					<select id="ddl2" name="ddl2" multiple="true"> -->
+<!-- 					</select> -->
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
 				</form:form>
 	        </div>
