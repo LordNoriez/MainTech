@@ -18,8 +18,8 @@ public class Reporte {
 	@GeneratedValue
 	private Integer idReporte;
 	private String NombreReporte;
-;
 	
+	private Integer FrecuenciaDias;	
 	
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
@@ -41,18 +41,21 @@ public class Reporte {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-	
-	public Reporte() {
-		
+	public Integer getFrecuenciaDias() {
+		return FrecuenciaDias;
 	}
-	
-	public Reporte(Integer idReporte, String nombreReporte) {
+	public void setFrecuenciaDias(Integer frecuenciaDias) {
+		this.FrecuenciaDias = frecuenciaDias;
+	}
+	public Reporte(Integer idReporte, String nombreReporte, Integer frecuenciaDias) {
 		super();
 		this.idReporte = idReporte;
 		NombreReporte = nombreReporte;
+		this.FrecuenciaDias = frecuenciaDias;
 		this.active = true;
 	}
-	
-	
+	public Reporte() {
+		super();
+	}
 	
 }

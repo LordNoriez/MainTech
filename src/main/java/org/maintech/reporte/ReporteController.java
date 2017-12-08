@@ -19,15 +19,15 @@ public class ReporteController {
 	//Funciones CRUD 
 	@RequestMapping(value = "/reporte", method = RequestMethod.GET)
 	public String showAllReporte(Model model) {
-		model.addAttribute("Reportes", reporteService.getAllReporte());
-		return "reporte/ReporteRead";
+		model.addAttribute("reportes", reporteService.getAllReporte());
+		return "Reporte/ReporteRead";
 
 	}
 	
 	@RequestMapping("/crearReporte")
 	public String crearReporte(@ModelAttribute("crearModelReporte") Reporte reporte,
 			BindingResult result, Model model){
-		return "reporte/ReporteCrear";
+		return "Reporte/ReporteCrear";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addReporte")

@@ -61,6 +61,8 @@
 			<p>Roles
 		  <a href="/crearRol">Crear</a>
 		  <a href="/rol">Ver</a>
+			<p>Reportes
+		  <a href="/reporte">Ver</a>
 <!-- 			<p>Actividades -->
 <!-- 		  <a href="/crearActividad">Crear</a> -->
 <!-- 		  <a href="/actividad">Ver</a> -->
