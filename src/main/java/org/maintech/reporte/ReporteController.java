@@ -17,7 +17,7 @@ public class ReporteController {
 	private ReporteService reporteService;
 	
 	//Funciones CRUD 
-	@RequestMapping(value = "/Reporte", method = RequestMethod.GET)
+	@RequestMapping(value = "/reporte", method = RequestMethod.GET)
 	public String showAllReporte(Model model) {
 		model.addAttribute("Reportes", reporteService.getAllReporte());
 		return "reporte/ReporteRead";
@@ -34,30 +34,30 @@ public class ReporteController {
 	public ModelAndView addReporte(Reporte reporte) {
 		reporte.setActive(true);
 		reporteService.addReporte(reporte);
-		return new ModelAndView("redirect:/Reporte");
+		return new ModelAndView("redirect:/reporte");
 	}
 			
-	@RequestMapping("/Reporte/{idReporte}")
+	@RequestMapping("/reporte/{idReporte}")
 	public String getReporteUpdate(@PathVariable("idReporte") Integer id,Model model){
-		model.addAttribute("Reportes", reporteService.getReporte(id));
-		return "reporte/ReporteUpdate";
+		model.addAttribute("reportes", reporteService.getReporte(id));
+		return "Reporte/ReporteUpdate";
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/Reporteupdate/{idReporte}")
+	@RequestMapping(method=RequestMethod.PUT, value="/reporteUpdate/{idReporte}")
 	public ModelAndView updateReporte(Reporte reporte, @PathVariable("idReporte") Integer id) {
 		reporte.setIdReporte(id);
 		reporte.setActive(true);
 		reporteService.updateReporte(id, reporte);
-		return new ModelAndView("redirect:/Reporte");
+		return new ModelAndView("redirect:/reporte");
 	}
 	
-	@RequestMapping(value="/Reportedelete/{idReporte}")
-	public ModelAndView deactiveTipoMovimiento(@PathVariable("idReporte") Integer id) {
+	@RequestMapping(value="/reporteDelete/{idReporte}")
+	public ModelAndView deactiveReporte(@PathVariable("idReporte") Integer id) {
 		reporteService.softDeleteReporte(id);
-		return new ModelAndView("redirect:/Reporte");
+		return new ModelAndView("redirect:/reporte");
 	}
 
-	@RequestMapping(method=RequestMethod.DELETE, value="/Reporte/{idReporte}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/reporte/{idReporte}")
 	public void deleteReporte(@PathVariable Integer id){
 		reporteService.deleteReporte(id);
 	}

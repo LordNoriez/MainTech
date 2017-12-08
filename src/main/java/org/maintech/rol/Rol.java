@@ -15,20 +15,14 @@ public class Rol {
 	@GeneratedValue
 	private Integer idRol;
 	
-	private String mail;
-	
 	private String NombreRol;	
 	
-	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
-	private Boolean active;
-	
-	public String getMail() {
-		return mail;
+	public Rol() {
+		super();
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
+	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
+	private Boolean active;
 
 	public Integer getIdRol() {
 		return idRol;
@@ -57,7 +51,7 @@ public class Rol {
 	public Rol(Integer idRol, String nombreRol) {
 		super();
 		this.idRol = idRol;
-		NombreRol = nombreRol;
+		this.NombreRol = nombreRol;
 		this.active = true;
 	}
 		

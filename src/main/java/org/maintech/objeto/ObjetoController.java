@@ -70,25 +70,6 @@ public class ObjetoController {
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.returnAllObjeto());
 		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
-		 
-		/*StringTokenizer st = new StringTokenizer(principal.toString(),",");
-		
-	     while (st.hasMoreTokens()) {
-	    	 if (st.nextToken().toLowerCase().contains("email")) {
-	    		 model.addAttribute("usu", st.nextToken());
-	    		 System.out.println("----------------------   " + st.nextToken()); 
-	    	 }
-	     }*/
-	     
-	     
-	    
-	     /*List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
-	     updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_MANAGER")); 
-		
-	     Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
-		
-	     SecurityContextHolder.getContext().setAuthentication(newAuth);*/
-		
 		
 		return "Objeto/ObjetoCrear";
 	}
@@ -123,13 +104,6 @@ public class ObjetoController {
 		model.addAttribute("objetos", objeto);
 		return "ObjetoActividad/ObjetoActividadCrear";
 	}
-	
-//	@RequestMapping("/objetoLinkActividad")
-//	public String ObjetoLinkActividad(@ModelAttribute("crearModellistActividad") ObjetoListActividad listActividad, 
-//			BindingResult result, Model model, Principal principal) {
-//		model.addAttribute("actividades", actividadService.getAllActividad());
-//		return "ObjetoActividad/ObjetoActividadCrear";
-//	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addObjetoLinkActividad")
 	public ModelAndView addObjetoLinkActividad(ObjetoListActividad listActividad) {

@@ -51,9 +51,15 @@
 		  <a href="/mantenimiento">Ver Mantenimientos</a>
 		  <a href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
 		  <a href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>-->
-		  	<p>Áreas de la Empresa
+			<p>Usuarios
+		  <a href="/crearUsuario">Crear</a>
+		  <a href="/usuario">Ver</a>
+			<p>Áreas de la Empresa
 		  <a href="/crearAreaEmpresa">Crear</a>
 		  <a href="/areaEmpresa">Ver</a>
+			<p>Roles
+		  <a href="/crearRol">Crear</a>
+		  <a href="/rol">Ver</a>
 <!-- 		  <a href="/crearActividad">Crear Actividad</a> -->
 <!-- 		  <a href="/actividad">Ver Actividad</a> -->
 <!-- 		  <p>Categorías -->
@@ -89,7 +95,7 @@
 			</div>					
 			
 			<div class=" col-md-8" >
-				<spring:url value="/AreaEmpresaupdate/${ModelAreaEmpresa.idAreaEmpresa}" var="variableAdd" />
+				<spring:url value="/areaEmpresaUpdate/${ModelAreaEmpresa.idAreaEmpresa}" var="variableAdd" />
 			
 				<form:form method="PUT" modelAttribute="ModelAreaEmpresa" action="${variableAdd}">
 			

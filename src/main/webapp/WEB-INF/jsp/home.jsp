@@ -102,7 +102,7 @@
 <!-- 						</div>	 -->
 <!-- 						<br><br> -->
 						<div class="col-md-4">
-							<a class="btn btn-default btn-block" ng-show="user" href="/areaEmpresa">Áreas de Empresa</a>
+							<a class="btn btn-default btn-block" ng-show="user" href="/areaEmpresa">Empresa</a>
 						</div>				
 					</div>
 				</div>				

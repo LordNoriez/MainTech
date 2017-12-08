@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Áreas de la Empresa</title>
+    <title>Editar Usuario</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,18 +40,17 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-		
+						
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
-	<!-- 	  <a href="/crearObjeto">Crear Objeto</a> -->
-	<!-- 	  <a href="/objeto">Ver Objetos</a> -->
-<!-- 			<p>Mantenimientos -->
-<!-- 		  <a href="/crearMantenimiento">Crear</a> -->
-<!-- 		  <a href="/mantenimiento">Ver</a> -->
-<!-- 			<p>Tipos de Mantenimientos -->
-<!-- 		  <a href="/crearTipoMantenimiento">Crear</a> -->
-<!-- 		  <a href="/tipoMantenimiento">Ver</a> -->
+<!-- 		  <p>Objetos -->
+<!-- 		  <a href="/crearObjeto">Crear</a> -->
+<!-- 		  <a href="/objeto">Ver</a> -->
+		  <!--  <a href="/crearMantenimiento">Crear Mantenimiento</a>
+		  <a href="/mantenimiento">Ver Mantenimientos</a>
+		  <a href="/crearTipoMantenimiento">Crear Tipo Mantenimiento</a>
+		  <a href="/tipoMantenimiento">Ver Tipo Mantenimientos</a>-->
 			<p>Usuarios
 		  <a href="/crearUsuario">Crear</a>
 		  <a href="/usuario">Ver</a>
@@ -61,11 +60,11 @@
 			<p>Roles
 		  <a href="/crearRol">Crear</a>
 		  <a href="/rol">Ver</a>
-<!-- 			<p>Actividades -->
-<!-- 		  <a href="/crearActividad">Crear</a> -->
-<!-- 		  <a href="/actividad">Ver</a> -->
-	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
-	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
+<!-- 		  <a href="/crearActividad">Crear Actividad</a> -->
+<!-- 		  <a href="/actividad">Ver Actividad</a> -->
+<!-- 		  <p>Categorías -->
+<!-- 		  <a href="/crearCategoria">Crear</a> -->
+<!-- 		  <a href="/categoria">Ver</a> -->
 	</div>
 	<div class="container-fluid" id="main">
     
@@ -76,7 +75,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Ver Áreas de la Empresa</h4>
+				        <h4 class="text-muted">Editar Usuario</h4>
 			        </div>
 			    </div>
 			</div>
@@ -93,47 +92,39 @@
 			    					
 				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
 					
-			</div>
+			</div>					
 			
-
-			<div class=" col-md-8 table-responsive"  >
-				<input class="form-control" id="myInput" type="text" placeholder="Buscar..">
-				<br>
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Nombre</th>
-						</tr>
-					</thead>
-    				<tbody id="myTable">
-		
-					<c:forEach var="areaEmpresas" items="${areaEmpresa}">
-					    <tr>
-						<td>${areaEmpresas.idAreaEmpresa}</td>
-						<td>${areaEmpresas.nombreAreaEmpresa}</td>
-		
-						<td>
-						  <spring:url value="/deleteAreaEmpresa/${areaEmpresas.idAreaEmpresa}" var="deleteUrl" />
-						  <spring:url value="/areaEmpresa/${areaEmpresas.idAreaEmpresa}" var="updateUrl" />
-		
-						  <button class="btn btn-primary"
-		                                          onclick="location.href='${updateUrl}'">Update</button>
-		                                                                             
-<%-- 						  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button> --%>
-		<%--                                           onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
-		                                          
-		                  </td>
-					    </tr>
-					</c:forEach>
-					</tbody>
-				</table>
+			<div class=" col-md-8" >
+				<spring:url value="/usuarioUpdate/${usuario.idUsuario}" var="variableAdd" />
+			
+				<form:form method="PUT" modelAttribute="usuario" action="${variableAdd}">
+			
+					<label>Nombre:</label>
+					<form:input type="text" class="form-control" path="NombreUsuario" value = "${usuario.nombreUsuario}"/>
+					<br>
+			
+					<label>Correo:</label>
+					<form:input type="email" class="form-control" path="CorreoUsuario" value = "${usuario.correoUsuario}"/>
+					<br>
+							
+					<label>Rol:</label>
+					<form:select class="form-control" path="rol">
+						<form:options items="${roles}" itemLabel="nombreRol" itemValue="idRol" />
+					</form:select>
+					<br>	
+							
+					<label>Área de Empresa:</label>
+					<form:select class="form-control" path="areaEmpresa">
+						<form:options items="${areaEmpresas}" itemLabel="nombreAreaEmpresa" itemValue="idAreaEmpresa" />
+					</form:select>
+					<br>	
+				
+					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>
+				
+				</form:form>
 			</div>
-
-	</div>
+		</div>
 	
-	<div id="snackbar" class="alert alert-danger">Área de la Empresa Eliminada Correctamente</div>
-
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
     </footer>
@@ -168,17 +159,6 @@
 				console.log("Logout error : ", error);
 			});
 		};
-	});
-	</script>
-
-	<script>
-	$(document).ready(function(){
-	  $("#myInput").on("keyup", function() {
-	    var value = $(this).val().toLowerCase();
-	    $("#myTable tr").filter(function() {
-	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-	    });
-	  });
 	});
 	</script>
 

@@ -96,29 +96,6 @@ public class MantenimientoController {
 		
 		return "Mantenimiento/MantenimientoCrear";
 	}
-
-//	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
-//	public String addMantenimiento(Mantenimiento mantenimiento) {
-//		mantenimiento.setActive(true);
-//		mantenimiento.setIsAceptadoMantenimiento(true);
-//		mantenimientoService.addMantenimiento(mantenimiento);
-////		for (Actividad activMante: mantenimiento.getActividad()) {
-////			
-////			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(),
-////					mantenimientoService.IdUltimoMante());
-////		}
-//		return "MantenimientoObjetoActividad/MantenimientoObjetoCrear";
-//	}
-	
-//	@RequestMapping("/crearMantenimiento")
-//	public String crearMantenimiento(@ModelAttribute("crearModelMantenimiento") MantenimientoObjetoActividad MantenimientoObjetoActividad,
-//			BindingResult result, Model model){
-//		//model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
-//		//model.addAttribute("ItemActividad", actividadService.getAllActividad());
-//		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
-//		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
-//		return "Mantenimiento/MantenimientoCrear";
-//	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addMantenimiento")
 	public String crearobjmantenimientoObjetoActividad(Mantenimiento mantenimiento, @ModelAttribute("crearModelGroupMantenimientoObjeto") GroupMantenimientoObjeto groupMantenimientoObjeto,
@@ -141,25 +118,12 @@ public class MantenimientoController {
 	public ModelAndView addMantObjeto(@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantenimientoObjeto,
 			BindingResult result, Model model) {
 
-//		for (ActividadProveedor actividadProveedor: groupMantenimientoObjeto.getActividadesProveedores()) {
-//		
-//			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(actividadProveedor.getActividad().getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
-//					, actividadProveedor.getProveedor().getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), actividadProveedor.getCosto().getCosto());
-//		} 
-		
-//		for (Actividad actividadProveedor: groupMantenimientoObjeto.getActividades()) {
-//		
-//			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(actividadProveedor.getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
-//					, 1, groupMantenimientoObjeto.getIdobjeto(), 2.6);
-//		}
 		
 		for (int i = 0; i < groupMantenimientoObjeto.getActividades().size(); i++) {
 			
 			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(groupMantenimientoObjeto.getActividades().get(i).getIdActividad(), groupMantenimientoObjeto.getMantenimientos()
 					, groupMantenimientoObjeto.getProveedores().get(i).getIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), 2.6);
 		}
-		
-		
 		
 		return new ModelAndView("redirect:/mantenimiento");
 
@@ -173,8 +137,6 @@ public class MantenimientoController {
 		model.addAttribute("idobjeto", groupMantenimientoObjeto.getIdobjeto());
 		model.addAttribute("actividades",groupMantenimientoObjeto.getActividades());
 		model.addAttribute("proveedor",groupMantenimientoObjeto.getProveedores());
-		
-		
 		
 		return "MantenimientoObjetoActividad/prueba";
 

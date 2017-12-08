@@ -45,7 +45,7 @@ public class AreaEmpresaController {
 		return new ModelAndView("redirect:/areaEmpresa");
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/AreaEmpresaupdate/{idAreaEmpresa}")
+	@RequestMapping(method=RequestMethod.PUT, value="/areaEmpresaUpdate/{idAreaEmpresa}")
 	public ModelAndView updateAreaEmpresa(AreaEmpresa areaEmpresa, @PathVariable("idAreaEmpresa") Integer id) {
 		areaEmpresa.setActive(true);
 		areaEmpresaService.updateAreaEmpresa(id, areaEmpresa);

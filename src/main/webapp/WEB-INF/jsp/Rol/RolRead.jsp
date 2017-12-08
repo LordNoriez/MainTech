@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Áreas de la Empresa</title>
+    <title>Ver Roles</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -76,7 +76,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Ver Áreas de la Empresa</h4>
+				        <h4 class="text-muted">Ver Roles</h4>
 			        </div>
 			    </div>
 			</div>
@@ -103,25 +103,24 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Nombre</th>
+							<th>Rol</th>
 						</tr>
 					</thead>
     				<tbody id="myTable">
 		
-					<c:forEach var="areaEmpresas" items="${areaEmpresa}">
+					<c:forEach var="rol" items="${roles}">
 					    <tr>
-						<td>${areaEmpresas.idAreaEmpresa}</td>
-						<td>${areaEmpresas.nombreAreaEmpresa}</td>
+						<td>${rol.idRol}</td>
+						<td>${rol.nombreRol}</td>
 		
 						<td>
-						  <spring:url value="/deleteAreaEmpresa/${areaEmpresas.idAreaEmpresa}" var="deleteUrl" />
-						  <spring:url value="/areaEmpresa/${areaEmpresas.idAreaEmpresa}" var="updateUrl" />
+						  <spring:url value="/deleteRol/${rol.idRol}" var="deleteUrl" />
+						  <spring:url value="/rol/${rol.idRol}" var="updateUrl" />
 		
 						  <button class="btn btn-primary"
 		                                          onclick="location.href='${updateUrl}'">Update</button>
 		                                                                             
 <%-- 						  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button> --%>
-		<%--                                           onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
 		                                          
 		                  </td>
 					    </tr>
@@ -132,7 +131,7 @@
 
 	</div>
 	
-	<div id="snackbar" class="alert alert-danger">Área de la Empresa Eliminada Correctamente</div>
+	<div id="snackbar" class="alert alert-danger">Rol Eliminado Correctamente</div>
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>

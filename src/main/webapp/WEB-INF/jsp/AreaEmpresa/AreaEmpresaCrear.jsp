@@ -52,9 +52,15 @@
 <!-- 			<p>Tipos de Mantenimientos -->
 <!-- 		  <a href="/crearTipoMantenimiento">Crear</a> -->
 <!-- 		  <a href="/tipoMantenimiento">Ver</a> -->
+			<p>Usuarios
+		  <a href="/crearUsuario">Crear</a>
+		  <a href="/usuario">Ver</a>
 			<p>Áreas de la Empresa
 		  <a href="/crearAreaEmpresa">Crear</a>
 		  <a href="/areaEmpresa">Ver</a>
+			<p>Roles
+		  <a href="/crearRol">Crear</a>
+		  <a href="/rol">Ver</a>
 <!-- 			<p>Actividades -->
 <!-- 		  <a href="/crearActividad">Crear</a> -->
 <!-- 		  <a href="/actividad">Ver</a> -->

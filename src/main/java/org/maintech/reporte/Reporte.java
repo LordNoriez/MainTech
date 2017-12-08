@@ -46,11 +46,11 @@ public class Reporte {
 		
 	}
 	
-	public Reporte(Integer idReporte, String nombreReporte, Boolean active) {
+	public Reporte(Integer idReporte, String nombreReporte) {
 		super();
 		this.idReporte = idReporte;
 		NombreReporte = nombreReporte;
-		this.active = active;
+		this.active = true;
 	}
 	
 	

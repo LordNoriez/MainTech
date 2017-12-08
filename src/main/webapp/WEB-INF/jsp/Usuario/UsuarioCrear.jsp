@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Áreas de la Empresa</title>
+    <title>Crear Usuario</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,7 +40,7 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-		
+					
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
@@ -76,7 +76,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Ver Áreas de la Empresa</h4>
+				        <h4 class="text-muted">Crear Usuario</h4>
 			        </div>
 			    </div>
 			</div>
@@ -93,46 +93,43 @@
 			    					
 				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
 					
-			</div>
+			</div>					
 			
-
-			<div class=" col-md-8 table-responsive"  >
-				<input class="form-control" id="myInput" type="text" placeholder="Buscar..">
-				<br>
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Nombre</th>
-						</tr>
-					</thead>
-    				<tbody id="myTable">
-		
-					<c:forEach var="areaEmpresas" items="${areaEmpresa}">
-					    <tr>
-						<td>${areaEmpresas.idAreaEmpresa}</td>
-						<td>${areaEmpresas.nombreAreaEmpresa}</td>
-		
-						<td>
-						  <spring:url value="/deleteAreaEmpresa/${areaEmpresas.idAreaEmpresa}" var="deleteUrl" />
-						  <spring:url value="/areaEmpresa/${areaEmpresas.idAreaEmpresa}" var="updateUrl" />
-		
-						  <button class="btn btn-primary"
-		                                          onclick="location.href='${updateUrl}'">Update</button>
-		                                                                             
-<%-- 						  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button> --%>
-		<%--                                           onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
-		                                          
-		                  </td>
-					    </tr>
-					</c:forEach>
-					</tbody>
-				</table>
-			</div>
-
-	</div>
+			<div class=" col-md-8"  >
+				<spring:url value="/addUsuario" var="variableAdd" />
+			
+				<form:form method="post" modelAttribute="crearModelUsuario" action="${variableAdd}">
+					<label>Nombre: </label>
+					<form:input path="nombreUsuario" class="form-control" type="text" /> 
+					<form:errors path="nombreUsuario" />
+					<br>
+					
+					<label>Correo: </label>
+					<form:input path="correoUsuario" class="form-control" type="email" /> 
+					<form:errors path="correoUsuario" />
+					<br>
+					
+					<label>Rol: </label>						        
+					<form:select class="form-control" path="rol">
+						<form:options items="${roles}" itemLabel="NombreRol" itemValue="idRol" />
+					</form:select>
+					<br>
+					
+					<label>Área de Empresa: </label>						        
+					<form:select class="form-control" path="rol">
+						<form:options items="${areaEmpresas}" itemLabel="NombreAreaEmpresa" itemValue="idAreaEmpresa" />
+					</form:select>
+					<br>
+					
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
+				</form:form>
+	        </div>
+		</div>
 	
-	<div id="snackbar" class="alert alert-danger">Área de la Empresa Eliminada Correctamente</div>
+		
+	        <!-- The actual snackbar -->
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
+        
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
@@ -168,17 +165,6 @@
 				console.log("Logout error : ", error);
 			});
 		};
-	});
-	</script>
-
-	<script>
-	$(document).ready(function(){
-	  $("#myInput").on("keyup", function() {
-	    var value = $(this).val().toLowerCase();
-	    $("#myTable tr").filter(function() {
-	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-	    });
-	  });
 	});
 	</script>
 

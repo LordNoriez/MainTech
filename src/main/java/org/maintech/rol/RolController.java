@@ -24,13 +24,13 @@ public class RolController {
 	}
 		
 	@RequestMapping("/rol/{idRol}")
-	public String getCategoria(@PathVariable("idRol") Integer id, Model model){		
+	public String getRolUpdate(@PathVariable("idRol") Integer id, Model model){		
 		model.addAttribute("rol", rolService.getRol(id));
 		return "Rol/RolUpdate";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addRol")
-	public ModelAndView addCategoria(Rol rol) {
+	public ModelAndView addRol(Rol rol) {
 		rol.setActive(true);
 		rolService.addRol(rol);
 		return new ModelAndView("redirect:/rol");
@@ -49,7 +49,7 @@ public class RolController {
 	}
 	
 	@RequestMapping(value="/deleteRol/{idRol}")
-	public ModelAndView deactiveCategoria(@PathVariable("idRol") Integer id) {
+	public ModelAndView deactiveRol(@PathVariable("idRol") Integer id) {
 		rolService.softDeleteRol(id);
 		return new ModelAndView("redirect:/rol");
 	}
