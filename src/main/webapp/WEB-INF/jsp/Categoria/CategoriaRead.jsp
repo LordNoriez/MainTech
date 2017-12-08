@@ -89,6 +89,8 @@
 			
 
 			<div class=" col-md-8 table-responsive"  >
+				<input class="form-control" id="myInput" type="text" placeholder="Buscar..">
+				<br>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -96,6 +98,7 @@
 							<th>Descripción</th>
 						</tr>
 					</thead>
+    				<tbody id="myTable">
 		
 					<c:forEach var="categoria" items="${categorias}">
 					    <tr>
@@ -113,6 +116,7 @@
 			                </td>
 					    </tr>
 					</c:forEach>
+					</tbody>
 				</table>
 			</div>
 
@@ -154,6 +158,17 @@
 				console.log("Logout error : ", error);
 			});
 		};
+	});
+	</script>
+
+	<script>
+	$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
 	});
 	</script>
 

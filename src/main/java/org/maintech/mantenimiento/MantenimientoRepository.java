@@ -66,7 +66,7 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		void Acept_mantenimiento(Integer id);
 	    
 		@Query(value = "select mantenimiento.id_mantenimiento, nombre_mantenimiento, descripcion_mantenimiento, " +
-				" nombre_tipo_mantenimiento, fecha_mantenimiento, " +
+				" nombre_tipo_mantenimiento, DATE_FORMAT(fecha_mantenimiento, '%d/%M/%Y') as fecha_mant, " +
 				" objeto.id_objeto, marca_objeto, descripcion_objeto, proveedor.id_proveedor, nombre_proveedor, " +
 				" is_programado_mantenimiento, frecuencia_mantenimiento, is_aceptado_mantenimiento, " +
 				" is_en_proceso_mantenimiento, is_terminado_mantenimiento, sum(costo) " +
