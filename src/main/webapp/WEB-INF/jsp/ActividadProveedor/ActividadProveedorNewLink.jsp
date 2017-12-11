@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Actividad</title>
+    <title>Editar Actividad</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -60,8 +60,8 @@
 		  	<p>Proveedores
 		  <a href="/crearProveedor">Crear</a>
 		  <a href="/proveedor">Ver</a>
-	<!-- 	  <a href="/crearCategoria">Crear CategorÃ­a</a> -->
-	<!-- 	  <a href="/categoria">Ver CategorÃ­as</a> -->
+	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
+	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
 	</div>
 	<div class="container-fluid" id="main">
     
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Asignar Objeto al Mantenimiento</h4>
+				        <h4 class="text-muted">Editar Actividad</h4>
 			        </div>
 			    </div>
 			</div>
@@ -87,42 +87,52 @@
 			    </div>	
 			    
 			    					
-				<button type="button" onclick="openNav()" class="btn btn-info btn-block">MenÃº</button>				
+				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
 					
 			</div>					
 			
 			<div class=" col-md-8"  >
-							
-				<spring:url value="/LinkMantObjeto" var="variableAdd" />
-				<form:form method="post" modelAttribute="crearModelGroupMantenimientoObjeto" action="${variableAdd}">
+				
+				<form method="post"  action="/addProveedor2Act">
+						
+					<label>Descripción Actividad: </label>
+					<input name= "descripcionActividad" type="text" class="form-control" readonly value = "${Idactividad.descripcionActividad}"/>
+					<input name= "activid" type="text"  hidden="true" class="form-control" readonly value = "${Idactividad.idActividad}"/>					
+					<br>						
 					
-					<label>idMantenimiento: </label>
-					<form:input type="text" path="mantenimientos" class="form-control" value = "${idMantenimiento}"/>					
+<!-- 					<label>Costo ($): </label>	 -->
+					<label>Proveedor: </label>	
+					
+			       <select name="ListProveedor" class="form-control" >
+			          <c:forEach var="item" items="${proveedores}">
+			            <option value="${item.idProveedor}">${item.nombreProveedor}</option>
+			          </c:forEach>
+			        </select>
+								        
+<%-- 					<form:select class="form-control" path="costo"> --%>
+<%-- 						<form:option value="${costo.idCosto}" label="${costo.costo}" />						 --%>
+<%-- 					</form:select>				 --%>
+<!-- 					<br>	 -->
+									
+<%-- 					<fmt:formatDate value="${costo.fechaInicioCosto}" var="dateString" pattern="yyyy-MM-dd" /> --%>
+<!-- 					<label>Fecha de Inicio: </label> -->
+<%-- 					<input class="form-control" type="date" readonly value = "${dateString}" /> <!-- bind to user.name--> --%>
+<!-- 					<br> -->
+					
+<!-- 					<label>Proveedor: </label>						         -->
+<%-- 					<form:select class="form-control" path="proveedor"> --%>
+<%-- 						<form:options items="${proveedores}" itemLabel="NombreProveedor" itemValue="idProveedor" /> --%>
+<%-- 					</form:select> --%>
+<!-- 					<br> -->
+					
 					<br>
-					
-					<label>Objeto: </label>
-					<form:select class="form-control" path="idobjeto" onchange="callMe(this)">
-						<form:option value="" label="--- Select ---" />
-						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
-					</form:select>
-					
-<!-- 					<label>Actividades: </label> -->
-<%-- 					<form:select class="form-control" multiple="true" path="actividades" items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" /> --%>
-<!-- 					<br> -->
-<!-- 					<label>Proveedores: </label> -->
-<%-- 					<form:select class="form-control" multiple="true" path="proveedores" items="${proveedores}" itemLabel="nombreProveedor" itemValue="idProveedor" /> --%>
-<!-- 					<br> -->
-<!-- 					<br> -->
-					
-					<select id="ddl2" name="ddl2" multiple="true">
-					</select>
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
-				</form:form>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Proveedor</button>
+				<form>
 	        </div>
 		</div>
 		
 	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se IngresÃ³ Correctamente</div>
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
         
 
     <footer class="footer">
@@ -161,71 +171,6 @@
 		};
 	});
 	</script>
-	
-	<script type="text/javascript">
-	     function configureDropDownLists(ddl1,ddl2) {
-	    var colours = ['Black', 'White', 'Blue'];
-	    var shapes = ['Square', 'Circle', 'Triangle'];
-	    var names = ['John', 'David', 'Sarah'];
-	
-	    switch (ddl1.value) {
-	        case 'Colours':
-	            ddl2.options.length = 0;
-	            for (i = 0; i < colours.length; i++) {
-	                createOption(ddl2, colours[i], colours[i]);
-	            }
-	            break;
-	        case 'Shapes':
-	            ddl2.options.length = 0; 
-	        for (i = 0; i < shapes.length; i++) {
-	            createOption(ddl2, shapes[i], shapes[i]);
-	            }
-	            break;
-	        case 'Names':
-	            ddl2.options.length = 0;
-	            for (i = 0; i < names.length; i++) {
-	                createOption(ddl2, names[i], names[i]);
-	            }
-	            break;
-	            default:
-	                ddl2.options.length = 0;
-	            break;
-	    }â€‹
-
-	}
-	
-	    function createOption(ddl, text, value) {
-	        var opt = document.createElement('option');
-	        opt.value = value;
-	        opt.text = text;
-	        ddl.options.add(opt);
-	    }
-	    
-	    
-	</script>
-	
-	<script type="text/javascript">
-        function callMe(objtoid) {
-            var districtId = objtoid.value;
-          
-            $.ajax({
-                type: "POST",
-                url: "someUrl",
-                dataType: "json",
-                data: {
-                    varname1 : "varvalue1",
-                    varname2 : "varvalue2"
-                },
-                success: function (data) {
-                    $('#ddl2').empty(); // empty existing list
-                    $('#ddl2').append('<option value="">Some Label</option>');
-                    $.each(data, function (varvalue, vartext){
-                        $('#ddl2').append($('<option></option>').val(varvalue).html(vartext));
-                    });  
-                }
-            });
-        }    
-    </script> 
 
 </body>
 </html>

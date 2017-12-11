@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 public class ActividadProveedorController {
 	
@@ -108,6 +109,29 @@ public class ActividadProveedorController {
 		
 		actividadProveedorService.updateActividadProveedor(id, actividadProveedor);
 		return new ModelAndView("redirect:/actividadProveedor");
+	}
+	// funcion para enviar actividad proveedor data
+	@RequestMapping("/actividadnewProveedor/{idActividadProveedor}")
+	public String addnewProveedortoActividadView(@PathVariable("idActividadProveedor") Integer id,Model model){
+
+		model.addAttribute("Idactividad", actividadService.getActividad(id));
+		model.addAttribute("proveedores", proveedorService.getAllProveedores());
+		model.addAttribute("costos", costoService.getAllCostos());
+		 
+		return "ActividadProveedor/ActividadProveedorNewLink";
+	}
+	// funcion para actualizar la relación
+	@RequestMapping(method=RequestMethod.POST, value="/addProveedor2Act")
+	public ModelAndView addnewProveedortoActividad(HttpServletRequest request) {
+		ActividadProveedor actProv = new ActividadProveedor();
+		String[] idproveedor = request.getParameterValues("ListProveedor");
+		actProv.setActividad(actividadService.getActividad(Integer.parseInt(request.getParameter("activid"))));
+		actProv.setProveedor(proveedorService.getProveedor(Integer.parseInt(idproveedor[0])));
+		actProv.setCosto(costoService.getCosto(1));
+		
+		actividadProveedorService.addActividadProveedor(actProv);
+		
+		return new ModelAndView("redirect:/actividad");
 	}
 	
 	@RequestMapping(value="/deleteActividadProveedor/{idActividadProveedor}")
