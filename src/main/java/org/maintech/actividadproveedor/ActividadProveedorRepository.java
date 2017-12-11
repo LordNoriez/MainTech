@@ -16,10 +16,11 @@ public interface ActividadProveedorRepository extends CrudRepository<ActividadPr
 	//#{#entityName}
 
 	@Query(value="select actividad.id_actividad, concat('$ ',  costo.costo, ' - ', proveedor.nombre_proveedor, ' - ', actividad.nombre_actividad) as act " + 
-			" from actividad, actividad_proveedor, proveedor, costo " + 
-			" where actividad.id_actividad=actividad_proveedor.id_actividad and " +
-				" actividad_proveedor.id_proveedor=proveedor.id_proveedor and " +
-				" actividad_proveedor.id_costo=costo.id_costo " + 
+			" from actividad, (select id_actividad, id_proveedor, max(id_costo) as idC from actividad_proveedor group by id_actividad, id_proveedor) as actP, proveedor, costo " + 
+			" where actividad.id_actividad=actP.id_actividad and " +
+				" actP.id_proveedor=proveedor.id_proveedor and " +
+				" actP.idC=costo.id_costo " + 
 			" order by proveedor.id_proveedor, actividad.id_actividad;", nativeQuery=true)
 	public List<Object[]> getActividadProveedorCosto();
+	
 }

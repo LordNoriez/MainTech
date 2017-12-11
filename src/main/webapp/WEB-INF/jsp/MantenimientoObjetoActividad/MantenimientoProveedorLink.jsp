@@ -93,36 +93,33 @@
 			
 			<div class=" col-md-8"  >
 							
-				<spring:url value="/LinkMantObjeto" var="variableAdd" />
-				<form:form method="post" modelAttribute="crearModelGroupMantenimientoObjeto" action="${variableAdd}">
+				<spring:url value="/LinkMantActividad" var="variableAdd" />
+				<form:form method="post" modelAttribute="crearModelMantenimiento" action="${variableAdd}">
 					
 					<label>idMantenimiento: </label>
-					<form:input type="text" path="mantenimientos" class="form-control" value = "${idMantenimiento}"/>					
+					<form:input type="text" path="mantenimientos" class="form-control" value = "${groupMant}"/>					
 					<br>
 					
-					<label>Objeto: </label>
-					<form:select class="form-control" path="idobjeto" onchange="callMe(this)">
-						<form:option value="" label="--- Select ---" />
-						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
-					</form:select>
+					<label>idObjeto: </label>
+					<form:input type="text" path="idobjeto" class="form-control" value = "${itemobjeto}"/>					
+					<br>
 					
-<!-- 					<label>Actividades: </label> -->
-<%-- 					<form:select class="form-control" multiple="true" path="actividades" items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" /> --%>
-<!-- 					<br> -->
-<!-- 					<label>Proveedores: </label> -->
-<%-- 					<form:select class="form-control" multiple="true" path="proveedores" items="${proveedores}" itemLabel="nombreProveedor" itemValue="idProveedor" /> --%>
-<!-- 					<br> -->
-<!-- 					<br> -->
+					<label>Proveedores: </label>
+<%-- 					<form:select class="form-control" multiple="true" path="listIdActividades" items="${ActividadesxObjeto}" itemLabel="${ActividadesxObjeto[0].toString()}" itemValue="${ActividadesxObjeto[1].toString()}" /> --%>
+					<br>
+					       <form:select name="Proveedores" class="form-control" path="listIdProveedor">
+					          <c:forEach var="item" items="${Proveedores}">
+					            <option value="${item[3].toString()}">${item[2].toString()}</option>
+					          </c:forEach>
+					        </form:select>
 					
-<!-- 					<select id="ddl2" name="ddl2" multiple="true"> -->
-<!-- 					</select> -->
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
 				</form:form>
 	        </div>
 		</div>
 		
 	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>
+        <div id="snackbar" class="alert alert-success">Se Ingreso Correctamente</div>
         
 
     <footer class="footer">

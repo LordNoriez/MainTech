@@ -60,4 +60,22 @@ public class ActividadService {
 	public ActividadProveedor getActividadProveedor(Integer idAct, Integer idProv, Integer idControl) {
 		return actividadRepository.getActividadProveedor(idAct, idProv, idControl);
 	}
+
+	public List<Object[]> getPlantActividadObjeto(Integer idObjeto){
+		List<Object[]> actividades = new ArrayList<>();
+		actividadRepository.getPlantAct_Objt(idObjeto)
+		.forEach(actividades::add);
+		return actividades;
+	}
+	
+	public List<Object[]> getidActividadProveedorxObjt(Integer idObjeto, Integer idProveedor){
+		List<Object[]> actividades = new ArrayList<>();
+		actividadRepository.getidActividadProveedorxObjt(idObjeto, idProveedor)
+		.forEach(actividades::add);
+		return actividades;
+	}
+	
+	public Double getCostoActividad(Integer idActividad, Integer idProveedor){
+		return actividadRepository.getCostoActividadProveedor(idActividad, idProveedor);
+	}
 }

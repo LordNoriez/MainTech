@@ -3,7 +3,6 @@ package org.maintech.mantenimientoObjetoActividad;
 import java.util.List;
 
 import org.maintech.actividad.Actividad;
-import org.maintech.actividadproveedor.ActividadProveedor;
 import org.maintech.proveedor.Proveedor;
 
 public class GroupMantenimientoObjeto {
@@ -13,6 +12,9 @@ public class GroupMantenimientoObjeto {
 	//private List<ActividadProveedor> actividadesProveedores;
 	private List<Actividad> actividades;
 	private List<Proveedor> Proveedores;
+	private List<Integer> ListIdActividades;
+	private Integer ListIdProveedor;
+	private List<String> ListIdActividadProveedor;
 	
 	public Integer getMantenimientos() {
 		return mantenimientos;
@@ -60,25 +62,40 @@ public class GroupMantenimientoObjeto {
 		Proveedores = proveedores;
 	}
 
+	public List<Integer> getListIdActividades() {
+		return ListIdActividades;
+	}
+
+	public void setListIdActividades(List<Integer> listIdActividades) {
+		ListIdActividades = listIdActividades;
+	}
+
+	public Integer getListIdProveedor() {
+		return ListIdProveedor;
+	}
+
+	public void setListIdProveedor(Integer listIdProveedor) {
+		ListIdProveedor = listIdProveedor;
+	}
+
+	public List<String> getListIdActividadProveedor() {
+		return ListIdActividadProveedor;
+	}
+
+	public void setListIdActividadProveedor(List<String> listIdActividadProveedor) {
+		ListIdActividadProveedor = listIdActividadProveedor;
+	}
+
 	public GroupMantenimientoObjeto(Integer mantenimientos, Integer idobjeto, List<Actividad> actividades,
-			List<Proveedor> proveedores) {
+			List<Proveedor> proveedores, List<Integer> listIdActividades, Integer listIdProveedor,
+			List<String> listIdActividadProveedor) {
 		super();
 		this.mantenimientos = mantenimientos;
 		this.idobjeto = idobjeto;
 		this.actividades = actividades;
 		Proveedores = proveedores;
+		ListIdActividades = listIdActividades;
+		ListIdProveedor = listIdProveedor;
+		ListIdActividadProveedor = listIdActividadProveedor;
 	}
-
-//	public GroupMantenimientoObjeto(Integer mantenimientos, Integer idobjeto,
-//			List<ActividadProveedor> actividadesProveedores) {
-//		super();
-//		this.mantenimientos = mantenimientos;
-//		this.idobjeto = idobjeto;
-//		this.actividadesProveedores = actividadesProveedores;
-//	}
-
-	
-
-	
-	
 }
