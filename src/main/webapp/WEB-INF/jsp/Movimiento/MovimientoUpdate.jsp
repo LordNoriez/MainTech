@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Categoría</title>
+    <title>Editar Tipo de Mantenimiento</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,7 +40,7 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-						
+					
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Crear Categoría</h4>
+				        <h4 class="text-muted">Editar Tipo de Movimiento</h4>
 			        </div>
 			    </div>
 			</div>
@@ -92,30 +92,21 @@
 			</div>					
 			
 			<div class=" col-md-8"  >
-				<spring:url value="/addCategoria" var="variableAdd" />
+				<spring:url value="/tipomovimientoupdate/${TipoMovimiento.idTipoMovimiento}" var="variableAdd" />
 			
-				<form:form method="post" modelAttribute="crearModelCategoria" action="${variableAdd}">
+				<form:form method="PUT" modelAttribute="TipoMovimiento" action="${variableAdd}">
+				
 					
 					<label>Nombre: </label>
-					<form:input path="NombreCategoria"  class="form-control" type="text" /> 
-					<form:errors path="NombreCategoria" />
-					<br>
-					
-					<label>Descripción: </label>
-					<form:input path="DescripcionCategoria"  class="form-control" type="text" /> 
-					<form:errors path="DescripcionCategoria" />
-					<br>
-					
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
+					<form:input path="NombreTipoMovimiento" class="form-control" type="text" value = "${TipoMovimiento.nombreTipoMovimiento}" /> <!-- bind to user.name-->		
+					<br>		
+						
+					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>
+				
 				</form:form>
-	        </div>
+			</div>
 		</div>
 	
-		
-	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
-        
-
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
     </footer>

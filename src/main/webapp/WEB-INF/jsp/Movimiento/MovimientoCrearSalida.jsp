@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Categoría</title>
+    <title>Salida de Equipos</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,7 +40,7 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-						
+					
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Crear Categoría</h4>
+				        <h4 class="text-muted">Salida de Equipos</h4>
 			        </div>
 			    </div>
 			</div>
@@ -92,23 +92,33 @@
 			</div>					
 			
 			<div class=" col-md-8"  >
-				<spring:url value="/addCategoria" var="variableAdd" />
+				<spring:url value="/addMovimientoSalida" var="variableAdd" />
 			
-				<form:form method="post" modelAttribute="crearModelCategoria" action="${variableAdd}">
-					
-					<label>Nombre: </label>
-					<form:input path="NombreCategoria"  class="form-control" type="text" /> 
-					<form:errors path="NombreCategoria" />
+				<form:form name="FormSalidaMovimiento" method="POST" modelAttribute="crearModelMovimiento" action="${variableAdd}">	
+				
+					<label>Descripción: </label>
+					<form:input path="DescripcionMovimiento" class="form-control" type="text" /> <!-- bind to user.name-->
+					<form:errors path="DescripcionMovimiento" />
+					<br>
+				
+					<label>Cantidad: </label>
+					<form:input name="cant" path="CantidadMovimiento" class="form-control" type="number" /> <!-- bind to user.name-->
+					<form:errors path="CantidadMovimiento" />
 					<br>
 					
-					<label>Descripción: </label>
-					<form:input path="DescripcionCategoria"  class="form-control" type="text" /> 
-					<form:errors path="DescripcionCategoria" />
+					<label>Equipo: </label>						        
+					<form:select name="obj" class="form-control" path="objeto">
+						
+						<c:forEach var="obj" items="${objetos}">
+							<form:option label="${obj[7].toString()}" value="${obj[1]}" />
+						</c:forEach>
+					</form:select>
 					<br>
 					
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
 				</form:form>
-	        </div>
+					<button name="btn" onclick="validate()">Hola</button>
+	       </div>
 		</div>
 	
 		
@@ -151,6 +161,34 @@
 			});
 		};
 	});
+
+		function validate() {
+
+			
+			var cant = document.getElementsByName("cant")[0].value;
+			var idObj = document.getElementsByName("obj")[0].value;
+			
+            console.log("1");		
+		    $.ajax({
+		        type: "POST",
+		        url: "verifCantSalida",
+		        data: "cant="+ cant +"& idObj="+ idObj,
+		        success: function () {
+		            // do something.
+            		console.log("2");
+					$.growl({title: "OK", message: "Cantidad Correcta"});			
+		        },
+		        error: function () {
+		            // do something.
+		            
+            		console.log("3");
+            		alert("Error"); 
+		        }
+		    });
+
+            console.log("4");
+		}
+		
 	</script>
 
 </body>

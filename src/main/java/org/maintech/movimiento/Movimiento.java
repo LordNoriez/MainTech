@@ -22,7 +22,6 @@ public class Movimiento {
 	@Id
 	@GeneratedValue
 	private Integer idMovimiento;
-	private String NombreMovimiento;
 	private Date FechaMovimiento;
 	private String DescripcionMovimiento;
 	private Integer CantidadMovimiento;
@@ -36,36 +35,13 @@ public class Movimiento {
 	@ManyToOne
 	private Objeto objeto;
 	
-	public Integer getCantidadMovimiento() {
-		return CantidadMovimiento;
-	}
 
-	public void setCantidadMovimiento(Integer cantidadMovimiento) {
-		CantidadMovimiento = cantidadMovimiento;
-	}
-
-	public TipoMovimiento getTipoMovimiento() {
-		return tipoMovimiento;
-	}
-
-	public void setTipoMovimiento(TipoMovimiento tipoMovimiento) {
-		this.tipoMovimiento = tipoMovimiento;
-	}
-	
 	public Integer getIdMovimiento() {
 		return idMovimiento;
 	}
 
 	public void setIdMovimiento(Integer idMovimiento) {
 		this.idMovimiento = idMovimiento;
-	}
-
-	public String getNombreMovimiento() {
-		return NombreMovimiento;
-	}
-
-	public void setNombreMovimiento(String nombreMovimiento) {
-		NombreMovimiento = nombreMovimiento;
 	}
 
 	public Date getFechaMovimiento() {
@@ -84,6 +60,14 @@ public class Movimiento {
 		DescripcionMovimiento = descripcionMovimiento;
 	}
 
+	public Integer getCantidadMovimiento() {
+		return CantidadMovimiento;
+	}
+
+	public void setCantidadMovimiento(Integer cantidadMovimiento) {
+		CantidadMovimiento = cantidadMovimiento;
+	}
+
 	public Boolean getActive() {
 		return active;
 	}
@@ -92,12 +76,12 @@ public class Movimiento {
 		this.active = active;
 	}
 
-	public TipoMovimiento getTipomovimiento() {
+	public TipoMovimiento getTipoMovimiento() {
 		return tipoMovimiento;
 	}
 
-	public void setTipomovimiento(TipoMovimiento tipomovimiento) {
-		this.tipoMovimiento = tipomovimiento;
+	public void setTipoMovimiento(TipoMovimiento tipoMovimiento) {
+		this.tipoMovimiento = tipoMovimiento;
 	}
 
 	public Objeto getObjeto() {
@@ -108,11 +92,10 @@ public class Movimiento {
 		this.objeto = objeto;
 	}
 
-	public Movimiento(Integer idMovimiento, String nombreMovimiento, Date fechaMovimiento, String descripcionMovimiento,
+	public Movimiento(Integer idMovimiento, Date fechaMovimiento, String descripcionMovimiento,
 			Integer cantidadMovimiento, Boolean active, TipoMovimiento tipoMovimiento, Objeto objeto) {
 		super();
 		this.idMovimiento = idMovimiento;
-		NombreMovimiento = nombreMovimiento;
 		FechaMovimiento = fechaMovimiento;
 		DescripcionMovimiento = descripcionMovimiento;
 		CantidadMovimiento = cantidadMovimiento;

@@ -55,6 +55,10 @@
 		  <a href="/areaEmpresa">Ver Area Empresa</a>
 		  <a href="/crearActividad">Crear Actividad</a>
 		  <a href="/actividad">Ver Actividad</a>-->
+		  <p>Movimientos de Equipos
+		  <a href="/crearMovimientoIngreso">Ingreso de Equipos</a>
+		  <a href="/crearMovimientoSalida">Salida de Equipos</a>
+		  <a href="/movimiento">Ver</a>
 		  <p>Categorías
 		  <a href="/crearCategoria">Crear</a>
 		  <a href="/categoria">Ver</a>
