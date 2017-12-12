@@ -29,3 +29,30 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.body.style.backgroundColor = "white";
 }
+
+function industryAjax()
+{
+	alert("i am here")
+var businessNatureId= $("#industrySelect option:selected").val();
+	
+	$.ajax({
+		url : "/getAllIndustries",
+		type : "get",
+		success : function(response) {
+			$('#industrySelect').empty();
+			$('#industrySelect').append($('<option>', {
+			    value: 0,
+			    text:  'Select'
+			}));
+			for (item in response) {
+				$('#industrySelect').append($('<option>', {
+				    value: response[item].idMantenimiento,
+				    text:  response[item].nombreMantenimiento
+				}));
+			}
+		},
+		error : function(e) {
+			// alert("Submit failed" + JSON.stringify(e));
+		}
+	});
+}

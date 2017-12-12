@@ -21,6 +21,9 @@ import org.maintech.proveedor.ProveedorService;
 import org.maintech.reporterol.ReporteRolService;
 import org.maintech.tipomantenimiento.TipoMantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -34,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -199,11 +203,21 @@ public class MantenimientoController {
 	return districtVillageList;
 	}
 	
-	@RequestMapping(value = "/someUrl", method=RequestMethod.POST)
+	@RequestMapping(value="/contacts", produces = {
+	        MediaType.APPLICATION_JSON_VALUE},
+	        method = RequestMethod.GET)
+	public ResponseEntity<List<Mantenimiento>> getContacts () {
+
+	    List<Mantenimiento> contacts = mantenimientoService.getAllMantenimiento();
+
+	    return new ResponseEntity<List<Mantenimiento>>(contacts, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/getAllIndustries")
 	@ResponseBody
-	public String getJsonData(@RequestBody String parameters) {
-	    String exampleData = "{\"somename1\":\"somevalue1\",\"somename2\":\"somevalue2\"}";
-	    return exampleData;
+	public List<Mantenimiento>getAllIndustries()
+	{
+	    return mantenimientoService.getAllMantenimiento();
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")

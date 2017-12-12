@@ -101,7 +101,8 @@
 					<br>
 					
 					<label>Objeto: </label>
-					<form:select class="form-control" path="idobjeto" onchange="callMe(this)">
+					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="idobjeto" onchange="industryAjax();">
+<!-- 					onchange="callMe(this)" -->
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
 					</form:select>
@@ -114,12 +115,21 @@
 <!-- 					<br> -->
 <!-- 					<br> -->
 					
-					<select id="ddl2" name="ddl2" multiple="true">
-					</select>
+<label>Industry</label> <select class="form-control m-b"
+ id="industrySelect" name="industryId" >
+		<option value="0">Choose Industry</option></select>
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
 				</form:form>
 	        </div>
 		</div>
+		
+    <table class="data-contacts-js table table-striped" >
+        <tr>
+            <th>Name</th>
+            <th>Telephone</th>
+            <th>Email</th>
+        </th>
+    </table>
 		
 	        <!-- The actual snackbar -->
         <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>
@@ -161,71 +171,7 @@
 		};
 	});
 	</script>
-	
-	<script type="text/javascript">
-	     function configureDropDownLists(ddl1,ddl2) {
-	    var colours = ['Black', 'White', 'Blue'];
-	    var shapes = ['Square', 'Circle', 'Triangle'];
-	    var names = ['John', 'David', 'Sarah'];
-	
-	    switch (ddl1.value) {
-	        case 'Colours':
-	            ddl2.options.length = 0;
-	            for (i = 0; i < colours.length; i++) {
-	                createOption(ddl2, colours[i], colours[i]);
-	            }
-	            break;
-	        case 'Shapes':
-	            ddl2.options.length = 0; 
-	        for (i = 0; i < shapes.length; i++) {
-	            createOption(ddl2, shapes[i], shapes[i]);
-	            }
-	            break;
-	        case 'Names':
-	            ddl2.options.length = 0;
-	            for (i = 0; i < names.length; i++) {
-	                createOption(ddl2, names[i], names[i]);
-	            }
-	            break;
-	            default:
-	                ddl2.options.length = 0;
-	            break;
-	    }​
 
-	}
-	
-	    function createOption(ddl, text, value) {
-	        var opt = document.createElement('option');
-	        opt.value = value;
-	        opt.text = text;
-	        ddl.options.add(opt);
-	    }
-	    
-	    
-	</script>
-	
-	<script type="text/javascript">
-        function callMe(objtoid) {
-            var districtId = objtoid.value;
-          
-            $.ajax({
-                type: "POST",
-                url: "someUrl",
-                dataType: "json",
-                data: {
-                    varname1 : "varvalue1",
-                    varname2 : "varvalue2"
-                },
-                success: function (data) {
-                    $('#ddl2').empty(); // empty existing list
-                    $('#ddl2').append('<option value="">Some Label</option>');
-                    $.each(data, function (varvalue, vartext){
-                        $('#ddl2').append($('<option></option>').val(varvalue).html(vartext));
-                    });  
-                }
-            });
-        }    
-    </script> 
 
 </body>
 </html>
