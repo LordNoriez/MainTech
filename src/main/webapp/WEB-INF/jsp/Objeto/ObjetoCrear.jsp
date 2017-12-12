@@ -125,7 +125,6 @@
 					
 					<label>Categoría: </label>						        
 					<form:select class="form-control" path="categoria">
-						<form:option value="" label="--- Select ---" />
 						<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
 					</form:select>
 					<br>

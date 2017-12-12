@@ -56,3 +56,5 @@ var businessNatureId= $("#industrySelect option:selected").val();
 		}
 	});
 }
+
+
