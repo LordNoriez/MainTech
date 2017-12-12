@@ -100,24 +100,27 @@
 					<form:input path="DescripcionMovimiento" class="form-control" type="text" /> <!-- bind to user.name-->
 					<form:errors path="DescripcionMovimiento" />
 					<br>
-				
-					<label>Cantidad: </label>
-					<form:input name="cant" path="CantidadMovimiento" class="form-control" type="number" /> <!-- bind to user.name-->
-					<form:errors path="CantidadMovimiento" />
-					<br>
 					
 					<label>Equipo: </label>						        
-					<form:select name="obj" class="form-control" path="objeto">
-						
+					<form:select name="obj" class="form-control" path="objeto" onchange="dropCants(${obj[0]})">
 						<c:forEach var="obj" items="${objetos}">
 							<form:option label="${obj[7].toString()}" value="${obj[1]}" />
 						</c:forEach>
 					</form:select>
 					<br>
+				
+					<label>Cantidad: </label>					
+					<form:select id="ddl" name="ddl" class="form-control" path="CantidadMovimiento" >
+					</form:select>
+<%-- 					<form:select class="form-control" path="CantidadMovimiento"> --%>
+<%-- 						<c:forEach begin="1" end="${obj[0]}" varStatus="loop"> --%>
+<%-- 						    <form:option label="${loop.count}" value="${loop.count}" /> --%>
+<%-- 						</c:forEach> --%>
+<%-- 					</form:select>					 --%>
+					<br>
 					
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
 				</form:form>
-					<button name="btn" onclick="validate()">Hola</button>
 	       </div>
 		</div>
 	
@@ -161,34 +164,16 @@
 			});
 		};
 	});
-
-		function validate() {
-
-			
-			var cant = document.getElementsByName("cant")[0].value;
-			var idObj = document.getElementsByName("obj")[0].value;
-			
-            console.log("1");		
-		    $.ajax({
-		        type: "POST",
-		        url: "verifCantSalida",
-		        data: "cant="+ cant +"& idObj="+ idObj,
-		        success: function () {
-		            // do something.
-            		console.log("2");
-					$.growl({title: "OK", message: "Cantidad Correcta"});			
-		        },
-		        error: function () {
-		            // do something.
-		            
-            		console.log("3");
-            		alert("Error"); 
-		        }
-		    });
-
-            console.log("4");
-		}
-		
+	</script>
+	<script type="text/javascript">
+        function dropCants(cant) {
+            var districtId = objtoid.value;
+          
+            $('#ddl').empty(); // empty existing list
+            for (i = 1; i <= cant; i++) { 
+            	$('#ddl').append($('<option></option>').val(i.toString()).html(i.toString()));
+            }
+        }
 	</script>
 
 </body>

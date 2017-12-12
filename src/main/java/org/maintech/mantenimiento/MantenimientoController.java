@@ -3,17 +3,11 @@ package org.maintech.mantenimiento;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import javax.mail.internet.MimeMessage;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
-import org.bouncycastle.eac.EACCertificateBuilder;
 import org.dom4j.Branch;
-import org.maintech.actividad.Actividad;
 import org.maintech.actividad.ActividadService;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
 import org.maintech.objeto.ObjetoService;
@@ -107,7 +101,7 @@ public class MantenimientoController {
 		mantenimiento.setIsTerminadoMantenimiento(false);
 		mantenimientoService.addMantenimiento(mantenimiento);
 		
-		model.addAttribute("idMantenimiento",  mantenimiento.getIdMantenimiento());
+		model.addAttribute("mantenimiento",  mantenimiento);
 		model.addAttribute("itemobjeto", objetoService.returnAllObjeto());
 		model.addAttribute("actividades", actividadService.getAllActividad());
 		model.addAttribute("proveedores",  proveedorService.getAllProveedores());
@@ -199,11 +193,12 @@ public class MantenimientoController {
 	return districtVillageList;
 	}
 	
-	@RequestMapping(value = "/someUrl", method=RequestMethod.POST)
+	@RequestMapping(value = "/cargarDrops", method=RequestMethod.POST)
 	@ResponseBody
 	public String getJsonData(@RequestBody String parameters) {
-	    String exampleData = "{\"somename1\":\"somevalue1\",\"somename2\":\"somevalue2\"}";
-	    return exampleData;
+		parameters= parameters.substring(0, parameters.length()-1);
+		System.out.println(parameters);
+	    return parameters;
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
@@ -217,7 +212,7 @@ public class MantenimientoController {
 //			
 //			mantenimientoService.LinkActividad_mantenimiento(activMante.getIdActividad(), id);
 //		} 
-
+ 
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 	

@@ -96,13 +96,14 @@
 				<spring:url value="/LinkMantObjeto" var="variableAdd" />
 				<form:form method="post" modelAttribute="crearModelGroupMantenimientoObjeto" action="${variableAdd}">
 					
-					<label>idMantenimiento: </label>
-					<form:input type="text" path="mantenimientos" class="form-control" value = "${idMantenimiento}"/>					
+					<label>Mantenimiento: </label>
+					<form:select class= "form-control" path="mantenimientos">
+						<form:option label="${mantenimiento.getNombreMantenimiento()}" value="${mantenimiento.getIdMantenimiento()}" />
+					</form:select>										
 					<br>
 					
 					<label>Objeto: </label>
-					<form:select class="form-control" path="idobjeto" onchange="callMe(this)">
-						<form:option value="" label="--- Select ---" />
+					<form:select name="obj" class="form-control" path="idobjeto" onchange="callMe(this)">
 						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
 					</form:select>
 					
@@ -116,13 +117,14 @@
 					
 					<select id="ddl2" name="ddl2" multiple="true">
 					</select>
+					
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
 				</form:form>
 	        </div>
 		</div>
 		
 	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se IngresÃ³ Correctamente</div>
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>
         
 
     <footer class="footer">
@@ -210,12 +212,10 @@
           
             $.ajax({
                 type: "POST",
-                url: "someUrl",
+                url: "cargarDrops",
                 dataType: "json",
-                data: {
-                    varname1 : "varvalue1",
-                    varname2 : "varvalue2"
-                },
+                data: districtId,
+                
                 success: function (data) {
                     $('#ddl2').empty(); // empty existing list
                     $('#ddl2').append('<option value="">Some Label</option>');
@@ -224,7 +224,7 @@
                     });  
                 }
             });
-        }    
+        }
     </script> 
 
 </body>
