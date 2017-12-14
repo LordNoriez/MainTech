@@ -6,10 +6,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
+import javax.xml.ws.Response;
 
 import org.dom4j.Branch;
 import org.maintech.actividad.ActividadService;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
+import org.maintech.movimiento.MovimientoService;
 import org.maintech.objeto.ObjetoService;
 import org.maintech.proveedor.ProveedorService;
 import org.maintech.reporterol.ReporteRolService;
@@ -26,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +36,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 
 @Controller
@@ -46,6 +51,9 @@ public class MantenimientoController {
 	
 	@Autowired
 	private ProveedorService proveedorService;
+	
+	@Autowired
+	private MovimientoService movimientoService;
 	
 	Integer aux = 0;
 	
@@ -214,15 +222,22 @@ public class MantenimientoController {
 	{
 	    return mantenimientoService.getAllMantenimiento();
 	}
-	@RequestMapping(value = "/cargarDrops", method=RequestMethod.POST)
+	
+	@RequestMapping(value="/getCantidadInventario/{categoryId}")
 	@ResponseBody
-	public String getJsonData(@RequestBody String parameters) {
-		parameters= parameters.substring(0, parameters.length()-1);
-		System.out.println(parameters);
-	    return parameters;
-
-	}
-
+    public  Integer getAllSubcategories(@PathVariable("categoryId") Integer categoryId) {
+        return movimientoService.getCantidadInventario(categoryId);
+    }
+	
+//	@PostMapping(value = "/save")
+//	public Response postCustomer(@RequestBody Integer customer) {
+//		cust.add(customer);
+//		
+//		// Create Response Object
+//		Response response = new Response("Done", customer);
+//		return response;
+//	}
+	
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
 		mantenimiento.setActive(true);

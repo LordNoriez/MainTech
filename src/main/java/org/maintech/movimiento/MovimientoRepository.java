@@ -13,4 +13,11 @@ public interface MovimientoRepository extends CrudRepository<Movimiento, Integer
 	@Modifying
 	void softDeleteMovimiento(Integer id);
 	//#{#entityName}
+	
+	
+	
+	@Query(value = "select sum(cantidad_movimiento) from movimiento where objeto_id_objeto = ?1",
+	        nativeQuery=true
+	    )
+	    public Integer CantidadInventario(Integer IdObjeto);
 }

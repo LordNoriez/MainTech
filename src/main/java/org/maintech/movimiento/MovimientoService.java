@@ -39,4 +39,9 @@ public class MovimientoService {
 	public void deleteMovimiento(Integer id) {
 		movimientoRepository.delete(id);
 	}
+
+	public Integer getCantidadInventario(Integer categoryId) {
+		return	movimientoRepository.CantidadInventario(categoryId);
+		
+	}
 }

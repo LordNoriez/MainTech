@@ -104,11 +104,14 @@
 					
 					<label>Objeto: </label>
 
-					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="idobjeto" onchange="industryAjax();">
+					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="idobjeto">
 <!-- 					onchange="callMe(this)" -->
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
 					</form:select>
+					<label>idObjeto: </label>
+					
+					<form:input type="number" path="idobjeto" class="form-control" min="0" step ="any"/>					
 					
 <!-- 					<label>Actividades: </label> -->
 <%-- 					<form:select class="form-control" multiple="true" path="actividades" items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" /> --%>
@@ -179,6 +182,8 @@
 		};
 	});
 	</script>
+	
+
 
 
 </body>
