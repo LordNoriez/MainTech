@@ -104,15 +104,17 @@
 					
 					<label>Objeto: </label>
 
-					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="idobjeto">
+					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="idobjeto" >
 <!-- 					onchange="callMe(this)" -->
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
 					</form:select>
-					<label>idObjeto: </label>
+					<label>Cantidad: </label>
 					
-					<form:input type="number" path="idobjeto" class="form-control" min="0" step ="any"/>					
+					<form:input type="number" path="idobjeto" class="form-control" step ="any" onkeyup="this.value = minmax(this.value, 0, 100)"/>					
 					
+					<label>Limite Max</label>
+					<input type="number" id="lmitmax" class="form-control"/>
 <!-- 					<label>Actividades: </label> -->
 <%-- 					<form:select class="form-control" multiple="true" path="actividades" items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" /> --%>
 <!-- 					<br> -->
@@ -121,26 +123,12 @@
 <!-- 					<br> -->
 <!-- 					<br> -->
 					
-
-<label>Industry</label> <select class="form-control m-b"
- id="industrySelect" name="industryId" >
-		<option value="0">Choose Industry</option></select>
-					<select id="ddl2" name="ddl2" multiple="true">
-					</select>
 					
 
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
 				</form:form>
 	        </div>
 		</div>
-		
-    <table class="data-contacts-js table table-striped" >
-        <tr>
-            <th>Name</th>
-            <th>Telephone</th>
-            <th>Email</th>
-        </th>
-    </table>
 		
 	        <!-- The actual snackbar -->
         <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>
@@ -183,7 +171,39 @@
 	});
 	</script>
 	
+<script type="text/javascript">
 
+$(function() {
+	  $("#ddlObjeto").on("change",function() {
+	    var period = this.value;
+	    $.ajax({
+	        type: 'POST',
+	        url: "/myPage",
+	        data: {
+	           item: period
+	        },
+	        success: function (html) {
+	        	
+	        	document.getElementById("lmitmax").value = parseInt(html);
+	        },
+	        error: function(e) {
+	            console.log("Error:" + e);
+	        }
+	    });
+	  }); 
+	});
+</script>
+
+	<script type="text/javascript">
+	function minmax(value, min, max) 
+	{
+	    if(parseInt(value) < min || isNaN(parseInt(value))) 
+	        return 0; 
+	    else if(parseInt(value) > document.getElementById("lmitmax").value) 
+	        return document.getElementById("lmitmax").value; 
+	    else return value;
+	}
+	</script>
 
 
 </body>

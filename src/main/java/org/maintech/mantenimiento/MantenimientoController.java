@@ -1,11 +1,14 @@
 package org.maintech.mantenimiento;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 
 import org.dom4j.Branch;
@@ -227,6 +230,15 @@ public class MantenimientoController {
 	@ResponseBody
     public  Integer getAllSubcategories(@PathVariable("categoryId") Integer categoryId) {
         return movimientoService.getCantidadInventario(categoryId);
+    }
+	
+    @RequestMapping(value = "/myPage")
+    public void myController(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    String myItem = request.getParameter("item");   
+ 
+
+    response.getWriter().println(movimientoService.getCantidadInventario(Integer.parseInt(myItem)));
     }
 	
 //	@PostMapping(value = "/save")
