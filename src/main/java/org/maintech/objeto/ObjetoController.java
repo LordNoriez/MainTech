@@ -8,6 +8,8 @@ import org.maintech.actividad.Actividad;
 import org.maintech.actividadproveedor.ActividadProveedorService;
 import org.maintech.areaempresa.AreaEmpresaService;
 import org.maintech.categoria.CategoriaService;
+import org.maintech.color.ColorService;
+import org.maintech.estructura.EstructuraService;
 import org.maintech.objetoActividad.ObjetoListActividad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -37,6 +39,12 @@ public class ObjetoController {
 	@Autowired
 	private AreaEmpresaService areaEmpresaService;
 	
+	@Autowired
+	private ColorService colorService;
+	
+	@Autowired
+	private EstructuraService estructuraService;
+	
     @Autowired
     private JavaMailSender mailSender;
     
@@ -59,6 +67,8 @@ public class ObjetoController {
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.returnAllObjeto());
 		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
+		model.addAttribute("colores", colorService.getAllColor());
+		model.addAttribute("estructuras", estructuraService.getAllEstructura());
 		
 		return "Objeto/ObjetoCrear";
 	}
@@ -69,6 +79,8 @@ public class ObjetoController {
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.returnAllObjeto());
 		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
+		model.addAttribute("colores", colorService.getAllColor());
+		model.addAttribute("estructuras", estructuraService.getAllEstructura());
 		return "Objeto/ObjetoUpdate";
 	}
 	

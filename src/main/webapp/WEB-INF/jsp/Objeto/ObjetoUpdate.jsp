@@ -126,6 +126,18 @@
 					</form:select>
 					<br>	
 					
+					<label>Color: </label>						        
+					<form:select class="form-control" path="color">
+						<form:options items="${colores}" itemLabel="nombreColor" itemValue="idColor" />
+					</form:select>
+					<br>
+					
+					<label>Estructura: </label>						        
+					<form:select class="form-control" path="estructura">
+						<form:options items="${estructuras}" itemLabel="nombreEstructura" itemValue="idEstructura" />
+					</form:select>
+					<br>
+										
 					<label>Equipo Padre:</label>
 					<form:select class="form-control" path="objetoPadre" onchange="document.getElementById('objtPadre').value = this.value;">
 						<form:option value="" label="--- Select ---" itemValue=""/>

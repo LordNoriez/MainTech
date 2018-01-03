@@ -2,6 +2,7 @@ package org.maintech.proveedor;
 
 import java.security.Principal;
 
+import org.maintech.tipomantenimiento.TipoMantenimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,9 @@ public class ProveedorController {
 	
 	@Autowired
 	private ProveedorService proveedorService;    
+	
+	@Autowired
+	private TipoMantenimientoService tipoMantenimientoService;
     
 	@RequestMapping(value = "/proveedor", method = RequestMethod.GET)
 	public String showAllProveedores(Model model) {
@@ -29,13 +33,14 @@ public class ProveedorController {
 	@RequestMapping("/crearProveedor")
 	public String crearProveedor(@ModelAttribute("crearModelProveedor") Proveedor proveedor, 
 			BindingResult result, Model model, Principal principal){
-				
+		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
 		return "Proveedor/ProveedorCrear";
 	}
 	
 	@RequestMapping("/proveedor/{idProveedor}")
 	public String getProveedorUpdate(@PathVariable("idProveedor") Integer id,Model model){
 		model.addAttribute("proveedor", proveedorService.getProveedor(id));
+		model.addAttribute("tipomantenimiento", tipoMantenimientoService.getAllMantenimiento());
 		return "Proveedor/ProveedorUpdate";
 	}
 	

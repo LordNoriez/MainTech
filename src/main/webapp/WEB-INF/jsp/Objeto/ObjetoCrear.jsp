@@ -123,6 +123,18 @@
 					<form:errors path="SerialObjeto" />
 					<br>
 					
+					<label>Color: </label>						        
+					<form:select class="form-control" path="color">
+						<form:options items="${colores}" itemLabel="nombreColor" itemValue="idColor" />
+					</form:select>
+					<br>
+					
+					<label>Estructura: </label>						        
+					<form:select class="form-control" path="estructura">
+						<form:options items="${estructuras}" itemLabel="nombreEstructura" itemValue="idEstructura" />
+					</form:select>
+					<br>
+										
 					<label>Categoría: </label>						        
 					<form:select class="form-control" path="categoria">
 						<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
