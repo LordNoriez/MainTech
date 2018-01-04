@@ -116,7 +116,15 @@
 					<label>Fecha de Ingreso: </label>
 					<form:input type="date" class="form-control" path="FechaIngresoProveedor" value = "${dateString}"/>
 					<br>
-				
+					
+					<label>Tipo Proveedor: </label>
+					<form:select class="form-control" path="objTipoMantenimiento">
+					    <c:forEach var="tipomantenimientos" items="${tipomantenimiento}">
+					        <option value="${tipomantenimientos.idTipoMantenimiento}" ${tipomantenimientos.idTipoMantenimiento == proveedor.objTipoMantenimiento.idTipoMantenimiento ? 'selected="selected"' : ''}>${tipomantenimientos.nombreTipoMantenimiento}</option>
+					    </c:forEach>
+					</form:select>					
+					<br>	
+					
 					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>
 				
 				</form:form>

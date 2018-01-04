@@ -121,7 +121,12 @@
 					<form:errors path="FechaIngresoProveedor" />
 					<br>
 					
+					<label>Tipo Proveedor: </label>						        
+					<form:select class="form-control" path="objTipoMantenimiento">
+						<form:options items="${tipos}" itemLabel="NombreTipoMantenimiento" itemValue="idTipoMantenimiento" />
+					</form:select>
 					<br>
+					
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar
 			                             </button>
 				</form:form>

@@ -6,8 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Where;
+import org.maintech.tipomantenimiento.TipoMantenimiento;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -25,6 +27,9 @@ public class Proveedor {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date FechaIngresoProveedor;
 
+	@ManyToOne
+	private TipoMantenimiento objTipoMantenimiento;
+	
 	@Column(name="is_active", columnDefinition="tinyint(1) default 1")	
 	private Boolean active;	
 	
@@ -76,6 +81,14 @@ public class Proveedor {
 		FechaIngresoProveedor = fechaIngresoProveedor;
 	}
 	
+	public TipoMantenimiento getObjTipoMantenimiento() {
+		return objTipoMantenimiento;
+	}
+
+	public void setObjTipoMantenimiento(TipoMantenimiento objTipoMantenimiento) {
+		this.objTipoMantenimiento = objTipoMantenimiento;
+	}
+
 	public Boolean getActive() {
 		return active;
 	}
@@ -89,7 +102,8 @@ public class Proveedor {
 	}
 
 	public Proveedor(Integer idProveedor, String nombreProveedor, String emailProveedor, String direccionProveedor,
-			String telefonoProveedor, Date fechaIngresoProveedor) {
+			String telefonoProveedor, Date fechaIngresoProveedor, TipoMantenimiento objTipoMantenimiento,
+			Boolean active) {
 		super();
 		this.idProveedor = idProveedor;
 		NombreProveedor = nombreProveedor;
@@ -97,5 +111,7 @@ public class Proveedor {
 		DireccionProveedor = direccionProveedor;
 		TelefonoProveedor = telefonoProveedor;
 		FechaIngresoProveedor = fechaIngresoProveedor;
-	}	
+		this.objTipoMantenimiento = objTipoMantenimiento;
+		this.active = active;
+	}
 }

@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Where;
 import org.maintech.areaempresa.AreaEmpresa;
 import org.maintech.categoria.Categoria;
+import org.maintech.color.Color;
+import org.maintech.estructura.Estructura;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -21,6 +23,7 @@ public class Objeto {
 	@Id
 	@GeneratedValue
 	private Integer idObjeto;
+	private String CodigoAvaluac;
 	private String MarcaObjeto;
 	private String ModeloObjeto;
 	private String SerialObjeto;
@@ -44,7 +47,12 @@ public class Objeto {
 	@ManyToOne
 	private AreaEmpresa AreaEmpresa;
 	
-		
+	@ManyToOne
+	private Color color;
+	
+	@ManyToOne
+	private Estructura estructura;
+	
 	@Column(name="is_active", columnDefinition="tinyint(1) default 1")	
 	private Boolean active;
 		
@@ -55,7 +63,15 @@ public class Objeto {
 	public void setIdObjeto(Integer idObjeto) {
 		this.idObjeto = idObjeto;
 	}
+	
+	public String getCodigoAvaluac() {
+		return CodigoAvaluac;
+	}
 
+	public void setCodigoAvaluac(String codigoAvaluac) {
+		CodigoAvaluac = codigoAvaluac;
+	}
+	
 	public String getMarcaObjeto() {
 		return MarcaObjeto;
 	}
@@ -168,6 +184,22 @@ public class Objeto {
 		AreaEmpresa = areaEmpresa;
 	}
 
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public Estructura getEstructura() {
+		return estructura;
+	}
+
+	public void setEstructura(Estructura estructura) {
+		this.estructura = estructura;
+	}
+
 	public Boolean getActive() {
 		return active;
 	}
@@ -180,13 +212,14 @@ public class Objeto {
 		super();
 	}
 
-
-	public Objeto(Integer idObjeto, String marcaObjeto, String modeloObjeto, String serialObjeto,
+	public Objeto(Integer idObjeto, String codigoAvaluac, String marcaObjeto, String modeloObjeto, String serialObjeto,
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
 			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objetoPadre,
-			Categoria categoria, AreaEmpresa areaEmpresa) {
+			Categoria categoria, org.maintech.areaempresa.AreaEmpresa areaEmpresa, Color color, Estructura estructura,
+			Boolean active) {
 		super();
 		this.idObjeto = idObjeto;
+		CodigoAvaluac = codigoAvaluac;
 		MarcaObjeto = marcaObjeto;
 		ModeloObjeto = modeloObjeto;
 		SerialObjeto = serialObjeto;
@@ -200,6 +233,9 @@ public class Objeto {
 		VidaObjeto = vidaObjeto;
 		this.objetoPadre = objetoPadre;
 		this.categoria = categoria;
-		this.AreaEmpresa = areaEmpresa;
-	}	
+		AreaEmpresa = areaEmpresa;
+		this.color = color;
+		this.estructura = estructura;
+		this.active = active;
+	}
 }
