@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Tipos de Mantenimiento</title>
+    <title>Ver Movimientos</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Ver Tipos de Movimientos</h4>
+				        <h4 class="text-muted">Ver Movimientos</h4>
 			        </div>
 			    </div>
 			</div>
@@ -98,28 +98,25 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Nombre</th>
+							<th>E/S</th>
+							<th>Movimiento</th>
+							<th>Cantidad</th>
+							<th>Fecha</th>
+							<th>Equipo</th>							
 						</tr>
 					</thead>
     				<tbody id="myTable">
 		
-					<c:forEach var="tipomovimiento" items="${tipomovimientos}">
+					<c:forEach var="movimiento" items="${movimientos}">
 					    <tr>
+							<td>${movimiento[6].toString()}</td>
+							<td>${movimiento[0].toString()}</td>
+							<td>${movimiento[1].toString()}</td>
+							<td>${movimiento[2].toString()}</td>
+							<td>${movimiento[4].toString()}</td>
 						<td>
-							${tipomovimiento.idTipoMovimiento}
-						</td>
-						<td>${tipomovimiento.nombreTipoMovimiento}</td>
-		
-						<td>
-						  <spring:url value="/tipomovimientodelete/${tipomovimiento.idTipoMovimiento}" var="deleteUrl" />
-						  <spring:url value="/TipoMovimiento/${tipomovimiento.idTipoMovimiento}" var="updateUrl" />
-		
-						  <button class="btn btn-primary"
-		                                          onclick="location.href='${updateUrl}'">Update</button>
-		                                                                             
+						  <spring:url value="/movimientoDelete/${movimiento[5].toString()}" var="deleteUrl" />						  
 						  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button>
-		<%--                                           onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
 		                                          
 		                                </td>
 					    </tr>
@@ -130,7 +127,7 @@
 
 	</div>
 	
-	<div id="snackbar" class="alert alert-danger">Tipo de Mantenimiento Eliminado Correctamente</div>
+	<div id="snackbar" class="alert alert-danger">Movimiento Eliminado Correctamente</div>
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>

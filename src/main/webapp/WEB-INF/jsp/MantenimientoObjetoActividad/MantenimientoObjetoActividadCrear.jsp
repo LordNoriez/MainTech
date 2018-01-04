@@ -87,7 +87,7 @@
 			    </div>	
 			    
 			    					
-				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
+				<button type="button" onclick="openNav" class="btn btn-info btn-block">Menú</button>				
 					
 			</div>					
 			
@@ -107,14 +107,15 @@
 					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="idobjeto" >
 <!-- 					onchange="callMe(this)" -->
 						<form:option value="" label="--- Select ---" />
-						<form:options items="${itemobjeto}" itemLabel="marcaObjeto" itemValue="idObjeto" />
-					</form:select>
+						<form:options items="${itemobjeto}" itemLabel="descripcionObjeto" itemValue="idObjeto" />
+					</form:select>							
+					<br>
 					<label>Cantidad: </label>
 					
 					<form:input type="number" path="idobjeto" class="form-control" step ="any" onkeyup="this.value = minmax(this.value, 0, 100)"/>					
 					
 					<label>Limite Max</label>
-					<input type="number" id="lmitmax" class="form-control"/>
+					<input type="number" id="lmitmax" class="form-control" readonly/>
 <!-- 					<label>Actividades: </label> -->
 <%-- 					<form:select class="form-control" multiple="true" path="actividades" items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" /> --%>
 <!-- 					<br> -->

@@ -58,26 +58,26 @@ var businessNatureId= $("#industrySelect option:selected").val();
 }
 
 
-
-function ajaxPost(var){
-	alert("it suppose to works")
-	
-	$.ajax({
-        type: 'POST',
-        url: "/myPage",
-        data: {
-           item: var
-        },
-        success: function (html) {
-
-            alert(html);
-        },
-        error: function(e) {
-            console.log("Error:" + e);
-        }
-    });
-
-}
+//
+//function ajaxPost(var){
+//	alert("it suppose to works")
+//	
+//	$.ajax({
+//        type: 'POST',
+//        url: "/myPage",
+//        data: {
+//           item: var
+//        },
+//        success: function (html) {
+//
+//            alert(html);
+//        },
+//        error: function(e) {
+//            console.log("Error:" + e);
+//        }
+//    });
+//
+//}
 
 
 

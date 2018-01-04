@@ -44,4 +44,8 @@ public class MovimientoService {
 		return	movimientoRepository.CantidadInventario(categoryId);
 		
 	}
+	
+	public List<Object[]> getFullMovimiento () {
+		return movimientoRepository.getFullMovimiento();
+	}
 }

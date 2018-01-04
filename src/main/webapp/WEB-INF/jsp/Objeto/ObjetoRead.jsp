@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     
     <link href="<c:url value="/css/style.css" />" rel="stylesheet">
-	<script src="<c:url value="/js/scripts.js" />"></script>
+	<script src="<c:url value="/js/scripts.js" />" type="text/javascript"></script>
     
 </head>
 
@@ -88,7 +88,7 @@
 			    
 			    					
 				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
-					
+				
 			</div>
 			
 
@@ -178,9 +178,7 @@
 			});
 		};
 	});
-	</script>
 
-	<script>
 	$(document).ready(function(){
 	  $("#myInput").on("keyup", function() {
 	    var value = $(this).val().toLowerCase();

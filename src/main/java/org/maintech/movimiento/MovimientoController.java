@@ -32,7 +32,7 @@ public class MovimientoController {
 	
 	@RequestMapping(value = "/movimiento", method = RequestMethod.GET)
 	public String getAllMovimiento(Model model) {
-		model.addAttribute("movimientos", movimientoService.getAllMovimiento());
+		model.addAttribute("movimientos", movimientoService.getFullMovimiento());
 		return "Movimiento/MovimientoRead";
 	}
 	
@@ -102,13 +102,13 @@ public class MovimientoController {
 	public ModelAndView updateMovimiento(Movimiento movimiento, @PathVariable("idMovimiento") Integer id) {
 		movimiento.setActive(true);
 		movimientoService.updateMovimiento(id, movimiento);
-		return new ModelAndView("redirect:/Movimiento");
+		return new ModelAndView("redirect:/movimiento");
 	}
 	
-	@RequestMapping(value="/deleteMovimiento/{idMovimiento}")
+	@RequestMapping(value="/movimientoDelete/{idMovimiento}")
 	public ModelAndView deactiveMovimiento(@PathVariable("idMovimiento") Integer id) {
 		movimientoService.sofDeleteMovimiento(id);
-		return new ModelAndView("redirect:/Movimiento");
+		return new ModelAndView("redirect:/movimiento");
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/Movimiento/{idMovimiento}")
