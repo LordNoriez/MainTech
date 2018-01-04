@@ -142,14 +142,14 @@
 <%-- 					<form:select multiple="true" path="actividad" items="${ItemActividad}" itemLabel="nombreActividad" itemValue="idActividad" /> --%>
 					
 					<br>
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Siguiente</button>
 			                             
 				</form:form>
 	        </div>
 		</div>
 
 	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>	
+        <div id="snackbar" class="alert alert-success">Seleccione Equipo</div>	
         
 
     <footer class="footer">

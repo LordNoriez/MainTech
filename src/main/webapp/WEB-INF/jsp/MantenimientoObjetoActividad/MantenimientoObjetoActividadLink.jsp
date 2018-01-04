@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Actividad</title>
+    <title>Crear Mantenimiento</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Asignar Objeto al Mantenimiento</h4>
+				        <h4 class="text-muted">Asignar Actividades al Mantenimiento</h4>
 			        </div>
 			    </div>
 			</div>
@@ -96,40 +96,39 @@
 				<spring:url value="/LinkEvrything" var="variableAdd" />
 				<form:form method="post" modelAttribute="crearModelMantenimiento" action="${variableAdd}">
 					
-					<label>idMantenimiento: </label>
-					<form:input type="text" path="mantenimientos" class="form-control" value = "${groupMant}"/>					
+					<label>Mantenimiento: </label>
+					<form:select class= "form-control" path="mantenimientos">
+						<form:option label="${groupMant.getNombreMantenimiento()}" value="${groupMant.getIdMantenimiento()}" />
+					</form:select>	
 					<br>
 					
-					<label>idObjeto: </label>
-					<form:input type="text" path="idobjeto" class="form-control" value = "${idobjeto}"/>					
+					<label>Equipo: </label>
+					<form:select class= "form-control" path="idobjeto">
+						<form:option label="${idobjeto.getDescripcionObjeto()}" value="${idobjeto.getIdObjeto()}" />
+					</form:select>					
 					<br>
 					
-					<label>Proveedores: </label>
-					<form:input type="text" path="listIdProveedor" class="form-control" value = "${proveedores}"/>					
+					<label>Proveedor: </label>	
+					<form:select class= "form-control" path="listIdProveedor">
+						<form:option label="${proveedores.getNombreProveedor()}" value="${proveedores.getIdProveedor()}" />
+					</form:select>				
 					<br>
 					        
-    					<label>Actividades: </label>
-<%-- 					<form:select class="form-control" multiple="true" path="listIdActividades" items="${ActividadesxObjeto}" itemLabel="${ActividadesxObjeto[0].toString()}" itemValue="${ActividadesxObjeto[1].toString()}" /> --%>
-					<br>
+    				<label>Actividades: </label>
 					       <form:select name="Actividades" class="form-control" multiple="true" path="listIdActividades">
 					          <c:forEach var="item" items="${ActividadesxObjeto}">
 					            <option value="${item[1].toString()}">${item[0].toString()}</option>
 					          </c:forEach>
 					        </form:select>
+					<br>
 					
-<!-- 					<label>Proveedores: </label> -->
-<%-- 					<form:select class="form-control" multiple="true" path="proveedores" items="${proveedores}" itemLabel="nombreProveedor" itemValue="idProveedor" /> --%>
-<!-- 					<br> -->
-<!-- 					<br> -->
-					
-
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Finalizar</button>
 				</form:form>
 	        </div>
 		</div>
 		
 	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se Ingreso Correctamente</div>
+        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>
         
 
     <footer class="footer">

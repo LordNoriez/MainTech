@@ -51,7 +51,7 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer> 
 	@Query(value="select concat(descripcion_actividad,' - $', costo.costo) ,actividad.id_actividad, max(actividad_proveedor.id_costo) from objeto_actividad INNER JOIN actividad ON actividad.id_actividad = objeto_actividad.id_actividad INNER JOIN actividad_proveedor ON actividad.id_actividad = actividad_proveedor.id_actividad inner join costo on costo.id_costo = actividad_proveedor.id_costo where objeto_actividad.objeto_id_objeto = ?1 and actividad_proveedor.id_proveedor = ?2", nativeQuery=true)
 		public List<Object[]> getidActividadProveedorxObjt(Integer idObjeto, Integer idProveedor);
 		
-	@Query(value="select max(id_costo) as idC from actividad_proveedor where id_actividad = ?1 and id_proveedor = ?2", nativeQuery=true)
+	@Query(value="select costo from costo join (select max(id_costo) as idC from actividad_proveedor where id_actividad = ?1 and id_proveedor = ?2) as maxC on costo.id_costo=maxC.idC;", nativeQuery=true)
 		public Double getCostoActividadProveedor(Integer idActividad, Integer idProveedor);		
 		
 }

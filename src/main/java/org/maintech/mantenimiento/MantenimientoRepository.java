@@ -96,4 +96,10 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		        nativeQuery=true
 		    )
 		    public List<Object[]> getAct_ProvxObjt(Integer idObjeto);
+
+
+		@Query(value = "select distinct nombre_proveedor,actividad_proveedor.id_proveedor from objeto_actividad INNER JOIN actividad ON actividad.id_actividad = objeto_actividad.id_actividad INNER JOIN actividad_proveedor ON actividad.id_actividad = actividad_proveedor.id_actividad INNER JOIN proveedor ON proveedor.id_proveedor= actividad_proveedor.id_proveedor where objeto_actividad.objeto_id_objeto = ?1",
+		        nativeQuery=true
+		    )
+		    public List<Object[]> getProvXObj(Integer idObjeto);
 }

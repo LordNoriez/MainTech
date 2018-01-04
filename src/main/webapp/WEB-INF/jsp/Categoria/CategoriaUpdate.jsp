@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Objeto</title>
+    <title>Editar Categoría</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -36,6 +36,58 @@
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;
+}
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* The navigation menu titles */
+.sidenav p {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
 }
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
@@ -72,7 +124,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Editar Objeto</h4>
+				        <h4 class="text-muted">Editar Categoría</h4>
 			        </div>
 			    </div>
 			</div>
@@ -145,6 +197,17 @@
 			});
 		};
 	});
+
+		function openNav() {
+		    document.getElementById("mySidenav").style.width = "250px";
+		    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+		}
+
+		/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+		function closeNav() {
+		    document.getElementById("mySidenav").style.width = "0";
+		    document.body.style.backgroundColor = "white";
+		}
 	</script>
 
 </body>

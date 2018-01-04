@@ -2,6 +2,8 @@ package org.maintech.mantenimientoObjetoActividad;
 
 import java.util.List;
 
+import javax.persistence.Column;
+
 import org.maintech.actividad.Actividad;
 import org.maintech.proveedor.Proveedor;
 
@@ -15,6 +17,17 @@ public class GroupMantenimientoObjeto {
 	private List<Integer> ListIdActividades;
 	private Integer ListIdProveedor;
 	private List<String> ListIdActividadProveedor;
+
+	@Column(columnDefinition="tinyint(1) default 0")
+	private Integer CantidadMantenimiento;
+
+	public Integer getCantidadMantenimiento() {
+		return CantidadMantenimiento;
+	}
+
+	public void setCantidadMantenimiento(Integer cantidadMantenimiento) {
+		CantidadMantenimiento = cantidadMantenimiento;
+	}
 	
 	public Integer getMantenimientos() {
 		return mantenimientos;
@@ -31,17 +44,6 @@ public class GroupMantenimientoObjeto {
 	public void setIdobjeto(Integer idobjeto) {
 		this.idobjeto = idobjeto;
 	}
-	
-
-//	public List<ActividadProveedor> getActividadesProveedores() {
-//		return actividadesProveedores;
-//	}
-//
-//	public void setActividadesProveedores(List<ActividadProveedor> actividadesProveedores) {
-//		this.actividadesProveedores = actividadesProveedores;
-//	}
-	
-	
 
 	public GroupMantenimientoObjeto() {
 	}
@@ -88,7 +90,7 @@ public class GroupMantenimientoObjeto {
 
 	public GroupMantenimientoObjeto(Integer mantenimientos, Integer idobjeto, List<Actividad> actividades,
 			List<Proveedor> proveedores, List<Integer> listIdActividades, Integer listIdProveedor,
-			List<String> listIdActividadProveedor) {
+			List<String> listIdActividadProveedor, Integer cantidadMantenimiento) {
 		super();
 		this.mantenimientos = mantenimientos;
 		this.idobjeto = idobjeto;
@@ -97,5 +99,6 @@ public class GroupMantenimientoObjeto {
 		ListIdActividades = listIdActividades;
 		ListIdProveedor = listIdProveedor;
 		ListIdActividadProveedor = listIdActividadProveedor;
+		this.CantidadMantenimiento = cantidadMantenimiento;
 	}
 }

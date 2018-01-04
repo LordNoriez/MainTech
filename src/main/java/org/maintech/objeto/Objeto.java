@@ -55,7 +55,18 @@ public class Objeto {
 	
 	@Column(name="is_active", columnDefinition="tinyint(1) default 1")	
 	private Boolean active;
+	
+	@Column(columnDefinition="tinyint(1) default 0")	
+	private Integer CantidadMantenimiento;
 		
+	public Integer getCantidadMantenimiento() {
+		return CantidadMantenimiento;
+	}
+
+	public void setCantidadMantenimiento(Integer cantidadMantenimiento) {
+		CantidadMantenimiento = cantidadMantenimiento;
+	}
+
 	public Integer getIdObjeto() {
 		return idObjeto;
 	}
@@ -216,7 +227,7 @@ public class Objeto {
 			Date fechaCreacionObjeto, Date fechaObtencionObjeto, String descripcionObjeto, String longitudObjeto,
 			String anchoObjeto, String areaObjeto, String alturaObjeto, Integer vidaObjeto, Objeto objetoPadre,
 			Categoria categoria, org.maintech.areaempresa.AreaEmpresa areaEmpresa, Color color, Estructura estructura,
-			Boolean active) {
+			Boolean active, Integer cantidadMantenimiento) {
 		super();
 		this.idObjeto = idObjeto;
 		CodigoAvaluac = codigoAvaluac;
@@ -237,5 +248,6 @@ public class Objeto {
 		this.color = color;
 		this.estructura = estructura;
 		this.active = active;
+		this.CantidadMantenimiento = cantidadMantenimiento;
 	}
 }

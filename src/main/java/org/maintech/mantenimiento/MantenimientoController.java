@@ -15,6 +15,7 @@ import org.dom4j.Branch;
 import org.maintech.actividad.ActividadService;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
 import org.maintech.movimiento.MovimientoService;
+import org.maintech.objeto.Objeto;
 import org.maintech.objeto.ObjetoService;
 import org.maintech.proveedor.ProveedorService;
 import org.maintech.reporterol.ReporteRolService;
@@ -39,9 +40,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-
-
-
 
 @Controller
 public class MantenimientoController {
@@ -114,6 +112,9 @@ public class MantenimientoController {
 		mantenimiento.setIsAceptadoMantenimiento(true);
 		mantenimiento.setIsEnProcesoMantenimiento(false);
 		mantenimiento.setIsTerminadoMantenimiento(false);
+		if (mantenimiento.getIsProgramadoMantenimiento() == false)  {
+			mantenimiento.setFrecuenciaMantenimiento(0);
+		}
 		mantenimientoService.addMantenimiento(mantenimiento);
 		
 		model.addAttribute("mantenimiento",  mantenimiento);
@@ -129,35 +130,30 @@ public class MantenimientoController {
 			@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantObjNew,
 			BindingResult result, Model model) {
 
-
-	model.addAttribute("groupMant", groupMantenimientoObjeto.getMantenimientos());
-	model.addAttribute("idobjeto", groupMantenimientoObjeto.getIdobjeto());
-	//model.addAttribute("ActividadesxObjeto", actividadService.getPlantActividadObjeto(groupMantenimientoObjeto.getIdobjeto()));
-	model.addAttribute("Proveedores", mantenimientoService.getAct_ProvxObjt(groupMantenimientoObjeto.getIdobjeto()));
-	return "MantenimientoObjetoActividad/MantenimientoProveedorLink";
-
-}
+		model.addAttribute("groupMant", mantenimientoService.getMantenimiento(groupMantenimientoObjeto.getMantenimientos()));
+		model.addAttribute("idobjeto", objetoService.getObjeto(groupMantenimientoObjeto.getIdobjeto()));
+		
+		Objeto obj = objetoService.getObjeto(groupMantenimientoObjeto.getIdobjeto());
+		obj.setCantidadMantenimiento(obj.getCantidadMantenimiento() + groupMantenimientoObjeto.getCantidadMantenimiento());
+		objetoService.updateObjeto(groupMantenimientoObjeto.getIdobjeto(), obj);
+		
+		model.addAttribute("Proveedores", mantenimientoService.getProvXObj(groupMantenimientoObjeto.getIdobjeto()));
+		return "MantenimientoObjetoActividad/MantenimientoProveedorLink";
+	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/LinkMantActividad")
 	public String addprovedor(GroupMantenimientoObjeto groupMantenimientoObjeto,
 			@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantObjNew,
 			BindingResult result, Model model) {
 
-	List<Object[]> Proveedor = new ArrayList<Object[]>() ;
+		List<Object[]> Proveedor = new ArrayList<Object[]>() ;
+			
+		model.addAttribute("groupMant", mantenimientoService.getMantenimiento(groupMantenimientoObjeto.getMantenimientos()));
+		model.addAttribute("idobjeto", objetoService.getObjeto(groupMantenimientoObjeto.getIdobjeto()));
+		model.addAttribute("proveedores", proveedorService.getProveedor(groupMantenimientoObjeto.getListIdProveedor()));
+		model.addAttribute("ActividadesxObjeto", actividadService.getidActividadProveedorxObjt(groupMantenimientoObjeto.getIdobjeto(),groupMantenimientoObjeto.getListIdProveedor()));
 		
-	model.addAttribute("groupMant", groupMantenimientoObjeto.getMantenimientos());
-	model.addAttribute("idobjeto", groupMantenimientoObjeto.getIdobjeto());
-	model.addAttribute("proveedores", groupMantenimientoObjeto.getListIdProveedor());
-	model.addAttribute("ActividadesxObjeto", actividadService.getidActividadProveedorxObjt(groupMantenimientoObjeto.getIdobjeto(),groupMantenimientoObjeto.getListIdProveedor()));
-//	for (Integer Int : groupMantenimientoObjeto.getListIdActividades()) {
-//		
-//		for (Object[] objects : mantenimientoService.getAct_ProvxObjt(Int)) {
-//			
-//			Proveedor.add(objects);
-//		}
-//	}
-	
-	return "MantenimientoObjetoActividad/MantenimientoObjetoActividadLink";
+		return "MantenimientoObjetoActividad/MantenimientoObjetoActividadLink";
 
 	}
 	

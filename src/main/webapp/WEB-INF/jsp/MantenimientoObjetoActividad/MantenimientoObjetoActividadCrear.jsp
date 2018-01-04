@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Actividad</title>
+    <title>Crear Mantenimiento</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -72,7 +72,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Asignar Objeto al Mantenimiento</h4>
+				        <h4 class="text-muted">Asignar Equipo al Mantenimiento</h4>
 			        </div>
 			    </div>
 			</div>
@@ -102,37 +102,28 @@
 					</form:select>										
 					<br>
 					
-					<label>Objeto: </label>
-
+					<label>Equipo: </label>
 					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="idobjeto" >
-<!-- 					onchange="callMe(this)" -->
-						<form:option value="" label="--- Select ---" />
+						<form:option value="" label="--- Seleccionar ---" />
 						<form:options items="${itemobjeto}" itemLabel="descripcionObjeto" itemValue="idObjeto" />
 					</form:select>							
 					<br>
-					<label>Cantidad: </label>
 					
-					<form:input type="number" path="idobjeto" class="form-control" step ="any" onkeyup="this.value = minmax(this.value, 0, 100)"/>					
+					<label>Cantidad: </label>					
+					<form:input type="number" path="cantidadMantenimiento" class="form-control" step ="any" onkeyup="this.value = minmax(this.value, 0, 100)"/>					
+					<br>
 					
-					<label>Limite Max</label>
+					<label>Límite Máx: </label>
 					<input type="number" id="lmitmax" class="form-control" readonly/>
-<!-- 					<label>Actividades: </label> -->
-<%-- 					<form:select class="form-control" multiple="true" path="actividades" items="${actividades}" itemLabel="nombreActividad" itemValue="idActividad" /> --%>
-<!-- 					<br> -->
-<!-- 					<label>Proveedores: </label> -->
-<%-- 					<form:select class="form-control" multiple="true" path="proveedores" items="${proveedores}" itemLabel="nombreProveedor" itemValue="idProveedor" /> --%>
-<!-- 					<br> -->
-<!-- 					<br> -->
-					
-					
+					<br>
 
-					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Agregar Costo</button>
+					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Siguiente</button>
 				</form:form>
 	        </div>
 		</div>
 		
 	        <!-- The actual snackbar -->
-        <div id="snackbar" class="alert alert-success">Se Ingresó Correctamente</div>
+        <div id="snackbar" class="alert alert-success">Seleccione Proveedor</div>
         
 
     <footer class="footer">
