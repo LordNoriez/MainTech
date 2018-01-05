@@ -161,7 +161,7 @@ public class MantenimientoController {
 		for (Integer ActividadId: groupMantenimientoObjeto.getListIdActividades()) {
 			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(ActividadId, groupMantenimientoObjeto.getMantenimientos()
 			, groupMantenimientoObjeto.getListIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), 
-			actividadService.getCostoActividad(ActividadId, groupMantenimientoObjeto.getListIdProveedor()), groupMantenimientoObjeto.getCantidadMantenimiento());	
+			groupMantenimientoObjeto.getCantidadMantenimiento() * actividadService.getCostoActividad(ActividadId, groupMantenimientoObjeto.getListIdProveedor()), groupMantenimientoObjeto.getCantidadMantenimiento());	
 		}
 		
 
