@@ -126,14 +126,15 @@
 							</td>					
 							<td>$ ${activida[4].toString()}</td>
 							<td>${activida[5].toString()}</td>
-							<td>${activida[6].toString()}</td>					
+							<td>${activida[6].toString()}</td>		
 							<td>
-								  <spring:url value="/deleteActividad/${activida[0]}" var="deleteUrl" />							  
-								  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button>
-								  
   								  <spring:url value="/actividadnewProveedor/${activida[0]}" var="actividadnewProveedorUrl" />							  
 								  <button onclick="location.href='${actividadnewProveedorUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-primary">Agregar Proveedor</button>
 		                     </td>
+							<td>
+								  <spring:url value="/deleteActividad/${activida[0]}" var="deleteUrl" />							  
+								  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button>
+							</td>
 					    </tr>
 					</c:forEach>
 					</tbody>
@@ -142,7 +143,7 @@
 
 	</div>
 	
-	<div id="snackbar" class="alert alert-danger">Actividad Eliminada Correctamente</div>
+	<div id="snackbar" class="alert alert-danger">Éxito</div>
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
