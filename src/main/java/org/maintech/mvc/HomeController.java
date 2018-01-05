@@ -147,44 +147,46 @@ public class HomeController {
     	String[] address = reporteRolService.getAllCorreos("Reportes de Costos");
     	String mes = getMonthForInt(mesNum-1).toUpperCase();
     	if (!isEmptyStringArray(address)) {
-	        MimeMessage message = mailSender.createMimeMessage();
-	        MimeMessageHelper helper = new MimeMessageHelper(message);
-	        helper.setTo(address);
-	        /*helper.setText("<html><body><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>  "
-	        		+ "<br><body></html>", true);*/
-	        String texto1 = "<html> " 
-	    			+"<head>"
-	    			+"<link href='<c:url value='/resources/css/style.css' />"
-	    			+"<script src='<c:url value='/resources/Js/scripts.js' />'></script>"
-	    			+"</head><body>"
-	    			+"<div class='container'>"
-	    			+"<h1>Reporte de Costos para " + mes + " de " + anio + "</h1>"
-	    			+"<table style=\"font-family: 'Raleway',sans-serif;font-size: 15px\">"
-	    			+"<tr style=\"text-align: center;font-weight: 600;font-family: 'Raleway',sans-serif;font-size: 15px;color: #008080;\">"
-		    			+"<th>Mantenimiento</th>"
-		    			+"<th>Fecha</th>"
-		    			+"<th> </th>"
-		    			+"<th>Equipo</th>"
-		    			+"<th>Costos</th>"
-	    			+"</tr>";
-	        
-	        String texto2="";
-	        for (Object[] mantenimiento: mantenimientoService.CostoMantenimiento(mesNum, anio)) {
-	        	if (mantenimiento[0]==null || mantenimiento[1]==null || mantenimiento[2]==null || 
-	        			mantenimiento[3]==null || mantenimiento[4]==null){
-	        		
-	        	} else {
-		        	texto2 = texto2 + "<tr style=\"text-align: center;font-family: 'Raleway',sans-serif;font-size: 15px;\"><td>" + mantenimiento[0].toString() + "</td>"
-						+"<td>" + mantenimiento[1].toString() + "</td>"
-				    	+"<th> </th>"
-						+"<td>" + mantenimiento[2].toString() + " " + mantenimiento[3].toString() + "</td>"
-						+"<td>$ " + mantenimiento[4].toString() + "</td></tr>";
-	        	}
-		    };
-	        helper.setText(texto1 + texto2                                                                                                                 
-				+"</table><h2>Total Mes: $ " + mantenimientoService.CostoMantenimientosMes(mesNum, anio) + "</h2></div></body></html>", true);
-	        helper.setSubject("Reporte de Costos para " + mes + " de " + anio);
-	        mailSender.send(message);
+    		if (mantenimientoService.CostoMantenimiento(mesNum, anio).size() != 0) {
+		        MimeMessage message = mailSender.createMimeMessage();
+		        MimeMessageHelper helper = new MimeMessageHelper(message);
+		        helper.setTo(address);
+		        /*helper.setText("<html><body><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>  "
+		        		+ "<br><body></html>", true);*/
+		        String texto1 = "<html> " 
+		    			+"<head>"
+		    			+"<link href='<c:url value='/resources/css/style.css' />"
+		    			+"<script src='<c:url value='/resources/Js/scripts.js' />'></script>"
+		    			+"</head><body>"
+		    			+"<div class='container'>"
+		    			+"<h1>Reporte de Costos para " + mes + " de " + anio + "</h1>"
+		    			+"<table style=\"font-family: 'Raleway',sans-serif;font-size: 15px\">"
+		    			+"<tr style=\"text-align: center;font-weight: 600;font-family: 'Raleway',sans-serif;font-size: 15px;color: #008080;\">"
+			    			+"<th>Mantenimiento</th>"
+			    			+"<th>Fecha</th>"
+			    			+"<th> </th>"
+			    			+"<th>Equipo</th>"
+			    			+"<th>Costos</th>"
+		    			+"</tr>";
+		        
+		        String texto2="";
+		        for (Object[] mantenimiento: mantenimientoService.CostoMantenimiento(mesNum, anio)) {
+		        	if (mantenimiento[0]==null || mantenimiento[1]==null || mantenimiento[2]==null || 
+		        			mantenimiento[3]==null || mantenimiento[4]==null){
+		        		
+		        	} else {
+			        	texto2 = texto2 + "<tr style=\"text-align: center;font-family: 'Raleway',sans-serif;font-size: 15px;\"><td>" + mantenimiento[0].toString() + "</td>"
+							+"<td>" + mantenimiento[1].toString() + "</td>"
+					    	+"<th> </th>"
+							+"<td>" + mantenimiento[2].toString() + " " + mantenimiento[3].toString() + "</td>"
+							+"<td>$ " + mantenimiento[4].toString() + "</td></tr>";
+		        	}
+			    };
+		        helper.setText(texto1 + texto2                                                                                                                 
+					+"</table><h2>Total Mes: $ " + mantenimientoService.CostoMantenimientosMes(mesNum, anio) + "</h2></div></body></html>", true);
+		        helper.setSubject("Reporte de Costos para " + mes + " de " + anio);
+		        mailSender.send(message);
+    		}
     	}
     }
     
