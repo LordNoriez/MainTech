@@ -145,13 +145,8 @@ public class HomeController {
     private void sendEmailCostsReport(Integer mesNum, Integer anio) throws Exception{
 
     	String[] address = reporteRolService.getAllCorreos("Reportes de Costos");
-    	System.out.println(mesNum);
-    	System.out.println(anio);
     	String mes = getMonthForInt(mesNum-1).toUpperCase();
-    	System.out.println(mes);
-    	System.out.println("1");
     	if (!isEmptyStringArray(address)) {
-    		System.out.println("2");
 	        MimeMessage message = mailSender.createMimeMessage();
 	        MimeMessageHelper helper = new MimeMessageHelper(message);
 	        helper.setTo(address);
@@ -174,7 +169,6 @@ public class HomeController {
 	    			+"</tr>";
 	        
 	        String texto2="";
-	        System.out.println("3");
 	        for (Object[] mantenimiento: mantenimientoService.CostoMantenimiento(mesNum, anio)) {
 	        	if (mantenimiento[0]==null || mantenimiento[1]==null || mantenimiento[2]==null || 
 	        			mantenimiento[3]==null || mantenimiento[4]==null){
@@ -187,12 +181,9 @@ public class HomeController {
 						+"<td>$ " + mantenimiento[4].toString() + "</td></tr>";
 	        	}
 		    };
-		    System.out.println("5");
-	        helper.setText(texto1
-				+ texto2                                                                                                                 
+	        helper.setText(texto1 + texto2                                                                                                                 
 				+"</table><h2>Total Mes: $ " + mantenimientoService.CostoMantenimientosMes(mesNum, anio) + "</h2></div></body></html>", true);
 	        helper.setSubject("Reporte de Costos para " + mes + " de " + anio);
-	        System.out.println("6");
 	        mailSender.send(message);
     	}
     }
