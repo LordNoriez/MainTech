@@ -18,15 +18,13 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 	//#{#entityName}
 	
 	
-	@Query(value = "SELECT mantenimiento.nombre_mantenimiento, "
-			+ "sum(actividad.costo_actividad)  FROM mantenimiento JOIN actividad_mantenimientos "
-			+ "ON mantenimiento.id_mantenimiento = actividad_mantenimientos.mantenimientos_id_mantenimiento "
-			+ "JOIN actividad ON actividad_mantenimientos.actividad_id_actividad = actividad.id_actividad "
-			+ "GROUP BY mantenimiento.id_mantenimiento", 
-	        nativeQuery=true
-	    )
-	    public List<Object[]> CostosMantenimiento();
-	    
+	  @Query(value = "select nombre_mantenimiento, DATE_FORMAT(fecha_mantenimiento, '%d/%M/%Y') as fechaMantenimiento, marca_objeto, descripcion_objeto, sum(costo) from mantenimiento left join mantenimiento_objeto_actividad on mantenimiento.id_mantenimiento=mantenimiento_objeto_actividad.id_mantenimiento left join objeto on objeto.id_objeto=mantenimiento_objeto_actividad.id_objeto where MONTH(mantenimiento.fecha_mantenimiento) =  ?1 and YEAR(mantenimiento.fecha_mantenimiento) =  ?2 and mantenimiento.is_active = 1 group by mantenimiento_objeto_actividad.id_mantenimiento;"
+			, nativeQuery=true)
+	    public List<Object[]> CostosMantenimiento(Integer mes, Integer anio);
+
+	  @Query(value = "select sum(costo) from mantenimiento left join mantenimiento_objeto_actividad on mantenimiento.id_mantenimiento=mantenimiento_objeto_actividad.id_mantenimiento left join objeto on objeto.id_objeto=mantenimiento_objeto_actividad.id_objeto where MONTH(mantenimiento.fecha_mantenimiento) =  ?1 and YEAR(mantenimiento.fecha_mantenimiento) =  ?2 and mantenimiento.is_active = 1;"
+			, nativeQuery=true)
+	    public Integer CostoMantenimientosMes(Integer mes, Integer anio);
 	    
 		@Query(value = "select * from mantenimiento where date(fecha_mantenimiento) = '?1'", 
 		        nativeQuery=true

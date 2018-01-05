@@ -44,10 +44,12 @@ public class MantenimientoService {
 		mantenimientoRepository.delete(id);
 	}
 	
-	public List<Object[]> CostoMantenimiento() {
-		List<Object[]> mantenimientos = new ArrayList<>();
-		mantenimientoRepository.CostosMantenimiento().forEach(mantenimientos::add);
-		return mantenimientos;
+	public List<Object[]> CostoMantenimiento(Integer mes, Integer anio) {
+		return mantenimientoRepository.CostosMantenimiento(mes, anio);
+	}
+	
+	public Integer CostoMantenimientosMes(Integer mes, Integer anio) {
+		return mantenimientoRepository.CostoMantenimientosMes(mes, anio);
 	}
 	
 	public List<Mantenimiento> MantenimientoEmergente() {
