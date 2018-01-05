@@ -2,7 +2,7 @@ package org.maintech.mantenimiento;
 
 import java.util.List;
 
-
+import org.maintech.mantenimientoObjetoActividad.MantenimientoObjetoActividad;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -86,4 +86,10 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		        nativeQuery=true
 		    )
 		    public List<Object[]> getProvXObj(Integer idObjeto);
+		    
+
+			@Query(value = "select * from mantenimiento_objeto_actividad where id_mantenimiento = ?1",
+			        nativeQuery=true
+			    )
+			    public List<Object[]> getMantenimientoActividadObjetoXMant(Integer idMantenimiento);
 }

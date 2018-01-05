@@ -1,9 +1,11 @@
 package org.maintech.mantenimiento;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
@@ -14,6 +16,7 @@ import javax.xml.ws.Response;
 import org.dom4j.Branch;
 import org.maintech.actividad.ActividadService;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
+import org.maintech.mantenimientoObjetoActividad.MantenimientoObjetoActividad;
 import org.maintech.movimiento.MovimientoService;
 import org.maintech.objeto.Objeto;
 import org.maintech.objeto.ObjetoService;
@@ -56,8 +59,6 @@ public class MantenimientoController {
 	@Autowired
 	private MovimientoService movimientoService;
 	
-	Integer aux = 0;
-	
 	@Autowired
 	private MantenimientoService mantenimientoService;
 	
@@ -69,6 +70,8 @@ public class MantenimientoController {
 		
     @Autowired
     private JavaMailSender mailSender;
+
+	Integer aux = 0;
 	
 	@RequestMapping(value = "/mantenimiento", method = RequestMethod.GET)
 	public String showAllMantenimientos(Model model) {
@@ -267,21 +270,31 @@ public class MantenimientoController {
 	}
 	
 
-	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoProceso/{idMantenimiento}/{idObjeto}")
-	public ModelAndView updateMantenimientoProceso(@PathVariable("idMantenimiento") Integer id, @PathVariable("idObjeto") Integer idObj) {
+	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoProceso/{idMantenimiento}/{idObjeto}/{cant}")
+	public ModelAndView updateMantenimientoProceso(@PathVariable("idMantenimiento") Integer id, 
+			@PathVariable("idObjeto") Integer idObj, @PathVariable("cant") Integer cant) {
 		
 		Mantenimiento mantenimiento = mantenimientoService.getMantenimiento(id);
 		if (mantenimiento.getIsAceptadoMantenimiento()) {
 			if (mantenimiento.getIsEnProcesoMantenimiento()) {
-				mantenimiento.setIsEnProcesoMantenimiento(false);
-				mantenimiento.setIsTerminadoMantenimiento(false);
+
+				Objeto obj = objetoService.getObjeto(idObj);
+				if ((obj.getCantidadMantenimiento() - cant) >= 0) {
+
+					mantenimiento.setIsEnProcesoMantenimiento(false);
+					mantenimiento.setIsTerminadoMantenimiento(false);
+					
+					obj.setCantidadMantenimiento(obj.getCantidadMantenimiento() - cant);
+					objetoService.updateObjeto(idObj, obj);					
+				}
 			} else{
-				mantenimiento.setIsEnProcesoMantenimiento(true);
-				// CAMBIAR
-//				Objeto obj = objetoService.getObjeto(idObj);
-//				obj.setCantidadMantenimiento(obj.getCantidadMantenimiento() + groupMantenimientoObjeto.getCantidadMantenimiento());
-//				objetoService.updateObjeto(groupMantenimientoObjeto.getIdobjeto(), obj);
-				
+				Objeto obj = objetoService.getObjeto(idObj);
+				if (movimientoService.getCantidadInventario(idObj) >= (cant)) {
+					mantenimiento.setIsEnProcesoMantenimiento(true);
+					
+					obj.setCantidadMantenimiento(obj.getCantidadMantenimiento() + cant);
+					objetoService.updateObjeto(idObj, obj);					
+				}				
 			}
 			mantenimientoService.updateMantenimiento(id, mantenimiento);
 		}		
@@ -289,31 +302,74 @@ public class MantenimientoController {
 		return new ModelAndView("redirect:/mantenimiento");
 	}
 
-	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoTerminado/{idMantenimiento}")
-	public ModelAndView updateMantenimientoTerminado(@PathVariable("idMantenimiento") Integer id) {
+	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoTerminado/{idMantenimiento}/{idObjeto}/{cant}")
+	public ModelAndView updateMantenimientoTerminado(@PathVariable("idMantenimiento") Integer id, 
+		@PathVariable("idObjeto") Integer idObj, @PathVariable("cant") Integer cant) {
 		
 		Mantenimiento mantenimiento = mantenimientoService.getMantenimiento(id);
 		if (mantenimiento.getIsAceptadoMantenimiento()) {
 			if (mantenimiento.getIsEnProcesoMantenimiento()) {
 				if (mantenimiento.getIsTerminadoMantenimiento()) {
-					mantenimiento.setIsTerminadoMantenimiento(false);
-				} else{
-					mantenimiento.setIsTerminadoMantenimiento(true);
-					if (mantenimiento.getIsProgramadoMantenimiento()) {
-//						Mantenimiento mant = new Mantenimiento();
-//						mant.setNombreMantenimiento(mantenimiento.getNombreMantenimiento());
-//						mant.setDescripcionMantenimiento(mantenimiento.getDescripcionMantenimiento());
-//						mant.setIsProgramadoMantenimiento(true);
-//						mant.setFrecuenciaMantenimiento(mantenimiento.getFrecuenciaMantenimiento());
-//						mant.setObjTipoMantenimiento(mantenimiento.getObjTipoMantenimiento());
-//						mant.setActive(true);
-//						mant.setIsAceptadoMantenimiento(false);
-//						mant.setIsEnProcesoMantenimiento(false);
-//						mant.setIsTerminadoMantenimiento(false);
-//						
-//						mant.setFechaMantenimiento(mantenimiento.getFechaMantenimiento());
-//						mantenimientoService.addMantenimiento(mant);
+					Objeto obj = objetoService.getObjeto(idObj);
+					if (movimientoService.getCantidadInventario(idObj) >= (cant)) {
+						mantenimiento.setIsTerminadoMantenimiento(false);
+						
+						obj.setCantidadMantenimiento(obj.getCantidadMantenimiento() + cant);
+						objetoService.updateObjeto(idObj, obj);					
 					}
+				} else{
+
+					Objeto obj = objetoService.getObjeto(idObj);
+					if ((obj.getCantidadMantenimiento() - cant) >= 0) {
+
+						mantenimiento.setIsTerminadoMantenimiento(true);
+						if (mantenimiento.getIsProgramadoMantenimiento()) {
+							Mantenimiento mant = new Mantenimiento();
+							mant.setNombreMantenimiento(mantenimiento.getNombreMantenimiento());
+							mant.setDescripcionMantenimiento(mantenimiento.getDescripcionMantenimiento());
+							mant.setIsProgramadoMantenimiento(true);
+							mant.setFrecuenciaMantenimiento(mantenimiento.getFrecuenciaMantenimiento());
+							mant.setObjTipoMantenimiento(mantenimiento.getObjTipoMantenimiento());
+							mant.setActive(true);
+							mant.setIsAceptadoMantenimiento(false);
+							mant.setIsEnProcesoMantenimiento(false);
+							mant.setIsTerminadoMantenimiento(false);
+							
+							Integer dias = Math.round(mantenimiento.getFrecuenciaMantenimiento() / 24);
+							
+							String dt = mantenimiento.getFechaMantenimiento().toString();
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+							Calendar c = Calendar.getInstance();
+							try {
+								c.setTime(sdf.parse(dt));
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							System.out.println(dias);
+							c.add(Calendar.DATE, dias);  // number of days to add
+							
+							System.out.println(c.getTime().toString());
+							
+							mant.setFechaMantenimiento(c.getTime());
+							mantenimientoService.addMantenimiento(mant);
+							Integer idMantNuevo = mantenimientoService.IdUltimoMante();
+							
+							List<Object[]> moasAnt = mantenimientoService.getMantenimientoActividadObjetoXMant(id);
+							
+							for (Object[] moa : moasAnt) {
+								
+								mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(Integer.parseInt(moa[1].toString()),
+									idMantNuevo, Integer.parseInt(moa[3].toString()), Integer.parseInt(moa[4].toString()), 
+										Integer.parseInt(moa[5].toString()) * actividadService.getCostoActividad(Integer.parseInt(moa[1].toString()), Integer.parseInt(moa[3].toString())), 
+										Integer.parseInt(moa[5].toString()));
+							}
+						}
+						
+						obj.setCantidadMantenimiento(obj.getCantidadMantenimiento() - cant);
+						objetoService.updateObjeto(idObj, obj);					
+					}
+					
 				}
 				mantenimientoService.updateMantenimiento(id, mantenimiento);
 			}

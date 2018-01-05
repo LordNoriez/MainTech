@@ -103,8 +103,9 @@
 					
 					<label>Equipo: </label>						        
 					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="objeto" >
+						<form:option value="" label="--- Seleccionar ---" />
 						<c:forEach var="obj" items="${objetos}">
-							<form:option label="${obj[7].toString()}" value="${obj[1]}" />
+							<form:option label="${obj[8].toString()}" value="${obj[2]}" />
 						</c:forEach>
 					</form:select>
 					<br>

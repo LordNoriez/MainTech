@@ -146,20 +146,20 @@
 							<td>			
 								<c:choose>
 								  <c:when test="${mantenimiento[13]==true}">
-								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}/${mantenimiento[5]}'">
+								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}/${mantenimiento[5]}/${mantenimiento[16]}'">
 								  </c:when>
 								  <c:otherwise>
-								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}/${mantenimiento[5]}'">
+								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}/${mantenimiento[5]}/${mantenimiento[16]}'">
 								  </c:otherwise>
 								</c:choose></td>
 							
 							<td>	
 								<c:choose>
 								  <c:when test="${mantenimiento[14]==true}">
-								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}/${mantenimiento[5]}'">
+								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}/${mantenimiento[5]}/${mantenimiento[16]}'">
 								  </c:when>
 								  <c:otherwise>
-								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}/${mantenimiento[5]}'">
+								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}/${mantenimiento[5]}/${mantenimiento[16]}'">
 								  </c:otherwise>
 								</c:choose></td>
 										

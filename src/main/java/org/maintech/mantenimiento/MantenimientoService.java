@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.maintech.mantenimientoObjetoActividad.MantenimientoObjetoActividad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -106,6 +107,10 @@ public class MantenimientoService {
 		List<Object[]> ObjProve = new ArrayList<>();
 		mantenimientoRepository.getProvXObj(idObjeto).forEach(ObjProve::add);
 		return ObjProve;
+	}
+	
+	public List<Object[]> getMantenimientoActividadObjetoXMant (Integer idMantenimiento) {
+		return mantenimientoRepository.getMantenimientoActividadObjetoXMant(idMantenimiento);
 	}
 
 }
