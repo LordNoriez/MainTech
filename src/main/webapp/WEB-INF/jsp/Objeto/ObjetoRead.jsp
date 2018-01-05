@@ -114,16 +114,85 @@
 		
 					<c:forEach var="objeto" items="${objetos}">
 					    <tr>
-						<td>${objeto[7].toString()}</td>
-						<td>${objeto[8].toString()}</td>
-						<td>${objeto[0].toString()}</td>
-						<td>${objeto[1].toString()}</td>
-						<td>${objeto[3].toString()}</td>
-						<td>${objeto[4].toString()}</td>
-						<td>${objeto[9].toString()}</td>
-						<td>${objeto[10].toString()}</td>
-						<td>${objeto[11].toString()}</td>
-						<td>${objeto[12].toString()} ${objeto[13].toString()}</td>
+					    <c:set var = "ob" scope = "session" value = "${objeto[7].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[7].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[8].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[8].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[0].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[0].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[1].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[1].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[3].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[3].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[4].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[4].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[9].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[9].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[10].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[10].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[11].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[11].toString()}</td>
+						</c:if>
+						
+					    <c:set var = "ob" scope = "session" value = "${objeto[12].toString()}"/>
+					    <c:if test="${empty ob}">
+					    	<td> - </td>
+						</c:if>
+						<c:if test="${not empty ob}">
+						    <td>${objeto[12].toString()} ${objeto[13].toString()}</td>
+						</c:if>
 						<td>
 						  <spring:url value="/deleteObjeto/${objeto[2]}" var="deleteUrl" />
 						  <spring:url value="/objeto/${objeto[2]}" var="updateUrl" />

@@ -23,6 +23,7 @@ public class Objeto {
 	@Id
 	@GeneratedValue
 	private Integer idObjeto;
+	
 	private String CodigoAvaluac;
 	private String MarcaObjeto;
 	private String ModeloObjeto;
