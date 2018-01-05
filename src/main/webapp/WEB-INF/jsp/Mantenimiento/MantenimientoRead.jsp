@@ -102,6 +102,7 @@
 							<th>Equipo</th>
 							<th>Fecha</th>
 							<th>Proveedor</th>
+							<th>Cantidad</th>
 							<th>Costo</th>
 							<th>Program?</th>
 							<th>Frecuencia</th>
@@ -119,7 +120,8 @@
 							<td>${mantenimiento[3].toString()}</td>		
 							<td>${mantenimiento[6].toString()} ${mantenimiento[7].toString()}</td>				
 							<td>${mantenimiento[4].toString()}</td>			
-							<td>${mantenimiento[9].toString()}</td>	
+							<td>${mantenimiento[9].toString()}</td>		
+							<td>${mantenimiento[16].toString()}</td>	
 							<td>$ ${mantenimiento[15]}</td>
 							<td>	
 								<c:choose>
@@ -144,20 +146,20 @@
 							<td>			
 								<c:choose>
 								  <c:when test="${mantenimiento[13]==true}">
-								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}'">
+								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}/${mantenimiento[5]}'">
 								  </c:when>
 								  <c:otherwise>
-								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}'">
+								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}/${mantenimiento[5]}'">
 								  </c:otherwise>
 								</c:choose></td>
 							
 							<td>	
 								<c:choose>
 								  <c:when test="${mantenimiento[14]==true}">
-								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}'">
+								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}/${mantenimiento[5]}'">
 								  </c:when>
 								  <c:otherwise>
-								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}'">
+								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}/${mantenimiento[5]}'">
 								  </c:otherwise>
 								</c:choose></td>
 										

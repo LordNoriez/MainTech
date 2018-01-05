@@ -133,10 +133,6 @@ public class MantenimientoController {
 		model.addAttribute("groupMant", mantenimientoService.getMantenimiento(groupMantenimientoObjeto.getMantenimientos()));
 		model.addAttribute("idobjeto", objetoService.getObjeto(groupMantenimientoObjeto.getIdobjeto()));
 		
-		Objeto obj = objetoService.getObjeto(groupMantenimientoObjeto.getIdobjeto());
-		obj.setCantidadMantenimiento(obj.getCantidadMantenimiento() + groupMantenimientoObjeto.getCantidadMantenimiento());
-		objetoService.updateObjeto(groupMantenimientoObjeto.getIdobjeto(), obj);
-		
 		model.addAttribute("Proveedores", mantenimientoService.getProvXObj(groupMantenimientoObjeto.getIdobjeto()));
 		return "MantenimientoObjetoActividad/MantenimientoProveedorLink";
 	}
@@ -165,7 +161,7 @@ public class MantenimientoController {
 		for (Integer ActividadId: groupMantenimientoObjeto.getListIdActividades()) {
 			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(ActividadId, groupMantenimientoObjeto.getMantenimientos()
 			, groupMantenimientoObjeto.getListIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), 
-			actividadService.getCostoActividad(ActividadId, groupMantenimientoObjeto.getListIdProveedor()));
+			actividadService.getCostoActividad(ActividadId, groupMantenimientoObjeto.getListIdProveedor()), groupMantenimientoObjeto.getCantidadMantenimiento());	
 		}
 		
 
@@ -271,8 +267,8 @@ public class MantenimientoController {
 	}
 	
 
-	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoProceso/{idMantenimiento}")
-	public ModelAndView updateMantenimientoProceso(@PathVariable("idMantenimiento") Integer id) {
+	@RequestMapping(method=RequestMethod.GET, value="/mantenimientoProceso/{idMantenimiento}/{idObjeto}")
+	public ModelAndView updateMantenimientoProceso(@PathVariable("idMantenimiento") Integer id, @PathVariable("idObjeto") Integer idObj) {
 		
 		Mantenimiento mantenimiento = mantenimientoService.getMantenimiento(id);
 		if (mantenimiento.getIsAceptadoMantenimiento()) {
@@ -281,6 +277,11 @@ public class MantenimientoController {
 				mantenimiento.setIsTerminadoMantenimiento(false);
 			} else{
 				mantenimiento.setIsEnProcesoMantenimiento(true);
+				// CAMBIAR
+//				Objeto obj = objetoService.getObjeto(idObj);
+//				obj.setCantidadMantenimiento(obj.getCantidadMantenimiento() + groupMantenimientoObjeto.getCantidadMantenimiento());
+//				objetoService.updateObjeto(groupMantenimientoObjeto.getIdobjeto(), obj);
+				
 			}
 			mantenimientoService.updateMantenimiento(id, mantenimiento);
 		}		
@@ -415,7 +416,6 @@ public class MantenimientoController {
 		        mailSender.send(message);
 	        }
     	}
-    	System.out.println("= end =");
     }
     
     public boolean isEmptyStringArray(String [] array){

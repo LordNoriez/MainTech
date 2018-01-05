@@ -66,30 +66,14 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 		@Modifying
 		void Acept_mantenimiento(Integer id);
 	    
-		@Query(value = "select mantenimiento.id_mantenimiento, nombre_mantenimiento, descripcion_mantenimiento, " +
-				" nombre_tipo_mantenimiento, DATE_FORMAT(fecha_mantenimiento, '%d/%M/%Y') as fecha_mant, " +
-				" objeto.id_objeto, marca_objeto, descripcion_objeto, proveedor.id_proveedor, nombre_proveedor, " +
-				" is_programado_mantenimiento, frecuencia_mantenimiento, is_aceptado_mantenimiento, " +
-				" is_en_proceso_mantenimiento, is_terminado_mantenimiento, sum(costo) " +
-				" from mantenimiento " + 
-				" left join tipo_mantenimiento on mantenimiento.obj_tipo_mantenimiento_id_tipo_mantenimiento=tipo_mantenimiento.id_tipo_mantenimiento " +
-				" left join mantenimiento_objeto_actividad on mantenimiento_objeto_actividad.id_mantenimiento=mantenimiento.id_mantenimiento  " +
-				" left join proveedor on mantenimiento_objeto_actividad.id_proveedor=proveedor.id_proveedor  " +
-				" left join objeto on mantenimiento_objeto_actividad.id_objeto=objeto.id_objeto " +
-				" where mantenimiento.is_active=1 and objeto.is_active=1 " +
-				" group by mantenimiento.id_mantenimiento, nombre_mantenimiento, descripcion_mantenimiento, " + 
-				" nombre_tipo_mantenimiento, fecha_mantenimiento, " +
-				" objeto.id_objeto, marca_objeto, descripcion_objeto, proveedor.id_proveedor, nombre_proveedor, " +
-				" is_programado_mantenimiento, frecuencia_mantenimiento, is_aceptado_mantenimiento, " +
-				" is_en_proceso_mantenimiento, is_terminado_mantenimiento",
-		        nativeQuery=true
-		    )
+		@Query(value = "select mantenimiento.id_mantenimiento, nombre_mantenimiento, descripcion_mantenimiento, nombre_tipo_mantenimiento, DATE_FORMAT(fecha_mantenimiento, '%d/%M/%Y') as fecha_mant, objeto.id_objeto, marca_objeto, descripcion_objeto, proveedor.id_proveedor, nombre_proveedor, is_programado_mantenimiento, frecuencia_mantenimiento, is_aceptado_mantenimiento, is_en_proceso_mantenimiento, is_terminado_mantenimiento, sum(costo), mantenimiento_objeto_actividad.cantidad_mantenimiento from mantenimiento left join tipo_mantenimiento on mantenimiento.obj_tipo_mantenimiento_id_tipo_mantenimiento=tipo_mantenimiento.id_tipo_mantenimiento left join mantenimiento_objeto_actividad on mantenimiento_objeto_actividad.id_mantenimiento=mantenimiento.id_mantenimiento left join proveedor on mantenimiento_objeto_actividad.id_proveedor=proveedor.id_proveedor left join objeto on mantenimiento_objeto_actividad.id_objeto=objeto.id_objeto where mantenimiento.is_active=1 and objeto.is_active=1 group by mantenimiento.id_mantenimiento, nombre_mantenimiento, descripcion_mantenimiento, nombre_tipo_mantenimiento, fecha_mantenimiento, objeto.id_objeto, marca_objeto, descripcion_objeto, proveedor.id_proveedor, nombre_proveedor, is_programado_mantenimiento, frecuencia_mantenimiento, is_aceptado_mantenimiento, is_en_proceso_mantenimiento, is_terminado_mantenimiento"
+				, nativeQuery=true)
 		    public List<Object[]> getFullMantenimientos();
 		
-		@Query(nativeQuery = true, value= "insert into mantenimiento_objeto_actividad(id_actividad,id_mantenimiento, id_proveedor, id_objeto, costo) values(?1,?2,?3,?4,?5);")
+		@Query(nativeQuery = true, value= "insert into mantenimiento_objeto_actividad(id_actividad,id_mantenimiento, id_proveedor, id_objeto, costo, cantidad_mantenimiento) values(?1,?2,?3,?4,?5,?6);")
 		@Transactional
 		@Modifying
-		void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo);
+		void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo, Integer cantidadMantenimiento);
 				
 		
 		@Query(value = "select descripcion_actividad, actividad.id_actividad,nombre_proveedor,actividad_proveedor.id_proveedor from objeto_actividad INNER JOIN actividad ON actividad.id_actividad = objeto_actividad.id_actividad INNER JOIN actividad_proveedor ON actividad.id_actividad = actividad_proveedor.id_actividad INNER JOIN proveedor ON proveedor.id_proveedor= actividad_proveedor.id_proveedor where objeto_actividad.objeto_id_objeto = ?1",

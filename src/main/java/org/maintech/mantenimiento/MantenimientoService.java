@@ -92,8 +92,8 @@ public class MantenimientoService {
 		return mantenimientoRepository.getFullMantenimientos();
 	}
 
-	public void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo) {
-		mantenimientoRepository.LinkMantenimiento_Actividad_Obj_Provee(idActividad, idMantenimiento, idProveedor, idObjeto, costo);
+	public void LinkMantenimiento_Actividad_Obj_Provee(Integer idActividad, Integer idMantenimiento, Integer idProveedor, Integer idObjeto, Double costo, Integer cantidadMantenimiento) {
+		mantenimientoRepository.LinkMantenimiento_Actividad_Obj_Provee(idActividad, idMantenimiento, idProveedor, idObjeto, costo, cantidadMantenimiento);
 	}
 	
 	public List<Object[]> getAct_ProvxObjt(Integer idObjeto) {

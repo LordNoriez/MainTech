@@ -108,6 +108,10 @@
 					</form:select>					
 					<br>
 					
+					<label>Cantidad: </label>					
+					<form:input type="number" path="cantidadMantenimiento" class="form-control" readonly="true" />					
+					<br>
+					
 					<label>Proveedores: </label>
 					       <form:select name="Proveedores" class="form-control" path="listIdProveedor">
 					          <c:forEach var="item" items="${Proveedores}">

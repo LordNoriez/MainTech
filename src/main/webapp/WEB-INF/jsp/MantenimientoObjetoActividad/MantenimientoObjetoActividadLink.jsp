@@ -108,6 +108,10 @@
 					</form:select>					
 					<br>
 					
+					<label>Cantidad: </label>					
+					<form:input type="number" path="cantidadMantenimiento" class="form-control" readonly="true"  />					
+					<br>
+					
 					<label>Proveedor: </label>	
 					<form:select class= "form-control" path="listIdProveedor">
 						<form:option label="${proveedores.getNombreProveedor()}" value="${proveedores.getIdProveedor()}" />

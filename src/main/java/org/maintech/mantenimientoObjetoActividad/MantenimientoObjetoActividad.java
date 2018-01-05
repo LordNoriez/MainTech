@@ -33,6 +33,17 @@ public class MantenimientoObjetoActividad implements java.io.Serializable {
 	@Column(name="costo",columnDefinition="double(10,2) default 0")
 	private Double costo;
 
+	@Column(columnDefinition="tinyint(1) default 0")
+	private Integer cantidadMantenimiento;
+
+	public Integer getCantidadMantenimiento() {
+		return cantidadMantenimiento;
+	}
+
+	public void setCantidadMantenimiento(Integer cantidadMantenimiento) {
+		this.cantidadMantenimiento = cantidadMantenimiento;
+	}
+
 	public MantenimientoObjetoActividad() {
 	}
 
