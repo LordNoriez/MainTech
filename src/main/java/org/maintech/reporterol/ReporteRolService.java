@@ -30,11 +30,22 @@ public class ReporteRolService {
 		reporteRolRepository.save(reporteRol);
 	}
 
-	public void deleteReporteRol(Integer id) {
-		reporteRolRepository.delete(id);
+	public void deleteReporteRol(Integer idReporte, Integer idRol) {
+		reporteRolRepository.delete(reporteRolRepository.findByIds(idReporte, idRol));		
 	}
 	
 	public String[] getAllCorreos(String reporte){
-		return reporteRolRepository.getAllCorreos(reporte);
+		
+		List<String> corrs = reporteRolRepository.getAllCorreos(reporte);
+		
+		String[] correos = new String[corrs.size()];
+		
+		int i = 0;
+
+		for (String correo : corrs) {
+			correos[i] = correo;
+			i++;
+		}
+		return correos;
 	}
 }

@@ -109,12 +109,12 @@
 					</form:select>							
 					<br>
 					
-					<label>Cantidad: </label>					
-					<form:input type="number" path="cantidadMantenimiento" class="form-control" step ="any" onkeyup="this.value = minmax(this.value, 0, 100)"/>					
-					<br>
-					
 					<label>Límite Máx: </label>
 					<input type="number" id="lmitmax" class="form-control" readonly/>
+					<br>
+					
+					<label>Cantidad: </label>					
+					<form:input type="number" path="cantidadMantenimiento" class="form-control" step ="any" onkeyup="this.value = minmax(this.value, 0, 100)"/>					
 					<br>
 
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Siguiente</button>
@@ -165,7 +165,7 @@
 	
 <script type="text/javascript">
 
-$(function() {
+	$(function() {
 	  $("#ddlObjeto").on("change",function() {
 	    var period = this.value;
 	    $.ajax({
@@ -184,9 +184,7 @@ $(function() {
 	    });
 	  }); 
 	});
-</script>
-
-	<script type="text/javascript">
+	
 	function minmax(value, min, max) 
 	{
 	    if(parseInt(value) < min || isNaN(parseInt(value))) 

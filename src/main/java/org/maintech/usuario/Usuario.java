@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Where;
 import org.maintech.areaempresa.AreaEmpresa;
-import org.maintech.categoria.Categoria;
 import org.maintech.rol.Rol;
 
 @Entity

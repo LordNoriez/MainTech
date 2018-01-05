@@ -102,21 +102,19 @@
 					<br>
 					
 					<label>Equipo: </label>						        
-					<form:select name="obj" class="form-control" path="objeto" onchange="dropCants(${obj[0]})">
+					<form:select id="ddlObjeto" name="ddlObjeto" class="form-control" path="objeto" >
 						<c:forEach var="obj" items="${objetos}">
 							<form:option label="${obj[7].toString()}" value="${obj[1]}" />
 						</c:forEach>
 					</form:select>
 					<br>
-				
+					
+					<label>Límite Máx: </label>
+					<input type="number" id="lmitmax" class="form-control" readonly/>
+					<br>
+					
 					<label>Cantidad: </label>					
-					<form:select id="ddl" name="ddl" class="form-control" path="CantidadMovimiento" >
-					</form:select>
-<%-- 					<form:select class="form-control" path="CantidadMovimiento"> --%>
-<%-- 						<c:forEach begin="1" end="${obj[0]}" varStatus="loop"> --%>
-<%-- 						    <form:option label="${loop.count}" value="${loop.count}" /> --%>
-<%-- 						</c:forEach> --%>
-<%-- 					</form:select>					 --%>
+					<form:input type="number" path="CantidadMovimiento" class="form-control" step ="any" onkeyup="this.value = minmax(this.value, 0, 100)"/>					
 					<br>
 					
 					<button onclick="snackBarFunction()" type="submit" class="btn-lg btn-primary pull-right">Ingresar</button>
@@ -164,16 +162,44 @@
 			});
 		};
 	});
-	</script>
-	<script type="text/javascript">
-        function dropCants(cant) {
-            var districtId = objtoid.value;
-          
-            $('#ddl').empty(); // empty existing list
-            for (i = 1; i <= cant; i++) { 
-            	$('#ddl').append($('<option></option>').val(i.toString()).html(i.toString()));
-            }
-        }
+
+       function dropCants(cant) {
+           var districtId = objtoid.value;
+         
+           $('#ddl').empty(); // empty existing list
+           for (i = 1; i <= cant; i++) { 
+           	$('#ddl').append($('<option></option>').val(i.toString()).html(i.toString()));
+           }
+       }
+
+   	$(function() {
+   	  $("#ddlObjeto").on("change",function() {
+   	    var period = this.value;
+   	    $.ajax({
+   	        type: 'POST',
+   	        url: "/myPage",
+   	        data: {
+   	           item: period
+   	        },
+   	        success: function (html) {
+   	        	
+   	        	document.getElementById("lmitmax").value = parseInt(html);
+   	        },
+   	        error: function(e) {
+   	            console.log("Error:" + e);
+   	        }
+   	    });
+   	  }); 
+   	});
+   	
+   	function minmax(value, min, max) 
+   	{
+   	    if(parseInt(value) < min || isNaN(parseInt(value))) 
+   	        return 0; 
+   	    else if(parseInt(value) > document.getElementById("lmitmax").value) 
+   	        return document.getElementById("lmitmax").value; 
+   	    else return value;
+   	}
 	</script>
 
 </body>

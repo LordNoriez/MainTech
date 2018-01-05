@@ -3,11 +3,13 @@ package org.maintech.reporterol;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Where;
 import org.maintech.reporte.Reporte;
 import org.maintech.rol.Rol;
 
@@ -18,7 +20,7 @@ import org.maintech.rol.Rol;
 		@AssociationOverride(name = "pk.rol",
 			joinColumns = @JoinColumn(name = "id_rol")) })
 public class ReporteRol implements java.io.Serializable {
-
+	
 	private ReporteRolId pk = new ReporteRolId();
 
 	public ReporteRol() {

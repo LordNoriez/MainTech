@@ -61,14 +61,14 @@ public class ReporteRolController {
 		return new ModelAndView("redirect:/reporteRol");
 	}
 	
-	@RequestMapping(value="/reporteRolDelete/{idReporteRol}")
-	public ModelAndView deactiveReporteRol(@PathVariable("idReporteRol") Integer id) {
-		reporteRolService.deleteReporteRol(id);
+	@RequestMapping(value="/reporteRolDelete/{idReporte}/{idRol}")
+	public ModelAndView deactiveReporteRol(@PathVariable("idReporte") Integer idReporte, @PathVariable("idRol") Integer idRol) {
+		reporteRolService.deleteReporteRol(idReporte, idRol);
 		return new ModelAndView("redirect:/reporteRol");
 	}
 
-	@RequestMapping(method=RequestMethod.DELETE, value="/reporteRol/{idReporteRol}")
-	public void deleteReporte(@PathVariable Integer id){
-		reporteRolService.deleteReporteRol(id);
+	@RequestMapping(method=RequestMethod.DELETE, value="/reporteRol/{idReporte}/{idRol}")
+	public void deleteReporte(@PathVariable("idReporte") Integer idReporte, @PathVariable("idRol") Integer idRol) {
+		reporteRolService.deleteReporteRol(idReporte, idRol);
 	}
 }

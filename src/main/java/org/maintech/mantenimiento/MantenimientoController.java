@@ -231,20 +231,10 @@ public class MantenimientoController {
     @RequestMapping(value = "/myPage")
     public void myController(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    String myItem = request.getParameter("item");   
- 
-
-    response.getWriter().println(movimientoService.getCantidadInventario(Integer.parseInt(myItem)));
+	    String myItem = request.getParameter("item");   
+	 
+	    response.getWriter().println(movimientoService.getCantidadInventario(Integer.parseInt(myItem)));
     }
-	
-//	@PostMapping(value = "/save")
-//	public Response postCustomer(@RequestBody Integer customer) {
-//		cust.add(customer);
-//		
-//		// Create Response Object
-//		Response response = new Response("Done", customer);
-//		return response;
-//	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
 	public ModelAndView updateMantenimiento(Mantenimiento mantenimiento, @PathVariable("idMantenimiento") Integer id) {
@@ -366,22 +356,25 @@ public class MantenimientoController {
 
     private void sendEmail() throws Exception{
     	
-    	String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
-//    	String[] address = reporteRolService.getAllCorreos("Mantenimientos Emergentes");
+    	//String[] address = {"osdavidm3@gmail.com", "leninronquillo@gmail.com"};
+    	String[] address = reporteRolService.getAllCorreos("Mantenimientos Emergentes");
 
     	if (!isEmptyStringArray(address)) {
-
+    		
 	        MimeMessage message = mailSender.createMimeMessage();
 	        MimeMessageHelper helper = new MimeMessageHelper(message);
 	        helper.setTo(address);
 	        String texto1 = "<html> " 
-	    			+"<head><form action='http://localhost:8080/cMantenimiento'><input type='submit' value='Aceptar Mantenimiento de Hoy' /></form>"
-	    			+"<link href='<c:url value='/resources/css/style.css' />"
-	    			+"<script src='<c:url value='/resources/Js/scripts.js' />'></script>"
+	    			+"<head><form action='http://localhost:8080/cMantenimiento'></form>"
+	    			+"<script src='http://code.jquery.com/jquery.js'></script>"
+	    			+"<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>"
+	    			+"<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>"
+	        		+"<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>"
+	    			+"<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>"	    			
 	    			+"</head><body>"
 	    			+"<div class='container'>"
-	    			+"<h1>Ver Mantenimientos</h1>"
-	    			+"<table class='table table-striped'>"
+	    			+"<h1>Mantenimientos Por Aceptar</h1>"
+	    			+"<table class='table table-striped table-hover'>"
 	    			+"<thead>"
 	    			+"<tr>"
 	    			+"<th>ID</th>"
@@ -389,27 +382,31 @@ public class MantenimientoController {
 	    			+"<th>Fecha</th>"
 	    			+"<th>Es Programado ?</th>"
 	    			+"<th>Frecuencia</th>"
-	    			+"<th>Objeto</th>"
+	    			//+"<th>Equipo</th>"
 	    			+"</tr></thead>";
 	        
 	        String texto2="";
-	        
+			String frec = "";
+
 	        if (mantenimientoService.MantenimientoxAceptar().size()!=0) {
 
-		        for (Mantenimiento mantenimiento: mantenimientoService.MantenimientoxAceptar()) {
-		        	
+	    		for (Mantenimiento mantenimiento: mantenimientoService.MantenimientoxAceptar()) {
+		        		
+	    			if (mantenimiento.getIsProgramadoMantenimiento() == true) {
+	    				frec = "Sí";
+	    			} else {
+	    				frec = "No";
+	    			}
 			        	texto2 = texto2 + "<tr><td>" + mantenimiento.getIdMantenimiento().toString() + "</td>"
 							+"<td>" + mantenimiento.getNombreMantenimiento() + "</td>"
 							+"<td>" + mantenimiento.getFechaMantenimiento() + "</td>"
-							+"<td>" + mantenimiento.getIsProgramadoMantenimiento() + "</td>"
-							+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + "</td>"
+							+"<td>" + frec + "</td>"
+							+"<td>" + mantenimiento.getFrecuenciaMantenimiento() + " Horas</td>"
 							//+"<td>" + mantenimiento.getObjetoMantenimiento().getDescripcionObjeto() + "</td>"
 							+"<a href=\"http://localhost:8080/emailAcepted/" + mantenimiento.getIdMantenimiento().toString() + "\">Aceptar Mantenimiento</a>"
 							+ "</tr>";
-		        	
 		        };
-		        		
-		        
+
 		        helper.setText(texto1
 					+ texto2                                                                                                                 
 					+"</tr></table></div></body></html>", true);
@@ -418,6 +415,7 @@ public class MantenimientoController {
 		        mailSender.send(message);
 	        }
     	}
+    	System.out.println("= end =");
     }
     
     public boolean isEmptyStringArray(String [] array){
