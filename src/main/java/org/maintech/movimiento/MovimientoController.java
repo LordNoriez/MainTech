@@ -1,12 +1,15 @@
 package org.maintech.movimiento;
 
 
+import java.security.Principal;
 import java.util.Date;
 
 import org.maintech.objeto.Objeto;
 import org.maintech.objeto.ObjetoService;
 import org.maintech.tipomovimiento.TipoMovimiento;
 import org.maintech.tipomovimiento.TipoMovimientoService;
+import org.maintech.usuario.UsuarioController;
+import org.maintech.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +32,12 @@ public class MovimientoController {
 	
 	@Autowired
 	private TipoMovimientoService tipoMovimientoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private UsuarioController usuarioController;
 	
 	@RequestMapping(value = "/movimiento", method = RequestMethod.GET)
 	public String getAllMovimiento(Model model) {
@@ -62,8 +71,8 @@ public class MovimientoController {
 	
 	@RequestMapping("/crearMovimientoSalida")
 	public String crearMovimientoSalida(@ModelAttribute("crearModelMovimiento") Movimiento movimiento,
-			BindingResult result, Model model){
-		model.addAttribute("objetos", objetoService.getAllObjeto());
+			BindingResult result, Model model, Principal principal){
+		model.addAttribute("objetos", objetoService.getAllObjeto(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		return "Movimiento/MovimientoCrearSalida";
 	}
 	
@@ -79,11 +88,11 @@ public class MovimientoController {
 	}
 	
 	@RequestMapping("/verifCantSalida/{cant}/{idObj}")
-	public Boolean verifCantSalida(@PathVariable("cant") Integer cant, @PathVariable("idObj") Integer idObj){
+	public Boolean verifCantSalida(@PathVariable("cant") Integer cant, @PathVariable("idObj") Integer idObj, Principal principal){
 		System.out.println("HM");
 		Boolean retorno=false;
 		
-		for (Object[] ob : objetoService.getAllObjeto()) {
+		for (Object[] ob : objetoService.getAllObjeto(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal)))) {
 			if (ob[1] == idObj) {
 				if (Integer.parseInt(ob[0].toString()) < cant) {
 					retorno = false;

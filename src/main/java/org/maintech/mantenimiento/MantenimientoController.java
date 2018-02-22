@@ -1,6 +1,7 @@
 package org.maintech.mantenimiento;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ import org.maintech.objeto.ObjetoService;
 import org.maintech.proveedor.ProveedorService;
 import org.maintech.reporterol.ReporteRolService;
 import org.maintech.tipomantenimiento.TipoMantenimientoService;
+import org.maintech.usuario.UsuarioController;
+import org.maintech.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -64,6 +67,12 @@ public class MantenimientoController {
 	
 	@Autowired
 	private TipoMantenimientoService tipoMantenimientoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private UsuarioController usuarioController;
 
 	Integer aux = 0;
 	
@@ -76,9 +85,9 @@ public class MantenimientoController {
 	}
 		
 	@RequestMapping("/mantenimiento/{idMantenimiento}")
-	public String getMantenimientoUpdate(@PathVariable("idMantenimiento") Integer id,Model model){
+	public String getMantenimientoUpdate(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
-		model.addAttribute("Itemobjeto", objetoService.getAllObjeto());
+		model.addAttribute("Itemobjeto", objetoService.getAllObjeto(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		model.addAttribute("ItemActividad", actividadService.getAllActividad());
 		model.addAttribute("tipos", tipoMantenimientoService.getAllMantenimiento());
 		

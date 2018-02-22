@@ -1,6 +1,8 @@
 package org.maintech.objeto;
 
 import java.security.Principal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 
@@ -11,9 +13,13 @@ import org.maintech.categoria.CategoriaService;
 import org.maintech.color.ColorService;
 import org.maintech.estructura.EstructuraService;
 import org.maintech.objetoActividad.ObjetoListActividad;
+import org.maintech.usuario.UsuarioController;
+import org.maintech.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,14 +51,20 @@ public class ObjetoController {
 	@Autowired
 	private EstructuraService estructuraService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private UsuarioController usuarioController;
+	
     @Autowired
     private JavaMailSender mailSender;
     
     
 	@RequestMapping(value = "/objeto", method = RequestMethod.GET)
-	public String showAllObjetos(Model model) {
-
-		model.addAttribute("objetos", objetoService.getAllObjeto());
+	public String showAllObjetos(Model model, Principal principal) {
+		
+		model.addAttribute("objetos", objetoService.getAllObjeto(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objetosPadre", objetoService.returnAllObjeto());
 		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());

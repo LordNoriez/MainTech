@@ -37,4 +37,8 @@ public class UsuarioService {
 	public void softDeleteUsuario(Integer id) {
 		usuarioRepository.softDeleteUsuario(id);
 	}
+	
+	public Integer getAreaByMail(String mail) {
+		return usuarioRepository.getAreaByMail(mail);
+	}
 }

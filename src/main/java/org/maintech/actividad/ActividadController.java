@@ -7,6 +7,8 @@ import org.maintech.costo.Costo;
 import org.maintech.costo.CostoService;
 import org.maintech.objeto.ObjetoService;
 import org.maintech.proveedor.ProveedorService;
+import org.maintech.usuario.UsuarioController;
+import org.maintech.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,12 @@ public class ActividadController {
 	@Autowired
 	private ProveedorService proveedorService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private UsuarioController usuarioController;
+	
 	@RequestMapping(value = "/actividad", method = RequestMethod.GET)
 	public String getAllActividad(Model model) {
 		model.addAttribute("actividades", ActividadService.getActividadesProveedores());
@@ -46,8 +54,8 @@ public class ActividadController {
 	
 	@RequestMapping("/crearActividad")
 	public String crearActividad(@ModelAttribute("crearModelActividad") Actividad actividad,
-			BindingResult result, Model model){
-		model.addAttribute("objetosPadre", objetoService.getAllObjeto());
+			BindingResult result, Model model, Principal principal){
+		model.addAttribute("objetosPadre", objetoService.getAllObjeto(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		return "Actividad/ActividadCrear";
 	}
 	
