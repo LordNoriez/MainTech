@@ -27,14 +27,6 @@ public class Usuario {
 	
 	@ManyToOne
 	private AreaEmpresa areaEmpresa;
-	
-	public Rol getRol() {
-		return rol;
-	}
-
-	public void setRol(Rol rol) {
-		this.rol = rol;
-	}
 
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
@@ -69,6 +61,14 @@ public class Usuario {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 	public AreaEmpresa getAreaEmpresa() {

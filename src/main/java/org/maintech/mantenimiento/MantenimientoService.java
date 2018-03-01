@@ -114,5 +114,8 @@ public class MantenimientoService {
 	public List<Object[]> getMantenimientoActividadObjetoXMant (Integer idMantenimiento) {
 		return mantenimientoRepository.getMantenimientoActividadObjetoXMant(idMantenimiento);
 	}
-
+	
+	public Integer ObjetoFromMante (Integer idMantenimiento) {
+		return mantenimientoRepository.ObjetoFromMante(idMantenimiento);
+	}
 }

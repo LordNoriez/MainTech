@@ -43,15 +43,17 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer> 
 	@Query(value = "select descripcion_actividad, actividad.id_actividad from actividad inner join objeto_actividad on actividad.id_actividad=objeto_actividad.id_actividad where objeto_actividad.objeto_id_objeto = ?1",
 	        nativeQuery=true
 	    )
-	    public List<Object[]> getPlantAct_Objt(Integer idObjeto);
+    public List<Object[]> getPlantAct_Objt(Integer idObjeto);
 	    
 	@Query(value="select CONCAT(descripcion_actividad,'  ',nombre_proveedor) as Descripcion, concat(actividad.id_actividad,'|',actividad_proveedor.id_proveedor) as IDs from objeto_actividad INNER JOIN actividad ON actividad.id_actividad = objeto_actividad.id_actividad INNER JOIN actividad_proveedor ON actividad.id_actividad = actividad_proveedor.id_actividad INNER JOIN proveedor ON proveedor.id_proveedor= actividad_proveedor.id_proveedor where objeto_actividad.objeto_id_objeto = ?1", nativeQuery=true)
-		public List<Object[]> getActividadProveedorxObjt(Integer idObjeto);
+	public List<Object[]> getActividadProveedorxObjt(Integer idObjeto);
 	
 	@Query(value="select concat(descripcion_actividad,' - $', costo.costo) ,actividad.id_actividad, max(actividad_proveedor.id_costo) from objeto_actividad INNER JOIN actividad ON actividad.id_actividad = objeto_actividad.id_actividad INNER JOIN actividad_proveedor ON actividad.id_actividad = actividad_proveedor.id_actividad inner join costo on costo.id_costo = actividad_proveedor.id_costo where objeto_actividad.objeto_id_objeto = ?1 and actividad_proveedor.id_proveedor = ?2", nativeQuery=true)
-		public List<Object[]> getidActividadProveedorxObjt(Integer idObjeto, Integer idProveedor);
+	public List<Object[]> getidActividadProveedorxObjt(Integer idObjeto, Integer idProveedor);
 		
 	@Query(value="select costo from costo join (select max(id_costo) as idC from actividad_proveedor where id_actividad = ?1 and id_proveedor = ?2) as maxC on costo.id_costo=maxC.idC;", nativeQuery=true)
-		public Double getCostoActividadProveedor(Integer idActividad, Integer idProveedor);		
-		
+	public Double getCostoActividadProveedor(Integer idActividad, Integer idProveedor);	
+	
+	@Query(value="select a.id_actividad, a.nombre_actividad, p.nombre_proveedor from mantenimiento_objeto_actividad as m inner join actividad as a on m.id_actividad=a.id_actividad inner join proveedor as p on m.id_proveedor=p.id_proveedor where m.id_mantenimiento = ?1", nativeQuery=true)
+	public List<Object[]> getactividadxMante(Integer idMantenimiento);	
 }

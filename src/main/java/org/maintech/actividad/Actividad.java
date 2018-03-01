@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Where;
+import org.maintech.areaempresa.AreaEmpresa;
 import org.maintech.mantenimiento.Mantenimiento;
 
 
@@ -24,15 +26,11 @@ public class Actividad {
 	private String NombreActividad;
 	private String DescripcionActividad;
 	
+	@ManyToOne
+	private AreaEmpresa areaEmpresa;
+	
 	@Column(name="is_active",columnDefinition="tinyint(1) default 1")
 	private Boolean active;
-
-	//@ManyToMany(mappedBy = "Mantenimiento_has_Actividad")
-//	  @JoinTable(
-//		        name="Mantenimiento_has_Actividad",
-//		        joinColumns=@JoinColumn(name="id_mantenimiento", referencedColumnName="id_mantenimiento"),
-//		        inverseJoinColumns=@JoinColumn(name="id_actividad", referencedColumnName="id_actividad"))
-	//private Set<Mantenimiento> mantenimiento = new HashSet<Mantenimiento>();
 
 	@ManyToMany
 	private Set<Mantenimiento> mantenimientos;
@@ -64,17 +62,6 @@ public class Actividad {
 		DescripcionActividad = descripcionActividad;
 	}
 
-
-	
-/*
-	public Set<Mantenimiento> getMantenimiento() {
-		return mantenimiento;
-	}
-
-	public void setMantenimiento(Set<Mantenimiento> mantenimiento) {
-		this.mantenimiento = mantenimiento;
-	}*/
-
 	public Set<Mantenimiento> getMantenimiento() {
 		return mantenimientos;
 	}
@@ -91,17 +78,26 @@ public class Actividad {
 		this.active = active;
 	}
 
+	public AreaEmpresa getAreaEmpresa() {
+		return areaEmpresa;
+	}
+
+	public void setAreaEmpresa(AreaEmpresa areaEmpresa) {
+		this.areaEmpresa = areaEmpresa;
+	}
+
 	public Actividad() {
 		super();
 	}
 
-	public Actividad(Integer idActividad, String nombreActividad, String descripcionActividad,
+	public Actividad(Integer idActividad, String nombreActividad, String descripcionActividad, AreaEmpresa areaEmpresa,
 			Boolean active, Set<Mantenimiento> mantenimientos) {
 		super();
 		this.idActividad = idActividad;
 		NombreActividad = nombreActividad;
 		DescripcionActividad = descripcionActividad;
+		this.areaEmpresa = areaEmpresa;
 		this.active = active;
 		this.mantenimientos = mantenimientos;
-	}	
+	}
 }

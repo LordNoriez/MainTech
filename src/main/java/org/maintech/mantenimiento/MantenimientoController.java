@@ -83,7 +83,16 @@ public class MantenimientoController {
 		return "Mantenimiento/MantenimientoRead";
 
 	}
+	
+	@RequestMapping("/mantenimientobyId/{idMantenimiento}")
+	public String getMantenimientobyId(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
+		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
+		model.addAttribute("MantObjeto", objetoService.getObjeto(mantenimientoService.ObjetoFromMante(id)));
+		model.addAttribute("ItemActividad", actividadService.getactividadxMante(id));
 		
+		return "Mantenimiento/MantenimientoReadById";
+	}
+	
 	@RequestMapping("/mantenimiento/{idMantenimiento}")
 	public String getMantenimientoUpdate(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));

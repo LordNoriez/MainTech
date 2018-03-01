@@ -78,4 +78,18 @@ public class ActividadService {
 	public Double getCostoActividad(Integer idActividad, Integer idProveedor){
 		return actividadRepository.getCostoActividadProveedor(idActividad, idProveedor);
 	}
+	
+	public List<Actividad> getActividadesMantenimiento(){
+		List<Actividad> actividades = new ArrayList<>();
+		actividadRepository.findAll()
+		.forEach(actividades::add);
+		return actividades;
+	}
+	
+	public List<Object[]> getactividadxMante(Integer idMantenimiento){
+		List<Object[]> actividades = new ArrayList<>();
+		actividadRepository.getactividadxMante(idMantenimiento)
+		.forEach(actividades::add);
+		return actividades;
+	}
 }
