@@ -57,3 +57,5 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer> 
 	@Query(value="select a.id_actividad, a.nombre_actividad, p.nombre_proveedor from mantenimiento_objeto_actividad as m inner join actividad as a on m.id_actividad=a.id_actividad inner join proveedor as p on m.id_proveedor=p.id_proveedor where m.id_mantenimiento = ?1", nativeQuery=true)
 	public List<Object[]> getactividadxMante(Integer idMantenimiento);	
 }
+
+

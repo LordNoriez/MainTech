@@ -132,6 +132,28 @@
 					</c:forEach>
     				</tbody>
 				</table>
+				<br>
+				
+				<h4 class="text-muted">Autorizado por: </h4>
+				
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Cargo</th>
+						</tr>
+					</thead>
+    				<tbody id="myTable">
+					
+					<c:forEach var="Actividades" items="${ItemActividad}">
+					    <tr>
+							<td>${Actividades[1].toString()}</td>
+							<td>${Actividades[2].toString()}</td>
+						</tr>
+					</c:forEach>
+    				</tbody>
+				</table>
+				
 			</div>
 
 	</div>
