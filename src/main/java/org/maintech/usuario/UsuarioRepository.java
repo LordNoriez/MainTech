@@ -18,4 +18,12 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
 	@Query(value="select area_empresa_id_area_empresa from usuario where correo_usuario = ?1"
 			, nativeQuery=true)
 	public Integer getAreaByMail(String mail);
+	
+	@Query(value = "select u.nombre_usuario, r.nombre_rol from usuario as u inner join rol as r on u.rol_id_rol = r.id_rol inner join mantenimiento_usuario as mu on u.id_usuario = mu.id_usuario where mu.id_mantenimiento = ?1 and is_autorizado_mantenimiento = 1;"
+		, nativeQuery=true)
+    public List<Object[]> getautorizan(Integer id);
+
+	@Query(value = "select u.nombre_usuario, r.nombre_rol from usuario as u inner join rol as r on u.rol_id_rol = r.id_rol inner join mantenimiento_usuario as mu on u.id_usuario = mu.id_usuario where mu.id_mantenimiento = ?1 and is_liberado_mantenimiento = 1;"
+			, nativeQuery=true)
+	    public List<Object[]> getliberacion(Integer id);
 }

@@ -27,6 +27,7 @@ public class Mantenimiento {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date FechaMantenimiento;
 	private String DescripcionMantenimiento;
+	private String Observaciones;
 	@Column(columnDefinition="tinyint(1) default 0")
 	private Boolean  isProgramadoMantenimiento;
 	private Integer FrecuenciaMantenimiento;
@@ -140,7 +141,14 @@ public class Mantenimiento {
 	public void setIsTerminadoMantenimiento(Boolean isTerminadoMantenimiento) {
 		this.isTerminadoMantenimiento = isTerminadoMantenimiento;
 	}
+	
+	public String getObservaciones() {
+		return Observaciones;
+	}
 
+	public void setObservaciones(String observaciones) {
+		Observaciones = observaciones;
+	}
 
 	public Mantenimiento() {
 		super();
@@ -148,20 +156,21 @@ public class Mantenimiento {
 	}
 
 	public Mantenimiento(Integer idMantenimiento, String nombreMantenimiento, Date fechaMantenimiento,
-			String descripcionMantenimiento, Boolean isProgramadoMantenimiento, Integer frecuenciaMantenimiento,
-			Objeto objetoMantenimiento, TipoMantenimiento objTipoMantenimiento,Set<Actividad> actividad, Boolean active, Boolean isAceptadoMantenimiento,
-			Boolean isEnProcesoMantenimiento, Boolean isTerminadoMantenimiento) {
+			String descripcionMantenimiento, String observaciones, Boolean isProgramadoMantenimiento,
+			Integer frecuenciaMantenimiento, Boolean isAceptadoMantenimiento, Boolean isEnProcesoMantenimiento,
+			Boolean isTerminadoMantenimiento, TipoMantenimiento objTipoMantenimiento, Boolean active) {
 		super();
 		this.idMantenimiento = idMantenimiento;
 		NombreMantenimiento = nombreMantenimiento;
 		FechaMantenimiento = fechaMantenimiento;
 		DescripcionMantenimiento = descripcionMantenimiento;
+		Observaciones = observaciones;
 		this.isProgramadoMantenimiento = isProgramadoMantenimiento;
 		FrecuenciaMantenimiento = frecuenciaMantenimiento;
-		this.objTipoMantenimiento = objTipoMantenimiento;
-		this.active = true;
 		this.isAceptadoMantenimiento = isAceptadoMantenimiento;
 		this.isEnProcesoMantenimiento = isEnProcesoMantenimiento;
 		this.isTerminadoMantenimiento = isTerminadoMantenimiento;
+		this.objTipoMantenimiento = objTipoMantenimiento;
+		this.active = active;
 	}
 }

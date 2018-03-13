@@ -41,4 +41,16 @@ public class UsuarioService {
 	public Integer getAreaByMail(String mail) {
 		return usuarioRepository.getAreaByMail(mail);
 	}
+
+	public Object getautorizan(Integer id) {
+		List<Object> usuarios = new ArrayList<>();
+		usuarioRepository.getautorizan(id).forEach(usuarios::add);
+		return usuarios;
+	}
+
+	public Object getliberacion(Integer id) {
+		List<Object> usuarios = new ArrayList<>();
+		usuarioRepository.getliberacion(id).forEach(usuarios::add);
+		return usuarios;
+	}
 }

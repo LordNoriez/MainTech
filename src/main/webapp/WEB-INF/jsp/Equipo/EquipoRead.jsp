@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Mantenimientos</title>
+    <title>Ver Equipos</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -40,26 +40,34 @@
 </style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-					
+		
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
 	<!-- 	  <a href="/crearObjeto">Crear Objeto</a> -->
 	<!-- 	  <a href="/objeto">Ver Objetos</a> -->
-			<p>Mantenimientos
-		  <a href="/crearMantenimiento">Crear</a>
-		  <a href="/mantenimiento">Ver</a>
-			<p>Tipos de Mantenimientos
-		  <a href="/crearTipoMantenimiento">Crear</a>
-		  <a href="/tipoMantenimiento">Ver</a>
-	<!-- 	  <a href="/crearAreaEmpresa">Crear Area Empresa</a> -->
-	<!-- 	  <a href="/areaEmpresa">Ver Area Empresa</a> -->
-			<p>Actividades
-		  <a href="/crearActividad">Crear</a>
-		  <a href="/actividad">Ver</a>
-		  	<p>Proveedores
-		  <a href="/crearProveedor">Crear</a>
-		  <a href="/proveedor">Ver</a>
+<!-- 			<p>Mantenimientos -->
+<!-- 		  <a href="/crearMantenimiento">Crear</a> -->
+<!-- 		  <a href="/mantenimiento">Ver</a> -->
+<!-- 			<p>Tipos de Mantenimientos -->
+<!-- 		  <a href="/crearTipoMantenimiento">Crear</a> -->
+<!-- 		  <a href="/tipoMantenimiento">Ver</a> -->
+			<p>Usuarios
+		  <a href="/crearUsuario">Crear</a>
+		  <a href="/usuario">Ver</a>
+			<p>Áreas de la Empresa
+		  <a href="/crearAreaEmpresa">Crear</a>
+		  <a href="/areaEmpresa">Ver</a>
+			<p>Roles
+		  <a href="/crearRol">Crear</a>
+		  <a href="/rol">Ver</a>
+			<p>Reportes
+		  <a href="/reporte">Ver</a>
+		  <a href="/reporteRol">Vículo con Roles</a>
+		  <a href="/crearReporteRol">Vícular con Roles</a>
+<!-- 			<p>Actividades -->
+<!-- 		  <a href="/crearActividad">Crear</a> -->
+<!-- 		  <a href="/actividad">Ver</a> -->
 	<!-- 	  <a href="/crearCategoria">Crear Categoría</a> -->
 	<!-- 	  <a href="/categoria">Ver Categorías</a> -->
 	</div>
@@ -72,7 +80,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Ver Mantenimientos</h4>
+				        <h4 class="text-muted">Ver Equipos</h4>
 			        </div>
 			    </div>
 			</div>
@@ -91,93 +99,43 @@
 					
 			</div>
 			
+
 			<div class=" col-md-8 table-responsive"  >
 				<input class="form-control" id="myInput" type="text" placeholder="Buscar..">
 				<br>
-				
-				<h4 class="text-muted">Información Mantenimiento</h4>
-				<div>
-					<label>Nombre: </label> <label>${varMantenmiento.nombreMantenimiento}</label>
-				</div>
-				
-				<div>
-					<label>fecha Mantenimiento: </label> <label>${varMantenmiento.fechaMantenimiento}</label>
-				</div>
-				
-				<div>
-					<label>Descripcion Mantenimiento: </label> <label>${varMantenmiento.descripcionMantenimiento}</label>
-				</div>
-				<div>
-					<label>Equipo: </label> <label>${MantObjeto.descripcionObjeto}</label>
-				</div>
-				<br>
-				
-
-				<h4 class="text-muted">Actividades</h4>
-				
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
+							<th>ID</th>
 							<th>Nombre</th>
-							<th>Proveedor</th>
 						</tr>
 					</thead>
     				<tbody id="myTable">
-					
-					<c:forEach var="Actividades" items="${ItemActividad}">
+		
+					<c:forEach var="equipo" items="${Equipos}">
 					    <tr>
-							<td>${Actividades[1].toString()}</td>
-							<td>${Actividades[2].toString()}</td>
-						</tr>
+						<td>${equipo.idEquipo}</td>
+						<td>${equipo.nombreEquipo}</td>		
+						<td>
+						  <spring:url value="/deleteEquipo/${equipo.idEquipo}" var="deleteUrl" />
+						  <spring:url value="/equipo/${equipo.idEquipo}" var="updateUrl" />
+		
+						  <button class="btn btn-primary"
+		                                          onclick="location.href='${updateUrl}'">Update</button>
+		                                                                             
+						  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button>
+		<%--                                           onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
+		                                          
+		                  </td>
+					    </tr>
 					</c:forEach>
-    				</tbody>
+					</tbody>
 				</table>
-				<br>
-				
-				<h4 class="text-muted">Autorizado por: </h4>
-				
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Cargo</th>
-						</tr>
-					</thead>
-    				<tbody id="myTable">
-					
-					<c:forEach var="Autorizaciones" items="${Autorizacion}">
-					    <tr>
-							<td>${Autorizaciones[0].toString()}</td>
-							<td>${Autorizaciones[1].toString()}</td>
-						</tr>
-					</c:forEach>
-    				</tbody>
-				</table>
-				
-				<h4 class="text-muted">Liberado por: </h4>
-				
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Cargo</th>
-						</tr>
-					</thead>
-    				<tbody id="myTable">
-					
-					<c:forEach var="Liberaciones" items="${Liberado}">
-					    <tr>
-							<td>${Liberaciones[0].toString()}</td>
-							<td>${Liberaciones[1].toString()}</td>
-						</tr>
-					</c:forEach>
-    				</tbody>
-				</table>
-				
 			</div>
 
 	</div>
 	
+	<div id="snackbar" class="alert alert-danger">Equipo Eliminado Correctamente</div>
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
@@ -226,78 +184,6 @@
 	  });
 	});
 	</script>
-		<script>
-	function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-	}
-	
-	function closeNav() {
-	    document.getElementById("mySidenav").style.width = "0";
-	    document.body.style.backgroundColor = "white";
-	}
-	</script>
-	<style>
-		/* The side navigation menu */
-.sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-}
 
-/* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #818181;
-    display: block;
-    transition: 0.3s
-}
-
-/* The navigation menu titles */
-.sidenav p {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s;
-    padding: 20px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
-		
-	</style>
 </body>
 </html>

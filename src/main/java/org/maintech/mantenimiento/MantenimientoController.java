@@ -89,7 +89,8 @@ public class MantenimientoController {
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("MantObjeto", objetoService.getObjeto(mantenimientoService.ObjetoFromMante(id)));
 		model.addAttribute("ItemActividad", actividadService.getactividadxMante(id));
-		
+		model.addAttribute("Autorizacion", usuarioService.getautorizan(id));
+		model.addAttribute("Liberado", usuarioService.getliberacion(id));
 		return "Mantenimiento/MantenimientoReadById";
 	}
 	
