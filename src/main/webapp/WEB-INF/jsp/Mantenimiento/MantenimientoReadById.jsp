@@ -115,6 +115,8 @@
 
 				<h4 class="text-muted">Actividades</h4>
 				
+				<a href="/LinkMantActividad">Agregar</a>
+				
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>

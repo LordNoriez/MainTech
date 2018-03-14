@@ -131,7 +131,7 @@
 				<div class="header clearfix">
 			        <div class=" col-md-6">
 			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Editar Usuario</h4>
+				        <h4 class="text-muted">Editar Equipo</h4>
 			        </div>
 			    </div>
 			</div>
