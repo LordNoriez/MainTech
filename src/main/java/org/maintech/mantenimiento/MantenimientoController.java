@@ -16,6 +16,7 @@ import javax.xml.ws.Response;
 
 import org.dom4j.Branch;
 import org.maintech.actividad.ActividadService;
+import org.maintech.epp.EppService;
 import org.maintech.mantenimientoObjetoActividad.GroupMantenimientoObjeto;
 import org.maintech.mantenimientoObjetoActividad.MantenimientoObjetoActividad;
 import org.maintech.movimiento.MovimientoService;
@@ -73,6 +74,9 @@ public class MantenimientoController {
 	
 	@Autowired
 	private UsuarioController usuarioController;
+	
+	@Autowired
+	private EppService eppService;
 
 	Integer aux = 0;
 	
@@ -88,6 +92,7 @@ public class MantenimientoController {
 	public String getMantenimientobyId(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("MantObjeto", objetoService.getObjeto(mantenimientoService.ObjetoFromMante(id)));
+		model.addAttribute("MantEpp", eppService.getEppsMainte(id));
 		model.addAttribute("ItemActividad", actividadService.getactividadxMante(id));
 		model.addAttribute("Autorizacion", usuarioService.getautorizan(id));
 		model.addAttribute("Liberado", usuarioService.getliberacion(id));
@@ -404,5 +409,12 @@ public class MantenimientoController {
 		return "Mantenimiento Eliminado!";
 	}
 	
+	@RequestMapping("/mantenimientoEpp/{idMantenimiento}")
+	public String MantenimientoEpp(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
+		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
+		model.addAttribute("ItemEpp", eppService.getEppsMainte(id));
+		
+		return "Mantenimiento/MantenimientoUpdate";
+	}
     
 }

@@ -1,4 +1,4 @@
-package org.maintech.mantenimientoEquipo;
+package org.maintech.mantenimientoEpp;
 
 
 import javax.persistence.AssociationOverride;
@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
-import org.maintech.equipo.Equipo;
+import org.maintech.epp.Epp;
 import org.maintech.mantenimiento.Mantenimiento;
 
 
@@ -18,20 +18,20 @@ import org.maintech.mantenimiento.Mantenimiento;
 @AssociationOverrides({
 		@AssociationOverride(name = "pk.mantenimiento",
 			joinColumns = @JoinColumn(name = "id_mantenimiento")),
-		@AssociationOverride(name = "pk.equipo",
-			joinColumns = @JoinColumn(name = "id_equipo")) })
+		@AssociationOverride(name = "pk.epp",
+			joinColumns = @JoinColumn(name = "id_epp")) })
 
 
-public class MantenimientoEquipo implements java.io.Serializable {
+public class MantenimientoEpp implements java.io.Serializable {
 
-	private MantenimientoEquipoId pk = new MantenimientoEquipoId();
+	private MantenimientoEppId pk = new MantenimientoEppId();
 
 	@EmbeddedId
-	public MantenimientoEquipoId getPk() {
+	public MantenimientoEppId getPk() {
 		return pk;
 	}
 	
-	public void setPk(MantenimientoEquipoId pk) {
+	public void setPk(MantenimientoEppId pk) {
 		this.pk = pk;
 	}
 	
@@ -45,15 +45,15 @@ public class MantenimientoEquipo implements java.io.Serializable {
 	}
 	
 	@Transient
-	public Equipo getEquipo () {
-		return getPk().getEquipo();
+	public Epp getEpp () {
+		return getPk().getEpp();
 	}
 
-	public void setUsuario (Equipo equipo) {
-		getPk().setEquipo(equipo);
+	public void setEpp (Epp epp) {
+		getPk().setEpp(epp);
 	}
 
-	public MantenimientoEquipo() {
+	public MantenimientoEpp() {
 		super();
 	}
 
@@ -73,7 +73,7 @@ public class MantenimientoEquipo implements java.io.Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MantenimientoEquipo other = (MantenimientoEquipo) obj;
+		MantenimientoEpp other = (MantenimientoEpp) obj;
 		if (pk == null) {
 			if (other.pk != null)
 				return false;

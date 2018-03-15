@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Equipos</title>
+    <title>Ver Epps</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -112,13 +112,13 @@
 					</thead>
     				<tbody id="myTable">
 		
-					<c:forEach var="equipo" items="${Equipos}">
+					<c:forEach var="epps" items="${Epps}">
 					    <tr>
-						<td>${equipo.idEquipo}</td>
-						<td>${equipo.nombreEquipo}</td>		
+						<td>${epps.idEpp}</td>
+						<td>${epps.nombreEpp}</td>		
 						<td>
-						  <spring:url value="/deleteEquipo/${equipo.idEquipo}" var="deleteUrl" />
-						  <spring:url value="/equipo/${equipo.idEquipo}" var="updateUrl" />
+						  <spring:url value="/deleteEpp/${epps.idEpp}" var="deleteUrl" />
+						  <spring:url value="/epp/${epps.idEpp}" var="updateUrl" />
 		
 						  <button class="btn btn-primary"
 		                                          onclick="location.href='${updateUrl}'">Update</button>
@@ -135,7 +135,7 @@
 
 	</div>
 	
-	<div id="snackbar" class="alert alert-danger">Equipo Eliminado Correctamente</div>
+	<div id="snackbar" class="alert alert-danger">Epp Eliminado Correctamente</div>
 
     <footer class="footer">
         <p> &copy; 2017 POFASA S.A.</p>
