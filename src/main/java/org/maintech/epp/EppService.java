@@ -38,8 +38,8 @@ public class EppService {
 		eppRepository.softDeleteEpp(id);
 	}
 	
-	public List<String> getEppsMainte(Integer id) {
-		List<String> lstEpps = new ArrayList<>();
+	public List<Object[]> getEppsMainte(Integer id) {
+		List<Object[]> lstEpps = new ArrayList<>();
 		eppRepository.getEppsMainte(id).forEach(lstEpps::add);
 		return lstEpps;
 	}

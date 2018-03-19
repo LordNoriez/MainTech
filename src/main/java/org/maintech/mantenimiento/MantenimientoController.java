@@ -413,8 +413,23 @@ public class MantenimientoController {
 	public String MantenimientoEpp(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("ItemEpp", eppService.getEppsMainte(id));
+
+		return "Epp/EppOnMainte";
 		
-		return "Mantenimiento/MantenimientoUpdate";
 	}
+	
+	@RequestMapping("/mantenimientoEppupdated/{idMantenimiento}")
+	public ModelAndView MantenimientoEppUpdated(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal,
+			HttpServletRequest request){
+
+		String[] foo = request.getParameterValues("foo");
+		for (String string : foo) {
+			System.out.println(string);
+		}
+		
+		return new ModelAndView("redirect:/mantenimientobyId/" + id);
+		
+	}
+	
     
 }

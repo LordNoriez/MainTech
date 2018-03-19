@@ -15,8 +15,8 @@ public interface EppRepository extends CrudRepository<Epp, Integer> {
 	void softDeleteEpp(Integer id);
 	//#{#entityName}
     
-	@Query(value = "select nombre_epp from mantenimiento_epp as m inner join epp as e on m.id_epp = e.id_epp where m.id_mantenimiento = ?1",
+	@Query(value = "select e.id_epp, e.nombre_epp from mantenimiento_epp as m inner join epp as e on m.id_epp = e.id_epp where m.id_mantenimiento = ?1",
 	        nativeQuery=true
 	    )
-    public List<String> getEppsMainte(Integer id);
+    public List<Object[]> getEppsMainte(Integer id);
 }

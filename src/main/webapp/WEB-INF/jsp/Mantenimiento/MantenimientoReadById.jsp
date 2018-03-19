@@ -119,7 +119,7 @@
 				    <c:if test="${rowCounter.count % 3 == 1}">
 				      <tr>
 				    </c:if>
-				    <td style = "border-left: 1px solid #ddd;">${MantEpps}</td>
+				    <td style = "border-left: 1px solid #ddd;">${MantEpps[1].toString()}</td>
 				    <c:if test="${rowCounter.count % 3 == 0||rowCounter.count == fn:length(values)}">
 				      </tr>
 				    </c:if>
@@ -128,7 +128,7 @@
 				
 				<h4 class="text-muted">Actividades</h4>
 				
-				<a href="/LinkMantActividad">Agregar</a>
+				<a href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
 				
 				<table class="table table-striped table-hover">
 					<thead>
