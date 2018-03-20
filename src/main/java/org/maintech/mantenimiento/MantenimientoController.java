@@ -413,7 +413,7 @@ public class MantenimientoController {
 	public String MantenimientoEpp(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("ItemEpp", eppService.getEppsMainte(id));
-
+		model.addAttribute("AllEpps", eppService.getAllEpp());
 		return "Epp/EppOnMainte";
 		
 	}
@@ -423,8 +423,18 @@ public class MantenimientoController {
 			HttpServletRequest request){
 
 		String[] foo = request.getParameterValues("foo");
-		for (String string : foo) {
-			System.out.println(string);
+		
+		if (foo != null )
+		{
+		
+			eppService.deleteAllMantEpp(id);
+			
+			for (String stringId : foo) {
+				
+				eppService.InsertMantEpp(id,Integer.parseInt(stringId));
+			}
+		}else {
+			eppService.deleteAllMantEpp(id);
 		}
 		
 		return new ModelAndView("redirect:/mantenimientobyId/" + id);

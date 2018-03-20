@@ -161,21 +161,31 @@
 						<thead>
 							<tr>
 								<th>Nombre</th>
-								<th>Cargo</th>
+								<th>:3</th>
 							</tr>
 						</thead>
 	    				<tbody id="myTable">
 						
-						<c:forEach var="ItemEpps" items="${ItemEpp}">
+						<c:forEach var="AllEppsObj" items="${AllEpps}">
+							<c:set var="auxchecked" value="0"/>
 						    <tr>
-								<td>${ItemEpps[1].toString()}</td>
-								<td><input type="checkbox" name="foo" value="${ItemEpps[0].toString()}" > lero lero </td>
+								<td>${AllEppsObj.nombreEpp}</td>
+								
+								<c:forEach var="ItemEpps" items="${ItemEpp}">									
+								    <c:if test="${ItemEpps[0]==AllEppsObj.idEpp}">
+								        <td><input type="checkbox" checked name="foo" value="${ItemEpps[0].toString()}" ></td>
+								        <c:set var="auxchecked" value= "1"/>
+								    </c:if>
+							  	</c:forEach>
+							  	<c:if test="${auxchecked == 0}">
+								        <td><input type="checkbox" name="foo" value="${AllEppsObj.idEpp}" ></td>
+							    </c:if>
 							</tr>
 						</c:forEach>
 	    				</tbody>
 					</table>
-					<a class="btn-lg btn-primary pull-left" href="/mantenimientobyId/${varMantenmiento.idMantenimiento}">Agregar</a>
-					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>
+					<a class="btn-lg btn-primary pull-left" href="/mantenimientobyId/${varMantenmiento.idMantenimiento}">Cancelar</a>
+					<button type="submit" class="btn-lg btn-primary pull-right">Aceptar</button>
 				
 				</form>
 			</div>

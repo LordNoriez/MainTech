@@ -43,4 +43,14 @@ public class EppService {
 		eppRepository.getEppsMainte(id).forEach(lstEpps::add);
 		return lstEpps;
 	}
+
+	public void deleteAllMantEpp(Integer id) {
+		eppRepository.deleteAllMantEpp(id);
+		
+	}
+
+	public void InsertMantEpp(Integer idMantenmiento, Integer idEpp) {
+		eppRepository.InsertMantEpp(idMantenmiento, idEpp);
+		
+	}
 }

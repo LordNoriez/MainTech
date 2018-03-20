@@ -143,7 +143,7 @@
 								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoAceptado/${mantenimiento[0]}'">
 								  </c:otherwise>
 								</c:choose></td>	
-							<td>			
+							<td>
 								<c:choose>
 								  <c:when test="${mantenimiento[13]==true}">
 								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}/${mantenimiento[5]}/${mantenimiento[16]}'">

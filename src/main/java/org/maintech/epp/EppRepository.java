@@ -19,4 +19,15 @@ public interface EppRepository extends CrudRepository<Epp, Integer> {
 	        nativeQuery=true
 	    )
     public List<Object[]> getEppsMainte(Integer id);
+  	
+	@Query(nativeQuery = true, value= "delete from mantenimiento_epp where id_mantenimiento = ?1")
+	@Transactional
+	@Modifying
+	void deleteAllMantEpp(Integer id);
+	
+	@Query(nativeQuery = true, value= "insert into mantenimiento_epp(id_mantenimiento,id_epp) values (?1,?2)")
+	@Transactional
+	@Modifying
+	void InsertMantEpp(Integer idMantenmiento, Integer idEpp);
+	
 }

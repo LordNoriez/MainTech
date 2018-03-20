@@ -114,6 +114,8 @@
 				
 				<h4 class="text-muted">Epps: </h4>
 				
+				<a class="btn-lg btn-primary pull-right" href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
+				
 				<table class="table table-striped table-hover">
 				  <c:forEach items="${MantEpp}" var="MantEpps" varStatus="rowCounter">
 				    <c:if test="${rowCounter.count % 3 == 1}">
@@ -127,8 +129,6 @@
 				</table>
 				
 				<h4 class="text-muted">Actividades</h4>
-				
-				<a href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
 				
 				<table class="table table-striped table-hover">
 					<thead>
@@ -162,8 +162,8 @@
 					
 					<c:forEach var="Autorizaciones" items="${Autorizacion}">
 					    <tr>
-							<td>${Autorizaciones[0].toString()}</td>
-							<td>${Autorizaciones[1].toString()}</td>
+							<td>${Autorizaciones[0].toString()} <br>
+							<p style = "font-size:10px; color: rgb(182,182,182);">${Autorizaciones[1].toString()}</p></td>
 						</tr>
 					</c:forEach>
     				</tbody>
@@ -182,11 +182,24 @@
 					
 					<c:forEach var="Liberaciones" items="${Liberado}">
 					    <tr>
-							<td>${Liberaciones[0].toString()}</td>
-							<td>${Liberaciones[1].toString()}</td>
+							<td>${Liberaciones[0].toString()} <br>
+							<p style = "font-size:10px; color: rgb(182,182,182);">${Liberaciones[1].toString()}</p></td>
 						</tr>
 					</c:forEach>
     				</tbody>
+				</table>
+				
+				<table class="table table-striped table-hover">
+				  <c:forEach items="${Liberado}" var="Liberaciones" varStatus="rowCounter">
+				    <c:if test="${rowCounter.count % 3 == 1}">
+				      <tr>
+				    </c:if>
+				    <td style = "border-left: 1px solid #ddd;">${Liberaciones[0].toString()}</td>
+				    <p style = "font-size:10px; color: rgb(182,182,182);">${Liberaciones[1].toString()}</p></td>
+				    <c:if test="${rowCounter.count % 3 == 0||rowCounter.count == fn:length(values)}">
+				      </tr>
+				    </c:if>
+				  </c:forEach >
 				</table>
 				
 			</div>
