@@ -101,6 +101,10 @@
 				</div>
 				
 				<div>
+					<label>Tipo de Mantenimiento: </label> <label>${varMantenmiento.objTipoMantenimiento.nombreTipoMantenimiento}</label>
+				</div>
+				
+				<div>
 					<label>fecha Mantenimiento: </label> <label>${varMantenmiento.fechaMantenimiento}</label>
 				</div>
 				
@@ -112,9 +116,11 @@
 				</div>
 				<br>
 				
+				<div>
 				<h4 class="text-muted">Epps: </h4>
 				
 				<a class="btn-lg btn-primary pull-right" href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
+				</div>
 				
 				<table class="table table-striped table-hover">
 				  <c:forEach items="${MantEpp}" var="MantEpps" varStatus="rowCounter">
@@ -128,7 +134,12 @@
 				  </c:forEach >
 				</table>
 				
-				<h4 class="text-muted">Actividades</h4>
+				<div>
+				<h4 class="text-muted">Actividades: </h4>
+				
+				<a class="btn-lg btn-primary pull-right" href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
+				</div>
+				
 				
 				<table class="table table-striped table-hover">
 					<thead>
@@ -152,49 +163,26 @@
 				<h4 class="text-muted">Autorizado por: </h4>
 				
 				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Cargo</th>
-						</tr>
-					</thead>
-    				<tbody id="myTable">
-					
-					<c:forEach var="Autorizaciones" items="${Autorizacion}">
-					    <tr>
-							<td>${Autorizaciones[0].toString()} <br>
-							<p style = "font-size:10px; color: rgb(182,182,182);">${Autorizaciones[1].toString()}</p></td>
-						</tr>
-					</c:forEach>
-    				</tbody>
+				  <c:forEach items="${Autorizacion}" var="Autorizaciones" varStatus="rowCounter">
+				    <c:if test="${rowCounter.count % 3 == 1}">
+				      <tr>
+				    </c:if>
+				    <td style = "border-left: 1px solid #ddd;">${Autorizaciones[0].toString()} <br>
+				    <p style = "font-size:10px; color: rgb(182,182,182);">${Autorizaciones[1].toString()}</p></td>
+				    <c:if test="${rowCounter.count % 3 == 0||rowCounter.count == fn:length(values)}">
+				      </tr>
+				    </c:if>
+				  </c:forEach >
 				</table>
 				
 				<h4 class="text-muted">Liberado por: </h4>
-				
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Cargo</th>
-						</tr>
-					</thead>
-    				<tbody id="myTable">
-					
-					<c:forEach var="Liberaciones" items="${Liberado}">
-					    <tr>
-							<td>${Liberaciones[0].toString()} <br>
-							<p style = "font-size:10px; color: rgb(182,182,182);">${Liberaciones[1].toString()}</p></td>
-						</tr>
-					</c:forEach>
-    				</tbody>
-				</table>
 				
 				<table class="table table-striped table-hover">
 				  <c:forEach items="${Liberado}" var="Liberaciones" varStatus="rowCounter">
 				    <c:if test="${rowCounter.count % 3 == 1}">
 				      <tr>
 				    </c:if>
-				    <td style = "border-left: 1px solid #ddd;">${Liberaciones[0].toString()}</td>
+				    <td style = "border-left: 1px solid #ddd;">${Liberaciones[0].toString()} <br>
 				    <p style = "font-size:10px; color: rgb(182,182,182);">${Liberaciones[1].toString()}</p></td>
 				    <c:if test="${rowCounter.count % 3 == 0||rowCounter.count == fn:length(values)}">
 				      </tr>
