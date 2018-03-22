@@ -71,8 +71,7 @@
 			<div class=" col-md-12">		
 				<div class="header clearfix">
 			        <div class=" col-md-6">
-			        	<h2 class="text-muted">MainTech</h2>						
-				        <h4 class="text-muted">Ver Equipos</h4>
+				        <h4 class="text-muted">Equipo</h4>
 			        </div>
 			    </div>
 			</div>
@@ -95,93 +94,44 @@
 			<div class=" col-md-8 table-responsive"  >
 				<input class="form-control" id="myInput" type="text" placeholder="Buscar..">
 				<br>
+				<form action="/ObjetoActividadupdated/${varObjeto.idObjeto}" method="post">
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>Descripción</th>
-							<th>Marca</th>
-							<th>Modelo</th>
-							<th>Stock</th>
-							<th>En Mantenimiento</th>
-							<th>Categoría</th>
-							<th>Padre</th>
+							<th>Área</th>
 						</tr>
 					</thead>
     				<tbody id="myTable">
 		
-					<c:forEach var="objeto" items="${objetos}">
-					    <tr>
-						
-					    <c:set var = "ob" scope = "session" value = "${objeto[8].toString()}"/>
+					<c:forEach var="allActvs" items="${allActv}">
+						<c:set var="auxchecked" value="0"/>
+						<tr>
+					    <c:set var = "ob" scope = "session" value = "${allActvs}"/>
 					    <c:if test="${empty ob}">
-					    	<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';"> - </td>
+					    	<td> - </td>
 						</c:if>
 						<c:if test="${not empty ob}">
-						    <td onClick="document.location.href='/objetoById/${objeto[2].toString()}';">${objeto[8].toString()}</td>
+						    <td>${allActvs.nombreActividad} <br>
 						</c:if>
 						
-					    <c:set var = "ob" scope = "session" value = "${objeto[3].toString()}"/>
-					    <c:if test="${empty ob}">
-					    	<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';"> - </td>
-						</c:if>
-						<c:if test="${not empty ob}">
-						    <td onClick="document.location.href='/objetoById/${objeto[2].toString()}';">${objeto[3].toString()}</td>
-						</c:if>
-						
-					    <c:set var = "ob" scope = "session" value = "${objeto[4].toString()}"/>
-					    <c:if test="${empty ob}">
-					    	<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';"> - </td>
-						</c:if>
-						<c:if test="${not empty ob}">
-							<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';">${objeto[4].toString()}</td>
-						</c:if>
-						
-					    <c:set var = "ob" scope = "session" value = "${objeto[0].toString()}"/>
-					    <c:if test="${empty ob}">
-					    	<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';"> - </td>
-						</c:if>
-						<c:if test="${not empty ob}">
-						    <td onClick="document.location.href='/objetoById/${objeto[2].toString()}';">${objeto[0].toString()}</td>
-						</c:if>
-						
-					    <c:set var = "ob" scope = "session" value = "${objeto[1].toString()}"/>
-					    <c:if test="${empty ob}">
-					    	<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';"> - </td>
-						</c:if>
-						<c:if test="${not empty ob}">
-						    <td onClick="document.location.href='/objetoById/${objeto[2].toString()}';">${objeto[1].toString()}</td>
-						</c:if>
-						
-					    <c:set var = "ob" scope = "session" value = "${objeto[11].toString()}"/>
-					    <c:if test="${empty ob}">
-					    	<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';"> - </td>
-						</c:if>
-						<c:if test="${not empty ob}">
-							<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';">${objeto[11].toString()}</td>
-						</c:if>
-						
-					    <c:set var = "ob" scope = "session" value = "${objeto[12].toString()}"/>
-					    <c:if test="${empty ob}">
-					    	<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';"> - </td>
-						</c:if>
-						<c:if test="${not empty ob}">
-							<td onClick="document.location.href='/objetoById/${objeto[2].toString()}';">${objeto[13].toString()}</td>
-						</c:if>
-<!-- 						<td> -->
-<%-- 						  <spring:url value="/deleteObjeto/${objeto[2]}" var="deleteUrl" /> --%>
-<%-- 						  <spring:url value="/objeto/${objeto[2]}" var="updateUrl" /> --%>
-		
-<!-- 						  <button class="btn btn-primary" -->
-<%-- 		                                          onclick="location.href='${updateUrl}'">Update</button> --%>
-		                                                                             
-<%-- 						  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button> --%>
-<%-- 		                                          onclick="this.disabled=true;post('${deleteUrl}')">Delete</button> --%>
-		                                          
-<!-- 		                                </td> -->
+						<c:forEach var="ItemActvs" items="${ItemActv}">									
+						    <c:if test="${ItemActvs[1]==allActvs.idActividad}">
+						        <td><input type="checkbox" checked name="foo" value="${ItemActvs[1].toString()}" ></td>
+						        <c:set var="auxchecked" value= "1"/>
+						    </c:if>
+					  	</c:forEach>
+					  	<c:if test="${auxchecked == 0}">
+						        <td><input type="checkbox" name="foo" value="${allActvs.idActividad}" ></td>
+					    </c:if>
+
 					    </tr>
 					</c:forEach>
 					</tbody>
 				</table>
+					<a class="btn-lg btn-primary pull-left" href="/objetoById/${varObjeto.idObjeto}">Cancelar</a>
+					<button type="submit" class="btn-lg btn-primary pull-right">Aceptar</button>
+				
+				</form>
 			</div>
 
 	</div>

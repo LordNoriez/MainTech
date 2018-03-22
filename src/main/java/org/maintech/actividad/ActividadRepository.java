@@ -55,7 +55,17 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer> 
 	public Double getCostoActividadProveedor(Integer idActividad, Integer idProveedor);	
 	
 	@Query(value="select a.id_actividad, a.nombre_actividad, p.nombre_proveedor from mantenimiento_objeto_actividad as m inner join actividad as a on m.id_actividad=a.id_actividad inner join proveedor as p on m.id_proveedor=p.id_proveedor where m.id_mantenimiento = ?1", nativeQuery=true)
-	public List<Object[]> getactividadxMante(Integer idMantenimiento);	
+	public List<Object[]> getactividadxMante(Integer idMantenimiento);
+
+	@Query(nativeQuery = true, value= "delete from objeto_actividad where objeto_id_objeto = ?1")
+	@Transactional
+	@Modifying
+	void deleteAllObjActv(Integer id);
+
+	@Query(nativeQuery = true, value= "insert into objeto_actividad(objeto_id_objeto,id_actividad) values(?1,?2)")
+	@Transactional
+	@Modifying
+	void InsertPlantObjActv(Integer id, Integer parseInt);	
 }
 
 

@@ -5,8 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.maintech.actividad.Actividad;
+import org.maintech.actividad.ActividadService;
 import org.maintech.actividadproveedor.ActividadProveedorService;
 import org.maintech.areaempresa.AreaEmpresaService;
 import org.maintech.categoria.CategoriaService;
@@ -38,6 +40,9 @@ public class ObjetoController {
 	
 	@Autowired
 	private ActividadProveedorService actividadProveedorService;
+	
+	@Autowired
+	private ActividadService actividadService;
 	
 	@Autowired
 	private CategoriaService categoriaService;
@@ -87,6 +92,17 @@ public class ObjetoController {
 	
 	@RequestMapping("/objeto/{idObjeto}")
 	public String getObjetoUpdate(@PathVariable("idObjeto") Integer id,Model model){
+		model.addAttribute("objeto", objetoService.getObjeto(id));
+		model.addAttribute("categories", categoriaService.getAllCategoria());
+		model.addAttribute("objects", objetoService.returnAllObjeto());
+		model.addAttribute("areas", areaEmpresaService.getAllAreaEmpresa());
+		model.addAttribute("colores", colorService.getAllColor());
+		model.addAttribute("estructuras", estructuraService.getAllEstructura());
+		return "Objeto/ObjetoUpdate";
+	}
+	
+	@RequestMapping("/objetoById/{idObjeto}")
+	public String getObjetoById(@PathVariable("idObjeto") Integer id,Model model){
 		model.addAttribute("objeto", objetoService.getObjeto(id));
 		model.addAttribute("categories", categoriaService.getAllCategoria());
 		model.addAttribute("objects", objetoService.returnAllObjeto());
@@ -213,4 +229,37 @@ public class ObjetoController {
         mailSender.send(message);
     }
 
+	@RequestMapping("/ObjetoActividad/{idObjeto}")
+	public String ObjetoActividad(@PathVariable("idObjeto") Integer id,Model model, Principal principal){
+		model.addAttribute("varObjeto", objetoService.getObjeto(id));
+		model.addAttribute("ItemActv", actividadService.getPlantActividadObjeto(id));
+		model.addAttribute("allActv", actividadService.getAllActividad());
+		return "Objeto/ObjetoActividad";
+		
+	}
+	
+	@RequestMapping("/ObjetoActividadupdated/{idObjeto}")
+	public ModelAndView MantenimientoEppUpdated(@PathVariable("idObjeto") Integer id,Model model, Principal principal,
+			HttpServletRequest request){
+
+		String[] foo = request.getParameterValues("foo");
+		
+		
+		if (foo != null )
+		{
+					
+			actividadService.deleteAllObjActv(id);
+			
+			for (String stringId : foo) {
+				
+				actividadService.InsertPlantObjActv(id,Integer.parseInt(stringId));
+			}
+		}else {
+			actividadService.deleteAllObjActv(id);
+		}
+		
+		return new ModelAndView("redirect:/objetoById/" + id);
+		
+	}
+    
 }

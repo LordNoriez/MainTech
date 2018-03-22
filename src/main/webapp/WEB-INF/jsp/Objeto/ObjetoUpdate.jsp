@@ -232,6 +232,13 @@
 				
 				</form:form>
 			</div>
+			
+				<div>
+				<h4 class="text-muted">Agregar Actividades: </h4>
+				
+				<a class="btn-lg btn-primary pull-right" href="/ObjetoActividad/${objeto.idObjeto}">Agregar</a>
+				</div>
+			
 		</div>
 	
     <footer class="footer">

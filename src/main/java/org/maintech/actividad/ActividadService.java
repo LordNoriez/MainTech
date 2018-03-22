@@ -92,4 +92,13 @@ public class ActividadService {
 		.forEach(actividades::add);
 		return actividades;
 	}
+
+	public void deleteAllObjActv(Integer id) {
+		actividadRepository.deleteAllObjActv(id);
+		
+	}
+
+	public void InsertPlantObjActv(Integer id, Integer parseInt) {
+		actividadRepository.InsertPlantObjActv(id, parseInt);
+	}
 }
