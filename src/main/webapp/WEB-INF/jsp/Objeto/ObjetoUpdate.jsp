@@ -143,7 +143,14 @@
 					
 			</div>					
 			
+			<div class=" col-md-8">
+				<h4 class="text-muted">Agregar Actividades: </h4>
+		
+				<a class="btn-lg btn-primary pull-left" href="/ObjetoActividad/${objeto.idObjeto}">Agregar</a>	
+			</div>
+			
 			<div class=" col-md-8"  >
+			
 				<spring:url value="/updateObjeto/${objeto.idObjeto}" var="variableAdd" />
 			
 				<form:form method="PUT" modelAttribute="objeto" action="${variableAdd}">
@@ -154,13 +161,13 @@
 						<form:options items="${areas}" itemLabel="NombreAreaEmpresa" itemValue="idAreaEmpresa" />
 					</form:select>
 					<br>
-				
+					<div style="width:50%;">
 					<label>Descripción:</label>
 					<form:input type="text" class="form-control" path="DescripcionObjeto" value = "${objeto.descripcionObjeto}"/>
-					<br>					
-					
+									
 					<label>Marca:</label>
 					<form:input type="text" class="form-control" path="MarcaObjeto" value = "${objeto.marcaObjeto}"/>	
+					</div>
 					<br>
 				
 					<label>Modelo:</label>
@@ -227,17 +234,13 @@
 					<label>Vida: </label>
 					<form:input path="VidaObjeto"  class="form-control" type="number" value = "${objeto.vidaObjeto}"/> 
 					<br>
-				
+					
+					<a class="btn btn-danger pull-left" href="/objeto">Cancelar</a>
 					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>
 				
 				</form:form>
 			</div>
-			
-				<div>
-				<h4 class="text-muted">Agregar Actividades: </h4>
 				
-				<a class="btn-lg btn-primary pull-right" href="/ObjetoActividad/${objeto.idObjeto}">Agregar</a>
-				</div>
 			
 		</div>
 	

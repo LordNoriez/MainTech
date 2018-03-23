@@ -128,7 +128,7 @@
 					</c:forEach>
 					</tbody>
 				</table>
-					<a class="btn-lg btn-primary pull-left" href="/objetoById/${varObjeto.idObjeto}">Cancelar</a>
+					<a class="btn btn-danger pull-left" href="/objetoById/${varObjeto.idObjeto}">Cancelar</a>
 					<button type="submit" class="btn-lg btn-primary pull-right">Aceptar</button>
 				
 				</form>
