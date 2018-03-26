@@ -160,13 +160,16 @@
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${areas}" itemLabel="NombreAreaEmpresa" itemValue="idAreaEmpresa" />
 					</form:select>
-					<br>
-					<div style="width:50%;">
+					
+					<div>
+					<div style="float:left;width:50%;">
 					<label>Descripción:</label>
 					<form:input type="text" class="form-control" path="DescripcionObjeto" value = "${objeto.descripcionObjeto}"/>
-									
+					</div>
+					<div style="float:left;width:50%;">			
 					<label>Marca:</label>
 					<form:input type="text" class="form-control" path="MarcaObjeto" value = "${objeto.marcaObjeto}"/>	
+					</div>
 					</div>
 					<br>
 				
