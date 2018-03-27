@@ -155,12 +155,6 @@
 			
 				<form:form method="PUT" modelAttribute="objeto" action="${variableAdd}">
 					
-					<label>Área de la Empresa: </label>						        
-					<form:select class="form-control" path="AreaEmpresa">
-						<form:option value="" label="--- Select ---" />
-						<form:options items="${areas}" itemLabel="NombreAreaEmpresa" itemValue="idAreaEmpresa" />
-					</form:select>
-					
 					<div>
 					<div style="float:left;width:50%;">
 					<label>Descripción:</label>
@@ -172,70 +166,89 @@
 					</div>
 					</div>
 					<br>
-				
+					
+					<div>
+					<div style="float:left;width:50%;">
 					<label>Modelo:</label>
 					<form:input type="text" class="form-control" path="ModeloObjeto" value = "${objeto.modeloObjeto}"/>
-					<br>
-				
+					</div>
+					<div style="float:left;width:50%;">	
 					<label>Serial:</label>
 					<form:input type="text" class="form-control" path="SerialObjeto" value = "${objeto.serialObjeto}"/>
+					</div>
+					</div>
 					<br>	
-							
+					
+					<div>
+					<div style="float:left;width:50%;">		
 					<label>Categoría:</label>
 					<form:select class="form-control" path="categoria">
 						<form:option value="" label="--- Select ---" />
 						<form:options items="${categories}" itemLabel="NombreCategoria" itemValue="idCategoria" />
 					</form:select>
-					<br>	
-					
+					</div>
+					<div style="float:left;width:50%;">	
 					<label>Color: </label>						        
 					<form:select class="form-control" path="color">
 						<form:options items="${colores}" itemLabel="nombreColor" itemValue="idColor" />
 					</form:select>
+					</div>
+					</div>
 					<br>
 					
+					<div>
+					<div style="float:left;width:50%;">	
 					<label>Estructura: </label>						        
 					<form:select class="form-control" path="estructura">
 						<form:options items="${estructuras}" itemLabel="nombreEstructura" itemValue="idEstructura" />
 					</form:select>
-					<br>
-										
+					</div>
+					<div style="float:left;width:50%;">				
 					<label>Equipo Padre:</label>
 					<form:select class="form-control" path="objetoPadre" onchange="document.getElementById('objtPadre').value = this.value;">
 						<form:option value="" label="--- Select ---" itemValue=""/>
 						<form:options items="${objects}" itemLabel="DescripcionObjeto" itemValue="idObjeto" />
 					</form:select>
 					<form:input type="hidden" path="objetoPadre" id = "objtPadre" /> 
+					</div>
+					</div>
 					<br>	
 			
+					<div>
+					<div style="float:left;width:33.3%;">	
 					<fmt:formatDate value="${objeto.fechaCreacionObjeto}" var="dateString" pattern="yyyy-MM-dd" />
 					<label>Creado El:</label>
 					<form:input type="date" class="form-control" path="FechaCreacionObjeto" value = "${dateString}"/>
-					<br>	
-				
+					</div>
+					<div style="float:left;width:33.3%;">		
 					<fmt:formatDate value="${objeto.fechaObtencionObjeto}" var="date2String" pattern="yyyy-MM-dd" />
 					<label>Obtenido El:</label>
 					<form:input type="date" class="form-control" path="FechaObtencionObjeto" value = "${date2String}"/>
-					<br>	
-					
-					<label>Longitud: </label>
-					<form:input path="LongitudObjeto" class="form-control"  type="number" value = "${objeto.longitudObjeto}"/>
-					<br>
-					
-					<label>Ancho: </label>
-					<form:input path="AnchoObjeto"  class="form-control" type="number" value = "${objeto.anchoObjeto}"/> 
-					<br>
-			
-					<label>Altura: </label>
-					<form:input path="AlturaObjeto"  class="form-control" type="number" value = "${objeto.alturaObjeto}"/> 
-					<br>
-					
-					<label>Área: </label>
-					<form:input path="AreaObjeto"  class="form-control" type="number" value = "${objeto.areaObjeto}"/> 
-					<br>
-					
+					</div>
+					<div style="float:left;width:33.3%;">
 					<label>Vida: </label>
 					<form:input path="VidaObjeto"  class="form-control" type="number" value = "${objeto.vidaObjeto}"/> 
+					</div>					
+					</div>
+					<br>
+					
+					<div>
+					<div style="float:left;width:25%;">	
+					<label>Longitud: </label>
+					<form:input path="LongitudObjeto" class="form-control"  type="number" value = "${objeto.longitudObjeto}"/>
+					</div>
+					<div style="float:left;width:25%;">
+					<label>Ancho: </label>
+					<form:input path="AnchoObjeto"  class="form-control" type="number" value = "${objeto.anchoObjeto}"/> 
+					</div>
+					<div style="float:left;width:25%;">
+					<label>Altura: </label>
+					<form:input path="AlturaObjeto"  class="form-control" type="number" value = "${objeto.alturaObjeto}"/> 
+					</div>
+					<div style="float:left;width:25%;">
+					<label>Área: </label>
+					<form:input path="AreaObjeto"  class="form-control" type="number" value = "${objeto.areaObjeto}"/> 
+					</div></div>
 					<br>
 					
 					<a class="btn btn-danger pull-left" href="/objeto">Cancelar</a>

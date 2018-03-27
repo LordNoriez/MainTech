@@ -116,14 +116,14 @@
 					
 					<c:forEach var="mantenimiento" items="${mantenimientos}">
 					    <tr>
-							<td>${mantenimiento[1].toString()}</td>
-							<td>${mantenimiento[3].toString()}</td>		
-							<td>${mantenimiento[6].toString()} ${mantenimiento[7].toString()}</td>				
-							<td>${mantenimiento[4].toString()}</td>			
-							<td>${mantenimiento[9].toString()}</td>		
-							<td>${mantenimiento[16].toString()}</td>	
-							<td>$ ${mantenimiento[15]}</td>
-							<td>	
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[1].toString()}</td>
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[3].toString()}</td>		
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[6].toString()} ${mantenimiento[7].toString()}</td>				
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[4].toString()}</td>			
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[9].toString()}</td>		
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[16].toString()}</td>	
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">$ ${mantenimiento[15]}</td>
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">	
 								<c:choose>
 								  <c:when test="${mantenimiento[10]==true}">
 								    <input type="checkbox" checked >
@@ -133,8 +133,8 @@
 								  </c:otherwise>
 								</c:choose>
 							</td>	
-							<td>${mantenimiento[11]}</td>
-							<td>							
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[11]}</td>
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">							
 								<c:choose>
 								  <c:when test="${mantenimiento[12]==true}">
 								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoAceptado/${mantenimiento[0]}'">
@@ -143,7 +143,7 @@
 								    <input type="checkbox" onclick="javascript:location.href='/mantenimientoAceptado/${mantenimiento[0]}'">
 								  </c:otherwise>
 								</c:choose></td>	
-							<td>
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">
 								<c:choose>
 								  <c:when test="${mantenimiento[13]==true}">
 								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoProceso/${mantenimiento[0]}/${mantenimiento[5]}/${mantenimiento[16]}'">
@@ -153,7 +153,7 @@
 								  </c:otherwise>
 								</c:choose></td>
 							
-							<td>	
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">	
 								<c:choose>
 								  <c:when test="${mantenimiento[14]==true}">
 								    <input type="checkbox" checked onclick="javascript:location.href='/mantenimientoTerminado/${mantenimiento[0]}/${mantenimiento[5]}/${mantenimiento[16]}'">
@@ -165,7 +165,7 @@
 										
 <%-- 							<td>${mantenimiento.objetoMantenimiento.getDescripcionObjeto()}</td> --%>
 			
-							<td>
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">
 							  <spring:url value="/deleteMantenimiento/${mantenimiento[0].toString()}" var="deleteUrl" />
 							  <spring:url value="/mantenimiento/${mantenimiento[0].toString()}" var="updateUrl" />
 								
