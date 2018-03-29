@@ -96,32 +96,46 @@
 				<br>
 				
 				<h4 class="text-muted">Información Mantenimiento</h4>
-				<div>
-					<label>Nombre: </label> <label>${varMantenmiento.nombreMantenimiento}</label>
-				</div>
 				
 				<div>
-					<label>Tipo de Mantenimiento: </label> <label>${varMantenmiento.objTipoMantenimiento.nombreTipoMantenimiento}</label>
+				<div style="float:left;width:32%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
+					<p style="font-size:10px; color: rgb(182,182,182);margin-bottom: 0px;margin-left:  5%;">Nombre</p><br>
+					<label style="margin-bottom: 0%;margin-left:  5%;">${varMantenmiento.nombreMantenimiento}</label>
 				</div>
-				
-				<div>
-					<label>fecha Mantenimiento: </label> <label>${varMantenmiento.fechaMantenimiento}</label>
+				<div style="float:left;width:32%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
+					<p style="font-size:10px; color: rgb(182,182,182);margin-bottom: 0px;margin-left:  5%;">Tipo Mantenimiento</p><br>
+					<label style="margin-bottom: 0%;margin-left:  5%;">${varMantenmiento.objTipoMantenimiento.nombreTipoMantenimiento}</label>
 				</div>
-				
-				<div>
-					<label>Descripcion Mantenimiento: </label> <label>${varMantenmiento.descripcionMantenimiento}</label>
+				<div style="float:left;width:32%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
+					<p style="font-size:10px; color: rgb(182,182,182);margin-bottom: 0px;margin-left:  5%;">Fecha</p><br>
+					<label style="margin-bottom: 0%;margin-left:  5%;">${varMantenmiento.fechaMantenimiento}</label>
 				</div>
-				<div>
-					<label>Equipo: </label> <label>${MantObjeto.descripcionObjeto}</label>
 				</div>
 				<br>
 				
 				<div>
+				<div style="float:left;width:32%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
+					<p style="font-size:10px; color: rgb(182,182,182);margin-bottom: 0px;margin-left:  5%;">Descripcion</p><br>
+					<label style="margin-bottom: 0%;margin-left:  5%;">${varMantenmiento.descripcionMantenimiento}</label>
+				</div>
+				<div style="float:left;width:32%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
+					<p style="font-size:10px; color: rgb(182,182,182);margin-bottom: 0px;margin-left:  5%;">Equipo</p><br>
+					<label style="margin-bottom: 0%;margin-left:  5%;">${MantObjeto.descripcionObjeto}</label>
+				</div>
+				<div style="float:left;width:32%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
+					<p style="font-size:10px; color: rgb(182,182,182);margin-bottom: 0px;margin-left:  5%;">Equipo</p><br>
+					<label style="margin-bottom: 0%;margin-left:  5%;">${MantObjeto.descripcionObjeto}</label>
+				</div>
+				</div>	
+				
+				<br>
+				
+				<div style="height: 10%;width: 100%;margin-top: 90px;">
 				<h4 class="text-muted">Epps: </h4>
 				
 				<a class="btn-lg btn-primary pull-right" href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
 				</div>
-				
+				<div style="width:100%">
 				<table class="table table-striped table-hover">
 				  <c:forEach items="${MantEpp}" var="MantEpps" varStatus="rowCounter">
 				    <c:if test="${rowCounter.count % 3 == 1}">
@@ -133,14 +147,14 @@
 				    </c:if>
 				  </c:forEach >
 				</table>
-				
+				</div>
 				<div>
 				<h4 class="text-muted">Actividades: </h4>
 				
 				<a class="btn-lg btn-primary pull-right" href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
 				</div>
 				
-				
+				<div style="width:100%">
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -158,6 +172,7 @@
 					</c:forEach>
     				</tbody>
 				</table>
+				</div>
 				<br>
 				
 				<h4 class="text-muted">Autorizado por: </h4>
