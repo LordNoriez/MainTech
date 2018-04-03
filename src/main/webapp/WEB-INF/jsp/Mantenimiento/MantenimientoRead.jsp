@@ -122,7 +122,7 @@
 							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[4].toString()}</td>			
 							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[9].toString()}</td>		
 							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[16].toString()}</td>	
-							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">$ ${mantenimiento[15]}</td>
+							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">${mantenimiento[15]}</td>
 							<td onClick="document.location.href='/mantenimientobyId/${mantenimiento[0].toString()}';">	
 								<c:choose>
 								  <c:when test="${mantenimiento[10]==true}">

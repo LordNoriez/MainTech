@@ -151,7 +151,7 @@
 				<div>
 				<h4 class="text-muted">Actividades: </h4>
 				
-				<a class="btn-lg btn-primary pull-right" href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
+				<a class="btn-lg btn-primary pull-right" href="/LinkMantActividad/${varMantenmiento.idMantenimiento}">Agregar</a>
 				</div>
 				
 				<div style="width:100%">

@@ -118,4 +118,10 @@ public class MantenimientoService {
 	public Integer ObjetoFromMante (Integer idMantenimiento) {
 		return mantenimientoRepository.ObjetoFromMante(idMantenimiento);
 	}
+
+	public List<Object[]> getActvProvXObj(Integer idobjeto) {
+		List<Object[]> ObjProveActv = new ArrayList<>();
+		mantenimientoRepository.getActvProvXObj(idobjeto).forEach(ObjProveActv::add);
+		return ObjProveActv;
+	}
 }

@@ -143,35 +143,35 @@ public class MantenimientoController {
 		model.addAttribute("actividades", actividadService.getAllActividad());
 		model.addAttribute("proveedores",  proveedorService.getAllProveedores());
 		return "MantenimientoObjetoActividad/MantenimientoObjetoActividadCrear";
-		//return "/";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/LinkMantObjeto")
-	public String addMantObjeto(GroupMantenimientoObjeto groupMantenimientoObjeto,
+	public ModelAndView addMantObjeto(GroupMantenimientoObjeto groupMantenimientoObjeto,
 			@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantObjNew,
 			BindingResult result, Model model) {
 
 		model.addAttribute("groupMant", mantenimientoService.getMantenimiento(groupMantenimientoObjeto.getMantenimientos()));
 		model.addAttribute("idobjeto", objetoService.getObjeto(groupMantenimientoObjeto.getIdobjeto()));
 		
-		model.addAttribute("Proveedores", mantenimientoService.getProvXObj(groupMantenimientoObjeto.getIdobjeto()));
-		return "MantenimientoObjetoActividad/MantenimientoProveedorLink";
+		//mantenimientoService.getActvProvXObj(groupMantenimientoObjeto.getIdobjeto());
+		
+		for (Object[] ActvProvObj : mantenimientoService.getActvProvXObj(groupMantenimientoObjeto.getIdobjeto())) {
+			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(Integer.parseInt(ActvProvObj[0].toString()),  groupMantenimientoObjeto.getMantenimientos(), 
+					Integer.parseInt(ActvProvObj[1].toString()),  groupMantenimientoObjeto.getIdobjeto(),  Double.parseDouble(ActvProvObj[2].toString()),  groupMantenimientoObjeto.getCantidadMantenimiento());
+		}
+		
+		System.out.println(groupMantenimientoObjeto.getCantidadMantenimiento());
+		//return "MantenimientoObjetoActividad/MantenimientoProveedorLink";
+		return new ModelAndView ("redirect:/mantenimientobyId/" + groupMantenimientoObjeto.getMantenimientos());
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/LinkMantActividad")
-	public String addprovedor(GroupMantenimientoObjeto groupMantenimientoObjeto,
-			@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantObjNew,
-			BindingResult result, Model model) {
-
-		List<Object[]> Proveedor = new ArrayList<Object[]>() ;
-			
-		model.addAttribute("groupMant", mantenimientoService.getMantenimiento(groupMantenimientoObjeto.getMantenimientos()));
-		model.addAttribute("idobjeto", objetoService.getObjeto(groupMantenimientoObjeto.getIdobjeto()));
-		model.addAttribute("proveedores", proveedorService.getProveedor(groupMantenimientoObjeto.getListIdProveedor()));
-		model.addAttribute("ActividadesxObjeto", actividadService.getidActividadProveedorxObjt(groupMantenimientoObjeto.getIdobjeto(),groupMantenimientoObjeto.getListIdProveedor()));
+	@RequestMapping("/LinkMantActividad/{idMantenimiento}")
+	public String MantActividad(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
+		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
+		model.addAttribute("AllActividad", actividadService.getAllActividad());
+		model.addAttribute("AllEpps", eppService.getAllEpp());
+		return "MantenimientoObjetoActividad/ActividadOnMainte";
 		
-		return "MantenimientoObjetoActividad/MantenimientoObjetoActividadLink";
-
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/LinkEvrything")
@@ -188,30 +188,6 @@ public class MantenimientoController {
 
 		return new ModelAndView("redirect:/mantenimiento");
 	}
-	
-	@RequestMapping(method=RequestMethod.POST, value="/LinkMantObjeto1")
-	public String zz(@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantenimientoObjeto,
-			BindingResult result, Model model) {
-		
-		model.addAttribute("idmantenimiento", groupMantenimientoObjeto.getMantenimientos());
-		model.addAttribute("idobjeto", groupMantenimientoObjeto.getIdobjeto());
-		model.addAttribute("actividades",groupMantenimientoObjeto.getActividades());
-		model.addAttribute("proveedor",groupMantenimientoObjeto.getProveedores());
-		
-		return "MantenimientoObjetoActividad/prueba";
-
-	}
-	
-	@RequestMapping(value = "/addBranch", method = RequestMethod.POST)
-	public @ResponseBody 
-	List getForm1(@ModelAttribute Branch branch, Model model,@RequestParam("districtId")    
-	int districtId) {
-
-	       List<Object[]> districtVillageList = mantenimientoService.getAct_ProvxObjt(districtId);
-
-
-	    return districtVillageList;
-	 }
 	
 	@RequestMapping(value="phcheck", method=RequestMethod.GET,
             produces="application/json")
@@ -249,8 +225,13 @@ public class MantenimientoController {
     public void myController(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 	    String myItem = request.getParameter("item");   
-	 
-	    response.getWriter().println(movimientoService.getCantidadInventario(Integer.parseInt(myItem)));
+	    
+	    if (movimientoService.getCantidadInventario(Integer.parseInt(myItem)) == null) {
+	    	response.getWriter().println("0");
+	    }else {
+	    	response.getWriter().println(movimientoService.getCantidadInventario(Integer.parseInt(myItem)));
+	    }
+	    
     }
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/updateMantenimiento/{idMantenimiento}")
@@ -441,5 +422,17 @@ public class MantenimientoController {
 		
 	}
 	
+    @RequestMapping(value = "/filter")
+    public void proveedorFilter(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+	    String myItem = request.getParameter("item");   
+	    
+	    if (movimientoService.getCantidadInventario(Integer.parseInt(myItem)) == null) {
+	    	response.getWriter().println("0");
+	    }else {
+	    	response.getWriter().println(movimientoService.getCantidadInventario(Integer.parseInt(myItem)));
+	    }
+	    
+    }
     
 }
