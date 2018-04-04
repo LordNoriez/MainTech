@@ -168,8 +168,7 @@ public class MantenimientoController {
 	@RequestMapping("/LinkMantActividad/{idMantenimiento}")
 	public String MantActividad(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
-		model.addAttribute("AllActividad", actividadService.getAllActividad());
-		model.addAttribute("AllEpps", eppService.getAllEpp());
+		model.addAttribute("AllProveedor", proveedorService.getAllProveedores());
 		return "MantenimientoObjetoActividad/ActividadOnMainte";
 		
 	}

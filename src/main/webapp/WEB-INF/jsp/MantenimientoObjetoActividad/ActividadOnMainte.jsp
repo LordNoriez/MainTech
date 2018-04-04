@@ -92,35 +92,70 @@
 			
 
 			<div class=" col-md-8 table-responsive"  >
-				<div style="float:left;width:48%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
-				<input class="form-control" id="myInput" type="text" onkeyup="myFunction()" placeholder="Buscar.. Actividad">
-				</div>
+
 				<div style="float:left;width:48%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
 				<input class="form-control" id="myInput2" type="text" onkeyup="myFunction2()" placeholder="Buscar.. Proveedor">
 				</div>
-				
 				<br>
+				
+
+				<label onclick="borrartbl()"> añadir tabla </label>
+				
 				<form action="/ObjetoActividadupdated/${varObjeto.idObjeto}" method="post">
+				
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>Área</th>
+							<th>Proveedor</th>
 						</tr>
 					</thead>
-    				<tbody id="myTable">
+    				<tbody id="myTableProveedor">
 		
-					<c:forEach var="AllActividades" items="${AllActividad}">
+					<c:forEach var="AllProveedores" items="${AllProveedor}">
 						
 						<tr>
-						
-						    <td>${AllActividades.nombreActividad} </td>
-						    <td>${AllActividades.getAreaEmpresa().nombreAreaEmpresa} </td>
+						    <td onclick="searchActividad(${AllProveedores.idProveedor})">${AllProveedores.nombreProveedor} </td>
+						    <td onclick="searchActividad(${AllProveedores.idProveedor})" style="display:none;">
+						    <span style="visibility:hidden">${AllProveedores.idProveedor} </span></td>
 						
 					    </tr>
 					</c:forEach>
 					</tbody>
 				</table>
-					<a class="btn btn-danger pull-left" href="/objetoById/${varObjeto.idObjeto}">Cancelar</a>
+				
+				<div style="float:left;width:48%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
+				<input class="form-control" id="myInput" type="text" onkeyup="myFunction()" placeholder="Buscar.. Actividad">
+				</div>
+				
+				<input class="form-control" id="myInput3" type="hidden" onkeyup="myFunction3()" placeholder="filtrar por proveedor id">
+				
+				
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Actividad</th>
+							<th><span style="visibility:hidden">idproveedor</span></th>
+							<th>Costo</th>
+							<th>:3</th>
+						</tr>
+					</thead>
+    				<tbody id="myTable">
+		
+<%-- 					<c:forEach var="AllActividades" items="${AllActividad}"> --%>
+						
+<!-- 						<tr> -->
+						
+<%-- 						    <td>${AllActividades[1].toString()} </td> --%>
+<%--						    <td><span style="visibility:hidden">${AllActividades[2].toString()}</span></td> --%>
+<%-- 						    <td>${AllActividades[2].toString()}</td> --%>
+<%-- 						    <td>${AllActividades[4].toString()} </td> --%>
+						
+<!-- 					    </tr> -->
+<%-- 					</c:forEach> --%>
+					</tbody>
+				</table>
+				
+					<a class="btn btn-danger pull-left" href="/mantenimientobyId/${varMantenmiento.idMantenimiento}">Cancelar</a>
 					<button type="submit" class="btn-lg btn-primary pull-right">Aceptar</button>
 				
 				</form>
@@ -189,7 +224,7 @@
 		    td = tr[i].getElementsByTagName("td")[0];
 		    if (td) {
 		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-		        tr[i].style.display = "";
+		    	  tr[i].style.display = "";
 		      } else {
 		        tr[i].style.display = "none";
 		      }
@@ -202,6 +237,27 @@
 		  var input, filter, table, tr, td, i;
 		  input = document.getElementById("myInput2");
 		  filter = input.value.toUpperCase();
+		  table = document.getElementById("myTableProveedor");
+		  tr = table.getElementsByTagName("tr");
+
+		  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+		    td = tr[i].getElementsByTagName("td")[0];
+		    if (td) {
+		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+		    	  tr[i].style.display = "";
+		      } else {
+		        tr[i].style.display = "none";
+		      }
+		    } 
+		  }
+		}
+
+	function myFunction3() {
+		  // Declare variables 
+		  var input, filter, table, tr, td, i;
+		  input = document.getElementById("myInput3");
+		  filter = input.value.toUpperCase();
 		  table = document.getElementById("myTable");
 		  tr = table.getElementsByTagName("tr");
 
@@ -210,13 +266,72 @@
 		    td = tr[i].getElementsByTagName("td")[1];
 		    if (td) {
 		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-		        tr[i].style.display = "";
+		    	  tr[i].style.display = "";
 		      } else {
 		        tr[i].style.display = "none";
 		      }
 		    } 
 		  }
 		}
+		
+	
+    function D(lol) {
+        document.getElementById('myInput3').value = lol;
+        myFunction3();
+     }
+    
+    function addTable(){
+    
+    	$('#myTable').append('<tr><td>new row - cell 1</td><td>new row - cell 2</td></tr>');
+    }
+    
+    function borrartbl() {
+    	var elmtTable = document.getElementById('myTable');
+    	var tableRows = elmtTable.getElementsByTagName('tr');
+    	var rowCount = tableRows.length;
+
+    	for (var x=rowCount-1; x>-1; x--) {
+    	   elmtTable.removeChild(tableRows[x]);
+    	}
+    }
+    
+    function searchActividad(idProveedor) {
+        // set variables into javascript object which you need to send to spring controller
+        // the variable name here should be same as it is in your java class UserDetails.java
+
+        //var user = new String();
+        //user = "hello"; // id of user to be deleted
+        borrartbl();
+        
+        $.ajax({
+            type : 'POST',
+            url : '/actcostxprov',
+            dataType : 'json',
+            data : JSON.stringify(idProveedor),
+            contentType : 'application/json',
+            success : function(data) {
+               //here in data variable, you will get list of all users sent from 
+               // spring controller in json format, currently its object
+               // iterate it and show users on page
+
+               showUsers(data);
+            },
+            error : function() {
+                alert('error');
+            }
+        });
+    }
+
+    function showUsers(data) {
+        // and here you show users on page
+        //following code just example
+
+        
+            for ( var i = 0, len = data.length; i < len; ++i) {
+                var objeto = data[i];
+                $('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style= &quot; visibility:hidden &quot;>" + objeto[2].toString() + "</span></td><td>" + objeto[4].toString() + "</td></tr>");
+        }
+    }
 	</script>
 
 </body>

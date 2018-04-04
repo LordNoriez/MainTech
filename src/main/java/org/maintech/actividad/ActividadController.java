@@ -2,6 +2,7 @@ package org.maintech.actividad;
 
 
 import java.security.Principal;
+import java.util.List;
 
 import org.maintech.costo.Costo;
 import org.maintech.costo.CostoService;
@@ -15,8 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -88,4 +91,18 @@ public class ActividadController {
 	public void deleteActividad(@PathVariable Integer id){
 		ActividadService.deleteActividad(id);
 	}
+	
+	@RequestMapping(value = "/actcostxprov", method = RequestMethod.POST)
+	public @ResponseBody
+	List<Object[]> deleteUser(@RequestBody String idProveedor) {
+	    // fetch the userid to be deleted from the userDetails
+	    // remebmer the id of user to be deleted will be set in the ajax call
+
+	    // again populate the user list to display on page
+		System.out.println(idProveedor);
+	    return ActividadService.getidActCostidProve(Integer.parseInt(idProveedor));
+	    
+	    
+	}
+	
 }
