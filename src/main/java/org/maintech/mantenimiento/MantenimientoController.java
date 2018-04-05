@@ -169,23 +169,34 @@ public class MantenimientoController {
 	public String MantActividad(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("AllProveedor", proveedorService.getAllProveedores());
+		model.addAttribute("ActividadesxMante", actividadService.getactividadxMante(id));
+		
 		return "MantenimientoObjetoActividad/ActividadOnMainte";
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/LinkEvrything")
-	public ModelAndView addLinkEvrything(@ModelAttribute("crearModelMantenimiento") GroupMantenimientoObjeto groupMantenimientoObjeto,
-			BindingResult result, Model model) {
+	@RequestMapping("/mantActProvUpdated/{idMantenimiento}")
+	public ModelAndView MantenimientoActividadProveUpdated(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal,
+			HttpServletRequest request){
 
+		String[] foo = request.getParameterValues("foo");
 		
-		for (Integer ActividadId: groupMantenimientoObjeto.getListIdActividades()) {
-			mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(ActividadId, groupMantenimientoObjeto.getMantenimientos()
-			, groupMantenimientoObjeto.getListIdProveedor(), groupMantenimientoObjeto.getIdobjeto(), 
-			groupMantenimientoObjeto.getCantidadMantenimiento() * actividadService.getCostoActividad(ActividadId, groupMantenimientoObjeto.getListIdProveedor()), groupMantenimientoObjeto.getCantidadMantenimiento());	
-		}
+//		if (foo != null )
+//		{
+//		
+//			eppService.deleteAllMantEpp(id);
+//			
+			for (String stringId : foo) {
+				
+				//eppService.InsertMantEpp(id,Integer.parseInt(stringId));
+				System.out.println(stringId);
+			}
+//		}else {
+//			eppService.deleteAllMantEpp(id);
+//		}
 		
-
-		return new ModelAndView("redirect:/mantenimiento");
+		return new ModelAndView("redirect:/mantenimientobyId/" + id);
+		
 	}
 	
 	@RequestMapping(value="phcheck", method=RequestMethod.GET,

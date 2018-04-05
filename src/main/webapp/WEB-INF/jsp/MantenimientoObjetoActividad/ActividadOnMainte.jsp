@@ -71,26 +71,52 @@
 			<div class=" col-md-12">		
 				<div class="header clearfix">
 			        <div class=" col-md-6">
-				        <h4 class="text-muted">Equipo</h4>
+				        <h4 class="text-muted">Actividades del mantenimiento: ${varMantenmiento.nombreMantenimiento}</h4>
 			        </div>
 			    </div>
 			</div>
 		</div>
-		<div class="row">
-			<div class=" col-md-3">
-				<div class="jumbotron">						
-					<img class="p-img" alt="" src="{{user.userAuthentication.details.picture}}">
-					<h5>{{user.userAuthentication.details.name}}</h5>
-					<h6>{{user.userAuthentication.details.email}}</h6>		
-					<a href="/logout">Salir</a>		        
-			    </div>	
+<!-- 		<div class="row"> -->
+<!-- 			<div class=" col-md-3"> -->
+<!-- 				<div class="jumbotron">						 -->
+<!-- 					<img class="p-img" alt="" src="{{user.userAuthentication.details.picture}}"> -->
+<!-- 					<h5>{{user.userAuthentication.details.name}}</h5> -->
+<!-- 					<h6>{{user.userAuthentication.details.email}}</h6>		 -->
+<!-- 					<a href="/logout">Salir</a>		         -->
+<!-- 			    </div>	 -->
 			    
 			    					
-				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				
+<!-- 				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				 -->
 				
-			</div>
+<!-- 			</div> -->
+				<div class=" col-md-8 table-responsive"  >
+				<form action="/mantActProvUpdated/${varMantenmiento.idMantenimiento}" method="post">
+				
+								
+				<table class="table table-striped table-hover">
+				<tbody id="TblActividades">
+				  <c:forEach items="${ActividadesxMante}" var="Actividades" varStatus="rowCounter">
+				    <c:if test="${rowCounter.count % 3 == 1}">
+				      <tr>
+				    </c:if>
+				    <td style = "border-left: 1px solid #ddd;">${Actividades[1].toString()}<br>
+				    <p style = "font-size:10px; color: rgb(182,182,182);">${Actividades[2].toString()}</p>
+				    <input type="text" name="foo" value="${Actividades[0].toString()}" ></td>
+				    <c:if test="${rowCounter.count % 3 == 0||rowCounter.count == fn:length(values)}">
+				      </tr>
+				    </c:if>
+				  </c:forEach >
+				  </tbody>
+				</table>
+				
+				
 			
-
+					<a class="btn btn-danger pull-left" href="/mantenimientobyId/${varMantenmiento.idMantenimiento}">Cancelar</a>
+					<button type="submit" class="btn-lg btn-primary pull-right">Aceptar</button>
+				
+				</form>
+				</div>
+			
 			<div class=" col-md-8 table-responsive"  >
 
 				<div style="float:left;width:48%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
@@ -99,9 +125,9 @@
 				<br>
 				
 
-				<label onclick="borrartbl()"> añadir tabla </label>
+<!-- 				<label onclick="borrartbl()"> añadir tabla </label> -->
 				
-				<form action="/ObjetoActividadupdated/${varObjeto.idObjeto}" method="post">
+				
 				
 				<table class="table table-striped table-hover">
 					<thead>
@@ -136,7 +162,6 @@
 							<th>Actividad</th>
 							<th><span style="visibility:hidden">idproveedor</span></th>
 							<th>Costo</th>
-							<th>:3</th>
 						</tr>
 					</thead>
     				<tbody id="myTable">
@@ -155,10 +180,6 @@
 					</tbody>
 				</table>
 				
-					<a class="btn btn-danger pull-left" href="/mantenimientobyId/${varMantenmiento.idMantenimiento}">Cancelar</a>
-					<button type="submit" class="btn-lg btn-primary pull-right">Aceptar</button>
-				
-				</form>
 			</div>
 
 	</div>
@@ -280,9 +301,36 @@
         myFunction3();
      }
     
-    function addTable(){
+    function deletecell(elem,tridnum){
+    	alert(tridnum);
+
+    		var row = document.getElementById(tridnum);
+    		for(i=0;i<row.children.length;i++) {
+	    		if(row.children[i]==elem) {
+	    		row.deleteCell(i);
+	
+	    		}
+    		}
+    		
+    }
     
-    	$('#myTable').append('<tr><td>new row - cell 1</td><td>new row - cell 2</td></tr>');
+    var auxTabla = 1;
+    function addActividad(){
+    	
+    	//var rows = document.getElementById("TblActividades").getElementsByTagName("tr").length;
+    	var rows = $('#TblActividades tr').length
+    	//var colum = document.getElementById("TblActividades").getElementsByTagName("td").length;
+    	var colum = $('#TblActividades td').length
+
+    	
+    	if (colum % 3 == 0) {
+        	auxTabla = auxTabla+ 1 ;
+    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td>new row</td></tr>');
+    	}else{
+    		//$('#TblActividades').append('<td>new cell</td>');
+    		//$('TblActividades> tbody:last').append('<td>new cell</td>');
+    		$('#trid' + auxTabla).append('<td onClick=\"deletecell(this,trid' + auxTabla + ')\"><input type="text" name="foo" value="8728"></td>')
+    	}
     }
     
     function borrartbl() {
@@ -329,7 +377,8 @@
         
             for ( var i = 0, len = data.length; i < len; ++i) {
                 var objeto = data[i];
-                $('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style= &quot; visibility:hidden &quot;>" + objeto[2].toString() + "</span></td><td>" + objeto[4].toString() + "</td></tr>");
+                //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
+                $('#myTable').append("<tr><td onClick=\"addActividad()\">" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td><td>$" + objeto[4].toString() + "</td></tr>");
         }
     }
 	</script>
