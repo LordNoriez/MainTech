@@ -91,19 +91,23 @@
 <!-- 			</div> -->
 				<div class=" col-md-8 table-responsive"  >
 				<form action="/mantActProvUpdated/${varMantenmiento.idMantenimiento}" method="post">
-				
+				<c:set var = "numtr" scope = "session" value = "${1}"/>
 								
 				<table class="table table-striped table-hover">
 				<tbody id="TblActividades">
 				  <c:forEach items="${ActividadesxMante}" var="Actividades" varStatus="rowCounter">
+				  
 				    <c:if test="${rowCounter.count % 3 == 1}">
-				      <tr>
+				      <tr id="defaulttrid${numtr}">
 				    </c:if>
-				    <td style = "border-left: 1px solid #ddd;">${Actividades[1].toString()}<br>
+				    <td style = "border-left: 1px solid #ddd;" onClick="deletecell(this,'defaulttrid${numtr}')">${Actividades[1].toString()}<br>
 				    <p style = "font-size:10px; color: rgb(182,182,182);">${Actividades[2].toString()}</p>
-				    <input type="text" name="foo" value="${Actividades[0].toString()}" ></td>
+				    <input type="text" name="foo" value="${Actividades[0].toString()}" >
+				    <input type="text" name="foo" value="${Actividades[3].toString()}" >
+				    <input type="text" name="foo" value="${Actividades[3].toString()}" ></td>
 				    <c:if test="${rowCounter.count % 3 == 0||rowCounter.count == fn:length(values)}">
 				      </tr>
+				       <c:set var="numtr" value="${numtr + 1}"/>
 				    </c:if>
 				  </c:forEach >
 				  </tbody>
@@ -302,8 +306,7 @@
      }
     
     function deletecell(elem,tridnum){
-    	alert(tridnum);
-
+    	
     		var row = document.getElementById(tridnum);
     		for(i=0;i<row.children.length;i++) {
 	    		if(row.children[i]==elem) {
@@ -315,7 +318,7 @@
     }
     
     var auxTabla = 1;
-    function addActividad(){
+    function addActividad(idActividad,IdProveedor,IdCosto){
     	
     	//var rows = document.getElementById("TblActividades").getElementsByTagName("tr").length;
     	var rows = $('#TblActividades tr').length
@@ -325,11 +328,11 @@
     	
     	if (colum % 3 == 0) {
         	auxTabla = auxTabla+ 1 ;
-    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td>new row</td></tr>');
+    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td></tr>');
     	}else{
     		//$('#TblActividades').append('<td>new cell</td>');
     		//$('TblActividades> tbody:last').append('<td>new cell</td>');
-    		$('#trid' + auxTabla).append('<td onClick=\"deletecell(this,trid' + auxTabla + ')\"><input type="text" name="foo" value="8728"></td>')
+    		$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td>')
     	}
     }
     
@@ -378,7 +381,7 @@
             for ( var i = 0, len = data.length; i < len; ++i) {
                 var objeto = data[i];
                 //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
-                $('#myTable').append("<tr><td onClick=\"addActividad()\">" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td><td>$" + objeto[4].toString() + "</td></tr>");
+                $('#myTable').append("<tr><td onClick=\"addActividad(" + objeto[0].toString() + "," + objeto[2].toString() + "," + objeto[3].toString() + ")\">" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td><td>$" + objeto[4].toString() + "</td></tr>");
         }
     }
 	</script>
