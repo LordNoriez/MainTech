@@ -124,4 +124,12 @@ public class MantenimientoService {
 		mantenimientoRepository.getActvProvXObj(idobjeto).forEach(ObjProveActv::add);
 		return ObjProveActv;
 	}
+
+	public Integer getCantMante(Integer id) {
+		return mantenimientoRepository.getCantMante(id);
+	}
+
+	public Integer getIdObjetoFromMantObjActv(Integer id) {
+		return mantenimientoRepository.getIdObjetoFromMantObjActv(id);
+	}
 }

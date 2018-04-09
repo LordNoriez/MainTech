@@ -54,7 +54,7 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 	@Modifying
 	void LinkActividad_mantenimiento(Integer idActividad, Integer idMantenimiento);
 	
-	@Query(nativeQuery = true, value= "delete from actividad_mantenimientos where mantenimientos_id_mantenimiento = ?1")
+	@Query(nativeQuery = true, value= "delete from mantenimiento_objeto_actividad where id_mantenimiento = ?1")
 	@Transactional
 	@Modifying
 	void DeleteLinkActividad_mantenimiento(Integer idMantenimiento);
@@ -101,5 +101,13 @@ public interface MantenimientoRepository extends CrudRepository<Mantenimiento, I
 	        nativeQuery=true
 	    )
 	    public List<Object[]> getActvProvXObj(Integer idObjeto);
+
+		@Query(value = "select cantidad_mantenimiento from mantenimiento_objeto_actividad where id_mantenimiento = ?1 group by id_mantenimiento",
+		        nativeQuery=true)
+		Integer getCantMante(Integer id);
+
+		@Query(value = "select id_objeto from mantenimiento_objeto_actividad where id_mantenimiento = ?1 group by id_mantenimiento",
+		        nativeQuery=true)
+		Integer getIdObjetoFromMantObjActv(Integer id);
 	
 }

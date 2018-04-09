@@ -99,7 +99,6 @@ public class ActividadController {
 	    // remebmer the id of user to be deleted will be set in the ajax call
 
 	    // again populate the user list to display on page
-		System.out.println(idProveedor);
 	    return ActividadService.getidActCostidProve(Integer.parseInt(idProveedor));
 	    
 	    

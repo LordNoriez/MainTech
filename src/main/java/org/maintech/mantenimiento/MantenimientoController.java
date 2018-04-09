@@ -1,5 +1,7 @@
 package org.maintech.mantenimiento;
 
+import static org.assertj.core.api.Assertions.doesNotHave;
+
 import java.io.IOException;
 import java.security.Principal;
 import java.text.ParseException;
@@ -180,16 +182,22 @@ public class MantenimientoController {
 			HttpServletRequest request){
 
 		String[] foo = request.getParameterValues("foo");
-		
+		Integer CantMantenimiento = mantenimientoService.getCantMante(id);
+		Integer idObjeto = mantenimientoService.getIdObjetoFromMantObjActv(id);
 //		if (foo != null )
 //		{
 //		
 //			eppService.deleteAllMantEpp(id);
-//			
+		mantenimientoService.DeleteLinkActividad_mantenimiento(id);
+		
 			for (String stringId : foo) {
 				
 				//eppService.InsertMantEpp(id,Integer.parseInt(stringId));
-				System.out.println(stringId);
+				String[] array = stringId.split("\\|", -1);
+				System.out.println("codActividad:" + array[0] + " codProveedor:" + array[1] + " Costo:" + array[2] + " codMantenimient:" + id + " Cantidad:" + CantMantenimiento + " codObjeto:" + idObjeto);
+				
+				mantenimientoService.LinkMantenimiento_Actividad_Obj_Provee(Integer.parseInt(array[0]),  id, 
+						Integer.parseInt(array[1]),  idObjeto,  Double.parseDouble(array[2]),  CantMantenimiento);
 			}
 //		}else {
 //			eppService.deleteAllMantEpp(id);

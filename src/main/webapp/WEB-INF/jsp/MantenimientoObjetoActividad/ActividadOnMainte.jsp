@@ -102,9 +102,7 @@
 				    </c:if>
 				    <td style = "border-left: 1px solid #ddd;" onClick="deletecell(this,'defaulttrid${numtr}')">${Actividades[1].toString()}<br>
 				    <p style = "font-size:10px; color: rgb(182,182,182);">${Actividades[2].toString()}</p>
-				    <input type="text" name="foo" value="${Actividades[0].toString()}" >
-				    <input type="text" name="foo" value="${Actividades[3].toString()}" >
-				    <input type="text" name="foo" value="${Actividades[3].toString()}" ></td>
+				    <input type="text" name="foo" value="${Actividades[0].toString()}|${Actividades[3].toString()}|${Actividades[4].toString()}" ></td>
 				    <c:if test="${rowCounter.count % 3 == 0||rowCounter.count == fn:length(values)}">
 				      </tr>
 				       <c:set var="numtr" value="${numtr + 1}"/>
@@ -129,7 +127,7 @@
 				<br>
 				
 
-<!-- 				<label onclick="borrartbl()"> añadir tabla </label> -->
+				<label onclick="Get()"> añadir tabla </label>
 				
 				
 				
@@ -320,19 +318,17 @@
     var auxTabla = 1;
     function addActividad(idActividad,IdProveedor,IdCosto){
     	
-    	//var rows = document.getElementById("TblActividades").getElementsByTagName("tr").length;
+    	
     	var rows = $('#TblActividades tr').length
-    	//var colum = document.getElementById("TblActividades").getElementsByTagName("td").length;
     	var colum = $('#TblActividades td').length
 
     	
     	if (colum % 3 == 0) {
         	auxTabla = auxTabla+ 1 ;
-    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td></tr>');
+    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td></tr>');
     	}else{
-    		//$('#TblActividades').append('<td>new cell</td>');
-    		//$('TblActividades> tbody:last').append('<td>new cell</td>');
-    		$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td>')
+    		//$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td>')
+    		$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td>')
     	}
     }
     
@@ -344,6 +340,20 @@
     	for (var x=rowCount-1; x>-1; x--) {
     	   elmtTable.removeChild(tableRows[x]);
     	}
+    }
+    
+    function Get() {
+        
+        
+		var table = document.getElementById("defaulttrid1");
+		for (var i = 0, cell; cell = table.cells[i]; i++) {
+		     //iterate through cells
+		     //cells would be accessed using the "cell" variable assigned in the for loop
+		     var value = cell.getElementsByName("foo").value
+		     alert(value);
+		}
+            
+        
     }
     
     function searchActividad(idProveedor) {
@@ -381,7 +391,7 @@
             for ( var i = 0, len = data.length; i < len; ++i) {
                 var objeto = data[i];
                 //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
-                $('#myTable').append("<tr><td onClick=\"addActividad(" + objeto[0].toString() + "," + objeto[2].toString() + "," + objeto[3].toString() + ")\">" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td><td>$" + objeto[4].toString() + "</td></tr>");
+                $('#myTable').append("<tr><td onClick=\"addActividad(" + objeto[0].toString() + "," + objeto[2].toString() + "," + objeto[4].toString() + ")\">" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td><td>$" + objeto[4].toString() + "</td></tr>");
         }
     }
 	</script>
