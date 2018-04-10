@@ -94,6 +94,7 @@ public class MantenimientoController {
 	public String getMantenimientobyId(@PathVariable("idMantenimiento") Integer id,Model model, Principal principal){
 		model.addAttribute("varMantenmiento", mantenimientoService.getMantenimiento(id));
 		model.addAttribute("MantObjeto", objetoService.getObjeto(mantenimientoService.ObjetoFromMante(id)));
+		model.addAttribute("CantMante", mantenimientoService.getCantMante(id));
 		model.addAttribute("MantEpp", eppService.getEppsMainte(id));
 		model.addAttribute("ItemActividad", actividadService.getactividadxMante(id));
 		model.addAttribute("Autorizacion", usuarioService.getautorizan(id));

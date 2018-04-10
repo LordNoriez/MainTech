@@ -118,6 +118,7 @@
 				
 				</form>
 				</div>
+				<div class="alert alert-danger" id="form-errors">ya esta en la lista esta actividad</div>
 			
 			<div class=" col-md-8 table-responsive"  >
 
@@ -305,12 +306,24 @@
     
     function deletecell(elem,tridnum){
     	
-    		var row = document.getElementById(tridnum);
-    		for(i=0;i<row.children.length;i++) {
-	    		if(row.children[i]==elem) {
-	    		row.deleteCell(i);
+//     		var row = document.getElementById(tridnum);
+//     		for(i=0;i<row.children.length;i++) {
+// 	    		if(row.children[i]==elem) {
+// 	    		row.deleteCell(i);
 	
-	    		}
+// 	    		}
+//     		}
+
+    		if ($('#TblActividades tr').children().length == 1) {
+    		    alert("Debe terner almenos 1 actividad");
+    		}else {
+        		var row = document.getElementById(tridnum);
+        		for(i=0;i<row.children.length;i++) {
+    	    		if(row.children[i]==elem) {
+    	    		row.deleteCell(i);
+    	
+    	    		}
+        		}
     		}
     		
     }
@@ -322,13 +335,28 @@
     	var rows = $('#TblActividades tr').length
     	var colum = $('#TblActividades td').length
 
+    	var isthere = itExist(idActividad + '|' + IdProveedor + '|' + IdCosto); 
     	
-    	if (colum % 3 == 0) {
-        	auxTabla = auxTabla+ 1 ;
-    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td></tr>');
+    	if(isthere == 0){
+	    	if (colum % 3 == 0) {
+	        	auxTabla = auxTabla+ 1 ;
+	    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td></tr>');
+	    	}else{
+	    		//$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td>')
+	    		$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td>')
+	    	}
     	}else{
-    		//$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td>')
-    		$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td>')
+    		//$("#form-errors").text("ya esta en la lista esta actividad").show();
+    		//setTimeout($(".form-errors").fadeOut('slow'), 4000);
+    		//$("#form-errors").delay(800).fadeOut(300);
+    	    // Get the snackbar DIV
+    	    var x = document.getElementById("form-errors")
+
+    	    // Add the "show" class to DIV
+    	    x.className = "show";
+
+    	    // After 3 seconds, remove the show class from DIV
+    	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5500);
     	}
     }
     
@@ -336,24 +364,45 @@
     	var elmtTable = document.getElementById('myTable');
     	var tableRows = elmtTable.getElementsByTagName('tr');
     	var rowCount = tableRows.length;
+	
+    	
+    	var tbody = $("#incidents tbody");
 
-    	for (var x=rowCount-1; x>-1; x--) {
-    	   elmtTable.removeChild(tableRows[x]);
-    	}
+       	for (var x=rowCount-1; x>-1; x--) {
+   	   		elmtTable.removeChild(tableRows[x]);
+       	}	
     }
     
-    function Get() {
-        
-        
-		var table = document.getElementById("defaulttrid1");
-		for (var i = 0, cell; cell = table.cells[i]; i++) {
-		     //iterate through cells
-		     //cells would be accessed using the "cell" variable assigned in the for loop
-		     var value = cell.getElementsByName("foo").value
-		     alert(value);
-		}
-            
-        
+    function itExist(dataxCompar) {        
+	     
+    	 var aux = 0;
+	     var table = document.getElementById('TblActividades');
+
+	     var rowLength = table.rows.length;
+		 
+	     for(var i=0; i<rowLength; i+=1){
+	       var row = table.rows[i];
+
+	       //your code goes here, looping over every row.
+	       //cells are accessed as easy
+
+	       var cellLength = row.cells.length;
+	       for(var y=0; y<cellLength; y+=1){
+	         var cell = row.cells[y];
+
+	         //do something with every cell here
+	         var iupdated = i + 1;
+	         var data = $('#defaulttrid' + iupdated).find("td:eq(" + y + ") input[type='text']").val();
+	         var data2 = $('#trid' + iupdated).find("td:eq(" + y + ") input[type='text']").val();
+			if(dataxCompar == data){
+				aux = aux + 1 ;
+			}
+			if(dataxCompar == data2){
+				aux = aux + 1 ;
+			}
+	       }
+	     }
+	     return aux;
     }
     
     function searchActividad(idProveedor) {
