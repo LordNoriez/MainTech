@@ -356,7 +356,7 @@
     	    x.className = "show";
 
     	    // After 3 seconds, remove the show class from DIV
-    	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5500);
+    	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
     	}
     }
     
@@ -379,6 +379,7 @@
 	     var table = document.getElementById('TblActividades');
 
 	     var rowLength = table.rows.length;
+	     
 		 
 	     for(var i=0; i<rowLength; i+=1){
 	       var row = table.rows[i];
