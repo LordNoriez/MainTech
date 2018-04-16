@@ -83,8 +83,8 @@
 					<label style="margin-bottom: 0%;margin-left:  5%;">${MantObjeto.descripcionObjeto}</label>
 				</div>
 				<div style="float:left;width:32%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
-					<p style="font-size:10px; color: rgb(182,182,182);margin-bottom: 0px;margin-left:  5%;">Equipo</p><br>
-					<label style="margin-bottom: 0%;margin-left:  5%;">${MantObjeto.descripcionObjeto}</label>
+					<p style="font-size:10px; color: rgb(182,182,182);margin-bottom: 0px;margin-left:  5%;">Cantidad Mantenimiento Equipo</p><br>
+					<label style="margin-bottom: 0%;margin-left:  5%;">${CantMante}</label>
 				</div>
 				</div>	
 				
@@ -111,7 +111,7 @@
 				<div>
 				<h4 class="text-muted">Actividades: </h4>
 				
-				<a class="btn-lg btn-primary pull-right" href="/mantenimientoEpp/${varMantenmiento.idMantenimiento}">Agregar</a>
+				<a class="btn-lg btn-primary pull-right" href="/LinkMantActividad/${varMantenmiento.idMantenimiento}">Agregar</a>
 				</div>
 				
 				<div style="width:100%">

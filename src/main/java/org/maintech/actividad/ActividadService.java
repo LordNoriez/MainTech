@@ -101,4 +101,11 @@ public class ActividadService {
 	public void InsertPlantObjActv(Integer id, Integer parseInt) {
 		actividadRepository.InsertPlantObjActv(id, parseInt);
 	}
+
+	public List<Object[]> getidActCostidProve(Integer idProveedor) {
+		List<Object[]> actCostProv = new ArrayList<>();
+		actividadRepository.getidActCostidProve(idProveedor)
+		.forEach(actCostProv::add);
+		return actCostProv;
+	}
 }

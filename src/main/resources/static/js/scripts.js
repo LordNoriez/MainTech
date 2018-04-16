@@ -9,6 +9,8 @@ function snackBarFunction() {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5500);
 }
 
+
+
 function showSelection()
 {
 //     var selectedLine = document.getElementById("objPadreInput").value;
