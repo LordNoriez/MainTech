@@ -4,6 +4,7 @@ package org.maintech.actividad;
 import java.security.Principal;
 import java.util.List;
 
+import org.maintech.actividadproveedor.ActividadProveedorService;
 import org.maintech.costo.Costo;
 import org.maintech.costo.CostoService;
 import org.maintech.objeto.ObjetoService;
@@ -38,6 +39,9 @@ public class ActividadController {
 	private ProveedorService proveedorService;
 	
 	@Autowired
+	private ActividadProveedorService actividadProveedorService;
+	
+	@Autowired
 	private UsuarioService usuarioService;
 	
 	@Autowired
@@ -52,6 +56,7 @@ public class ActividadController {
 	@RequestMapping("/actualizarActividad/{idActividad}")
 	public String getMantenimientoUpdate(@PathVariable("idActividad") Integer id,Model model){
 		model.addAttribute("actividad", ActividadService.getActividad(id));	
+		model.addAttribute("ProvedorxCosto", actividadProveedorService.getProvCostxAct(id));	
 		return "Actividad/ActividadUpdate";
 	}
 	

@@ -1,17 +1,46 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<html lang="en">
 <head>
-    <title>Actividades del mantenimiento</title>
-    <%@ include file="/WEB-INF/jsp/Master/Head.jsp" %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Actividades</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/css/jquery.growl.css"/>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="/js/jquery.growl.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <link href="<c:url value="/css/style.css" />" rel="stylesheet">
+	<script src="<c:url value="/js/scripts.js" />" type="text/javascript"></script>
+    
 </head>
+
+<style>
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+
+.margin-top-5 {
+	margin-top: 10px;
+}
+
+.p-img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}
+</style>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
-		<div class=" col-md-12">		
-			<div class="header clearfix">
-		        <div class=" col-md-6">
-		        <h4 class="text-muted">Actividades del mantenimiento: ${varMantenmiento.nombreMantenimiento}</h4>
-		        </div>
-		    </div>
-		</div>
-			
+				
      <div id="mySidenav" class="sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <a class="active" id="home" href="/google/login">Inicio</a>
@@ -37,6 +66,16 @@
 	<div class="container-fluid" id="main">
     
     <!--<div class="container" style="margin-top: 50px;">-->
+		<!-- Login panel -->
+		<div class="row">
+			<div class=" col-md-12">		
+				<div class="header clearfix">
+			        <div class=" col-md-6">
+				        <h4 class="text-muted">Actividades del mantenimiento: ${varMantenmiento.nombreMantenimiento}</h4>
+			        </div>
+			    </div>
+			</div>
+		</div>
 <!-- 		<div class="row"> -->
 <!-- 			<div class=" col-md-3"> -->
 <!-- 				<div class="jumbotron">						 -->
@@ -148,9 +187,15 @@
 				
 			</div>
 
+	</div>
 	
 	<div id="snackbar" class="alert alert-danger">Equipo Eliminado Correctamente</div>
 
+    <footer class="footer">
+        <p> &copy; 2017 POFASA S.A.</p>
+    </footer>
+
+</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script type="text/javascript">
@@ -443,11 +488,10 @@
             for ( var i = 0, len = data.length; i < len; ++i) {
                 var objeto = data[i];
                 //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
-                $('#myTable').append("<tr><td onClick=\"addActividad(" + objeto[0].toString() + "," + objeto[2].toString() + "," + objeto[4].toString() + ",\'" + objeto[5].toString() + "\',\'" + objeto[1].toString() + "\')\">" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td><td>$" + objeto[4].toString() + "</td></tr>");
+                $('#myTable').append("<tr><td onClick=\"addActividad(" + objeto[0].toString() + "," + objeto[2].toString() + "," + objeto[4].toString() + ",\'" + objeto[5].toString() + "\',\'" + objeto[1].toString() + "\')\">" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
         }
     }
 	</script>
 
-	<%@ include file="/WEB-INF/jsp/Master/Footer.jsp" %>
-</div>
 </body>
+</html>

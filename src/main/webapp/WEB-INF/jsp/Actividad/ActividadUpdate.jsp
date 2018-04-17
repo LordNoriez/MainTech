@@ -68,6 +68,26 @@
 					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>				
 				
 				</form:form>
+			
+			<div class=" col-md-8"  >
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Proveedor</th>
+							<th>Costo ($)</th>
+						</tr>
+					</thead>
+    				<tbody id="myTable">
+		
+					<c:forEach var="actividades" items="${ProvedorxCosto}">
+					    <tr>
+							<td>${actividades[2].toString()}</td>
+							<td>${actividades[3].toString()}</td>
+					    </tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
 			</div>
 		</div>
 	

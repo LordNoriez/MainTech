@@ -42,5 +42,10 @@ public class ActividadProveedorService {
 	public List<Object[]> getActividadProveedorCosto(){
 		return actividadProveedorRepository.getActividadProveedorCosto();
 	}
+
+	public Object[] getProvCostxAct(Integer id) {
+		return actividadProveedorRepository.getProvCostxAct(id);
+		 
+	}
 		
 }

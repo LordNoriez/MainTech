@@ -26,7 +26,7 @@
 			<div ng-show="user" class=" col-md-8">						
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h2>Menú</h2>
+						<h1 style="color: #6f6e6c;">Menú</h1>
 					</div>
 					
 					<div class="panel-body">
@@ -61,6 +61,17 @@
 				</div>				
 			</div>
 	    </div>
+	    
+        <div class="row marketing">
+        <div class="col-lg-6">
+            <h4>Misión</h4>
+            <p>Producir la mejor carne de aves del Ecuador, contando con colaboradores motivados a la excelencia, con alta tecnología y eficiencia, para la satisfacción de nuestros clientes y en armonía con la naturaleza</p>
+        </div>
+		<div class="col-lg-6">            
+            <h4>Visión</h4>
+            <p>Ser la empresa LÍDER de producción y comercialización de carne de aves en el mercado ecuatoriano, rentable y sostenible en el tiempo.</p>
+        </div>
+    </div>
 
 	<%@ include file="/WEB-INF/jsp/Master/Footer.jsp" %>
 </div>

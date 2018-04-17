@@ -59,8 +59,7 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>Nombre</th>
-							<th>Descripción</th>
+							<th>Nombre</th>							
 							<th>Proveedor</th>
 							<th>Costo ($)</th>
 							<th>Desde El</th>
@@ -71,31 +70,11 @@
 		
 					<c:forEach var="activida" items="${actividades}">
 					    <tr>
-							<td>${activida[2].toString()}</td>					
-							<td>
-								<spring:url value="/actualizarActividad/${activida[0]}" var="updateUrl" />
-								<a href="${updateUrl}">${activida[1].toString()}</a>
-							</td>	
-<!-- 							<td> -->
-<%-- 								<spring:url value="/actualizarActividad/${activida[0]}" var="updateUrl" /> --%>
-<%-- 							  	<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>								 --%>
-<!-- 							</td>				 -->
-							<td>
-								<spring:url value="/actualizarActividadProveedor/${activida[0]}/${activida[7]}/${activida[8]}" var="updateUrl2" />
-			
-								<a href="${updateUrl2}">${activida[3].toString()}</a>
-							</td>					
-							<td>$ ${activida[4].toString()}</td>
-							<td>${activida[5].toString()}</td>
-							<td>${activida[6].toString()}</td>		
-							<td>
-  								  <spring:url value="/actividadnewProveedor/${activida[0]}" var="actividadnewProveedorUrl" />							  
-								  <button onclick="location.href='${actividadnewProveedorUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-primary">Agregar Proveedor</button>
-		                     </td>
-							<td>
-								  <spring:url value="/deleteActividad/${activida[0]}" var="deleteUrl" />							  
-								  <button onclick="location.href='${deleteUrl}'; setTimeout(snackBarFunction(),5000);" class="btn btn-danger">Delete</button>
-							</td>
+							<td onClick="document.location.href='/actualizarActividad/${activida[0]}';">${activida[2].toString()}</td>
+							<td onClick="document.location.href='/actualizarActividad/${activida[0]}';">${activida[3].toString()}</td>
+							<td onClick="document.location.href='/actualizarActividad/${activida[0]}';">${activida[4].toString()}</td>
+							<td onClick="document.location.href='/actualizarActividad/${activida[0]}';">${activida[5].toString()}</td>
+							<td onClick="document.location.href='/actualizarActividad/${activida[0]}';">${activida[6].toString()}</td>
 					    </tr>
 					</c:forEach>
 					</tbody>
