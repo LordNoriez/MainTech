@@ -89,7 +89,7 @@
 <!-- 				<button type="button" onclick="openNav()" class="btn btn-info btn-block">Menú</button>				 -->
 				
 <!-- 			</div> -->
-				<div class=" col-md-8 table-responsive"  >
+				<div class=" col-md-8 table-responsive" style="width: 100%;">
 				<form action="/mantActProvUpdated/${varMantenmiento.idMantenimiento}" method="post">
 				<c:set var = "numtr" scope = "session" value = "${1}"/>
 								
@@ -98,11 +98,12 @@
 				  <c:forEach items="${ActividadesxMante}" var="Actividades" varStatus="rowCounter">
 				  
 				    <c:if test="${rowCounter.count % 3 == 1}">
-				      <tr id="defaulttrid${numtr}">
+				      <tr id="trid${numtr}">
 				    </c:if>
-				    <td style = "border-left: 1px solid #ddd;" onClick="deletecell(this,'defaulttrid${numtr}')">${Actividades[1].toString()}<br>
-				    <p style = "font-size:10px; color: rgb(182,182,182);">${Actividades[2].toString()}</p>
-				    <input type="text" name="foo" value="${Actividades[0].toString()}|${Actividades[3].toString()}|${Actividades[4].toString()}" ></td>
+				    <td style = "border-left: 1px solid #ddd;" onClick="deletecell(this,'trid${numtr}')">${Actividades[1].toString()}<br>
+				    <p style = "font-size:10px; color: rgb(182,182,182);margin-bottom: 1%;">${Actividades[2].toString()}</p>
+				    <p style = "font-size:10px; color: #0029ffa6;margin-bottom: 0%;">${Actividades[4].toString()}</p>
+				    <input type="hidden"  name="foo" value="${Actividades[0].toString()}|${Actividades[3].toString()}|${Actividades[4].toString()}" ></td>
 				    <c:if test="${rowCounter.count % 3 == 0||rowCounter.count == fn:length(values)}">
 				      </tr>
 				       <c:set var="numtr" value="${numtr + 1}"/>
@@ -118,9 +119,10 @@
 				
 				</form>
 				</div>
-				<div class="alert alert-danger" id="form-errors">ya esta en la lista esta actividad</div>
+				<div class="alert alert-danger" id="form-errors"></div>
+
 			
-			<div class=" col-md-8 table-responsive"  >
+			<div class=" col-md-8 table-responsive" style="width: 100%;" >
 
 				<div style="float:left;width:48%;border: 1px solid #cecccf;border-radius: 8px;margin-right: 1%;">
 				<input class="form-control" id="myInput2" type="text" onkeyup="myFunction2()" placeholder="Buscar.. Proveedor">
@@ -128,7 +130,7 @@
 				<br>
 				
 
-				<label onclick="Get()"> añadir tabla </label>
+				<label onclick="blabla()"> añadir tabla </label>
 				
 				
 				
@@ -305,17 +307,17 @@
      }
     
     function deletecell(elem,tridnum){
-    	
-//     		var row = document.getElementById(tridnum);
-//     		for(i=0;i<row.children.length;i++) {
-// 	    		if(row.children[i]==elem) {
-// 	    		row.deleteCell(i);
-	
-// 	    		}
-//     		}
 
     		if ($('#TblActividades tr').children().length == 1) {
-    		    alert("Debe terner almenos 1 actividad");
+    		    document.getElementById("form-errors").innerHTML = "Debe estar Seleccionado al menos 1 actividad";
+    		    
+    		    var x = document.getElementById("form-errors")
+
+        	    // Add the "show" class to DIV
+        	    x.className = "show";
+
+        	    // After 3 seconds, remove the show class from DIV
+        	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
     		}else {
         		var row = document.getElementById(tridnum);
         		for(i=0;i<row.children.length;i++) {
@@ -325,12 +327,60 @@
     	    		}
         		}
     		}
-    		
+    		deleteIfTrEmpty();
     }
     
-    var auxTabla = 1;
-    function addActividad(idActividad,IdProveedor,IdCosto){
+    function deleteIfTrEmpty(){
     	
+    	$('#TblActividades tr').each(function() {
+    		  if($(this).find('td').length == 0) {
+    		   // empty tr
+    		   // id of tr is available through this.id
+    		   document.getElementById(this.id).remove();
+    		  }
+    		});
+    }
+    
+    function ifTrHas1or2(){
+    	var aux = 0;
+    	$('#TblActividades tr').each(function() {
+				aux = aux + 1;
+    		});
+    	
+    	if (aux == 1){
+    		
+    		if($('#TblActividades tr').find('td').length == 1){
+    			return 1;
+    		}
+    		if($('#TblActividades tr').find('td').length == 2){
+    			return 2;
+    		}
+    	}
+    }
+    
+    function lastTrId(){
+    	var trids = [];
+    	
+    	$('#TblActividades tr').each(function() {
+    		  
+    		   // empty tr
+    		   // id of tr is available through this.id
+    		   var str = this.id;
+    		   
+    		   trids.push(str.substring(4));
+    		});
+    	
+    	trids.sort(function(a, b){return a - b});
+    	
+    	return trids[trids.length - 1];
+    	
+    }
+    
+    
+    function addActividad(idActividad,IdProveedor,IdCosto,DescProveedor,DescActividad){
+    	
+    	var auxTabla = parseInt(lastTrId());
+    	var auxtr1or2 = ifTrHas1or2();
     	
     	var rows = $('#TblActividades tr').length
     	var colum = $('#TblActividades td').length
@@ -338,24 +388,21 @@
     	var isthere = itExist(idActividad + '|' + IdProveedor + '|' + IdCosto); 
     	
     	if(isthere == 0){
-	    	if (colum % 3 == 0) {
-	        	auxTabla = auxTabla+ 1 ;
-	    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td></tr>');
-	    	}else{
-	    		//$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td>')
-	    		$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td>')
+    		if(auxtr1or2 == 1 || auxtr1or2 == 2){    			
+	    		$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')">' + DescActividad + '<p style = "font-size:10px; color: rgb(182,182,182);margin-bottom: 1%;">' + DescProveedor + '</p><p style = "font-size:10px; color: #0029ffa6;margin-bottom: 0%;">' + IdCosto + '</p><input type="hidden" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td>')
+    		}else{
+		    	if (colum % 3 == 0) {
+		        	auxTabla = auxTabla + 1 ;
+		    		$('#TblActividades').append('<tr id=\"trid' + auxTabla + '\"><td onClick="deletecell(this,\'trid' + auxTabla + '\')">' + DescActividad + '<p style = "font-size:10px; color: rgb(182,182,182);margin-bottom: 1%;">' + DescProveedor + '</p><p style = "font-size:10px; color: #0029ffa6;margin-bottom: 0%;">' + IdCosto + '</p><input type="hidden" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td></tr>');
+		    	}else{
+		    		//$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')"><input type="text" name="foo" value="' + idActividad + '"><input type="text" name="foo" value="' + IdProveedor + '"><input type="text" name="foo" value="' + IdCosto + '"></td>')
+		    		$('#trid' + auxTabla).append('<td onClick="deletecell(this,\'trid' + auxTabla + '\')">' + DescActividad + '<p style = "font-size:10px; color: rgb(182,182,182);margin-bottom: 1%;">' + DescProveedor + '</p><p style = "font-size:10px; color: #0029ffa6;margin-bottom: 0%;">' + IdCosto + '</p><input type="hidden" name="foo" value="' + idActividad + '|' + IdProveedor + '|' + IdCosto + '"></td>')
+		    	}
 	    	}
     	}else{
-    		//$("#form-errors").text("ya esta en la lista esta actividad").show();
-    		//setTimeout($(".form-errors").fadeOut('slow'), 4000);
-    		//$("#form-errors").delay(800).fadeOut(300);
-    	    // Get the snackbar DIV
+    		document.getElementById("form-errors").innerHTML = "Ya consta en el listado de actividades";
     	    var x = document.getElementById("form-errors")
-
-    	    // Add the "show" class to DIV
     	    x.className = "show";
-
-    	    // After 3 seconds, remove the show class from DIV
     	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
     	}
     }
@@ -441,7 +488,7 @@
             for ( var i = 0, len = data.length; i < len; ++i) {
                 var objeto = data[i];
                 //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
-                $('#myTable').append("<tr><td onClick=\"addActividad(" + objeto[0].toString() + "," + objeto[2].toString() + "," + objeto[4].toString() + ")\">" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td><td>$" + objeto[4].toString() + "</td></tr>");
+                $('#myTable').append("<tr><td onClick=\"addActividad(" + objeto[0].toString() + "," + objeto[2].toString() + "," + objeto[4].toString() + ",\'" + objeto[5].toString() + "\',\'" + objeto[1].toString() + "\')\">" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td><td>$" + objeto[4].toString() + "</td></tr>");
         }
     }
 	</script>

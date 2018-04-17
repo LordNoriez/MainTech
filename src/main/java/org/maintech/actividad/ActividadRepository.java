@@ -67,9 +67,10 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer> 
 	@Modifying
 	void InsertPlantObjActv(Integer id, Integer parseInt);
 
-	@Query(value="select ap.id_actividad, a.descripcion_actividad,ap.id_proveedor , ap.id_costo, c.costo from actividad_proveedor as ap inner join actividad as a on a.id_actividad = ap.id_actividad inner join costo as c on ap.id_costo = c.id_costo where ap.id_proveedor = ?1", nativeQuery=true)
+	@Query(value="select ap.id_actividad, a.descripcion_actividad,ap.id_proveedor , ap.id_costo, c.costo, p.nombre_proveedor from actividad_proveedor as ap inner join actividad as a on a.id_actividad = ap.id_actividad inner join proveedor as p on ap.id_proveedor = p.id_proveedor inner join costo as c on ap.id_costo = c.id_costo where c.id_costo in (select id_costo from costo where fecha_fin_costo is null) and ap.id_proveedor = ?1", nativeQuery=true)
 	public List<Object[]> getidActCostidProve(Integer idProveedor);	
 	//select ap.id_actividad, a.descripcion_actividad,ap.id_proveedor , ap.id_costo, c.costo from actividad_proveedor as ap inner join actividad as a on a.id_actividad = ap.id_actividad inner join costo as c on ap.id_costo = c.id_costo where c.id_costo in (select id_costo from costo where fecha_fin_costo is null) and ap.id_proveedor = 1;
+	//select ap.id_actividad, a.descripcion_actividad,ap.id_proveedor , ap.id_costo, c.costo from actividad_proveedor as ap inner join actividad as a on a.id_actividad = ap.id_actividad inner join costo as c on ap.id_costo = c.id_costo where ap.id_proveedor = ?1
 	//query for showing just the activities that have active costs
 }
 
