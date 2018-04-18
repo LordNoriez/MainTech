@@ -108,4 +108,11 @@ public class ActividadService {
 		.forEach(actCostProv::add);
 		return actCostProv;
 	}
+
+	public List<Object[]> getHistCosto(Integer id) {
+		List<Object[]> actCostProv = new ArrayList<>();
+		actividadRepository.getHistCosto(id)
+		.forEach(actCostProv::add);
+		return actCostProv;
+	}
 }

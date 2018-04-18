@@ -1,6 +1,7 @@
 <head>
     <title>Editar Actividad</title>
     <%@ include file="/WEB-INF/jsp/Master/Head.jsp" %>
+    
 </head>
 <body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
     
@@ -68,8 +69,37 @@
 					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>				
 				
 				</form:form>
+			<div style="margin-top: 10%;">
+			<div style="Margin-left:  52%">
+			<label>Costo</label>
+			</div>
+			    <div style="width:  49%;float: left;">
+				<select name="database1"  class="form-control">
+				  <c:forEach items="${Proveedores}" var="Proveedoritem">
+				    <option value="${Proveedoritem.idProveedor}">
+				        ${Proveedoritem.nombreProveedor}
+				    </option>
+				  </c:forEach>
+				</select>
+				
+				<input type="text" class="form-control"/>	
+				
+				</div>
+			 	<div style="width: 49%;float: right;height: 100px;overflow:auto;">		  
+				<table class="table table-striped table-hover">
+    				<tbody id="myTableCost">
+		
+					<c:forEach var="Costos" items="${AllCostos}">
+					    <tr>
+							<td>${Costos[0].toString()}</td>
+					    </tr>
+					</c:forEach>
+					</tbody>
+				</table>
+				</div>						
+			</div>
 			
-			<div class=" col-md-8"  >
+			<div class=" col-md-8" style="width: 100%;padding-left: 0%;padding-right: 0%;">
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>

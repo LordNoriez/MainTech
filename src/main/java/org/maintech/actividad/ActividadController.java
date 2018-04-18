@@ -55,7 +55,9 @@ public class ActividadController {
 	
 	@RequestMapping("/actualizarActividad/{idActividad}")
 	public String getMantenimientoUpdate(@PathVariable("idActividad") Integer id,Model model){
-		model.addAttribute("actividad", ActividadService.getActividad(id));	
+		model.addAttribute("actividad", ActividadService.getActividad(id));
+		model.addAttribute("Proveedores", proveedorService.getAllProveedores());
+		model.addAttribute("AllCostos", ActividadService.getHistCosto(id));
 		model.addAttribute("ProvedorxCosto", actividadProveedorService.getProvCostxAct(id));	
 		return "Actividad/ActividadUpdate";
 	}
