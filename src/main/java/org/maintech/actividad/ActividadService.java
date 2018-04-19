@@ -109,9 +109,9 @@ public class ActividadService {
 		return actCostProv;
 	}
 
-	public List<Object[]> getHistCosto(Integer id) {
+	public List<Object[]> getHistCosto(Integer idProveedor, Integer idActividad) {
 		List<Object[]> actCostProv = new ArrayList<>();
-		actividadRepository.getHistCosto(id)
+		actividadRepository.getHistCosto(idProveedor, idActividad)
 		.forEach(actCostProv::add);
 		return actCostProv;
 	}

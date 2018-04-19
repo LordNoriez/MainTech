@@ -74,7 +74,7 @@
 			<label>Costo</label>
 			</div>
 			    <div style="width:  49%;float: left;">
-				<select name="database1"  class="form-control">
+				<select id="selProveedor"  class="form-control" onChange = "searchActividad(this.value,${actividad.idActividad})" >
 				  <c:forEach items="${Proveedores}" var="Proveedoritem">
 				    <option value="${Proveedoritem.idProveedor}">
 				        ${Proveedoritem.nombreProveedor}
@@ -82,18 +82,21 @@
 				  </c:forEach>
 				</select>
 				
-				<input type="text" class="form-control"/>	
-				
+				<input type="text" id ="txtcosto" class="form-control"/>	
+				<label onClick="insertNewCost(${actividad.idActividad})" class="btn-lg btn-primary pull-left">Add</label>
 				</div>
 			 	<div style="width: 49%;float: right;height: 100px;overflow:auto;">		  
 				<table class="table table-striped table-hover">
     				<tbody id="myTableCost">
-		
+<%-- 		
 					<c:forEach var="Costos" items="${AllCostos}">
 					    <tr>
 							<td>${Costos[0].toString()}</td>
+							<td>${Costos[1].toString()}</td>
+							<td>${Costos[2].toString()}</td>
 					    </tr>
-					</c:forEach>
+					    ActividadService.getHistCosto(id)
+					</c:forEach> --%>
 					</tbody>
 				</table>
 				</div>						
@@ -161,6 +164,66 @@
 		    document.getElementById("mySidenav").style.width = "0";
 		    document.body.style.backgroundColor = "white";
 		}
+		
+	    function insertNewCost(idActividad) {
+
+	        var idProveedor = document.getElementById("selProveedor").value;
+	        var valCosto = document.getElementById("txtcosto").value;
+	        
+	        $.ajax({
+	        	  url: '/InsertNewCosto',
+	        	  method: 'POST',
+	        	  traditional: true,
+	        	  data: {
+	        		  idProveedorList: idProveedor,
+	        	    valCostoList: valCosto,
+	        	    idActividadList: idActividad
+	        	  },
+	        	  success: function(data) {
+	        	    if (data == "FAIL") {
+	        	      alert("File not found!");
+	        	    } 
+	        	  },
+	        	  error: function(request, status, error) {
+	        	    alert("The request failed: " + request.responseText);
+	        	  }
+	        	});
+	    }
+	    function searchActividad(idProveedor,idActividad) {
+	        
+	        $.ajax({
+	            type : 'POST',
+	            url : '/costousedxProve',
+	            traditional: true,
+	            data: {
+	        		  idProveedorList: idProveedor,
+	        	    idActividadList: idActividad
+	        	  },
+	            contentType : 'application/json',
+	            success : function(data) {
+	               //here in data variable, you will get list of all users sent from 
+	               // spring controller in json format, currently its object
+	               // iterate it and show users on page
+
+	               showUsers(data);
+	            },
+	            error : function() {
+	                alert('error');
+	            }
+	        });
+	    }
+	    
+	    function showUsers(data) {
+	        // and here you show users on page
+	        //following code just example
+
+	        
+	            for ( var i = 0, len = data.length; i < len; ++i) {
+	                var objeto = data[i];
+	                //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
+	                $('#myTableCost').append("<tr><td>" + objeto[0].toString() + "</td><td>" + objeto[1].toString() + "</td><td>$" + objeto[2].toString() + "</td></tr>");
+	        }
+	    }
 	</script>
 
 	<%@ include file="/WEB-INF/jsp/Master/Footer.jsp" %>

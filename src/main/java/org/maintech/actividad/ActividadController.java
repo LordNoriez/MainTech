@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,7 +58,7 @@ public class ActividadController {
 	public String getMantenimientoUpdate(@PathVariable("idActividad") Integer id,Model model){
 		model.addAttribute("actividad", ActividadService.getActividad(id));
 		model.addAttribute("Proveedores", proveedorService.getAllProveedores());
-		model.addAttribute("AllCostos", ActividadService.getHistCosto(id));
+		//model.addAttribute("AllCostos", ActividadService.getHistCosto(id));
 		model.addAttribute("ProvedorxCosto", actividadProveedorService.getProvCostxAct(id));	
 		return "Actividad/ActividadUpdate";
 	}
@@ -108,6 +109,18 @@ public class ActividadController {
 	    // again populate the user list to display on page
 	    return ActividadService.getidActCostidProve(Integer.parseInt(idProveedor));
 	    
+	    
+	}
+	
+	@RequestMapping(value = "/costousedxProve", method = RequestMethod.POST)
+	public @ResponseBody
+	List<Object[]> TblCostosUsados(@RequestParam(value = "idProveedorList") Integer idProveedor,
+			@RequestParam(value = "idActividadList") Integer idActividad) {
+	    // fetch the userid to be deleted from the userDetails
+	    // remebmer the id of user to be deleted will be set in the ajax call
+
+	    // again populate the user list to display on page
+	    return ActividadService.getHistCosto(idProveedor,idActividad);
 	    
 	}
 	

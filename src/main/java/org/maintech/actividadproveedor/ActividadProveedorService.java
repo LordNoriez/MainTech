@@ -47,5 +47,9 @@ public class ActividadProveedorService {
 		return actividadProveedorRepository.getProvCostxAct(id);
 		 
 	}
+
+	public Integer getLastCosto(Integer idActividad) {
+		return actividadProveedorRepository.getLastCosto(idActividad);
+	}
 		
 }

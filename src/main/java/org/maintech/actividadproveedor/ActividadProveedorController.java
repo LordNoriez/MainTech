@@ -1,6 +1,8 @@
 package org.maintech.actividadproveedor;
 
 import java.security.Principal;
+import java.util.Date;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +18,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -143,6 +148,41 @@ public class ActividadProveedorController {
 	@RequestMapping(method=RequestMethod.DELETE, value="/actividadProveedor/{idActividadProveedor}")
 	public void deleteObjeto(@PathVariable Integer id){
 		actividadProveedorService.deleteActividadProveedor(id);
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "/InsertNewCosto", method = RequestMethod.POST)
+    public void InsertNewCosto(@RequestParam(value = "idProveedorList")String idProveedor,
+    		@RequestParam(value = "valCostoList")String valCosto,
+    		@RequestParam(value = "idActividadList")String idActividad){
+			
+		
+		
+		ActividadProveedor objActPro = new ActividadProveedor();
+		
+		Costo costo = new Costo();
+		Date date = new Date();
+		
+		Costo Antiguocosto = costoService.getCosto(actividadProveedorService.getLastCosto(Integer.parseInt(idActividad)));
+		Antiguocosto.setFechaFinCosto(date);
+		costoService.updateCosto(actividadProveedorService.getLastCosto(Integer.parseInt(idActividad)), Antiguocosto);
+		
+		costo.setActive(true);
+		costo.setCosto(Double.parseDouble(valCosto));
+		costo.setFechaInicioCosto(date);
+		
+		costoService.addCosto(costo);
+		
+		
+		objActPro.setActividad(actividadService.getActividad(Integer.parseInt(idActividad)));
+		objActPro.setProveedor(proveedorService.getProveedor(Integer.parseInt(idProveedor)));
+		objActPro.setCosto(costo);
+		
+		System.out.println(objActPro.getActividad().getNombreActividad().toString() + "|" + objActPro.getCosto().getCosto().toString() + "|" + objActPro.getProveedor().getNombreProveedor().toString());
+		
+		actividadProveedorService.addActividadProveedor(objActPro);
+		
+	
 	}
 
 }

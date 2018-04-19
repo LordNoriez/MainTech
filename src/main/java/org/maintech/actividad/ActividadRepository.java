@@ -75,9 +75,9 @@ public interface ActividadRepository extends CrudRepository<Actividad, Integer> 
 	//select ap.id_actividad, a.descripcion_actividad,ap.id_proveedor , ap.id_costo, c.costo from actividad_proveedor as ap inner join actividad as a on a.id_actividad = ap.id_actividad inner join costo as c on ap.id_costo = c.id_costo where ap.id_proveedor = ?1
 	//query for showing just the activities that have active costs
 
-	@Query(value="select c.costo,fecha_fin_costo from actividad_proveedor as ap inner join costo as c on ap.id_costo = c.id_costo where id_actividad = ?1", nativeQuery=true)
-	public List<Object[]> getHistCosto(Integer id);	
-	
+	@Query(value="select c.costo,DATE_FORMAT(c.fecha_fin_costo, '%d/%m/%Y'),DATE_FORMAT(c.fecha_inicio_costo, '%d/%m/%Y') from actividad_proveedor as ap inner join costo as c on ap.id_costo = c.id_costo where ap.id_proveedor = ?1 and id_actividad = ?2", nativeQuery=true)
+	public List<Object[]> getHistCosto(Integer idProveedor,Integer idActividad);	
+
 }
 
 

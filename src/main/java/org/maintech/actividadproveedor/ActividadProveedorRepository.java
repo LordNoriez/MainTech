@@ -26,5 +26,8 @@ public interface ActividadProveedorRepository extends CrudRepository<ActividadPr
 	
 	@Query(value="select ap.id_actividad, ap.id_proveedor, p.nombre_proveedor,c.costo from actividad_proveedor as ap inner join costo as c on ap.id_costo = c.id_costo inner join proveedor as p on p.id_proveedor = ap.id_proveedor where c.fecha_fin_costo is null and ap.id_actividad = ?1", nativeQuery=true)	
 	Object[] getProvCostxAct(Integer id);
+
+	@Query(value="select c.id_costo from actividad_proveedor as ap inner join costo as c on ap.id_costo = c.id_costo where id_actividad = ?1 order by c.id_costo desc limit 1", nativeQuery=true)	
+	Integer getLastCosto(Integer idActividad);
 	
 }
