@@ -74,7 +74,7 @@
 			<label>Costo</label>
 			</div>
 			    <div style="width:  49%;float: left;">
-				<select id="selProveedor"  class="form-control" onChange = "searchActividad(this.value,${actividad.idActividad})" >
+				<select id="selProveedor"  class="form-control" onChange = "searchActividad(${actividad.idActividad})" >
 				  <c:forEach items="${Proveedores}" var="Proveedoritem">
 				    <option value="${Proveedoritem.idProveedor}">
 				        ${Proveedoritem.nombreProveedor}
@@ -189,29 +189,33 @@
 	        	  }
 	        	});
 	    }
-	    function searchActividad(idProveedor,idActividad) {
+	    function searchActividad(idActividad) {
 	        
+	    	var idProveedor = document.getElementById("selProveedor").value;
+	        
+	    	borrartbl();
+	    	
 	        $.ajax({
-	            type : 'POST',
-	            url : '/costousedxProve',
-	            traditional: true,
-	            data: {
+	        	  url: '/costousedxProve',
+	        	  method: 'POST',
+	        	  traditional: true,
+	        	  data: {
 	        		  idProveedorList: idProveedor,
 	        	    idActividadList: idActividad
 	        	  },
-	            contentType : 'application/json',
-	            success : function(data) {
-	               //here in data variable, you will get list of all users sent from 
-	               // spring controller in json format, currently its object
-	               // iterate it and show users on page
-
-	               showUsers(data);
-	            },
-	            error : function() {
-	                alert('error');
-	            }
-	        });
+	        	  success: function(data) {
+	        	    if (data == "FAIL") {
+	        	      alert("File not found!");
+	        	    } 
+	        	    showUsers(data);
+	        	  },
+	        	  error: function(request, status, error) {
+	        	    alert("The request failed: " + request.responseText);
+	        	  }
+	        	});
 	    }
+	    
+	    
 	    
 	    function showUsers(data) {
 	        // and here you show users on page
@@ -223,6 +227,19 @@
 	                //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
 	                $('#myTableCost').append("<tr><td>" + objeto[0].toString() + "</td><td>" + objeto[1].toString() + "</td><td>$" + objeto[2].toString() + "</td></tr>");
 	        }
+	    }
+	    
+	    function borrartbl() {
+	    	var elmtTable = document.getElementById('myTableCost');
+	    	var tableRows = elmtTable.getElementsByTagName('tr');
+	    	var rowCount = tableRows.length;
+		
+	    	
+	    	var tbody = $("#incidents tbody");
+
+	       	for (var x=rowCount-1; x>-1; x--) {
+	   	   		elmtTable.removeChild(tableRows[x]);
+	       	}	
 	    }
 	</script>
 

@@ -114,14 +114,16 @@ public class ActividadController {
 	
 	@RequestMapping(value = "/costousedxProve", method = RequestMethod.POST)
 	public @ResponseBody
-	List<Object[]> TblCostosUsados(@RequestParam(value = "idProveedorList") Integer idProveedor,
-			@RequestParam(value = "idActividadList") Integer idActividad) {
+	List<Object[]> TblCostosUsados(@RequestParam(value = "idProveedorList") String idProveedor,
+			@RequestParam(value = "idActividadList") String idActividad) {
 	    // fetch the userid to be deleted from the userDetails
 	    // remebmer the id of user to be deleted will be set in the ajax call
 
 	    // again populate the user list to display on page
-	    return ActividadService.getHistCosto(idProveedor,idActividad);
+	    return ActividadService.getHistCosto(Integer.parseInt(idProveedor),Integer.parseInt(idActividad));
 	    
 	}
+	
+	
 	
 }
