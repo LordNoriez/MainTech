@@ -163,9 +163,9 @@ public class ActividadProveedorController {
 		Costo costo = new Costo();
 		Date date = new Date();
 		
-		Costo Antiguocosto = costoService.getCosto(actividadProveedorService.getLastCosto(Integer.parseInt(idActividad)));
+		Costo Antiguocosto = costoService.getCosto(actividadProveedorService.getLastCosto(Integer.parseInt(idActividad),Integer.parseInt(idProveedor)));
 		Antiguocosto.setFechaFinCosto(date);
-		costoService.updateCosto(actividadProveedorService.getLastCosto(Integer.parseInt(idActividad)), Antiguocosto);
+		costoService.updateCosto(actividadProveedorService.getLastCosto(Integer.parseInt(idActividad),Integer.parseInt(idProveedor)), Antiguocosto);
 		
 		costo.setActive(true);
 		costo.setCosto(Double.parseDouble(valCosto));

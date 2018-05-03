@@ -3,7 +3,7 @@
     <%@ include file="/WEB-INF/jsp/Master/Head.jsp" %>
     
 </head>
-<body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak>
+<body ng-app="MainTech" ng-controller="AppCtrl" ng-cloak onload="searchActividad(${actividad.idActividad});searchProvedorxCosto(${actividad.idActividad});">
     
 		<div class=" col-md-12">		
 			<div class="header clearfix">
@@ -69,6 +69,10 @@
 					<button type="submit" class="btn-lg btn-primary pull-right">Actualizar</button>				
 				
 				</form:form>
+				
+				
+				<a class="btn btn-danger pull-left" href="/actividad">Cancelar</a>
+				
 			<div style="margin-top: 10%;">
 			<div style="Margin-left:  52%">
 			<label>Costo</label>
@@ -103,6 +107,7 @@
 			</div>
 			
 			<div class=" col-md-8" style="width: 100%;padding-left: 0%;padding-right: 0%;">
+			<label onClick="searchProvedorxCosto(${actividad.idActividad})">work it !</label>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -111,13 +116,12 @@
 						</tr>
 					</thead>
     				<tbody id="myTable">
-		
-					<c:forEach var="actividades" items="${ProvedorxCosto}">
-					    <tr>
-							<td>${actividades[2].toString()}</td>
-							<td>${actividades[3].toString()}</td>
-					    </tr>
-					</c:forEach>
+<%-- 					<c:forEach var="actividades" items="${ProvedorxCosto}"> --%>
+<!-- 					    <tr> -->
+<%-- 							<td>${actividades[2].toString()}</td> --%>
+<%-- 							<td>${actividades[3].toString()}</td> --%>
+<!-- 					    </tr> -->
+<%-- 					</c:forEach> --%>
 					</tbody>
 				</table>
 			</div>
@@ -183,6 +187,10 @@
 	        	    if (data == "FAIL") {
 	        	      alert("File not found!");
 	        	    } 
+	        	    
+	        	    searchProvedorxCosto(idActividad);
+	        	    searchActividad(idActividad);
+	        	    
 	        	  },
 	        	  error: function(request, status, error) {
 	        	    alert("The request failed: " + request.responseText);
@@ -225,7 +233,7 @@
 	            for ( var i = 0, len = data.length; i < len; ++i) {
 	                var objeto = data[i];
 	                //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
-	                $('#myTableCost').append("<tr><td>" + objeto[0].toString() + "</td><td>" + objeto[1].toString() + "</td><td>$" + objeto[2].toString() + "</td></tr>");
+	                $('#myTableCost').append("<tr><td>" + objeto[0].toString() + "</td><td>" + objeto[1].toString() + "</td><td>" + objeto[2].toString() + "</td></tr>");
 	        }
 	    }
 	    
@@ -241,6 +249,56 @@
 	   	   		elmtTable.removeChild(tableRows[x]);
 	       	}	
 	    }
+	    
+	    function searchProvedorxCosto(idActividad) {
+	        
+	        
+	    	borrartblDefault();
+	    	
+	        $.ajax({
+	        	  url: '/costousedxProvedefault',
+	        	  method: 'POST',
+	        	  traditional: true,
+	        	  data: {
+	        	    idActividadList: idActividad
+	        	  },
+	        	  success: function(data) {
+	        	    if (data == "FAIL") {
+	        	      alert("File not found!");
+	        	    } 
+	        	    showUsersmyTable(data);
+	        	  },
+	        	  error: function(request, status, error) {
+	        	    alert("The request failed: " + request.responseText);
+	        	  }
+	        	});
+	    }
+	    
+	    function borrartblDefault() {
+	    	var elmtTable = document.getElementById('myTable');
+	    	var tableRows = elmtTable.getElementsByTagName('tr');
+	    	var rowCount = tableRows.length;
+		
+	    	
+	    	var tbody = $("#incidents tbody");
+
+	       	for (var x=rowCount-1; x>-1; x--) {
+	   	   		elmtTable.removeChild(tableRows[x]);
+	       	}	
+	    }
+	    
+	    function showUsersmyTable(data) {
+	        // and here you show users on page
+	        //following code just example
+
+	        
+	            for ( var i = 0, len = data.length; i < len; ++i) {
+	                var objeto = data[i];
+	                //$('#myTable').append("<tr><td>" + objeto[1].toString() + "</td><td><span style=\"visibility:hidden\">" + objeto[2].toString() + "</span></td><td>$" + objeto[4].toString() + "</td></tr>");
+	                $('#myTable').append("<tr><td>" + objeto[2].toString() + "</td><td>" + objeto[3].toString() + "</td></tr>");
+	            }
+	    }
+	    
 	</script>
 
 	<%@ include file="/WEB-INF/jsp/Master/Footer.jsp" %>

@@ -124,6 +124,14 @@ public class ActividadController {
 	    
 	}
 	
+	@RequestMapping(value = "/costousedxProvedefault", method = RequestMethod.POST)
+	public @ResponseBody
+	List<Object[]> TblCostosUsadosDefault(@RequestParam(value = "idActividadList") String idActividad) {
+	    
+	    return actividadProveedorService.getProvCostxAct(Integer.parseInt(idActividad));
+	    
+	}
+	
 	
 	
 }

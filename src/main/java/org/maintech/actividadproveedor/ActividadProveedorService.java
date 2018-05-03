@@ -43,13 +43,13 @@ public class ActividadProveedorService {
 		return actividadProveedorRepository.getActividadProveedorCosto();
 	}
 
-	public Object[] getProvCostxAct(Integer id) {
+	public List<Object[]> getProvCostxAct(Integer id) {
 		return actividadProveedorRepository.getProvCostxAct(id);
 		 
 	}
 
-	public Integer getLastCosto(Integer idActividad) {
-		return actividadProveedorRepository.getLastCosto(idActividad);
+	public Integer getLastCosto(Integer idActividad, Integer idProveedor) {
+		return actividadProveedorRepository.getLastCosto(idActividad, idProveedor);
 	}
 		
 }
