@@ -16,6 +16,7 @@
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/js/jquery.growl.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         
     <link href="<c:url value="css/style.css" />" rel="stylesheet">
 	<script src="<c:url value="js/scripts.js" />"></script>
@@ -23,7 +24,9 @@
 	<div class="row">
 		<div class=" col-lg-12">		
 <!-- 			<div class="header clearfix"> -->
-		        <div class=" col-md-6"><h2 class="text-muted">MainTech</h2></div>
+				
+		        <div class=" col-md-6">
+		        	<h2 class="text-muted"><a href="/google/login">MainTech</a></h2></div>
 		        <div class=" col-md-6">
 		        	<nav>
 		            	<ul class="nav nav-pills pull-right">
@@ -36,6 +39,7 @@
 <!-- 		    </div> -->
 		</div>
 	</div>
+	
 </head>
 
 <style>

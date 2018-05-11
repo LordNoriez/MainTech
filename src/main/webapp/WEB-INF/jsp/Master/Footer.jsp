@@ -1,7 +1,7 @@
 
 <div>		
     <footer class="footer">
-        <p> &copy; 2017 POFASA S.A.</p>
+        <p> &copy; 2018 POFASA S.A.</p>
     </footer>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -199,10 +199,7 @@
 	        opt.text = text;
 	        ddl.options.add(opt);
 	    }
-	    
-	    
 	</script>
-
 	
 	<script>
 		var today = new Date();
