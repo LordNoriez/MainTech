@@ -30,6 +30,9 @@ public class UsuarioController {
 	@Autowired
 	private AreaEmpresaService areaEmpresaService;
 	
+	@Autowired
+	private UsuarioController usuarioController;
+	
 	@RequestMapping(value = "/usuario", method = RequestMethod.GET)
 	public String showAllUsuario(Model model) {
 
@@ -38,9 +41,9 @@ public class UsuarioController {
 	}
 		
 	@RequestMapping("/usuario/{idUsuario}")
-	public String getUsuario(@PathVariable("idUsuario") Integer id, Model model){		
+	public String getUsuario(@PathVariable("idUsuario") Integer id, Model model, Principal principal){		
 		model.addAttribute("usuario", usuarioService.getUsuario(id));
-		model.addAttribute("roles", rolService.getAllRol());
+		model.addAttribute("roles", rolService.getAllRol(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		model.addAttribute("areaEmpresas", areaEmpresaService.getAllAreaEmpresa());		
 		return "Usuario/UsuarioUpdate";
 	}
@@ -72,8 +75,8 @@ public class UsuarioController {
 
 	@RequestMapping("/crearUsuario")
 	public String crearUsuario(@ModelAttribute("crearModelUsuario") Usuario usuario,
-			BindingResult result, Model model){
-		model.addAttribute("roles", rolService.getAllRol());
+			BindingResult result, Model model,Principal principal){
+		model.addAttribute("roles", rolService.getAllRol(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		model.addAttribute("areaEmpresas", areaEmpresaService.getAllAreaEmpresa());		
 		return "Usuario/UsuarioCrear";
 	}

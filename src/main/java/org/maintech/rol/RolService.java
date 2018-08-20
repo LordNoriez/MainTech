@@ -12,9 +12,9 @@ public class RolService {
 	@Autowired
 	private RolRepository rolRepository;
 	
-	public List<Rol> getAllRol() {
+	public List<Rol> getAllRol(Integer idAreaEmpresa) {
 		List<Rol> rols = new ArrayList<>();
-		rolRepository.findAll().forEach(rols::add);
+		rolRepository.getFullRol(idAreaEmpresa).forEach(rols::add);
 		return rols;
 	}
 	

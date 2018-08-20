@@ -1,7 +1,11 @@
 package org.maintech.reporterol;
 
+import java.security.Principal;
+
 import org.maintech.reporte.ReporteService;
 import org.maintech.rol.RolService;
+import org.maintech.usuario.UsuarioController;
+import org.maintech.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +28,12 @@ public class ReporteRolController {
 	@Autowired
 	private RolService rolService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private UsuarioController usuarioController;
+	
 	//Funciones CRUD 
 	@RequestMapping(value = "/reporteRol", method = RequestMethod.GET)
 	public String showAllReporteRol(Model model) {
@@ -34,10 +44,10 @@ public class ReporteRolController {
 	
 	@RequestMapping("/crearReporteRol")
 	public String crearReporteRol(@ModelAttribute("crearModelReporteRol") ReporteRol reporteRol,
-			BindingResult result, Model model){
+			BindingResult result, Model model,Principal principal){
 
 		model.addAttribute("reportes", reporteService.getAllReporte());
-		model.addAttribute("roles", rolService.getAllRol());
+		model.addAttribute("roles", rolService.getAllRol(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		return "ReporteRol/ReporteRolCrear";
 	}
 	

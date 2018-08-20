@@ -1,5 +1,11 @@
 package org.maintech.rol;
 
+import java.security.Principal;
+
+import org.maintech.areaempresa.AreaEmpresa;
+import org.maintech.areaempresa.AreaEmpresaService;
+import org.maintech.usuario.UsuarioController;
+import org.maintech.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +22,19 @@ public class RolController {
 	@Autowired
 	private RolService rolService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private UsuarioController usuarioController;
+	
+	@Autowired
+	private AreaEmpresaService areaEmpresaService;
+	
 	@RequestMapping(value = "/rol", method = RequestMethod.GET)
-	public String showAllRol(Model model) {
+	public String showAllRol(Model model,Principal principal) {
 
-		model.addAttribute("roles", rolService.getAllRol());
+		model.addAttribute("roles", rolService.getAllRol(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		return "Rol/RolRead";
 	}
 		
@@ -30,8 +45,9 @@ public class RolController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addRol")
-	public ModelAndView addRol(Rol rol) {
+	public ModelAndView addRol(Rol rol,Principal principal) {
 		rol.setActive(true);
+		rol.setAreaEmpresa(areaEmpresaService.getAreaEmpresa(usuarioService.getAreaByMail(usuarioController.mailUsuario(principal))));
 		rolService.addRol(rol);
 		return new ModelAndView("redirect:/rol");
 	}
